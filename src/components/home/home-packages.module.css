@@ -334,16 +334,19 @@
  */
 @media (max-width: 767px) {
   .section {
-    padding: 56px 0 80px;
+    padding: 40px 0 52px;
   }
 
   .top {
     grid-template-columns: 1fr;
   }
 
+  /* Compact (17 Nov 2026): a shorter engraving band, a smaller heading. */
   .art {
     order: -1;
-    margin: 0 calc(-1 * var(--gutter)) -28px;
+    aspect-ratio: auto;
+    height: 150px;
+    margin: 0 calc(-1 * var(--gutter)) -24px;
     opacity: 0.38;
     -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
@@ -353,47 +356,80 @@
     object-position: 30% center;
   }
 
+  .section .heading {
+    font-size: 2.1rem !important;
+  }
+
   .rowHead {
-    margin: 36px 0 16px;
+    margin: 22px 0 12px;
   }
 
   .kicker {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .arrows {
     display: none;
   }
 
+  .track {
+    gap: 10px;
+    scroll-snap-type: x proximity;
+  }
+
+  /* About 270 x 196: the next card peeks in, so the row reads as swipeable. */
   .slide {
-    flex-basis: min(84vw, 360px);
+    flex-basis: min(70vw, 280px);
   }
 
   .card {
-    height: 264px;
-    padding: 20px 18px 18px;
+    height: 196px;
+    padding: 14px 14px 12px;
+    border-radius: 14px;
+  }
+
+  .label {
+    max-width: 62%;
+    font-size: 10px;
+    letter-spacing: 0.1em;
   }
 
   .cardImage {
-    top: 20px;
-    right: 18px;
-    width: 32%;
+    top: 12px;
+    right: 12px;
+    width: 30%;
+    border-radius: 10px;
   }
 
   .section .cardTitle {
-    font-size: 22px !important;
+    max-width: 62%;
+    margin-top: 6px;
+    font-size: 18px !important;
+  }
+
+  .price {
+    margin-top: 6px;
+    font-size: 16px;
   }
 
   .cta {
-    height: 46px;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 9px;
+    font-size: 13.5px;
   }
 
   .advice {
-    padding: 22px 18px;
+    padding: 16px 14px;
   }
 
   .speak {
-    font-size: 16px;
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  .adviceImage {
+    height: 52%;
   }
 }
 

@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
 import { HOME_IMAGES } from "./home-images";
 import { ImageSlot } from "./image-slot";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-packages.module.css";
 
 export type PackageCard = {
@@ -22,6 +23,7 @@ export type PackageCard = {
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const SLIDE = { hidden: { opacity: 0, y: 24 }, shown: { opacity: 1, y: 0 } };
 const WHATSAPP_URL = `https://wa.me/${clinic.telephone.replace("+", "")}?text=${encodeURIComponent(
   "Hello MyStree, could you help me choose a care package?",
 )}`;
@@ -38,7 +40,7 @@ const WHATSAPP_URL = `https://wa.me/${clinic.telephone.replace("+", "")}?text=${
  * larger screens and swipe on touch.
  */
 export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
-  const still = useReducedMotion();
+  const still = useStillAfterMount();
   const track = useRef<HTMLUListElement>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
@@ -114,9 +116,17 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
         </div>
       </div>
 
-      <ul ref={track} className={styles.track} aria-label="Care packages">
-        {cards.map((card, i) => (
-          <motion.li key={card.href} className={styles.slide} {...rise(0.05 + i * 0.07)}>
+      <motion.ul
+        ref={track}
+        className={styles.track}
+        aria-label="Care packages"
+        initial={still ? false : "hidden"}
+        whileInView="shown"
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ staggerChildren: 0.06 }}
+      >
+        {cards.map((card) => (
+          <motion.li key={card.href} className={styles.slide} variants={SLIDE} transition={{ duration: 0.7, ease: EASE }}>
             <article className={styles.card}>
               <div className={styles.cardImage}>
                 <ImageSlot slot={HOME_IMAGES[card.image]} sizes="160px" className={styles.photo} compact />
@@ -134,7 +144,7 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
           </motion.li>
         ))}
 
-        <motion.li className={styles.slide} {...rise(0.05 + cards.length * 0.07)}>
+        <motion.li className={styles.slide} variants={SLIDE} transition={{ duration: 0.7, ease: EASE }}>
           <article className={`${styles.card} ${styles.advice}`}>
             <h3 className={styles.cardTitle}>Need some advice?</h3>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.speak}>
@@ -148,7 +158,7 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
             </div>
           </article>
         </motion.li>
-      </ul>
+      </motion.ul>
     </section>
   );
 }

@@ -212,13 +212,6 @@ export default function PcosPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="pcos-stat-heading"
-        heading="PCOS is more than a period problem, so care looks at the whole picture."
-        figure="3"
-        caption="kinds of care in one clinic for PCOS: gynaecology, nutrition and dermatology."
-      />
-
       <ServiceConditions
         headingId="pcos-conditions-heading"
         heading="PCOS concerns we look at"
@@ -239,76 +232,17 @@ export default function PcosPage() {
         cta={{ label: "Book a PCOS consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{
-          src: "/images/services/pages/hormonal-acne-dermatology-indiranagar-bengaluru.webp",
-          alt: "A woman looking at acne along her jawline in a mirror",
-        }}
-        headingId="pcos-insight-heading"
-        heading="Why PCOS is often missed or treated in pieces"
-        body="PCOS shows up differently in every woman, and its signs are often seen by different doctors at different times, without anyone joining them up."
-        points={[
-          "Acne, hair growth and irregular periods are treated separately, without asking whether they are connected",
-          "Care is sometimes offered only around pregnancy, even when that is not your goal",
-          "Blood sugar, cholesterol, sleep and mood can be affected too, and are worth checking over time",
+      <ServiceSpecialists
+        headingId="pcos-specialists-heading"
+        heading="Book a PCOS consultation"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          { bookingId: 1, tag: "Gynaecology", focus: ["PCOS", "Irregular periods"], profileHref: "/doctors/dr-surbhi-sinha" },
+          { bookingId: 2, tag: "Gynaecology", focus: ["Hormonal health", "Menstrual health"], profileHref: "/doctors/dr-smitha-ap" },
+          { bookingId: 3, tag: "Nutrition", focus: ["PCOS diet", "Weight and metabolism"], profileHref: "/doctors/priyanka-savina" },
+          { bookingId: 8, tag: "Dermatology", focus: ["Acne", "Hair growth and hair thinning"], profileHref: "/doctors/dr-nivetha" },
         ]}
-      />
-
-      <ServiceModel
-        headingId="pcos-model-heading"
-        heading="One clinic for every part of PCOS"
-        body="PCOS care at MyStree is led by our gynaecologists, with nutritionist Priyanka Savina and dermatologist Dr. Nivetha. With your consent, your cycle, skin and hair, food and test results are looked at together, and every option is explained so the plan is one you agree with."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="pcos-fit-heading"
-        heading="Our PCOS care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that are irregular, far apart or have stopped" },
-          { icon: "mind", label: "Acne, extra hair growth or hair thinning that worries you" },
-          { icon: "monitor", label: "Weight changes, tiredness or concerns about blood sugar" },
-          { icon: "conversation", label: "A PCOS diagnosis and questions no one has had time to answer" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="pcos-facts-heading"
-        eyebrow="At a glance"
-        heading="What PCOS care at MyStree is built on"
-        facts={[
-          { figure: "3", label: "kinds of care in one clinic: gynaecology, nutrition and dermatology" },
-          { figure: "Your goals", label: "care for cycles, skin, weight and, only if you want it, pregnancy" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="pcos-faq-heading"
-        heading="Frequently asked questions"
-        items={PCOS_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="pcos-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20PCOS%20care.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{
-          src: "/images/services/pages/nutritionist-consultation-indiranagar-bengaluru.webp",
-          alt: "A nutritionist talking through a meal plan with a woman",
-        }}
-        headingId="pcos-questions-heading"
-        heading="PCOS care in Indiranagar"
-        questions={LOCAL_QUESTIONS}
       />
 
       <ServiceSteps
@@ -327,17 +261,83 @@ export default function PcosPage() {
         cta={{ label: "Book a PCOS consultation", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="pcos-specialists-heading"
-        heading="Book a PCOS consultation"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          { bookingId: 1, tag: "Gynaecology", focus: ["PCOS", "Irregular periods"], profileHref: "/doctors/dr-surbhi-sinha" },
-          { bookingId: 2, tag: "Gynaecology", focus: ["Hormonal health", "Menstrual health"], profileHref: "/doctors/dr-smitha-ap" },
-          { bookingId: 3, tag: "Nutrition", focus: ["PCOS diet", "Weight and metabolism"], profileHref: "/doctors/priyanka-savina" },
-          { bookingId: 8, tag: "Dermatology", focus: ["Acne", "Hair growth and hair thinning"], profileHref: "/doctors/dr-nivetha" },
+      <ServiceInsight
+        image={{
+          src: "/images/services/pages/hormonal-acne-dermatology-indiranagar-bengaluru.webp",
+          alt: "A woman looking at acne along her jawline in a mirror",
+        }}
+        headingId="pcos-insight-heading"
+        heading="Why PCOS is often missed or treated in pieces"
+        body="PCOS shows up differently in every woman, and its signs are often seen by different doctors at different times, without anyone joining them up."
+        points={[
+          "Acne, hair growth and irregular periods are treated separately, without asking whether they are connected",
+          "Care is sometimes offered only around pregnancy, even when that is not your goal",
+          "Blood sugar, cholesterol, sleep and mood can be affected too, and are worth checking over time",
         ]}
+      />
+
+      <ServiceFit
+        headingId="pcos-fit-heading"
+        heading="Our PCOS care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that are irregular, far apart or have stopped" },
+          { icon: "mind", label: "Acne, extra hair growth or hair thinning that worries you" },
+          { icon: "monitor", label: "Weight changes, tiredness or concerns about blood sugar" },
+          { icon: "conversation", label: "A PCOS diagnosis and questions no one has had time to answer" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="pcos-model-heading"
+        heading="One clinic for every part of PCOS"
+        body="PCOS care at MyStree is led by our gynaecologists, with nutritionist Priyanka Savina and dermatologist Dr. Nivetha. With your consent, your cycle, skin and hair, food and test results are looked at together, and every option is explained so the plan is one you agree with."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="pcos-stat-heading"
+        heading="PCOS is more than a period problem, so care looks at the whole picture."
+        figure="3"
+        caption="kinds of care in one clinic for PCOS: gynaecology, nutrition and dermatology."
+      />
+
+      <ServiceFacts
+        headingId="pcos-facts-heading"
+        eyebrow="At a glance"
+        heading="What PCOS care at MyStree is built on"
+        facts={[
+          { figure: "3", label: "kinds of care in one clinic: gynaecology, nutrition and dermatology" },
+          { figure: "Your goals", label: "care for cycles, skin, weight and, only if you want it, pregnancy" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{
+          src: "/images/services/pages/nutritionist-consultation-indiranagar-bengaluru.webp",
+          alt: "A nutritionist talking through a meal plan with a woman",
+        }}
+        headingId="pcos-questions-heading"
+        heading="PCOS care in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="pcos-faq-heading"
+        heading="Frequently asked questions"
+        items={PCOS_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="pcos-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20PCOS%20care.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceClosing

@@ -313,3 +313,59 @@
     transform: none !important;
   }
 }
+
+/*
+ * Phones (compact, 17 Nov 2026): each row is one short card, the need as a
+ * small title and MyStree's answer with its check under it. The repeated
+ * "What you need" / "MyStree · Integrated" labels are dropped on phones;
+ * a hairline border replaces the heavy wine outline.
+ */
+@media (max-width: 768px) {
+  .mobileView {
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .mobileCard {
+    border: 1px solid color-mix(in oklab, var(--twilight-wine) 18%, var(--pure-white));
+    border-radius: 0.75rem;
+    box-shadow: none;
+  }
+
+  .mobileCardTypical {
+    padding: 0.7rem 0.9rem 0;
+    background: var(--pure-white);
+    border-bottom: 0;
+  }
+
+  .mobileLabelTypical,
+  .mobileLabelMyStree {
+    display: none;
+  }
+
+  .mobileTextTypical {
+    color: var(--botanical-midnight);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .mobileCardMyStree {
+    padding: 0.35rem 0.9rem 0.75rem;
+  }
+
+  .mobileContentMyStree {
+    gap: 0.5rem;
+  }
+
+  .mobileTextMyStree {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  .diagramCard {
+    max-width: 100%;
+  }
+}

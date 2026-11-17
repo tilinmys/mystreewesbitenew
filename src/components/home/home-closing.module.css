@@ -166,3 +166,31 @@
     transition: none;
   }
 }
+
+/* Phones / touch (17 Nov 2026): the photo does not move with scroll, so no
+   compositor layer is reserved for it (use-lite-motion.ts). */
+@media (max-width: 767px), (hover: none) and (pointer: coarse) {
+  .media {
+    will-change: auto;
+  }
+}
+
+/* Compact phones (17 Nov 2026): tighter spacing and type, same design. */
+@media (max-width: 767px) {
+  .section {
+    min-height: 420px;
+  }
+
+  .inner {
+    padding: 56px 20px;
+  }
+
+  .section .heading {
+    font-size: 1.85rem !important;
+  }
+
+  .cta {
+    height: 48px;
+    font-size: 15.5px;
+  }
+}

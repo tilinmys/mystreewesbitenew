@@ -134,14 +134,15 @@ export default function FertilityClinicPage() {
         />
       </ServiceBand>
 
-      <ServiceFacts
-        headingId="fertility-facts-heading"
-        eyebrow="At a glance"
-        heading="About a fertility consultation at MyStree"
-        facts={[
-          { figure: "15 min", label: "for the first consultation" },
-          { figure: "2", label: "partners seen together, from the first visit" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+      <ServiceSpecialists
+        headingId="fertility-specialists-heading"
+        heading="Book a consultation"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          { bookingId: 4, tag: "Reproductive medicine", focus: ["PCOS", "Endometriosis"], profileHref: "/doctors/dr-chaitra-nayak" },
+          { bookingId: 1, tag: "Obstetrics and gynaecology", focus: ["Fertility consultations", "Gynaecology"], profileHref: "/doctors/dr-surbhi-sinha" },
+          { bookingId: 2, tag: "High-risk obstetrics", focus: ["Recurrent pregnancy loss", "High-risk pregnancy"], profileHref: "/doctors/dr-smitha-ap" },
         ]}
       />
 
@@ -157,6 +158,17 @@ export default function FertilityClinicPage() {
         cta={{ label: "Book a consultation", href: "/book" }}
       />
 
+      <ServiceFacts
+        headingId="fertility-facts-heading"
+        eyebrow="At a glance"
+        heading="About a fertility consultation at MyStree"
+        facts={[
+          { figure: "15 min", label: "for the first consultation" },
+          { figure: "2", label: "partners seen together, from the first visit" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
       <ServiceFaq headingId="fertility-faq-heading" heading="Frequently asked questions" items={QUESTIONS} allLink={{ label: "See all FAQs", href: "/faqs" }} />
 
       <ServiceAsk
@@ -165,18 +177,6 @@ export default function FertilityClinicPage() {
         note="Message the clinic on WhatsApp, or read answers to common questions."
         whatsapp={{ label: "WhatsApp the clinic", href: whatsapp }}
         faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceSpecialists
-        headingId="fertility-specialists-heading"
-        heading="Book a consultation"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          { bookingId: 4, tag: "Reproductive medicine", focus: ["PCOS", "Endometriosis"], profileHref: "/doctors/dr-chaitra-nayak" },
-          { bookingId: 1, tag: "Obstetrics and gynaecology", focus: ["Fertility consultations", "Gynaecology"], profileHref: "/doctors/dr-surbhi-sinha" },
-          { bookingId: 2, tag: "High-risk obstetrics", focus: ["Recurrent pregnancy loss", "High-risk pregnancy"], profileHref: "/doctors/dr-smitha-ap" },
-        ]}
       />
 
       <ServiceClosing

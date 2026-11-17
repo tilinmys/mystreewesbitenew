@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
+import { isLiteMotion, useStillAfterMount } from "@/lib/use-lite-motion";
 import { HOME_IMAGES } from "./home-images";
 import { ImageSlot } from "./image-slot";
 import styles from "./home-welcome.module.css";
@@ -50,14 +51,15 @@ function Word({
 }
 
 export function HomeWelcome() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useStillAfterMount();
   const statement = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({ target: statement, offset: ["start 0.85", "end 0.45"] });
   // The clinic photograph: a slow zoom-out and gentle drift while it crosses the screen.
   const frame = useRef<HTMLDivElement>(null);
   const { scrollYProgress: photoProgress } = useScroll({ target: frame, offset: ["start end", "end start"] });
-  const photoY = useTransform(photoProgress, (v) => `${(0.5 - v) * 8}%`);
-  const photoScale = useTransform(photoProgress, (v) => 1.12 - v * 0.1);
+  // Phones: no scroll-linked photo motion (see use-lite-motion.ts).
+  const photoY = useTransform(photoProgress, (v) => (isLiteMotion() ? "0%" : `${(0.5 - v) * 8}%`));
+  const photoScale = useTransform(photoProgress, (v) => (isLiteMotion() ? 1 : 1.12 - v * 0.1));
 
   return (
     <section className={styles.section} aria-labelledby="welcome-heading">

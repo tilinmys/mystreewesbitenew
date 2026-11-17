@@ -231,13 +231,6 @@ export default async function PrenatalPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="prenatal-stat-heading"
-        heading="Pregnancy care in Indiranagar, step by step."
-        figure="23 years"
-        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
-      />
-
       <ServiceConditions
         headingId="prenatal-conditions-heading"
         heading="Pregnancy conditions we care for"
@@ -254,97 +247,6 @@ export default async function PrenatalPage() {
           "Recurrent pregnancy loss",
           "Thyroid disorders in pregnancy",
           "Twin pregnancy",
-        ]}
-        cta={{ label: "Book a pregnancy consultation", href: "/book" }}
-      />
-
-      <ServiceInsight
-        image={{ src: "/images/services/pages/pregnant-woman-reading-scan-report.webp", alt: "A pregnant woman reads her scan report at home" }}
-        headingId="prenatal-insight-heading"
-        heading="Why pregnancy concerns are sometimes missed"
-        body="Pregnancy changes every system in the body, and short appointments leave little time to talk through results, symptoms and worries."
-        points={[
-          "Small rises in blood pressure, slower growth or rising sugar levels are easier to catch with time to review trends",
-          "Pelvic pain, nutrition and the emotional weight of a high-risk pregnancy deserve care alongside the scans",
-          "A delivery plan works best when it is built around your own medical history",
-        ]}
-      />
-
-      <ServiceModel
-        headingId="prenatal-model-heading"
-        heading="A physician-led approach to pregnancy"
-        body="Pregnancy care at MyStree is led by high-risk obstetrician Dr. Smitha A.P, with Dr. Surbhi Sinha for early pregnancy, nutritionist Priyanka Savina and pelvic physiotherapist Dr. Jasmine Flora. Every scan, result and milestone is reviewed with you, and your delivery is planned at a hospital suited to your pregnancy."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="prenatal-fit-heading"
-        heading="Our pregnancy care is right for you if you have"
-        items={[
-          { icon: "monitor", label: "High blood pressure, diabetes, a thyroid condition or an IVF pregnancy" },
-          { icon: "branch", label: "A previous miscarriage, preterm birth or difficult delivery" },
-          { icon: "conversation", label: "Questions that need more than a rushed appointment" },
-          { icon: "pregnancy", label: "A wish for physiotherapy and nutrition alongside your obstetric care" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="prenatal-facts-heading"
-        eyebrow="At a glance"
-        heading="What every pregnancy visit at MyStree is built on"
-        facts={[
-          { figure: "40 weeks", label: "of care, from the first scan to delivery planning" },
-          { figure: "4", label: "specialists in one clinic: obstetrics, early pregnancy, nutrition and pelvic physiotherapy" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="prenatal-faq-heading"
-        heading="Frequently asked questions"
-        items={PRENATAL_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="prenatal-ask-heading"
-        heading="Worried about a symptom right now?"
-        note="Bleeding, severe pain in your tummy, fluid leaking, a severe headache or blurred vision, or your baby moving less than usual: go to the nearest hospital emergency department or call 112, and do not wait for an appointment. For anything else, message our care team on WhatsApp."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20pregnancy%20care.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/pregnant-woman-walking-in-park-bengaluru.webp", alt: "A pregnant woman walking in a park with her husband in the morning" }}
-        headingId="prenatal-questions-heading"
-        heading="Pregnancy care in Indiranagar"
-        questions={LOCAL_QUESTIONS}
-      />
-
-      <ServiceSteps
-        image={{ src: "/images/services/pages/antenatal-blood-pressure-check.webp", alt: "A nurse checks a pregnant woman's blood pressure" }}
-        headingId="prenatal-steps-heading"
-        heading="Your pregnancy, stage by stage"
-        steps={[
-          {
-            title: "Weeks 0 to 12",
-            text: "Dating and NT scans, screening blood tests, blood pressure and thyroid checks.",
-          },
-          {
-            title: "Weeks 13 to 27",
-            text: "The anomaly scan, a gestational diabetes test, nutrition and pelvic floor care.",
-          },
-          {
-            title: "Weeks 28 to 36",
-            text: "Growth and Doppler scans as needed, closer care if higher risk, a birth plan.",
-          },
-          {
-            title: "Weeks 37 to 40",
-            text: "Readiness checks, hospital planning, and a plan for recovery and feeding.",
-          },
         ]}
         cta={{ label: "Book a pregnancy consultation", href: "/book" }}
       />
@@ -380,6 +282,104 @@ export default async function PrenatalPage() {
             profileHref: "/doctors/dr-jasmine-flora",
           },
         ]}
+      />
+
+      <ServiceSteps
+        image={{ src: "/images/services/pages/antenatal-blood-pressure-check.webp", alt: "A nurse checks a pregnant woman's blood pressure" }}
+        headingId="prenatal-steps-heading"
+        heading="Your pregnancy, stage by stage"
+        steps={[
+          {
+            title: "Weeks 0 to 12",
+            text: "Dating and NT scans, screening blood tests, blood pressure and thyroid checks.",
+          },
+          {
+            title: "Weeks 13 to 27",
+            text: "The anomaly scan, a gestational diabetes test, nutrition and pelvic floor care.",
+          },
+          {
+            title: "Weeks 28 to 36",
+            text: "Growth and Doppler scans as needed, closer care if higher risk, a birth plan.",
+          },
+          {
+            title: "Weeks 37 to 40",
+            text: "Readiness checks, hospital planning, and a plan for recovery and feeding.",
+          },
+        ]}
+        cta={{ label: "Book a pregnancy consultation", href: "/book" }}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/pregnant-woman-reading-scan-report.webp", alt: "A pregnant woman reads her scan report at home" }}
+        headingId="prenatal-insight-heading"
+        heading="Why pregnancy concerns are sometimes missed"
+        body="Pregnancy changes every system in the body, and short appointments leave little time to talk through results, symptoms and worries."
+        points={[
+          "Small rises in blood pressure, slower growth or rising sugar levels are easier to catch with time to review trends",
+          "Pelvic pain, nutrition and the emotional weight of a high-risk pregnancy deserve care alongside the scans",
+          "A delivery plan works best when it is built around your own medical history",
+        ]}
+      />
+
+      <ServiceFit
+        headingId="prenatal-fit-heading"
+        heading="Our pregnancy care is right for you if you have"
+        items={[
+          { icon: "monitor", label: "High blood pressure, diabetes, a thyroid condition or an IVF pregnancy" },
+          { icon: "branch", label: "A previous miscarriage, preterm birth or difficult delivery" },
+          { icon: "conversation", label: "Questions that need more than a rushed appointment" },
+          { icon: "pregnancy", label: "A wish for physiotherapy and nutrition alongside your obstetric care" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="prenatal-model-heading"
+        heading="A physician-led approach to pregnancy"
+        body="Pregnancy care at MyStree is led by high-risk obstetrician Dr. Smitha A.P, with Dr. Surbhi Sinha for early pregnancy, nutritionist Priyanka Savina and pelvic physiotherapist Dr. Jasmine Flora. Every scan, result and milestone is reviewed with you, and your delivery is planned at a hospital suited to your pregnancy."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="prenatal-stat-heading"
+        heading="Pregnancy care in Indiranagar, step by step."
+        figure="23 years"
+        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
+      />
+
+      <ServiceFacts
+        headingId="prenatal-facts-heading"
+        eyebrow="At a glance"
+        heading="What every pregnancy visit at MyStree is built on"
+        facts={[
+          { figure: "40 weeks", label: "of care, from the first scan to delivery planning" },
+          { figure: "4", label: "specialists in one clinic: obstetrics, early pregnancy, nutrition and pelvic physiotherapy" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/pregnant-woman-walking-in-park-bengaluru.webp", alt: "A pregnant woman walking in a park with her husband in the morning" }}
+        headingId="prenatal-questions-heading"
+        heading="Pregnancy care in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="prenatal-faq-heading"
+        heading="Frequently asked questions"
+        items={PRENATAL_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="prenatal-ask-heading"
+        heading="Worried about a symptom right now?"
+        note="Bleeding, severe pain in your tummy, fluid leaking, a severe headache or blurred vision, or your baby moving less than usual: go to the nearest hospital emergency department or call 112, and do not wait for an appointment. For anything else, message our care team on WhatsApp."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20pregnancy%20care.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

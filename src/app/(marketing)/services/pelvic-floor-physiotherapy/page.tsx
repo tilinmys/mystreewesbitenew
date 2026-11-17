@@ -231,13 +231,6 @@ export default function PelvicFloorPhysiotherapyPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="physio-stat-heading"
-        heading="Leaks and pelvic pain are common. They are not something to live with."
-        figure="21 years"
-        caption="of obstetric and gynaecological physiotherapy behind Dr. Jasmine Flora's care."
-      />
-
       <ServiceConditions
         headingId="physio-conditions-heading"
         heading="What pelvic floor physiotherapy helps with"
@@ -258,70 +251,19 @@ export default function PelvicFloorPhysiotherapyPage() {
         cta={{ label: "Book a pelvic health assessment", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/postpartum-back-pain-lifting-toddler.webp", alt: "A mother bracing her lower back as she lifts her toddler" }}
-        headingId="physio-insight-heading"
-        heading="Why pelvic floor problems are often missed"
-        body="Many women are told that leaking after children, or pain during sex, is just part of life. Both are common, and both can be assessed and treated."
-        points={[
-          "“Do more Kegels” is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
-          "C-section scars can stay stiff and sensitive for months, and are rarely checked after the six-week visit",
-          "Crunches and planks too soon after birth can strain a healing core and pelvic floor",
+      <ServiceSpecialists
+        headingId="physio-specialists-heading"
+        heading="Book with our pelvic floor physiotherapist"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 7,
+            tag: "Pelvic physiotherapy",
+            focus: ["Vaginismus and pelvic pain", "Leaks and postnatal recovery"],
+            profileHref: "/doctors/dr-jasmine-flora",
+          },
         ]}
-      />
-
-      <ServiceModel
-        headingId="physio-model-heading"
-        heading="Physiotherapy that works with your gynaecologist"
-        body="Pelvic health care at MyStree is led by Dr. Jasmine Flora, an obstetric and gynaecological physiotherapist with a master's in obstetric and gynaecological physiotherapy and 21 years of experience. Sessions are one-to-one and private. For pregnancy, recovery after birth and menopause changes, she works closely with obstetrician Dr. Smitha A.P and gynaecologist Dr. Surbhi Sinha, so your treatment is planned together with your doctor."
-        link={{ label: "Meet our team", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="physio-fit-heading"
-        heading="Pelvic floor physiotherapy is right for you if you"
-        items={[
-          { icon: "seedling", label: "Had a baby, by normal delivery or C-section, and your core or back still feels weak" },
-          { icon: "conversation", label: "Feel pain or tightness with sex, tampons or a gynaecological examination" },
-          { icon: "monitor", label: "Leak when you laugh, sneeze or exercise, or rush to reach the toilet" },
-          { icon: "pregnancy", label: "Are pregnant and have pubic bone, hip or lower back pain" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="physio-facts-heading"
-        eyebrow="At a glance"
-        heading="What pelvic health care at MyStree is built on"
-        facts={[
-          { figure: "21 years", label: "of obstetric and gynaecological physiotherapy behind Dr. Jasmine Flora's care" },
-          { figure: "1:1", label: "private sessions with your physiotherapist" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="physio-faq-heading"
-        heading="Frequently asked questions"
-        items={PHYSIO_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="physio-ask-heading"
-        heading="Not sure if physiotherapy is right for you?"
-        note="Message our care team on WhatsApp in confidence, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20pelvic%20floor%20physiotherapy.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/mother-with-baby-carrier-on-stairs.webp", alt: "A mother carrying her baby in a carrier as she climbs the stairs" }}
-        headingId="physio-questions-heading"
-        heading="Pelvic floor physiotherapy in Indiranagar"
-        questions={LOCAL_QUESTIONS}
       />
 
       <ServiceSteps
@@ -349,31 +291,77 @@ export default function PelvicFloorPhysiotherapyPage() {
         cta={{ label: "Book a pelvic health assessment", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="physio-specialists-heading"
-        heading="Book with our pelvic health team"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 7,
-            tag: "Pelvic physiotherapy",
-            focus: ["Vaginismus and pelvic pain", "Leaks and postnatal recovery"],
-            profileHref: "/doctors/dr-jasmine-flora",
-          },
-          {
-            bookingId: 2,
-            tag: "Obstetrics",
-            focus: ["Recovery after birth", "Pregnancy"],
-            profileHref: "/doctors/dr-smitha-ap",
-          },
-          {
-            bookingId: 1,
-            tag: "Gynaecology",
-            focus: ["Painful sex", "Menopause changes"],
-            profileHref: "/doctors/dr-surbhi-sinha",
-          },
+      <ServiceInsight
+        image={{ src: "/images/services/pages/postpartum-back-pain-lifting-toddler.webp", alt: "A mother bracing her lower back as she lifts her toddler" }}
+        headingId="physio-insight-heading"
+        heading="Why pelvic floor problems are often missed"
+        body="Many women are told that leaking after children, or pain during sex, is just part of life. Both are common, and both can be assessed and treated."
+        points={[
+          "“Do more Kegels” is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
+          "C-section scars can stay stiff and sensitive for months, and are rarely checked after the six-week visit",
+          "Crunches and planks too soon after birth can strain a healing core and pelvic floor",
         ]}
+      />
+
+      <ServiceFit
+        headingId="physio-fit-heading"
+        heading="Pelvic floor physiotherapy is right for you if you"
+        items={[
+          { icon: "seedling", label: "Had a baby, by normal delivery or C-section, and your core or back still feels weak" },
+          { icon: "conversation", label: "Feel pain or tightness with sex, tampons or a gynaecological examination" },
+          { icon: "monitor", label: "Leak when you laugh, sneeze or exercise, or rush to reach the toilet" },
+          { icon: "pregnancy", label: "Are pregnant and have pubic bone, hip or lower back pain" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="physio-model-heading"
+        heading="Physiotherapy that works with your gynaecologist"
+        body="Pelvic health care at MyStree is led by Dr. Jasmine Flora, an obstetric and gynaecological physiotherapist with a master's in obstetric and gynaecological physiotherapy and 21 years of experience. Sessions are one-to-one and private. For pregnancy, recovery after birth and menopause changes, she works closely with obstetrician Dr. Smitha A.P and gynaecologist Dr. Surbhi Sinha, so your treatment is planned together with your doctor."
+        link={{ label: "Meet our team", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="physio-stat-heading"
+        heading="Leaks and pelvic pain are common. They are not something to live with."
+        figure="21 years"
+        caption="of obstetric and gynaecological physiotherapy behind Dr. Jasmine Flora's care."
+      />
+
+      <ServiceFacts
+        headingId="physio-facts-heading"
+        eyebrow="At a glance"
+        heading="What pelvic health care at MyStree is built on"
+        facts={[
+          { figure: "21 years", label: "of obstetric and gynaecological physiotherapy behind Dr. Jasmine Flora's care" },
+          { figure: "1:1", label: "private sessions with your physiotherapist" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/mother-with-baby-carrier-on-stairs.webp", alt: "A mother carrying her baby in a carrier as she climbs the stairs" }}
+        headingId="physio-questions-heading"
+        heading="Pelvic floor physiotherapy in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="physio-faq-heading"
+        heading="Frequently asked questions"
+        items={PHYSIO_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="physio-ask-heading"
+        heading="Not sure if physiotherapy is right for you?"
+        note="Message our care team on WhatsApp in confidence, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20pelvic%20floor%20physiotherapy.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceClosing

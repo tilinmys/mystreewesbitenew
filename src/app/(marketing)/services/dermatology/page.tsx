@@ -222,13 +222,6 @@ export default async function DermatologyPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="dermatology-stat-heading"
-        heading="Skin and hair often show what is happening inside."
-        figure="MD (DVL)"
-        caption="the specialist degree in dermatology, venereology and leprosy behind Dr. Nivetha's care."
-      />
-
       <ServiceConditions
         headingId="dermatology-conditions-heading"
         heading="Skin and hair concerns we care for"
@@ -249,70 +242,25 @@ export default async function DermatologyPage() {
         cta={{ label: "Book a skin consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/dermatologist-dermatoscope-skin-examination.webp", alt: "A dermatologist examines a patient's cheek with a handheld dermatoscope" }}
-        headingId="dermatology-insight-heading"
-        heading="Why skin and hair problems keep coming back"
-        body="Many skin and hair problems in women are tied to hormones, nutrition and life stage, so treating the surface alone often brings only a short break."
-        points={[
-          "Jawline acne, new facial hair and thinning hair can be signs of PCOS or thyroid problems",
-          "Harsh scrubs and strong peels can irritate Indian skin and leave dark marks that outlast the acne",
-          "Many skin medicines are not safe in pregnancy or breastfeeding, so treatment needs planning around them",
+      <ServiceSpecialists
+        headingId="dermatology-specialists-heading"
+        heading="Book with our dermatologist and nutritionist"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 8,
+            tag: "Dermatology",
+            focus: ["Acne and pigmentation", "Hair and scalp"],
+            profileHref: "/doctors/dr-nivetha",
+          },
+          {
+            bookingId: 3,
+            tag: "Nutrition",
+            focus: ["PCOS diet", "Hair and skin nutrition"],
+            profileHref: "/doctors/priyanka-savina",
+          },
         ]}
-      />
-
-      <ServiceModel
-        headingId="dermatology-model-heading"
-        heading="Dermatology that works with your gynaecologist"
-        body="Dermatology at MyStree is led by Dr. Nivetha, a dermatologist with an MD in dermatology, venereology and leprosy. Because she works in the same clinic as gynaecologists Dr. Surbhi Sinha and Dr. Smitha A.P and nutritionist Priyanka Savina, acne, hair and skin changes linked to PCOS, thyroid, pregnancy or menopause are looked at together, and every treatment is checked against your plans for pregnancy or breastfeeding."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="dermatology-fit-heading"
-        heading="Our dermatology care is right for you if you have"
-        items={[
-          { icon: "ovary", label: "Acne, excess hair or hair thinning with irregular periods or PCOS" },
-          { icon: "pregnancy", label: "Skin or hair changes in pregnancy, after birth or while breastfeeding" },
-          { icon: "cycle", label: "Breakouts that flare every month before your period" },
-          { icon: "conversation", label: "Tried many products and want a plan that explains why" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="dermatology-facts-heading"
-        eyebrow="At a glance"
-        heading="What skin care at MyStree is built on"
-        facts={[
-          { figure: "MD (DVL)", label: "specialist dermatologist, in clinic or online" },
-          { figure: "3", label: "specialities on hormonal skin and hair: dermatology, gynaecology and nutrition" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="dermatology-faq-heading"
-        heading="Frequently asked questions"
-        items={DERMATOLOGY_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="dermatology-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20dermatology.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/applying-sunscreen-on-balcony-bengaluru.webp", alt: "A woman applying sunscreen on her balcony in the morning" }}
-        headingId="dermatology-questions-heading"
-        heading="Dermatology in Indiranagar"
-        questions={LOCAL_QUESTIONS}
       />
 
       <ServiceSteps
@@ -340,30 +288,77 @@ export default async function DermatologyPage() {
         cta={{ label: "Book a skin consultation", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="dermatology-specialists-heading"
-        heading="Book with our skin and hormone team"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 8,
-            tag: "Dermatology",
-            focus: ["Acne and pigmentation", "Hair and scalp"],
-          },
-          {
-            bookingId: 1,
-            tag: "Gynaecology",
-            focus: ["PCOS", "Hormonal health"],
-            profileHref: "/doctors/dr-surbhi-sinha",
-          },
-          {
-            bookingId: 3,
-            tag: "Nutrition",
-            focus: ["PCOS diet", "Hair and skin nutrition"],
-            profileHref: "/doctors/priyanka-savina",
-          },
+      <ServiceInsight
+        image={{ src: "/images/services/pages/dermatologist-dermatoscope-skin-examination.webp", alt: "A dermatologist examines a patient's cheek with a handheld dermatoscope" }}
+        headingId="dermatology-insight-heading"
+        heading="Why skin and hair problems keep coming back"
+        body="Many skin and hair problems in women are tied to hormones, nutrition and life stage, so treating the surface alone often brings only a short break."
+        points={[
+          "Jawline acne, new facial hair and thinning hair can be signs of PCOS or thyroid problems",
+          "Harsh scrubs and strong peels can irritate Indian skin and leave dark marks that outlast the acne",
+          "Many skin medicines are not safe in pregnancy or breastfeeding, so treatment needs planning around them",
         ]}
+      />
+
+      <ServiceFit
+        headingId="dermatology-fit-heading"
+        heading="Our dermatology care is right for you if you have"
+        items={[
+          { icon: "ovary", label: "Acne, excess hair or hair thinning with irregular periods or PCOS" },
+          { icon: "pregnancy", label: "Skin or hair changes in pregnancy, after birth or while breastfeeding" },
+          { icon: "cycle", label: "Breakouts that flare every month before your period" },
+          { icon: "conversation", label: "Tried many products and want a plan that explains why" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="dermatology-model-heading"
+        heading="Dermatology that works with your gynaecologist"
+        body="Dermatology at MyStree is led by Dr. Nivetha, a dermatologist with an MD in dermatology, venereology and leprosy. Because she works in the same clinic as gynaecologists Dr. Surbhi Sinha and Dr. Smitha A.P and nutritionist Priyanka Savina, acne, hair and skin changes linked to PCOS, thyroid, pregnancy or menopause are looked at together, and every treatment is checked against your plans for pregnancy or breastfeeding."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="dermatology-stat-heading"
+        heading="Skin and hair often show what is happening inside."
+        figure="MD (DVL)"
+        caption="the specialist degree in dermatology, venereology and leprosy behind Dr. Nivetha's care."
+      />
+
+      <ServiceFacts
+        headingId="dermatology-facts-heading"
+        eyebrow="At a glance"
+        heading="What skin care at MyStree is built on"
+        facts={[
+          { figure: "MD (DVL)", label: "specialist dermatologist, in clinic or online" },
+          { figure: "3", label: "specialities on hormonal skin and hair: dermatology, gynaecology and nutrition" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/applying-sunscreen-on-balcony-bengaluru.webp", alt: "A woman applying sunscreen on her balcony in the morning" }}
+        headingId="dermatology-questions-heading"
+        heading="Dermatology in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="dermatology-faq-heading"
+        heading="Frequently asked questions"
+        items={DERMATOLOGY_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="dermatology-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20dermatology.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

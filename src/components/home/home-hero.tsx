@@ -7,6 +7,7 @@ import { MotionConfig, motion, useReducedMotion, useScroll, useTransform } from 
 import { ArrowRight, ArrowUpRight, CalendarDays } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
+import { isLiteMotion } from "@/lib/use-lite-motion";
 import { HOME_IMAGES } from "./home-images";
 import { HOURS_DISPLAY, TEL_HREF } from "./home-nav-data";
 import styles from "./home-hero.module.css";
@@ -75,10 +76,10 @@ function HeroCard({ card, index, still }: { card: Card; index: number; still: bo
   );
   return (
     <motion.li
-      initial={still ? false : { opacity: 0, y: 56 }}
+      initial={still ? false : { opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.9, delay: index * 0.09, ease: EASE }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.8, delay: index * 0.08, ease: EASE }}
     >
       {card.external || card.href.startsWith("tel:") ? (
         <a
@@ -102,8 +103,11 @@ export function HomeHero() {
   const section = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end start"] });
-  const copyY = useTransform(scrollYProgress, (v) => v * -60);
-  const imageScale = useTransform(scrollYProgress, (v) => 1 + v * 0.06);
+  // Phones: photo and heading stay put while scrolling (no per-frame work
+  // under the cards); the entrance animations remain.
+  const copyY = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 0 : v * -60));
+  const imageScale = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 1 : 1 + v * 0.06));
+  const parallax = !reducedMotion;
 
   const desktop = HOME_IMAGES.hero;
   const mobile = HOME_IMAGES.heroMobile;
@@ -114,7 +118,7 @@ export function HomeHero() {
     <MotionConfig reducedMotion="user">
       <section ref={section} className={styles.hero} id="home" aria-labelledby="hero-heading">
         <div className={styles.stage}>
-          <motion.div className={styles.media} style={reducedMotion ? undefined : { scale: imageScale }} aria-hidden="true">
+          <motion.div className={styles.media} style={parallax ? { scale: imageScale } : undefined} aria-hidden="true">
             <picture>
               <source media="(max-width: 767px)" srcSet={mobileSrc} />
               <Image src={desktopSrc} alt="" fill priority fetchPriority="high" quality={90} sizes="100vw" className={styles.image} />
@@ -122,7 +126,7 @@ export function HomeHero() {
           </motion.div>
           <div className={styles.shade} aria-hidden="true" />
 
-          <motion.div className={styles.copy} style={reducedMotion ? undefined : { y: copyY }}>
+          <motion.div className={styles.copy} style={parallax ? { y: copyY } : undefined}>
             {/*
               SEO (17 Nov 2026): the page's one <h1> is the descriptive line,
               "Women's health clinic in Indiranagar, Bengaluru" (SEO.md §4),

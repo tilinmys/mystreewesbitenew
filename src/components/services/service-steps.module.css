@@ -167,3 +167,52 @@
     max-height: calc(100svh - 12rem);
   }
 }
+
+/*
+ * Phones (17 Nov 2026, compact; color.md "Service pages on phones").
+ * The photograph leads as a rounded 16:9 banner above the steps; the steps are tighter.
+ */
+@media (max-width: 639px) {
+  .inner {
+    grid-template-areas:
+      "media"
+      "copy";
+    row-gap: 1.25rem;
+  }
+
+  .media {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+  }
+
+  .heading {
+    font-size: 1.55rem !important;
+  }
+
+  .steps {
+    margin-top: 1rem;
+  }
+
+  .step {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    padding: 0.7rem 0 0.8rem;
+  }
+
+  .number {
+    font-size: 1.15rem;
+  }
+
+  .title {
+    font-size: 15px !important;
+  }
+
+  .text {
+    margin-top: 0.15rem;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .action {
+    margin-top: 1.25rem;
+  }
+}

@@ -2743,3 +2743,47 @@ Every "30-minute", "30 min", "thirty minutes" and "30–45 minute" reference was
 - **Home hero:** the first screen now shows only the eyebrow H1, the slogan and the two CTAs (`.copy` is at least one viewport tall). The four glass cards sit below the fold on the same photo and rise in with `whileInView` (opacity and y, staggered 0.09s). Slogan: `clamp(2.75rem, 5vw, 4.75rem)`, line-height 1.02, `text-wrap: balance`, a soft double text-shadow and a stronger shade for legibility; phone `clamp(2.4rem, 11vw, 3.1rem)`. The eyebrow is 13px / 600 / 0.2em (phone 11.5px).
 - **Blog featured slider:** the cellular texture SVG and the white fluid line / node overlay ("wires") over the images were removed. The circular image stays.
 - **Verified:** on the home, about, doctors, gynaecology, pregnancy, PCOS, package, contact, FAQ and blog pages the H1 sits below the navbar on the first screen at 1440x900 and 390x844, with no horizontal overflow.
+
+### 17 Nov 2026: mobile pass (phones only; desktop and laptop unchanged)
+
+User request: phones felt stuck while scrolling, everything felt too big, the doctor cards were too long, and service pages put too much text in one section with loose images. All changes below are inside phone media queries (`max-width: 767px`, or `639px` for service sections, `600px` for the doctors list) unless noted.
+
+- **Scroll smoothness (phones and touch screens):**
+  - The hero glass cards and the "Find a specialist" pill have no backdrop blur on phones and touch screens. A deeper tint keeps the glass look. Blur under moving content was redrawn every frame and was the main cause of the stutter.
+  - Scroll-linked parallax (hero photo scale and heading drift, welcome clinic photo, generations clip-path reveal and zoom, closing photo) returns neutral values on phones via `isLiteMotion()` (`src/lib/use-lite-motion.ts`). It switches on only after hydration, so server and client HTML match. Entrance animations and the text reveals stay.
+  - Sideways rows (services, packages) reveal as a whole row with a stagger, instead of per card. Cards that start off-screen are already visible when swiped in. Phones use `scroll-snap-type: x proximity`.
+  - The team marquee drops its edge-fade mask on phones (a mask over a moving layer).
+  - The care chat scroll listener is throttled to one update per frame, and the reveal point is measured on load and resize only.
+- **Home, compact on phones:**
+  - Section paddings are roughly 44 to 56px.
+  - Headings: services row and team 1.9rem, packages 2.1rem, journey 2.2rem, generations and story 2.1rem, core 2.3rem, closing 1.85rem.
+  - Services cards are about 68vw: a 16:10 image, two-line description, 16px title.
+  - Package cards are about 70vw x 196px.
+  - Journey rows are 54px.
+  - The generations photo is 4:3 instead of a tall 4:5.
+- **Home doctor cards (phones):** about 272 x 170. A 48px photo with the name and role beside it, qualifications as one dotted line of text, then experience and a small "Book" button on one row.
+- **/doctors (phones):**
+  - Meet-the-doctors cards are a one-column horizontal list: a 64px photo, name, role, qualification and registration clamped to two lines, two chips and a small "View profile". Role and location filters sit side by side.
+  - Care-team role cards are horizontal, a square photo beside the text.
+  - The care-model comparison rows are short cards without the repeated labels.
+- **Care chat:**
+  - Phones: a 46px launcher, smaller greeting and help card.
+  - All screens: the help options rise in with a short stagger, and a soft ring breathes out from the launcher a few times until the greeting is seen, while the flower in the mark sways once (transform and opacity only).
+  - Reduced motion: none of these play.
+
+#### Service pages on phones (and section order on all screens)
+
+- **Section order (all screens), by what a visitor needs first:** opening band (hero and quote), conditions, book with a specialist, steps to your first visit, care plan, insight, fit, model, statement figure, at-a-glance facts, local questions, FAQs, still have questions, reading, closing.
+- **Phone layout (`max-width: 639px`):**
+  - Conditions are wrapped outline chips instead of a 12-row column.
+  - Insight and steps photographs lead their sections as rounded 16:9 banners.
+  - The hero photograph is a rounded 16:10 card.
+  - Tighter type: section headings 1.55 to 1.6rem, body text 14 to 15px.
+  - Booking cards are about 270px tall: qualification clamped to two lines, one line of chips, a slimmer next-slot row.
+- **Doctors shown per page** (checked against the live booking roster, 17 Nov 2026):
+  - Dermatology: dermatologist and nutritionist; the gynaecologist was removed.
+  - Nutrition: nutritionist only; two gynaecologists were removed.
+  - Pelvic floor physiotherapy: the physiotherapist only; two gynaecologists were removed.
+  - Teen health: the high-risk obstetrician was replaced by the dermatologist (teen skin and hair).
+  - Gynaecology, pregnancy, menopause, fertility, PCOS and psychology were already correct.
+- **Hydration:** `useStillAfterMount()` reports reduced motion only after mount. This fixes a hydration failure for reduced-motion visitors in the welcome statement, team rows, and services and packages rows.

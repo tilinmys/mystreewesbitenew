@@ -224,13 +224,6 @@ export default function AdolescentHealthPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="adolescent-stat-heading"
-        heading="Your body, your questions, answered without judgement."
-        figure="13 to 15"
-        caption="is a good age for a first visit to a gynaecologist, even when nothing is wrong."
-      />
-
       <ServiceConditions
         headingId="adolescent-conditions-heading"
         heading="Teen health concerns we help with"
@@ -251,70 +244,36 @@ export default function AdolescentHealthPage() {
         cta={{ label: "Book a teen consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/teenager-period-pain-at-home.webp", alt: "A teenager resting on her bed with a hot-water bag and a schoolbook" }}
-        headingId="adolescent-insight-heading"
-        heading="Why teen health concerns are often missed"
-        body="Painful or irregular periods, acne and low mood are often brushed off as just growing up, and many teens find them hard to raise in front of family."
-        points={[
-          "Period pain bad enough to miss school is not something to put up with",
-          "Cycles that stay irregular years after the first period can point to PCOS or thyroid problems",
-          "Low mood, anxiety and eating concerns often appear alongside physical symptoms",
+      <ServiceSpecialists
+        headingId="adolescent-specialists-heading"
+        heading="Book a teen consultation"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 1,
+            tag: "Teen gynaecology",
+            focus: ["Period problems", "PCOS"],
+            profileHref: "/doctors/dr-surbhi-sinha",
+          },
+          {
+            bookingId: 8,
+            tag: "Teen skin and hair",
+            focus: ["Acne", "Hair fall"],
+            profileHref: "/doctors/dr-nivetha",
+          },
+          {
+            bookingId: 3,
+            tag: "Nutrition",
+            focus: ["Teen nutrition", "PCOS diet"],
+            profileHref: "/doctors/priyanka-savina",
+          },
+          {
+            bookingId: 12,
+            tag: "Mental health",
+            focus: ["Anxiety", "Low mood"],
+          },
         ]}
-      />
-
-      <ServiceModel
-        headingId="adolescent-model-heading"
-        heading="Consultations that start together"
-        body="For teens who feel awkward seeing a gynaecologist, a visit can begin with a parent in the room and then continue with the doctor alone. Private consultations. Your doctor will explain what stays confidential and what the law requires us to report."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="adolescent-fit-heading"
-        heading="Our teen care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that are painful, heavy or irregular" },
-          { icon: "branch", label: "Acne, hair growth or weight changes that worry you" },
-          { icon: "conversation", label: "Questions about your body you would rather not Google" },
-          { icon: "mind", label: "Stress, low mood or trouble sleeping" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="adolescent-facts-heading"
-        eyebrow="At a glance"
-        heading="What every teen visit at MyStree is built on"
-        facts={[
-          { figure: "2", label: "ways to be seen: together with a parent, or one-on-one" },
-          { figure: "4", label: "areas of teen care: gynaecology, nutrition, skin and mental health" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="adolescent-faq-heading"
-        heading="Frequently asked questions"
-        items={ADOLESCENT_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="adolescent-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20teen%20health%20care.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/mother-and-teen-daughter-walking-indiranagar.webp", alt: "A mother and her teenage daughter walking along a leafy street in Indiranagar" }}
-        headingId="adolescent-questions-heading"
-        heading="Seeing a teen gynaecologist in Indiranagar"
-        questions={LOCAL_QUESTIONS}
       />
 
       <ServiceSteps
@@ -342,36 +301,77 @@ export default function AdolescentHealthPage() {
         cta={{ label: "Book a teen consultation", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="adolescent-specialists-heading"
-        heading="Book a teen consultation"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 1,
-            tag: "Teen gynaecology",
-            focus: ["Period problems", "PCOS"],
-            profileHref: "/doctors/dr-surbhi-sinha",
-          },
-          {
-            bookingId: 2,
-            tag: "Gynaecology",
-            focus: ["Hormonal health", "Menstrual health"],
-            profileHref: "/doctors/dr-smitha-ap",
-          },
-          {
-            bookingId: 3,
-            tag: "Nutrition",
-            focus: ["Teen nutrition", "PCOS diet"],
-            profileHref: "/doctors/priyanka-savina",
-          },
-          {
-            bookingId: 12,
-            tag: "Mental health",
-            focus: ["Anxiety", "Low mood"],
-          },
+      <ServiceInsight
+        image={{ src: "/images/services/pages/teenager-period-pain-at-home.webp", alt: "A teenager resting on her bed with a hot-water bag and a schoolbook" }}
+        headingId="adolescent-insight-heading"
+        heading="Why teen health concerns are often missed"
+        body="Painful or irregular periods, acne and low mood are often brushed off as just growing up, and many teens find them hard to raise in front of family."
+        points={[
+          "Period pain bad enough to miss school is not something to put up with",
+          "Cycles that stay irregular years after the first period can point to PCOS or thyroid problems",
+          "Low mood, anxiety and eating concerns often appear alongside physical symptoms",
         ]}
+      />
+
+      <ServiceFit
+        headingId="adolescent-fit-heading"
+        heading="Our teen care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that are painful, heavy or irregular" },
+          { icon: "branch", label: "Acne, hair growth or weight changes that worry you" },
+          { icon: "conversation", label: "Questions about your body you would rather not Google" },
+          { icon: "mind", label: "Stress, low mood or trouble sleeping" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="adolescent-model-heading"
+        heading="Consultations that start together"
+        body="For teens who feel awkward seeing a gynaecologist, a visit can begin with a parent in the room and then continue with the doctor alone. Private consultations. Your doctor will explain what stays confidential and what the law requires us to report."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="adolescent-stat-heading"
+        heading="Your body, your questions, answered without judgement."
+        figure="13 to 15"
+        caption="is a good age for a first visit to a gynaecologist, even when nothing is wrong."
+      />
+
+      <ServiceFacts
+        headingId="adolescent-facts-heading"
+        eyebrow="At a glance"
+        heading="What every teen visit at MyStree is built on"
+        facts={[
+          { figure: "2", label: "ways to be seen: together with a parent, or one-on-one" },
+          { figure: "4", label: "areas of teen care: gynaecology, nutrition, skin and mental health" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/mother-and-teen-daughter-walking-indiranagar.webp", alt: "A mother and her teenage daughter walking along a leafy street in Indiranagar" }}
+        headingId="adolescent-questions-heading"
+        heading="Seeing a teen gynaecologist in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="adolescent-faq-heading"
+        heading="Frequently asked questions"
+        items={ADOLESCENT_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="adolescent-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20teen%20health%20care.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceClosing

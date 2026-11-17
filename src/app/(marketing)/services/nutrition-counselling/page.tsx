@@ -231,13 +231,6 @@ export default async function NutritionCounsellingPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="nutrition-stat-heading"
-        heading="Eat better without giving up the food you love."
-        figure="10 years"
-        caption="of nutrition and counselling experience behind Priyanka Savina's care."
-      />
-
       <ServiceConditions
         headingId="nutrition-conditions-heading"
         heading="What our nutritionist helps with"
@@ -258,70 +251,19 @@ export default async function NutritionCounsellingPage() {
         cta={{ label: "Book a nutrition consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/home-cooking-dal-ragi-and-vegetables.webp", alt: "Hands chopping vegetables beside dal and ragi flour in a home kitchen" }}
-        headingId="nutrition-insight-heading"
-        heading="Why most diets don't last"
-        body="A printed diet chart rarely survives a busy week, a family dinner or a bad night's sleep. Lasting change comes from a plan that fits the life you actually have."
-        points={[
-          "Generic plans ignore your home food, your culture, your working hours and your budget",
-          "The scale can't tell fat from muscle or water, so progress is easy to miss or misread",
-          "Cravings and stress eating have reasons, and willpower alone doesn't fix them",
+      <ServiceSpecialists
+        headingId="nutrition-specialists-heading"
+        heading="Book with our nutritionist"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 3,
+            tag: "Nutrition",
+            focus: ["PCOS and weight", "Pregnancy and after birth"],
+            profileHref: "/doctors/priyanka-savina",
+          },
         ]}
-      />
-
-      <ServiceModel
-        headingId="nutrition-model-heading"
-        heading="Nutrition that works with your medical care"
-        body="Nutrition counselling at MyStree is led by Priyanka Savina, who holds a Diploma in Nutrition and Health Education and an M.Sc in Counselling Psychology. Because she works in the same clinic as our gynaecologists, your food plan, your medicines and your test results are looked at together, whether you are managing PCOS, pregnant, breastfeeding or going through menopause."
-        link={{ label: "Meet our team", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="nutrition-fit-heading"
-        heading="Nutrition counselling is right for you if you"
-        items={[
-          { icon: "ovary", label: "Have PCOS, a thyroid condition or rising blood sugar and want food to help" },
-          { icon: "pregnancy", label: "Are planning a pregnancy, pregnant or breastfeeding" },
-          { icon: "mind", label: "Struggle with cravings, stress eating or diets that never last" },
-          { icon: "seedling", label: "Want steady, lasting change rather than a quick fix" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="nutrition-facts-heading"
-        eyebrow="At a glance"
-        heading="What nutrition care at MyStree is built on"
-        facts={[
-          { figure: "10 years", label: "of nutrition and counselling experience" },
-          { figure: "M.Sc", label: "in Counselling Psychology, with a Diploma in Nutrition and Health Education" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="nutrition-faq-heading"
-        heading="Frequently asked questions"
-        items={NUTRITION_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="nutrition-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20nutrition%20counselling.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/buying-fresh-greens-vegetable-cart-bengaluru.webp", alt: "A woman choosing fresh greens at a vegetable cart" }}
-        headingId="nutrition-questions-heading"
-        heading="Nutrition counselling in Indiranagar"
-        questions={LOCAL_QUESTIONS}
       />
 
       <ServiceSteps
@@ -349,31 +291,77 @@ export default async function NutritionCounsellingPage() {
         cta={{ label: "Book a nutrition consultation", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="nutrition-specialists-heading"
-        heading="Book with our nutrition team"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 3,
-            tag: "Nutrition",
-            focus: ["PCOS and weight", "Pregnancy and after birth"],
-            profileHref: "/doctors/priyanka-savina",
-          },
-          {
-            bookingId: 1,
-            tag: "Hormonal health",
-            focus: ["PCOS", "Thyroid and fertility"],
-            profileHref: "/doctors/dr-surbhi-sinha",
-          },
-          {
-            bookingId: 2,
-            tag: "Obstetrics",
-            focus: ["Gestational diabetes", "Pregnancy"],
-            profileHref: "/doctors/dr-smitha-ap",
-          },
+      <ServiceInsight
+        image={{ src: "/images/services/pages/home-cooking-dal-ragi-and-vegetables.webp", alt: "Hands chopping vegetables beside dal and ragi flour in a home kitchen" }}
+        headingId="nutrition-insight-heading"
+        heading="Why most diets don't last"
+        body="A printed diet chart rarely survives a busy week, a family dinner or a bad night's sleep. Lasting change comes from a plan that fits the life you actually have."
+        points={[
+          "Generic plans ignore your home food, your culture, your working hours and your budget",
+          "The scale can't tell fat from muscle or water, so progress is easy to miss or misread",
+          "Cravings and stress eating have reasons, and willpower alone doesn't fix them",
         ]}
+      />
+
+      <ServiceFit
+        headingId="nutrition-fit-heading"
+        heading="Nutrition counselling is right for you if you"
+        items={[
+          { icon: "ovary", label: "Have PCOS, a thyroid condition or rising blood sugar and want food to help" },
+          { icon: "pregnancy", label: "Are planning a pregnancy, pregnant or breastfeeding" },
+          { icon: "mind", label: "Struggle with cravings, stress eating or diets that never last" },
+          { icon: "seedling", label: "Want steady, lasting change rather than a quick fix" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="nutrition-model-heading"
+        heading="Nutrition that works with your medical care"
+        body="Nutrition counselling at MyStree is led by Priyanka Savina, who holds a Diploma in Nutrition and Health Education and an M.Sc in Counselling Psychology. Because she works in the same clinic as our gynaecologists, your food plan, your medicines and your test results are looked at together, whether you are managing PCOS, pregnant, breastfeeding or going through menopause."
+        link={{ label: "Meet our team", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="nutrition-stat-heading"
+        heading="Eat better without giving up the food you love."
+        figure="10 years"
+        caption="of nutrition and counselling experience behind Priyanka Savina's care."
+      />
+
+      <ServiceFacts
+        headingId="nutrition-facts-heading"
+        eyebrow="At a glance"
+        heading="What nutrition care at MyStree is built on"
+        facts={[
+          { figure: "10 years", label: "of nutrition and counselling experience" },
+          { figure: "M.Sc", label: "in Counselling Psychology, with a Diploma in Nutrition and Health Education" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/buying-fresh-greens-vegetable-cart-bengaluru.webp", alt: "A woman choosing fresh greens at a vegetable cart" }}
+        headingId="nutrition-questions-heading"
+        heading="Nutrition counselling in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="nutrition-faq-heading"
+        heading="Frequently asked questions"
+        items={NUTRITION_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="nutrition-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20nutrition%20counselling.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

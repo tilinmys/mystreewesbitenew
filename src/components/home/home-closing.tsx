@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { MapPin, Phone } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
+import { isLiteMotion } from "@/lib/use-lite-motion";
 import styles from "./home-closing.module.css";
 
 /*
@@ -53,8 +54,8 @@ export function HomeClosing() {
   const still = useReducedMotion();
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
-  const drift = useTransform(scrollYProgress, (v) => `${(v - 0.5) * -12}%`);
-  const zoom = useTransform(scrollYProgress, (v) => 1.12 - v * 0.08);
+  const drift = useTransform(scrollYProgress, (v) => (isLiteMotion() ? "0%" : `${(v - 0.5) * -12}%`));
+  const zoom = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 1 : 1.12 - v * 0.08));
 
   const rise = (delay: number) =>
     still

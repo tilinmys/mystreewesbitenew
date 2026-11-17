@@ -254,17 +254,6 @@ export default async function ObgynConsultsPage() {
         />
       </ServiceBand>
 
-      {/* SECTION 3 — statement and figure. No patient counts are published
-          (Growthamp review 13 Nov 2026, item 5); the figure is Dr. Smitha
-          A.P's experience as recorded in the booking system. */}
-
-      <ServiceStat
-        headingId="obgyn-stat-heading"
-        heading="Answers to your questions, not just your symptoms."
-        figure="23 years"
-        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
-      />
-
       {/* SECTION 4 — conditions, revealed with the Roll Call animation.
           Clinical scope only, alphabetical, no outcome claims. */}
 
@@ -284,111 +273,6 @@ export default async function ObgynConsultsPage() {
           "Pre-conception planning",
           "Recurrent pregnancy loss",
           "Uterine fibroids",
-        ]}
-        cta={{ label: "Book a consultation", href: "/book" }}
-      />
-
-      <ServiceInsight
-        image={{ src: "/images/services/pages/period-pain-at-work.webp", alt: "A woman at her office desk pressing a hand to her lower abdomen in discomfort" }}
-        headingId="obgyn-insight-heading"
-        heading="Why gynaecology concerns are often missed"
-        body="Irregular cycles, heavy bleeding and pelvic pain are common, and many women are told they are simply normal. A short appointment rarely leaves time to look for what is causing them."
-        points={[
-          "Symptoms are often treated one at a time rather than together",
-          "Painful periods are often accepted as normal, which can delay a diagnosis such as endometriosis",
-          "Cycles, hormones, fertility and mood are connected, and care works better when they are seen together",
-        ]}
-      />
-
-      <ServiceModel
-        headingId="obgyn-model-heading"
-        heading="Consultation, scan and follow-up in one clinic"
-        body="MyStree is a women's health clinic in Indiranagar. Your consultation, pelvic ultrasound and follow-up happen in one place, with a gynaecologist who has time to go through your history, your results and your choices."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="obgyn-fit-heading"
-        heading="Our gynaecology care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that are irregular, heavy or painful" },
-          { icon: "uterus", label: "Pelvic symptoms that have not settled with earlier treatment" },
-          { icon: "seedling", label: "Plans for pregnancy, now or in the years ahead" },
-          { icon: "branch", label: "Changes in your cycle or body in your forties and beyond" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="obgyn-facts-heading"
-        eyebrow="At a glance"
-        heading="What every visit to MyStree is built on"
-        facts={[
-          { figure: "15 min", label: "with your gynaecologist at every consultation" },
-          { figure: "5", label: "areas of care under one roof: obstetrics, gynaecology, pelvic health, nutrition and andrology" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="obgyn-faq-heading"
-        heading="Frequently asked questions"
-        items={OBGYN_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="obgyn-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20gynaecology%20care.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServicePlan
-        headingId="obgyn-plan-heading"
-        heading="A care plan for trying to conceive"
-        lead="Gynaecologist consultations, follicular scans and nutrition advice in one plan, at one price, at our Indiranagar clinic."
-        plan={{
-          name: CARE_JOURNEY_BASIC.name,
-          audience: "For women trying to conceive",
-          price: "₹2,999",
-          priceNote: "One price for the full plan",
-        }}
-        items={CARE_JOURNEY_BASIC.items}
-        cta={{ label: "Book a consultation", href: "/book" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/auto-rickshaw-ride-to-clinic-bengaluru.webp", alt: "A woman in an auto-rickshaw holding a file of reports on her way to an appointment" }}
-        headingId="obgyn-questions-heading"
-        heading="Seeing a gynaecologist in Indiranagar"
-        questions={LOCAL_QUESTIONS}
-      />
-
-      <ServiceSteps
-        image={{ src: "/images/services/pages/gynaecology-clinic-waiting-area.webp", alt: "A patient with a file of reports waits in the clinic waiting area" }}
-        headingId="obgyn-steps-heading"
-        heading="Four steps to your first visit"
-        steps={[
-          {
-            title: "Book your visit",
-            text: "Book online or message us on WhatsApp, and choose the doctor and time that suit you.",
-          },
-          {
-            title: "Gather your reports",
-            text: "Bring recent blood tests, scan reports and prescriptions, and note the date your last period started.",
-          },
-          {
-            title: "Meet your gynaecologist",
-            text: "Talk it through in an unhurried consultation at our Indiranagar clinic, with a pelvic ultrasound in the same visit if it is needed.",
-          },
-          {
-            title: "Leave with a plan",
-            text: "Go home knowing what is happening, what comes next and when to return. Follow-ups can be in the clinic or by video.",
-          },
         ]}
         cta={{ label: "Book a consultation", href: "/book" }}
       />
@@ -422,6 +306,122 @@ export default async function ObgynConsultsPage() {
             focus: ["Minimally invasive surgery", "Infertility"],
           },
         ]}
+      />
+
+      <ServiceSteps
+        image={{ src: "/images/services/pages/gynaecology-clinic-waiting-area.webp", alt: "A patient with a file of reports waits in the clinic waiting area" }}
+        headingId="obgyn-steps-heading"
+        heading="Four steps to your first visit"
+        steps={[
+          {
+            title: "Book your visit",
+            text: "Book online or message us on WhatsApp, and choose the doctor and time that suit you.",
+          },
+          {
+            title: "Gather your reports",
+            text: "Bring recent blood tests, scan reports and prescriptions, and note the date your last period started.",
+          },
+          {
+            title: "Meet your gynaecologist",
+            text: "Talk it through in an unhurried consultation at our Indiranagar clinic, with a pelvic ultrasound in the same visit if it is needed.",
+          },
+          {
+            title: "Leave with a plan",
+            text: "Go home knowing what is happening, what comes next and when to return. Follow-ups can be in the clinic or by video.",
+          },
+        ]}
+        cta={{ label: "Book a consultation", href: "/book" }}
+      />
+
+      <ServicePlan
+        headingId="obgyn-plan-heading"
+        heading="A care plan for trying to conceive"
+        lead="Gynaecologist consultations, follicular scans and nutrition advice in one plan, at one price, at our Indiranagar clinic."
+        plan={{
+          name: CARE_JOURNEY_BASIC.name,
+          audience: "For women trying to conceive",
+          price: "₹2,999",
+          priceNote: "One price for the full plan",
+        }}
+        items={CARE_JOURNEY_BASIC.items}
+        cta={{ label: "Book a consultation", href: "/book" }}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/period-pain-at-work.webp", alt: "A woman at her office desk pressing a hand to her lower abdomen in discomfort" }}
+        headingId="obgyn-insight-heading"
+        heading="Why gynaecology concerns are often missed"
+        body="Irregular cycles, heavy bleeding and pelvic pain are common, and many women are told they are simply normal. A short appointment rarely leaves time to look for what is causing them."
+        points={[
+          "Symptoms are often treated one at a time rather than together",
+          "Painful periods are often accepted as normal, which can delay a diagnosis such as endometriosis",
+          "Cycles, hormones, fertility and mood are connected, and care works better when they are seen together",
+        ]}
+      />
+
+      <ServiceFit
+        headingId="obgyn-fit-heading"
+        heading="Our gynaecology care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that are irregular, heavy or painful" },
+          { icon: "uterus", label: "Pelvic symptoms that have not settled with earlier treatment" },
+          { icon: "seedling", label: "Plans for pregnancy, now or in the years ahead" },
+          { icon: "branch", label: "Changes in your cycle or body in your forties and beyond" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="obgyn-model-heading"
+        heading="Consultation, scan and follow-up in one clinic"
+        body="MyStree is a women's health clinic in Indiranagar. Your consultation, pelvic ultrasound and follow-up happen in one place, with a gynaecologist who has time to go through your history, your results and your choices."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      {/* SECTION 3 — statement and figure. No patient counts are published
+          (Growthamp review 13 Nov 2026, item 5); the figure is Dr. Smitha
+          A.P's experience as recorded in the booking system. */}
+
+      <ServiceStat
+        headingId="obgyn-stat-heading"
+        heading="Answers to your questions, not just your symptoms."
+        figure="23 years"
+        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
+      />
+
+      <ServiceFacts
+        headingId="obgyn-facts-heading"
+        eyebrow="At a glance"
+        heading="What every visit to MyStree is built on"
+        facts={[
+          { figure: "15 min", label: "with your gynaecologist at every consultation" },
+          { figure: "5", label: "areas of care under one roof: obstetrics, gynaecology, pelvic health, nutrition and andrology" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/auto-rickshaw-ride-to-clinic-bengaluru.webp", alt: "A woman in an auto-rickshaw holding a file of reports on her way to an appointment" }}
+        headingId="obgyn-questions-heading"
+        heading="Seeing a gynaecologist in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="obgyn-faq-heading"
+        heading="Frequently asked questions"
+        items={OBGYN_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="obgyn-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20gynaecology%20care.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

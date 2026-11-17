@@ -254,3 +254,55 @@
     transition: none;
   }
 }
+
+/* Compact phones (17 Nov 2026): tighter spacing and type, same design. */
+@media (max-width: 767px) {
+  .inner {
+    padding: 44px 16px 56px;
+  }
+
+  .section .heading {
+    font-size: 2.2rem !important;
+  }
+
+  .panel {
+    margin-top: 28px;
+  }
+
+  .kicker {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .trigger {
+    min-height: 54px;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 15.5px;
+  }
+
+  .bodyInner {
+    padding: 0 16px 14px 38px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .media {
+    width: min(180px, 100%);
+  }
+
+  .actions {
+    margin-top: 24px;
+  }
+
+  .cta {
+    height: 48px;
+    font-size: 15.5px;
+  }
+}

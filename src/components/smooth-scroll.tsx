@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 
+import { enableLiteMotion } from "@/lib/use-lite-motion";
+
 /*
  * SmoothScroll (revised 16 Nov 2026).
  *
@@ -39,6 +41,11 @@ export function SmoothScroll({ children }: PropsWithChildren) {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
   const firstPath = useRef(true);
+
+  // Phone motion switch: on only after hydration (see use-lite-motion.ts).
+  useEffect(() => {
+    enableLiteMotion();
+  }, []);
 
   useEffect(() => {
     if (reducedMotion || !wantsSmoothWheel()) return;

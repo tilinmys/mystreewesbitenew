@@ -220,13 +220,22 @@
 }
 
 /* --------------------------------------------------------------- phones */
+/*
+ * Phones (compact, 17 Nov 2026): smaller cards (about 260 x 330) so the next
+ * card peeks in clearly, a shorter image, two lines of description and a
+ * smaller title. Proximity snap: a swipe never fights the page scroll.
+ */
 @media (max-width: 767px) {
   .section {
-    padding: 56px 0 72px;
+    padding: 44px 0 52px;
   }
 
   .head {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
+  }
+
+  .section .heading {
+    font-size: 1.9rem !important;
   }
 
   .arrows {
@@ -234,31 +243,59 @@
   }
 
   .track {
-    gap: 12px;
+    gap: 10px;
+    padding-bottom: 8px;
+    scroll-snap-type: x proximity;
   }
 
   .slide {
-    flex-basis: min(82vw, 330px);
+    flex-basis: min(68vw, 270px);
   }
 
   .card {
-    padding: 16px 16px 22px;
-    border-radius: 18px;
+    padding: 10px 10px 14px;
+    border-radius: 16px;
+  }
+
+  .media {
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+  }
+
+  .badge {
+    left: 8px;
+    bottom: 8px;
+    padding: 4px 7px;
+    font-size: 11.5px;
   }
 
   .title {
-    margin-top: 20px;
-    font-size: 20px;
+    margin-top: 12px;
+    padding: 0 4px;
+    font-size: 16px;
+    line-height: 1.3;
   }
 
   .text {
-    margin-top: 10px;
-    font-size: 16px;
-    line-height: 1.65;
+    margin-top: 6px;
+    padding: 0 4px;
+    font-size: 13px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .more {
-    font-size: 17px;
+    margin-top: 10px;
+    padding: 0 4px;
+    font-size: 14px;
+  }
+
+  .moreIcon {
+    width: 20px;
+    height: 20px;
   }
 }
 

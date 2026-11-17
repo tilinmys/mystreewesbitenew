@@ -34,6 +34,7 @@ const GREETING_KEY = "mystree-care-chat-greeted";
 const GREETING_DELAY_MS = 5000;
 const GREETING_LIFETIME_MS = 10000;
 const IDLE_MS = 1200;
+const OPTION = { hidden: { opacity: 0, y: 8 }, shown: { opacity: 1, y: 0 } };
 
 function storage(get: true): string | null;
 function storage(get: false): void;
@@ -74,19 +75,33 @@ export function CareChat() {
   const shownFor = useRef(0);
 
   // Launcher visibility and the "reader is scrolling" state.
+  // Light on the main thread (17 Nov 2026): at most one update per frame,
+  // and the reveal point is measured on load and resize, not on every scroll.
   useEffect(() => {
     let idle: ReturnType<typeof setTimeout> | undefined;
+    let frame = 0;
+    let point = revealPoint();
+    const update = () => {
+      frame = 0;
+      setVisible(window.scrollY > point);
+    };
     const onScroll = () => {
-      setVisible(window.scrollY > revealPoint());
+      if (!frame) frame = window.requestAnimationFrame(update);
       setScrolling(true);
       clearTimeout(idle);
       idle = setTimeout(() => setScrolling(false), IDLE_MS);
     };
-    onScroll();
-    setScrolling(false);
+    const onResize = () => {
+      point = revealPoint();
+      onScroll();
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.cancelAnimationFrame(frame);
       clearTimeout(idle);
     };
   }, []);
@@ -176,33 +191,38 @@ export function CareChat() {
 
             <p className={styles.cardLead}>How can we help you today?</p>
 
-            <ul className={styles.options}>
-              <li>
+            <motion.ul
+              className={styles.options}
+              initial={still ? false : "hidden"}
+              animate="shown"
+              transition={{ staggerChildren: 0.05, delayChildren: 0.08 }}
+            >
+              <motion.li variants={OPTION}>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.option}>
                   <MessageCircle size={18} strokeWidth={1.6} aria-hidden="true" />
                   <span>Chat with us on WhatsApp</span>
                   <ArrowUpRight size={15} strokeWidth={1.6} className={styles.optionArrow} aria-hidden="true" />
                 </a>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li variants={OPTION}>
                 <a href={`tel:${clinic.telephone}`} className={styles.option}>
                   <Phone size={18} strokeWidth={1.6} aria-hidden="true" />
                   <span>Call {clinic.telephoneDisplay}</span>
                 </a>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li variants={OPTION}>
                 <Link href="/book" className={styles.option} onClick={() => close(false)}>
                   <CalendarDays size={18} strokeWidth={1.6} aria-hidden="true" />
                   <span>Book an appointment</span>
                 </Link>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li variants={OPTION}>
                 <Link href="/doctors" className={styles.option} onClick={() => close(false)}>
                   <UserRound size={18} strokeWidth={1.6} aria-hidden="true" />
                   <span>Find a specialist</span>
                 </Link>
-              </li>
-            </ul>
+              </motion.li>
+            </motion.ul>
 
             <p className={styles.emergency}>In a medical emergency, call 112 or go to the nearest hospital.</p>
           </motion.div>
@@ -238,7 +258,7 @@ export function CareChat() {
         <motion.button
           ref={launcher}
           type="button"
-          className={styles.launcher}
+          className={`${styles.launcher} ${visible && !open && greeting !== "done" ? styles.pulse : ""}`}
           aria-label={open ? "Close help" : "Need help? Talk to the MyStree care team"}
           aria-expanded={open}
           aria-controls="care-chat-card"

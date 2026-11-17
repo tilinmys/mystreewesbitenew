@@ -229,13 +229,6 @@ export default async function MenopausePage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="menopause-stat-heading"
-        heading="Menopause care that treats the whole of you, not one symptom."
-        figure="23 years"
-        caption="of experience in obstetrics and gynaecology behind Dr. Smitha A.P's care."
-      />
-
       <ServiceConditions
         headingId="menopause-conditions-heading"
         heading="Menopause concerns we care for"
@@ -252,97 +245,6 @@ export default async function MenopausePage() {
           "Sleep problems",
           "Vaginal dryness",
           "Weight gain and metabolic changes",
-        ]}
-        cta={{ label: "Book a menopause consultation", href: "/book" }}
-      />
-
-      <ServiceInsight
-        image={{ src: "/images/services/pages/night-sweats-hot-flushes-perimenopause.webp", alt: "A woman awake at night fanning herself by an open window" }}
-        headingId="menopause-insight-heading"
-        heading="Why menopause symptoms are often missed"
-        body="Perimenopause can begin years before periods stop, and its symptoms are easily put down to stress, thyroid trouble or simply getting older."
-        points={[
-          "Anxiety, poor sleep and brain fog are often treated on their own, without asking about periods",
-          "Treatment options are not always discussed in full, with your own risks and benefits weighed",
-          "Bone, heart and pelvic health change quietly after menopause and deserve a plan before problems appear",
-        ]}
-      />
-
-      <ServiceModel
-        headingId="menopause-model-heading"
-        heading="A physician-led approach to menopause"
-        body="Menopause care at MyStree is led by gynaecologists Dr. Smitha A.P and Dr. Surbhi Sinha, with nutritionist Priyanka Savina and pelvic physiotherapist Dr. Jasmine Flora. Your symptoms, history and test results are reviewed together, and every option, hormonal or not, is explained so the decision is yours."
-        link={{ label: "Meet our doctors", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="menopause-fit-heading"
-        heading="Our menopause care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that have become irregular, heavier or stopped, with new symptoms" },
-          { icon: "mind", label: "Hot flushes, night sweats, poor sleep, low mood or brain fog" },
-          { icon: "conversation", label: "Questions about treatment options that need a proper conversation, not a quick yes or no" },
-          { icon: "monitor", label: "Concerns about bone, heart, weight or pelvic health after menopause" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="menopause-facts-heading"
-        eyebrow="At a glance"
-        heading="What menopause care at MyStree is built on"
-        facts={[
-          { figure: "12 months", label: "without a period confirms menopause; our care starts earlier, in perimenopause" },
-          { figure: "4", label: "clinicians in one clinic: gynaecology, nutrition and pelvic physiotherapy" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="menopause-faq-heading"
-        heading="Frequently asked questions"
-        items={MENOPAUSE_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="menopause-ask-heading"
-        heading="Still have questions?"
-        note="Message our care team on WhatsApp, or read answers to common questions."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20menopause%20care.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/friends-sharing-filter-coffee-bengaluru.webp", alt: "Two women in their fifties sharing filter coffee outside a darshini" }}
-        headingId="menopause-questions-heading"
-        heading="Menopause care in Indiranagar"
-        questions={LOCAL_QUESTIONS}
-      />
-
-      <ServiceSteps
-        image={{ src: "/images/services/pages/morning-walk-women-in-their-fifties-bengaluru.webp", alt: "Two women in their fifties on a morning walk in a neighbourhood park" }}
-        headingId="menopause-steps-heading"
-        heading="How your menopause care works"
-        steps={[
-          {
-            title: "Listen",
-            text: "A full history of your periods, symptoms, sleep, mood and family health.",
-          },
-          {
-            title: "Assess",
-            text: "Only the tests you need: thyroid, sugar, cholesterol, vitamin D, bone density.",
-          },
-          {
-            title: "Plan",
-            text: "Lifestyle, nutrition and treatment options, chosen with you.",
-          },
-          {
-            title: "Review",
-            text: "A follow-up at about three months, then yearly checks for bone and heart health.",
-          },
         ]}
         cta={{ label: "Book a menopause consultation", href: "/book" }}
       />
@@ -378,6 +280,104 @@ export default async function MenopausePage() {
             profileHref: "/doctors/dr-jasmine-flora",
           },
         ]}
+      />
+
+      <ServiceSteps
+        image={{ src: "/images/services/pages/morning-walk-women-in-their-fifties-bengaluru.webp", alt: "Two women in their fifties on a morning walk in a neighbourhood park" }}
+        headingId="menopause-steps-heading"
+        heading="How your menopause care works"
+        steps={[
+          {
+            title: "Listen",
+            text: "A full history of your periods, symptoms, sleep, mood and family health.",
+          },
+          {
+            title: "Assess",
+            text: "Only the tests you need: thyroid, sugar, cholesterol, vitamin D, bone density.",
+          },
+          {
+            title: "Plan",
+            text: "Lifestyle, nutrition and treatment options, chosen with you.",
+          },
+          {
+            title: "Review",
+            text: "A follow-up at about three months, then yearly checks for bone and heart health.",
+          },
+        ]}
+        cta={{ label: "Book a menopause consultation", href: "/book" }}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/night-sweats-hot-flushes-perimenopause.webp", alt: "A woman awake at night fanning herself by an open window" }}
+        headingId="menopause-insight-heading"
+        heading="Why menopause symptoms are often missed"
+        body="Perimenopause can begin years before periods stop, and its symptoms are easily put down to stress, thyroid trouble or simply getting older."
+        points={[
+          "Anxiety, poor sleep and brain fog are often treated on their own, without asking about periods",
+          "Treatment options are not always discussed in full, with your own risks and benefits weighed",
+          "Bone, heart and pelvic health change quietly after menopause and deserve a plan before problems appear",
+        ]}
+      />
+
+      <ServiceFit
+        headingId="menopause-fit-heading"
+        heading="Our menopause care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that have become irregular, heavier or stopped, with new symptoms" },
+          { icon: "mind", label: "Hot flushes, night sweats, poor sleep, low mood or brain fog" },
+          { icon: "conversation", label: "Questions about treatment options that need a proper conversation, not a quick yes or no" },
+          { icon: "monitor", label: "Concerns about bone, heart, weight or pelvic health after menopause" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="menopause-model-heading"
+        heading="A physician-led approach to menopause"
+        body="Menopause care at MyStree is led by gynaecologists Dr. Smitha A.P and Dr. Surbhi Sinha, with nutritionist Priyanka Savina and pelvic physiotherapist Dr. Jasmine Flora. Your symptoms, history and test results are reviewed together, and every option, hormonal or not, is explained so the decision is yours."
+        link={{ label: "Meet our doctors", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="menopause-stat-heading"
+        heading="Menopause care that treats the whole of you, not one symptom."
+        figure="23 years"
+        caption="of experience in obstetrics and gynaecology behind Dr. Smitha A.P's care."
+      />
+
+      <ServiceFacts
+        headingId="menopause-facts-heading"
+        eyebrow="At a glance"
+        heading="What menopause care at MyStree is built on"
+        facts={[
+          { figure: "12 months", label: "without a period confirms menopause; our care starts earlier, in perimenopause" },
+          { figure: "4", label: "clinicians in one clinic: gynaecology, nutrition and pelvic physiotherapy" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/friends-sharing-filter-coffee-bengaluru.webp", alt: "Two women in their fifties sharing filter coffee outside a darshini" }}
+        headingId="menopause-questions-heading"
+        heading="Menopause care in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="menopause-faq-heading"
+        heading="Frequently asked questions"
+        items={MENOPAUSE_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="menopause-ask-heading"
+        heading="Still have questions?"
+        note="Message our care team on WhatsApp, or read answers to common questions."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20have%20a%20question%20about%20menopause%20care.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

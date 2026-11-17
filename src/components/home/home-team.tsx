@@ -2,10 +2,11 @@
 
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { CalendarDays } from "lucide-react";
 
 import type { Doctor } from "@/lib/doctors";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-team.module.css";
 
 /*
@@ -97,7 +98,8 @@ function TeamCard({ card, hidden }: { card: Card; hidden?: boolean }) {
           aria-label={hidden ? undefined : `Book an appointment with ${card.name}`}
         >
           <CalendarDays size={14} strokeWidth={1.8} aria-hidden="true" />
-          Book appointment
+          <span className={styles.bookFull}>Book appointment</span>
+          <span className={styles.bookShort}>Book</span>
         </Link>
       </div>
     </article>
@@ -131,20 +133,20 @@ function Row({ cards, reverse, still }: { cards: Card[]; reverse?: boolean; stil
             <TeamCard card={card} />
           </li>
         ))}
-        {still
-          ? null
-          : cards.map((card) => (
-              <li key={`${card.slug}-copy`} className={styles.item} aria-hidden="true">
-                <TeamCard card={card} hidden />
-              </li>
-            ))}
+        {/* The loop copy is always rendered (server and client match); with
+            reduced motion it is hidden in CSS (.rowStill .copy). */}
+        {cards.map((card) => (
+          <li key={`${card.slug}-copy`} className={`${styles.item} ${styles.copy}`} aria-hidden="true">
+            <TeamCard card={card} hidden />
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
 
 export function HomeTeam({ doctors }: { doctors: readonly Doctor[] }) {
-  const still = useReducedMotion() ?? false;
+  const still = useStillAfterMount();
   const cards = doctors.map(toCard);
   const first = cards.filter((_, i) => i % 2 === 0);
   const second = cards.filter((_, i) => i % 2 === 1);

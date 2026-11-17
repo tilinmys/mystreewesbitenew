@@ -228,13 +228,6 @@ export default async function PsychologyPage() {
         />
       </ServiceBand>
 
-      <ServiceStat
-        headingId="psychology-stat-heading"
-        heading="Your emotional health deserves the same care as your physical health."
-        figure="RCI"
-        caption="licensed: Ms. Jigyasa Thakur is a clinical psychologist registered with the Rehabilitation Council of India."
-      />
-
       <ServiceConditions
         headingId="psychology-conditions-heading"
         heading="What our psychologist and psychiatrist help with"
@@ -251,97 +244,6 @@ export default async function PsychologyPage() {
           "Pregnancy worries and fear of birth",
           "Relationship and couple difficulties",
           "Stress and burnout",
-        ]}
-        cta={{ label: "Book a counselling session", href: "/book" }}
-      />
-
-      <ServiceInsight
-        image={{ src: "/images/services/pages/woman-feeling-stressed-and-exhausted.webp", alt: "A tired woman sitting alone on an apartment stairwell" }}
-        headingId="psychology-insight-heading"
-        heading="Why women's emotional health is often overlooked"
-        body="Many women carry low mood, anxiety or grief for months because it is put down to hormones, tiredness or just being a mother."
-        points={[
-          "Low mood in pregnancy or after birth is often brushed off as normal tiredness or the baby blues",
-          "Grief after a miscarriage or unsuccessful fertility treatment is a real loss, yet women are often expected to move on quickly",
-          "Mood changes linked to periods, fertility treatment or menopause need care that understands both body and mind",
-        ]}
-      />
-
-      <ServiceModel
-        headingId="psychology-model-heading"
-        heading="Counselling that works with your medical care"
-        body="Psychology at MyStree is led by Ms. Jigyasa Thakur, an RCI-licensed consultant psychologist with an M.A. in clinical psychology, who supports women and couples through infertility, miscarriage, pregnancy, the months after birth, anxiety, depression, grief and life changes. Psychiatrist Dr. Nivedita Sudheer (MBBS, MD Psychiatry, DPM) sees women who may need medicine for anxiety, depression or sleep problems. Ms. Priyanka Savina, who holds an M.Sc in counselling psychology, also offers counselling. With your permission, your psychologist can work with your gynaecologist, so physical and emotional care fit together."
-        link={{ label: "Meet our team", href: "/doctors" }}
-      />
-
-      <ServiceFit
-        headingId="psychology-fit-heading"
-        heading="Counselling is right for you if you"
-        items={[
-          { icon: "pregnancy", label: "Feel anxious or low in pregnancy or since having your baby" },
-          { icon: "branch", label: "Are grieving a miscarriage or finding fertility treatment hard" },
-          { icon: "mind", label: "Have anxiety, low mood or stress that is affecting daily life" },
-          { icon: "conversation", label: "Want a private space to talk, on your own or as a couple" },
-        ]}
-      />
-
-      <ServiceFacts
-        headingId="psychology-facts-heading"
-        eyebrow="At a glance"
-        heading="What counselling at MyStree is built on"
-        facts={[
-          { figure: "RCI", label: "licensed clinical psychologist" },
-          { figure: "5+ years", label: "of clinical psychology practice behind Ms. Jigyasa Thakur's care" },
-          { figure: "2", label: "ways to meet: in the clinic in Indiranagar or online" },
-        ]}
-      />
-
-      <ServiceFaq
-        headingId="psychology-faq-heading"
-        heading="Frequently asked questions"
-        items={PSYCHOLOGY_FAQS}
-        allLink={{ label: "See all FAQs", href: "/faqs" }}
-      />
-
-      <ServiceAsk
-        headingId="psychology-ask-heading"
-        heading="Need to talk to someone today?"
-        note="If you are in crisis, call Tele-MANAS on 14416 (free, 24 hours) or 112. For anything else, message our care team on WhatsApp."
-        whatsapp={{
-          label: "Chat on WhatsApp",
-          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20would%20like%20to%20ask%20about%20counselling.",
-        }}
-        faqs={{ label: "Read the FAQs", href: "/faqs" }}
-      />
-
-      <ServiceQuestions
-        image={{ src: "/images/services/pages/mindful-breathing-on-park-bench-bengaluru.webp", alt: "A woman sitting on a park bench under a rain tree, taking a slow breath" }}
-        headingId="psychology-questions-heading"
-        heading="Counselling in Indiranagar"
-        questions={LOCAL_QUESTIONS}
-      />
-
-      <ServiceSteps
-        image={{ src: "/images/services/pages/journaling-for-emotional-wellbeing.webp", alt: "A woman writing in a notebook at her desk in the evening" }}
-        headingId="psychology-steps-heading"
-        heading="How counselling works"
-        steps={[
-          {
-            title: "Talk",
-            text: "A private first session about what has brought you in, at your pace.",
-          },
-          {
-            title: "Understand",
-            text: "How your sleep, health, cycle, pregnancy or fertility may be playing a part.",
-          },
-          {
-            title: "Work",
-            text: "Evidence-based therapy towards goals you choose together.",
-          },
-          {
-            title: "Connect",
-            text: "With your consent, with your gynaecologist or our psychiatrist if needed.",
-          },
         ]}
         cta={{ label: "Book a counselling session", href: "/book" }}
       />
@@ -370,6 +272,104 @@ export default async function PsychologyPage() {
             profileHref: "/doctors/priyanka-savina",
           },
         ]}
+      />
+
+      <ServiceSteps
+        image={{ src: "/images/services/pages/journaling-for-emotional-wellbeing.webp", alt: "A woman writing in a notebook at her desk in the evening" }}
+        headingId="psychology-steps-heading"
+        heading="How counselling works"
+        steps={[
+          {
+            title: "Talk",
+            text: "A private first session about what has brought you in, at your pace.",
+          },
+          {
+            title: "Understand",
+            text: "How your sleep, health, cycle, pregnancy or fertility may be playing a part.",
+          },
+          {
+            title: "Work",
+            text: "Evidence-based therapy towards goals you choose together.",
+          },
+          {
+            title: "Connect",
+            text: "With your consent, with your gynaecologist or our psychiatrist if needed.",
+          },
+        ]}
+        cta={{ label: "Book a counselling session", href: "/book" }}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/woman-feeling-stressed-and-exhausted.webp", alt: "A tired woman sitting alone on an apartment stairwell" }}
+        headingId="psychology-insight-heading"
+        heading="Why women's emotional health is often overlooked"
+        body="Many women carry low mood, anxiety or grief for months because it is put down to hormones, tiredness or just being a mother."
+        points={[
+          "Low mood in pregnancy or after birth is often brushed off as normal tiredness or the baby blues",
+          "Grief after a miscarriage or unsuccessful fertility treatment is a real loss, yet women are often expected to move on quickly",
+          "Mood changes linked to periods, fertility treatment or menopause need care that understands both body and mind",
+        ]}
+      />
+
+      <ServiceFit
+        headingId="psychology-fit-heading"
+        heading="Counselling is right for you if you"
+        items={[
+          { icon: "pregnancy", label: "Feel anxious or low in pregnancy or since having your baby" },
+          { icon: "branch", label: "Are grieving a miscarriage or finding fertility treatment hard" },
+          { icon: "mind", label: "Have anxiety, low mood or stress that is affecting daily life" },
+          { icon: "conversation", label: "Want a private space to talk, on your own or as a couple" },
+        ]}
+      />
+
+      <ServiceModel
+        headingId="psychology-model-heading"
+        heading="Counselling that works with your medical care"
+        body="Psychology at MyStree is led by Ms. Jigyasa Thakur, an RCI-licensed consultant psychologist with an M.A. in clinical psychology, who supports women and couples through infertility, miscarriage, pregnancy, the months after birth, anxiety, depression, grief and life changes. Psychiatrist Dr. Nivedita Sudheer (MBBS, MD Psychiatry, DPM) sees women who may need medicine for anxiety, depression or sleep problems. Ms. Priyanka Savina, who holds an M.Sc in counselling psychology, also offers counselling. With your permission, your psychologist can work with your gynaecologist, so physical and emotional care fit together."
+        link={{ label: "Meet our team", href: "/doctors" }}
+      />
+
+      <ServiceStat
+        headingId="psychology-stat-heading"
+        heading="Your emotional health deserves the same care as your physical health."
+        figure="RCI"
+        caption="licensed: Ms. Jigyasa Thakur is a clinical psychologist registered with the Rehabilitation Council of India."
+      />
+
+      <ServiceFacts
+        headingId="psychology-facts-heading"
+        eyebrow="At a glance"
+        heading="What counselling at MyStree is built on"
+        facts={[
+          { figure: "RCI", label: "licensed clinical psychologist" },
+          { figure: "5+ years", label: "of clinical psychology practice behind Ms. Jigyasa Thakur's care" },
+          { figure: "2", label: "ways to meet: in the clinic in Indiranagar or online" },
+        ]}
+      />
+
+      <ServiceQuestions
+        image={{ src: "/images/services/pages/mindful-breathing-on-park-bench-bengaluru.webp", alt: "A woman sitting on a park bench under a rain tree, taking a slow breath" }}
+        headingId="psychology-questions-heading"
+        heading="Counselling in Indiranagar"
+        questions={LOCAL_QUESTIONS}
+      />
+
+      <ServiceFaq
+        headingId="psychology-faq-heading"
+        heading="Frequently asked questions"
+        items={PSYCHOLOGY_FAQS}
+        allLink={{ label: "See all FAQs", href: "/faqs" }}
+      />
+
+      <ServiceAsk
+        headingId="psychology-ask-heading"
+        heading="Need to talk to someone today?"
+        note="If you are in crisis, call Tele-MANAS on 14416 (free, 24 hours) or 112. For anything else, message our care team on WhatsApp."
+        whatsapp={{
+          label: "Chat on WhatsApp",
+          href: "https://wa.me/916366573772?text=Hi%20MyStree%2C%20I%20would%20like%20to%20ask%20about%20counselling.",
+        }}
+        faqs={{ label: "Read the FAQs", href: "/faqs" }}
       />
 
       <ServiceReading

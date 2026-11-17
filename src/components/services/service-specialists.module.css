@@ -422,3 +422,100 @@
     transform: none;
   }
 }
+
+/*
+ * Phones (17 Nov 2026, compact; color.md "Service pages on phones"): the
+ * booking cards drop from about 420px to about 270px. Full-width cards,
+ * tighter groups, the qualification line clamped to two lines, specialty
+ * chips on one line, a slimmer next-slot row and footer.
+ */
+@media (max-width: 639px) {
+  .heading {
+    font-size: 1.6rem !important;
+  }
+
+  .lead {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .card {
+    gap: 0.6rem;
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
+
+  .head {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+  }
+
+  .portrait {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .tag {
+    font-size: 10.5px;
+  }
+
+  .name {
+    margin-top: 0.1rem;
+    font-size: 1.1rem !important;
+  }
+
+  .degree {
+    min-height: 0;
+    margin-top: 0.15rem;
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .stats {
+    font-size: 12.5px;
+  }
+
+  .focus {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .focus li {
+    flex: none;
+    min-height: 1.5rem;
+    padding: 0 0.5rem;
+    font-size: 11.5px;
+  }
+
+  .slot {
+    padding: 0.45rem 0.65rem;
+    border-radius: 10px;
+  }
+
+  .slotTime {
+    font-size: 13.5px;
+  }
+
+  .footer {
+    padding-top: 0.6rem;
+  }
+
+  .priceValue {
+    font-size: 1.1rem;
+  }
+
+  .book {
+    min-height: 2.25rem;
+    font-size: 13px !important;
+  }
+}

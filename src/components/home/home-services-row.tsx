@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 
 import type { ImageSlotData } from "./home-images";
 import { ImageSlot } from "./image-slot";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-services-row.module.css";
 
 /*
@@ -148,9 +149,10 @@ const SERVICES: readonly Service[] = [
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const SLIDE = { hidden: { opacity: 0, y: 24 }, shown: { opacity: 1, y: 0 } };
 
 export function HomeServicesRow() {
-  const still = useReducedMotion();
+  const still = useStillAfterMount();
   const track = useRef<HTMLUListElement>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
@@ -202,15 +204,21 @@ export function HomeServicesRow() {
         </motion.div>
       </div>
 
-      <ul ref={track} className={styles.track} aria-label="Care at MyStree">
-        {SERVICES.map((service, i) => (
+      <motion.ul
+        ref={track}
+        className={styles.track}
+        aria-label="Care at MyStree"
+        initial={still ? false : "hidden"}
+        whileInView="shown"
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ staggerChildren: 0.06 }}
+      >
+        {SERVICES.map((service) => (
           <motion.li
             key={service.href}
             className={styles.slide}
-            initial={still ? false : { opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: Math.min(i, 4) * 0.07, ease: EASE }}
+            variants={SLIDE}
+            transition={{ duration: 0.7, ease: EASE }}
           >
             <Link href={service.href} className={styles.card}>
               <span className={styles.media}>
@@ -228,7 +236,7 @@ export function HomeServicesRow() {
             </Link>
           </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </section>
   );
 }

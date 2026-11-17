@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+import { isLiteMotion } from "@/lib/use-lite-motion";
 import { HOME_IMAGES } from "./home-images";
 import { ImageSlot } from "./image-slot";
 import styles from "./home-generations.module.css";
@@ -26,14 +27,16 @@ export function HomeGenerations() {
   const still = useReducedMotion();
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
+  // Phones: no clip-path / parallax tied to scroll (repaints every frame).
   const inset = useTransform(scrollYProgress, (v) => {
+    if (isLiteMotion()) return "inset(0% 0% 0% 0% round 18px)";
     const k = Math.min(1, Math.max(0, v / 0.4));
     const e = 1 - Math.pow(1 - k, 3);
     return `inset(${(1 - e) * 8}% ${(1 - e) * 6}% ${(1 - e) * 8}% ${(1 - e) * 6}% round 18px)`;
   });
-  const zoom = useTransform(scrollYProgress, (v) => 1.14 - Math.min(1, v * 1.4) * 0.14);
-  const drift = useTransform(scrollYProgress, (v) => `${(0.5 - v) * 10}%`);
-  const copyY = useTransform(scrollYProgress, (v) => (0.5 - v) * 60);
+  const zoom = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 1 : 1.14 - Math.min(1, v * 1.4) * 0.14));
+  const drift = useTransform(scrollYProgress, (v) => (isLiteMotion() ? "0%" : `${(0.5 - v) * 10}%`));
+  const copyY = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 0 : (0.5 - v) * 60));
 
   const rise = (delay: number) =>
     still
