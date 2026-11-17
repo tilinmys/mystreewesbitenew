@@ -1,0 +1,85 @@
+/*
+ * ServiceFaq — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: heading ~44px in a left column
+ * that stays in view, accordion ~600px right, in a ~1080px block.
+ */
+
+.section {
+  --q-rule: color-mix(in oklab, var(--cadet-slate) 42%, var(--alabaster-canvas));
+
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-paper);
+  scroll-margin-top: 6rem;
+}
+
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  row-gap: var(--svc-gap-content);
+}
+
+.heading {
+  max-width: 12em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.all {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  color: var(--twilight-wine);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.4em;
+  transition: text-decoration-color 200ms ease;
+}
+
+.all:hover {
+  text-decoration-color: var(--twilight-wine);
+}
+
+.all:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    column-gap: clamp(2.5rem, 6.25vw, 6rem);
+  }
+
+  /* The heading stays beside the questions while the list is read. */
+  .intro {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .all {
+    margin-top: clamp(0.75rem, 1.2vw, 1.125rem);
+    font-size: clamp(0.875rem, 1.04vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .all {
+    transition: none;
+  }
+}

@@ -1,0 +1,277 @@
+/*
+ * Home Section 08, services row (16 Nov 2026; color.md "home Section 08").
+ * Blush ground #EFE2E3 (the reference's taupe moved into the MyStree
+ * palette), white cards, ink #2A1A1E, Sanctuary Burgundy #641E2B for the
+ * next button and the badge. Root fonts only.
+ */
+.section {
+  --gutter: clamp(20px, 5.5vw, 100px);
+  --start: max(var(--gutter), (100vw - 1440px) / 2 + var(--gutter));
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 96px;
+  background: #f5eced;
+  color: #2a1a1e;
+}
+
+.section.section {
+  border-top: 0;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  color: #2a1a1e;
+}
+
+.accent {
+  font-style: italic;
+  color: #641e2b;
+}
+
+.arrows {
+  display: flex;
+  flex: none;
+  gap: 36px;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(42 26 30 / 0.12);
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease,
+    opacity 200ms ease;
+}
+
+.arrowNext,
+.arrow:not(:disabled) {
+  background: #2a1a1e;
+}
+
+.arrow:hover:not(:disabled) {
+  background: #641e2b;
+  transform: scale(1.04);
+}
+
+.arrow:disabled {
+  background: rgb(42 26 30 / 0.12);
+  cursor: default;
+}
+
+.arrow:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------------- row */
+.track {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 4px var(--gutter) 16px var(--start);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--start);
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  display: flex;
+  flex: 0 0 375px;
+  scroll-snap-align: start;
+}
+
+/* After the reference card (375 wide): 20px frame, 24px radius, image 335 × 228. */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px 20px 28px;
+  border-radius: 24px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px -22px rgb(75 23 34 / 0.28);
+}
+
+.card:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+}
+
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 335 / 228;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f4e9ea;
+}
+
+.photo {
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .photo {
+  transform: scale(1.04);
+}
+
+.badge {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #f4cfd4;
+  color: #2a1a1e;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.title {
+  margin-top: 26px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: #1c1114;
+}
+
+.text {
+  margin-top: 14px;
+  flex: 1;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: #1c1114;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #1c1114;
+}
+
+.moreIcon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1.8px solid currentColor;
+  border-radius: 50%;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.card:hover .moreIcon {
+  background: #2a1a1e;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------- phones */
+@media (max-width: 767px) {
+  .section {
+    padding: 56px 0 72px;
+  }
+
+  .head {
+    margin-bottom: 28px;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .track {
+    gap: 12px;
+  }
+
+  .slide {
+    flex-basis: min(82vw, 330px);
+  }
+
+  .card {
+    padding: 16px 16px 22px;
+    border-radius: 18px;
+  }
+
+  .title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  .text {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .more {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .photo,
+  .arrow,
+  .moreIcon {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:hover .photo {
+    transform: none;
+  }
+}

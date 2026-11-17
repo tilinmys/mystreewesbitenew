@@ -1,0 +1,21 @@
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# graphify knowledge graph output
+graphify-out/
+
+# local caches and previews
+.npm-cache/
+.pdf-preview/
+.claude/settings.local.json
+
+# separate project (has its own git repo)
+remind-for-her/
+remind-for-her-standalone.html
+build_standalone.js

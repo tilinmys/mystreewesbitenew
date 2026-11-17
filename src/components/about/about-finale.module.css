@@ -1,0 +1,212 @@
+/*
+ * AboutFinale — "the doorway", last section of /about.
+ *
+ * Frame from the reference at 100% zoom: a band 1760 × 841px at 1907px
+ * (110rem wide, ~44vw tall), 112px wider than the content column on each
+ * side, giant headline split top and bottom, "Book a visit →" centred.
+ *
+ * Our change: the photo sits in a Twilight Wine wall and opens from an
+ * arched doorway to the full band as the section scrolls into view
+ * (scroll-driven animation, view timeline). The wine wall keeps the white
+ * headline readable at every stage of the opening.
+ */
+
+.section {
+  padding: 0 1.25rem clamp(3.5rem, 2.75rem + 2.5vw, 5.5rem);
+  background: var(--pure-white);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  max-width: 87rem;
+  height: clamp(28rem, 18rem + 26vw, 42rem);
+  margin: 0 auto;
+  /* clip, not hidden: hidden would make the stage a scroll container, and
+     the doorway's view() timeline would track it instead of the page. */
+  overflow: clip;
+  background: var(--twilight-wine);
+  isolation: isolate;
+}
+
+.doorway {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Shade top and bottom for the headline, and softly behind the button. */
+.doorway::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--botanical-midnight) 50%, transparent) 0%,
+      transparent 32%,
+      transparent 66%,
+      color-mix(in oklab, var(--botanical-midnight) 55%, transparent) 100%
+    ),
+    radial-gradient(
+      ellipse 40% 26% at 50% 50%,
+      color-mix(in oklab, var(--botanical-midnight) 30%, transparent),
+      transparent
+    );
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center 62%;
+}
+
+/* ------------------------------------------------ headline */
+
+/* The two lines pin to the top and bottom of the band. Overrides the global
+   `main h2` serif display role (globals.css, !important). */
+.headline {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  font-size: inherit !important;
+  pointer-events: none;
+}
+
+.lineTop,
+.lineBottom {
+  display: block;
+  max-width: 100%;
+  padding-inline: 1rem;
+  color: var(--pure-white);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(2.25rem, 0.8rem + 5.4vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.lineTop {
+  padding-top: clamp(1.25rem, 2.5vw, 2.75rem);
+}
+
+.lineBottom {
+  padding-bottom: clamp(1rem, 2vw, 2.25rem);
+}
+
+/* ------------------------------------------------ call to action */
+
+.cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--pure-white);
+  font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+.cta span {
+  display: inline-block;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cta:hover {
+  text-decoration-line: underline;
+}
+
+.cta:hover span {
+  transform: translateX(6px);
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--pure-white);
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------ the doorway opening */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .doorway {
+      animation: door-open linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+
+    .lineTop,
+    .lineBottom {
+      animation: line-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+
+    .lineTop {
+      --line-from: -0.35em;
+    }
+
+    .lineBottom {
+      --line-from: 0.35em;
+    }
+  }
+}
+
+/* An arched doorway in the wine wall widens into the full band. */
+@keyframes door-open {
+  from {
+    clip-path: inset(9% 36% 0 36% round 50vw 50vw 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 0 0 0 0);
+  }
+}
+
+/* The two lines start a little apart and close in as the door opens. */
+@keyframes line-settle {
+  from {
+    transform: translateY(var(--line-from));
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Phones: a taller frame, a wider doorway. */
+@media (max-width: 639px) {
+  .section {
+    padding-inline: 0;
+  }
+
+  .stage {
+    height: clamp(30rem, 120vw, 36rem);
+  }
+
+  @keyframes door-open {
+    from {
+      clip-path: inset(12% 22% 0 22% round 50vw 50vw 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0 round 0 0 0 0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta span {
+    transition: none;
+  }
+}

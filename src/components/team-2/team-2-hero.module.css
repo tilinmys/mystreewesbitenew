@@ -1,0 +1,212 @@
+/*
+ * Team 2 Hero Section
+ *
+ * Designed around how women experience color in clinical health:
+ * Luminous Sky Mist canvas (#D4E8F8 -> #E2F0FB), zero-glare comfort,
+ * Fraunces serif display heading in Midnight Navy (#0C161D),
+ * and tactile blue/navy dual pill actions.
+ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 4.5vw, 4rem);
+  background: var(--pure-white);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+.heroInner {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 48rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.heading {
+  margin: 0 0 clamp(1rem, 2vw, 1.35rem);
+  color: var(--botanical-midnight);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 4.8vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  max-width: 22ch;
+}
+
+.lead {
+  max-width: 44ch;
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: -0.01em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.75rem, 1.8vw, 1.15rem);
+  margin-bottom: 0;
+}
+
+/* Primary Pill Button: Midnight Navy */
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 2.4rem;
+  border-radius: 9999px;
+  background: linear-gradient(170deg, var(--book-top), var(--book-bottom));
+  color: var(--pure-white);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -8px color-mix(in oklab, var(--brand-flame-swatch) 70%, transparent);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 220ms ease,
+              box-shadow 220ms ease;
+}
+
+.primaryAction:hover {
+  transform: translateY(-2px);
+  background: var(--twilight-wine);
+  box-shadow: 0 8px 22px color-mix(in oklab, var(--twilight-wine) 30%, transparent);
+}
+
+.primaryAction:active {
+  transform: translateY(0);
+}
+
+/* Secondary Pill Button: Frosted Blue Pill */
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 2.4rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--cadet-slate);
+  background: color-mix(in oklab, var(--pure-white) 75%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 220ms ease,
+              border-color 220ms ease;
+}
+
+.secondaryAction:hover {
+  transform: translateY(-2px);
+  background: var(--pure-white);
+  border-color: var(--botanical-midnight);
+}
+
+.secondaryAction:active {
+  transform: translateY(0);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+}
+
+/* Local Trust Chips */
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem clamp(1.25rem, 2.5vw, 2rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+}
+
+.trustItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+.trustIcon {
+  color: var(--twilight-wine);
+  flex-shrink: 0;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 3rem 1.25rem 2.25rem;
+  }
+
+  .heading {
+    font-size: clamp(2rem, 7.5vw, 2.75rem);
+    max-width: 100%;
+  }
+
+  .lead {
+    font-size: var(--type-body-lg);
+    max-width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+    min-height: 3rem;
+  }
+
+  .trustRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction {
+    transition: none;
+    transform: none !important;
+  }
+}

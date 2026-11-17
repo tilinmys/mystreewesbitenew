@@ -1,0 +1,102 @@
+/*
+ * AboutInquiries — /about.
+ *
+ * Measured from the reference page at 100% zoom (1907px): padding 112px;
+ * heading 90px (84 in Plus Jakarta Sans), 80px to four 369 × 232 tiles,
+ * 20px apart, square corners, 32px inset; title 40px/700 (36 here), line
+ * 22px/500 at the foot. Interpolated to phones like the other sections.
+ *
+ * The reference's green becomes Uranian Mist with dark text; hover and
+ * keyboard focus flood Twilight Wine with white text, as in the concern grid.
+ */
+
+.section {
+  padding: clamp(3.5rem, 2.75rem + 2.5vw, 5.5rem) 1.25rem;
+  background: var(--pure-white);
+}
+
+.inner {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Overrides the global `main h2` serif display role (globals.css, !important). */
+.title {
+  margin: 0 0 clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: clamp(2.25rem, 1.45rem + 2.2vw, 3rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.5rem, 0.31rem + 0.791vw, 1.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
+  min-height: clamp(8.5rem, 7rem + 4vw, 11.5rem);
+  padding: clamp(1rem, 0.85rem + 0.6vw, 1.5rem);
+  background: var(--uranian-mist);
+  color: var(--botanical-midnight);
+  text-decoration: none;
+  transition:
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tileTitle {
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.tileText {
+  max-width: 20rem;
+  font-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.tile:hover,
+.tile:focus-visible {
+  background: var(--twilight-wine);
+  color: var(--pure-white);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--botanical-midnight);
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
+  }
+}

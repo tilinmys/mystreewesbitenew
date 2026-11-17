@@ -1,0 +1,270 @@
+/* ====================================================================
+   /faqs section 2 — Topics index + serif accordion (Oula reference,
+   MyStree palette). Alabaster ground; Fraunces questions in Midnight
+   Chamber; wine dividers, toggles and active topic; one coral rule
+   marks the active topic (the page's only orange besides the navbar CTA).
+   Phones: the topics become a single scrolling row above the list.
+   ==================================================================== */
+
+.section {
+  background: var(--alabaster-canvas);
+  padding: clamp(1rem, 2vw, 1.5rem) var(--svc-pad-x) clamp(4rem, 9vw, 7.5rem);
+}
+
+/* A hairline on the content column marks where the hero hands over, with
+   room above the topics so the two sections read as separate. */
+.inner {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--hairline);
+}
+
+/* ---- topics index ---- */
+
+.index {
+  margin-bottom: 2rem;
+}
+
+.indexTitle {
+  margin: 0 0 0.75rem;
+  color: var(--midnight-chamber);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Phones: one row of chips that scrolls sideways, no wrapping. */
+.topicList {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 calc(var(--svc-pad-x) * -1);
+  padding: 0.25rem var(--svc-pad-x);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.topicList::-webkit-scrollbar {
+  display: none;
+}
+
+.topicList li {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.topic {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid color-mix(in oklab, var(--twilight-wine) 22%, var(--alabaster-canvas));
+  border-radius: 999px;
+  background: transparent;
+  color: var(--midnight-chamber);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.topic:hover {
+  color: var(--twilight-wine);
+  border-color: var(--twilight-wine);
+}
+
+.topic[aria-pressed="true"] {
+  border-color: var(--twilight-wine);
+  background: var(--twilight-wine);
+  color: var(--alabaster-canvas);
+}
+
+.topic:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 2px;
+}
+
+/* ---- groups and accordion ---- */
+
+.group + .group {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.group[hidden] {
+  display: none;
+}
+
+/* Small caps label, not a display heading: overrides the global
+   `main h2` display style (globals.css), which is marked !important. */
+.group .groupTitle {
+  margin: 0 0 0.25rem;
+  color: var(--twilight-wine);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: var(--type-label) !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+}
+
+.item {
+  border-bottom: 1px solid color-mix(in oklab, var(--twilight-wine) 30%, var(--alabaster-canvas));
+  interpolate-size: allow-keywords;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  color: var(--midnight-chamber);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.1875rem, 1.6vw + 0.75rem, 1.75rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.question:hover,
+.item[open] .question {
+  color: var(--twilight-wine);
+}
+
+.question:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* A drawn plus that turns into a minus when open. */
+.toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--twilight-wine);
+}
+
+.toggle::before,
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.toggle::after {
+  transform: rotate(90deg);
+}
+
+.item[open] .toggle::after {
+  transform: rotate(0deg);
+}
+
+.answer {
+  max-width: 46rem;
+  margin: 0;
+  padding: 0 2.5rem 1.5rem 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--svc-body);
+  line-height: 1.7;
+}
+
+/* Smooth open where the browser supports animating details content. */
+.item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.3s ease,
+    content-visibility 0.3s allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
+}
+
+/* ---- desktop: sidebar index, sticky beside the list ---- */
+
+@media (min-width: 1024px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 7rem);
+    align-items: start;
+  }
+
+  .index {
+    position: sticky;
+    top: 7.5rem;
+    margin-bottom: 0;
+  }
+
+  .indexTitle {
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+  }
+
+  .topicList {
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .topic {
+    min-height: 2.25rem;
+    padding: 0 0 0 1rem;
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    font-size: var(--type-ui);
+    letter-spacing: 0.08em;
+  }
+
+  .topic:hover {
+    border-color: transparent;
+  }
+
+  .topic[aria-pressed="true"] {
+    border-left-color: var(--brand-flame-swatch);
+    background: transparent;
+    color: var(--twilight-wine);
+  }
+
+  .question {
+    padding: 1.625rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item::details-content,
+  .toggle::before,
+  .toggle::after {
+    transition: none;
+  }
+}

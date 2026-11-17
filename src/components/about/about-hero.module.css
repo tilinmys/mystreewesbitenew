@@ -1,0 +1,195 @@
+/*
+ * Section 01 — the human opening.
+ * Asymmetric 58/42 editorial split: copy left on a warm canvas, photograph
+ * right. Tokens stay on the corporate palette; see the About hero exception in
+ * /color.md.
+ */
+.hero {
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 57fr 43fr;
+  align-items: stretch;
+  background: var(--ivory);
+  color: var(--foreground);
+}
+
+.copy {
+  display: flex;
+  /* Trimmed from 84svh: the opening was running taller than the content
+     needed, which pushed the first real section below two screens. */
+  min-height: min(calc(72svh - var(--nav-height)), 38rem);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headline {
+  /* Measure is capped so the two typeset lines never reflow into orphans. */
+  max-width: 15ch;
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.22 !important;
+}
+
+.headlineLine {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.headlineInner {
+  display: block;
+  will-change: transform;
+}
+
+.lead {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.95rem;
+  align-items: center;
+  padding: 0 1.45rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+
+
+.secondaryAction {
+  border: 1px solid color-mix(in srgb, var(--navy) 45%, transparent);
+  color: var(--navy);
+}
+
+.secondaryAction:hover {
+  background: color-mix(in srgb, var(--navy) 8%, transparent);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.figure {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--foreground);
+}
+
+.imageLayer {
+  position: absolute;
+  /* Overscan vertically so the drift never exposes an edge. */
+  inset: -5% 0;
+  will-change: transform;
+}
+
+.image {
+  object-fit: cover;
+  /* Face sits in the upper third of the source; bias the crop up so it is
+     never clipped by the tall desktop column. */
+  object-position: 58% 26%;
+}
+
+.grain {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background-image: radial-gradient(rgb(255 255 255 / 16%) 0.55px, transparent 0.65px);
+  background-size: 4px 4px;
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  /*
+   * Mobile is composed independently: the photograph leads at a portrait crop,
+   * copy follows in normal document flow. No drift, no overlay text.
+   */
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .figure {
+    order: -1;
+    aspect-ratio: 4 / 3;
+  }
+
+  .imageLayer {
+    inset: 0;
+  }
+
+  /* Mobile leads with the face, per the independent mobile composition. */
+  .image {
+    object-position: 55% 20%;
+  }
+
+  .copy {
+    min-height: 0;
+    gap: 1.25rem;
+    padding: clamp(2rem, 8vw, 3rem) 1.25rem clamp(2.5rem, 9vw, 3.5rem);
+  }
+
+  .headline {
+    max-width: 18ch;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    flex: 1 1 13rem;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageLayer {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .headlineInner {
+    transform: none !important;
+    will-change: auto;
+  }
+}

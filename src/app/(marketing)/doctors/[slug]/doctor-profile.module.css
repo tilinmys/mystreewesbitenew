@@ -1,0 +1,290 @@
+/*
+ * Clinician profile — mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport, following the reference: a
+ * rounded 3:4 portrait (~400px) left, held in view while the profile is
+ * read; name ~40px Fraunces with credentials, a full-width hairline, the
+ * role, then ~17px paragraphs at a generous 1.75 line height in a column
+ * of ~70 characters. Phone: portrait first, then the profile.
+ */
+
+.page {
+  --profile-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
+
+  background: var(--svc-paper);
+  color: var(--midnight-chamber);
+}
+
+.layout {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+  row-gap: 2rem;
+}
+
+/* ------------------------------------------------------------ portrait */
+
+.portraitColumn {
+  min-width: 0;
+}
+
+.portrait {
+  position: relative;
+  width: 100%;
+  max-height: 70svh;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 1.25rem;
+  background: var(--uranian-mist);
+}
+
+.portraitImage {
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* ------------------------------------------------------------- content */
+
+.content {
+  min-width: 0;
+}
+
+.back {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--twilight-wine);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.4em;
+}
+
+.back:hover {
+  text-decoration-color: var(--twilight-wine);
+}
+
+.back:focus-visible,
+.relatedLink:focus-visible,
+.call:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The name: Fraunces, with a full-width hairline beneath — the reference's
+   rule, in a flame tint softened toward the paper. Outranks `main h1`. */
+.name {
+  margin: 0.75rem 0 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--brand-flame-swatch) 45%, var(--alabaster-canvas));
+  color: var(--midnight-chamber);
+  font-size: clamp(1.875rem, 2.6vw, 2.5rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.nameCredentials {
+  color: color-mix(in oklab, var(--midnight-chamber) 72%, var(--alabaster-canvas));
+  font-size: 0.62em;
+  letter-spacing: 0;
+}
+
+.role {
+  margin: 1rem 0 0;
+  color: var(--midnight-chamber);
+  font-size: var(--type-lead);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.narrative {
+  margin-top: 1.5rem;
+}
+
+.narrative p {
+  max-width: 44rem;
+  margin: 0;
+  color: color-mix(in oklab, var(--midnight-chamber) 86%, var(--alabaster-canvas));
+  font-size: var(--type-body-lg);
+  line-height: 1.75;
+}
+
+.narrative p + p {
+  margin-top: 1.25rem;
+}
+
+/* ---------------------------------------------- facts before booking */
+
+.facts {
+  margin: 2.5rem 0 0;
+  border-top: 1px solid var(--profile-rule);
+}
+
+.fact {
+  display: grid;
+  padding: 1rem 0;
+  row-gap: 0.375rem;
+  border-bottom: 1px solid var(--profile-rule);
+}
+
+.fact dt {
+  color: var(--twilight-wine);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fact dd {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: var(--type-body);
+  line-height: 1.6;
+}
+
+.plainList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plainList li + li {
+  margin-top: 0.25rem;
+}
+
+/* ------------------------------------------------------ related care */
+
+.related {
+  margin-top: 2rem;
+}
+
+.relatedTitle {
+  margin: 0;
+  color: var(--twilight-wine);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.relatedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.relatedLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--midnight-chamber);
+  font-size: var(--type-body);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.35em;
+}
+
+.relatedLink:hover {
+  color: var(--twilight-wine);
+  text-decoration-color: var(--twilight-wine);
+}
+
+/* ------------------------------------------------------------ actions */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.call {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--twilight-wine);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.4em;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .layout {
+    padding: 2.5rem 2.5rem 5rem;
+  }
+
+  .portrait {
+    max-width: 24rem;
+  }
+
+  .fact {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    column-gap: 1.5rem;
+    align-items: baseline;
+  }
+
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .layout {
+    width: min(80vw, 77rem);
+    max-width: none;
+    padding: clamp(3rem, 4.4vw, 4.25rem) 0 clamp(4rem, 6.25vw, 6rem);
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: clamp(3rem, 6.5vw, 6.25rem);
+  }
+
+  /* Held in view while the profile is read. */
+  .portraitColumn {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .portrait {
+    max-width: none;
+    max-height: calc(100svh - 9rem);
+    aspect-ratio: 3 / 4;
+  }
+
+  .back {
+    margin-top: -0.5rem;
+  }
+
+  .narrative {
+    margin-top: clamp(1.5rem, 2.1vw, 2rem);
+  }
+
+  .narrative p {
+    font-size: clamp(1rem, 1.12vw, 1.0625rem);
+  }
+
+  .narrative p + p {
+    margin-top: clamp(1.25rem, 2vw, 1.875rem);
+  }
+
+  .facts {
+    margin-top: clamp(2.5rem, 3.6vw, 3.5rem);
+  }
+}

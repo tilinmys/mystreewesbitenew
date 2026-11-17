@@ -1,0 +1,195 @@
+/*
+ * ServiceFit — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: heading ~44px on two lines,
+ * centred · four columns in a ~1100px block, divided by hairlines ·
+ * drawings 96px circles · labels ~16px.
+ */
+
+.section {
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-paper);
+}
+
+.inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.heading {
+  max-width: 15em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Phone: a list — drawing left, words right, hairline between rows. */
+.list {
+  margin: var(--svc-gap-content) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1.125rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--fit-rule);
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--fit-rule);
+}
+
+.section {
+  --fit-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
+}
+
+/* Soft mist circle with a whisper of wine, so the drawings sit on
+   something without needing a card. */
+/* No badge: the fine-line drawings sit straight on the paper, with air
+   around them, as in the reference. The class keeps its name so the
+   drawing's box and spacing stay in one place. */
+.badge {
+  display: grid;
+  width: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+}
+
+/* Hairline drawings in a soft slate-mauve: Cadet Slate warmed with Twilight
+   Wine, quieter than the text beside them. */
+.icon {
+  width: 100%;
+  height: 100%;
+  color: color-mix(in oklab, var(--cadet-slate) 52%, var(--twilight-wine) 48%);
+}
+
+.label {
+  color: var(--midnight-chamber);
+  font-size: var(--svc-body);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .heading {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  /* Two by two, centred, no row rules. */
+  .list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.5rem;
+  }
+
+  .item,
+  .item:last-child {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    row-gap: 1.25rem;
+    padding: 0 1.5rem;
+    border: 0;
+    text-align: center;
+  }
+
+  .badge {
+    width: 4.75rem;
+  }
+
+  .label {
+    max-width: 15rem;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(71.6vw, 68.75rem);
+    max-width: none;
+  }
+
+  /* Four columns with hairlines between them, not around them. */
+  .list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .item,
+  .item:last-child {
+    align-content: start;
+    row-gap: clamp(1.25rem, 1.82vw, 1.75rem);
+    padding: 0.25rem clamp(1.25rem, 2.1vw, 2rem) 0.5rem;
+  }
+
+  .item + .item {
+    border-left: 1px solid var(--fit-rule);
+  }
+
+  .badge {
+    width: clamp(4.75rem, 5.7vw, 5.5rem);
+  }
+
+  .label {
+    font-size: clamp(0.9375rem, 1.04vw, 1rem);
+    line-height: 1.6;
+  }
+}
+
+/* ======================================================================
+   LINE DRAW — this section's scroll animation.
+
+   As each item scrolls into view its drawing traces itself in, stroke by
+   stroke, like a pen sketching it, and its words fade up just after. CSS
+   scroll-driven, so no JavaScript; reversible; skipped for reduced-motion
+   users and unsupported browsers, who see the finished drawings. Every
+   drawn element has pathLength="1", so one dash value fits all of them.
+   ====================================================================== */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .icon :is(path, circle, ellipse) {
+      stroke-dasharray: 1;
+      animation: line-draw-trace linear both;
+      animation-timeline: view();
+      animation-range: cover 5% cover 30%;
+    }
+
+    .label {
+      animation: line-draw-words linear both;
+      animation-timeline: view();
+      animation-range: cover 10% cover 28%;
+    }
+  }
+}
+
+@keyframes line-draw-trace {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes line-draw-words {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,364 @@
+/*
+ * Section 07 — the clinic visit.
+ *
+ * Parchment canvas, deep charcoal type, one terracotta accent. Hierarchy is
+ * built from rules, tracking and measure; there are no cards or panels here.
+ * The bottom edge deliberately bleeds into the photograph that follows.
+ */
+
+.visit {
+  /* Parchment was warm; the visit section now sits on the cool pearl. */
+  --visit-canvas: var(--surface-pearl);
+  --visit-ink: #24211e;
+  --visit-muted: #56616f;
+  --visit-rule: color-mix(in srgb, var(--navy-slate) 26%, transparent);
+  --visit-accent: var(--brand-ink);
+
+  position: relative;
+  padding: clamp(4.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--visit-canvas);
+  color: var(--visit-ink);
+}
+
+.inner {
+  display: grid;
+  max-width: 78rem;
+  margin: 0 auto;
+  /* 55 / gutter / 45 — the gutter is where the contour lives. */
+  grid-template-columns: minmax(0, 55fr) clamp(3rem, 7vw, 7rem) minmax(0, 45fr);
+  align-items: start;
+}
+
+/* ---------------- Left column ---------------- */
+
+.eyebrow {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--visit-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headline {
+  max-width: 14ch;
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  color: var(--visit-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-display-title);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+/* Each line is masked so it can rise independently. */
+.headlineLine {
+  display: block;
+  overflow: hidden;
+  /* Room for descenders; overflow:hidden would otherwise clip the "q" and "y". */
+  padding-bottom: 0.08em;
+}
+
+.headlineInner {
+  display: block;
+  will-change: transform;
+}
+
+.body {
+  /* Held near 34ch so the measure stays comfortable at every width. */
+  max-width: 33rem;
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  color: var(--visit-muted);
+  font-size: var(--type-reading);
+  line-height: 1.6;
+}
+
+/* Weights the lower half of the column rather than leaving it hanging. */
+.detail {
+  max-width: 33rem;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--visit-rule);
+  color: var(--visit-muted);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ---------------- The contour ---------------- */
+
+.contour {
+  width: 100%;
+  height: clamp(16rem, 26vw, 24rem);
+  align-self: center;
+  color: color-mix(in srgb, var(--visit-accent) 34%, transparent);
+}
+
+/* ---------------- Right column: the ledger ---------------- */
+
+.ledger {
+  /* Optical alignment: drops the ledger to the headline's second line rather
+     than the cap-height of the eyebrow. */
+  padding-top: clamp(0.5rem, 3vw, 3.25rem);
+}
+
+.ledgerHead {
+  padding-bottom: 1.25rem;
+}
+
+.ledgerTitle {
+  margin: 0 0 0.35rem;
+  color: var(--visit-ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ledgerPlace {
+  margin: 0;
+  color: var(--visit-muted);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-lead);
+  font-weight: 400;
+}
+
+.rows {
+  margin: 0;
+  border-top: 1px solid var(--visit-rule);
+}
+
+.row {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--visit-rule);
+}
+
+.rowLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  margin: 0;
+  color: var(--visit-muted);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.rowIndex {
+  color: color-mix(in srgb, var(--visit-muted) 62%, transparent);
+  font-size: var(--type-micro);
+  letter-spacing: 0.12em;
+  /* Fixed width keeps the three labels on one optical axis. */
+  min-width: 1.35rem;
+}
+
+.rowValue {
+  margin: 0;
+  /* Aligns the value with the label text, past the index column. */
+  padding-left: 2.2rem;
+}
+
+.rowLink {
+  display: inline-flex;
+  /* Comfortable touch target without inflating the row visually. */
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--visit-ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-reading);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 260ms ease, transform 260ms ease;
+}
+
+.rowLinkText {
+  /* A drawn underline, not the browser default — it can be animated. */
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  padding-bottom: 0.15em;
+  transition: background-size 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rowArrow {
+  display: inline-block;
+  color: var(--visit-accent);
+  font-size: 0.9em;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rowLink:hover,
+.rowLink:focus-visible {
+  color: var(--visit-accent);
+}
+
+.rowLink:hover .rowLinkText,
+.rowLink:focus-visible .rowLinkText {
+  background-size: 100% 1px;
+}
+
+.rowLink:hover .rowArrow,
+.rowLink:focus-visible .rowArrow {
+  transform: translate(3px, -3px);
+}
+
+/* The two internal actions travel sideways; only directions leaves the site. */
+.rowLink[href^="tel"]:hover .rowArrow,
+.rowLink[href^="tel"]:focus-visible .rowArrow,
+.rowLink[href^="mailto"]:hover .rowArrow,
+.rowLink[href^="mailto"]:focus-visible .rowArrow {
+  transform: translateX(4px);
+}
+
+.rowLink:focus-visible {
+  outline: 2px solid var(--visit-accent);
+  outline-offset: 4px;
+}
+
+/* ---------------- Primary action ---------------- */
+
+.ctaWrap {
+  margin-top: 2rem;
+}
+
+.cta {
+  /* Square-cut, not a pill: it belongs to the ledger's rule system. */
+}
+
+.ctaArrow {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.cta:hover .ctaArrow,
+.cta:focus-visible .ctaArrow {
+  transform: translateX(4px);
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--visit-accent);
+  outline-offset: 3px;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 900px) {
+  .visit {
+    padding-bottom: clamp(3.5rem, 9vw, 5rem);
+  }
+
+  /*
+   * Recomposed rather than stacked: eyebrow -> headline -> body -> CTA ->
+   * place -> rows. The CTA is lifted above the ledger so the decision sits
+   * directly under the argument for it.
+   */
+  .inner {
+    display: flex;
+    flex-direction: column;
+    /* The desktop grid sets `align-items: start`, which in a column flex
+       container shrinks every child to its content width — the ledger and its
+       action came out narrower than the text above them. */
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .contour {
+    display: none;
+  }
+
+  .headline {
+    max-width: 16ch;
+    font-size: var(--type-display-title);
+  }
+
+  .body {
+    margin-bottom: 1.5rem;
+  }
+
+  .detail {
+    /* Redundant beside the ledger head on a single column. */
+    display: none;
+  }
+
+  /* The ledger becomes the ordering context so the CTA can be lifted above
+     the location line — `order` is inert on a plain block, which is why the
+     mobile recomposition needs this. */
+  .ledger {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .ctaWrap {
+    /* eyebrow -> headline -> body -> CTA -> location -> rows */
+    order: -1;
+    margin: 0 0 2.5rem;
+  }
+
+  .ledgerHead {
+    order: 0;
+  }
+
+  .rows {
+    order: 1;
+  }
+
+  .cta {
+    /* Full-bleed action is easier to hit and reads as a decision point. */
+    justify-content: center;
+  }
+
+  .ctaWrap .cta {
+    display: flex;
+  }
+
+  .ledgerHead {
+    padding-bottom: 1rem;
+    border-top: 1px solid var(--visit-rule);
+    padding-top: 1.5rem;
+  }
+
+  .row {
+    /* Label and value on one line reads tighter on a narrow column. */
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.65rem 0;
+  }
+
+  .rowValue {
+    padding-left: 0;
+    text-align: right;
+  }
+
+  .rowLink {
+    /* 44px minimum interaction target. */
+    min-height: 2.75rem;
+    font-size: var(--type-body-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowLink,
+  .rowLinkText,
+  .rowArrow,
+  .cta,
+  .ctaArrow {
+    transition: none;
+  }
+
+  .headlineInner {
+    transform: none !important;
+  }
+}

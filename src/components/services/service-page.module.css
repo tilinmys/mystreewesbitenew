@@ -1,0 +1,14 @@
+/*
+ * Page canvas shared by every /services/* page. Each section is a locked
+ * component in this folder with its own stylesheet; this file only sets the
+ * page root. Specification: color.md, "Service page system".
+ */
+
+.pageRoot {
+  width: 100%;
+  background: var(--bg-light);
+  color: var(--text-dark, #0C161D);
+  /* clip, not hidden: hidden makes <main> a scroll container, which breaks
+     scroll-driven animations (view() timelines) and position: sticky. */
+  overflow-x: clip;
+}

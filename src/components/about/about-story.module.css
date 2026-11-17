@@ -1,0 +1,516 @@
+/*
+ * About page editorial sections (02, 03, 04, 06).
+ * Tonal progression: white -> ivory -> deep navy -> alabaster.
+ * Orange appears only as a small marker; navy carries the structure.
+ */
+
+.sectionLabel {
+  margin: 0 0 0.9rem;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Section 02 — Why MyStree exists ---------- */
+
+.belief {
+  display: grid;
+  grid-template-columns: 48fr 52fr;
+  align-items: center;
+  background: var(--alabaster);
+}
+
+.beliefFigure {
+  position: relative;
+  /* Matches the source frame: both subjects sit near the edges, so anything
+     narrower than 3:2 clips one of them out of the shot. */
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.beliefImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.beliefCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.beliefHeading {
+  max-width: 17ch;
+  margin: 0 0 2rem;
+  color: var(--ink);
+}
+
+.frictionList {
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 26%, transparent);
+}
+
+.friction {
+  padding: 1.3rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 26%, transparent);
+}
+
+.friction dt {
+  margin: 0 0 0.4rem;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-lg);
+  /* Medium, not semibold — hierarchy comes from scale and spacing. */
+  font-weight: 500;
+}
+
+.friction dd {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.65;
+}
+
+/* ---------- Section 03 — Our philosophy ---------- */
+
+.philosophy {
+  background: var(--ivory);
+}
+
+.philosophyInner {
+  display: grid;
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: 58fr 42fr;
+  align-items: start;
+}
+
+.philosophyHeading {
+  max-width: 18ch;
+  margin: 0 0 2.5rem;
+  color: var(--ink);
+}
+
+.philosophyList {
+  display: flex;
+  flex-direction: column;
+}
+
+.philosophyEntry {
+  position: relative;
+  /* Taller rows give each statement more scroll distance, so the paired
+     photograph dwells instead of flicking between frames. */
+  min-height: clamp(24rem, 52vh, 36rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 0 3.5rem 3.6rem;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+  transition: opacity 420ms ease;
+}
+
+.philosophyEntry:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+}
+
+/* Unread statements recede slightly; never below readable. */
+.philosophyEntry[data-active="false"] {
+  opacity: 0.58;
+}
+
+.philosophyIndex {
+  position: absolute;
+  top: clamp(2.5rem, 6vh, 4rem);
+  left: 0;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: color 420ms ease;
+}
+
+/* The single orange marker in this section: the statement being read. */
+.philosophyEntry[data-active="true"] .philosophyIndex {
+  color: var(--accent-cadet);
+}
+
+.philosophyTitle {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.philosophyBody {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.68;
+}
+
+/* Mobile-only inline figure; hidden while the sticky stage is in play. */
+.philosophyInlineFigure {
+  display: none;
+}
+
+.philosophyMedia {
+  position: sticky;
+  /* Clears the fixed header from the shared token. */
+  top: calc(var(--header-offset) + 1.5rem);
+}
+
+.philosophyMediaFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: color-mix(in srgb, var(--navy-slate) 16%, var(--ivory));
+}
+
+.philosophyImage {
+  object-fit: cover;
+  /* Incoming frame settles from a clipped, slightly scaled state. */
+  clip-path: inset(10% 0 0 0);
+  opacity: 0;
+  transform: scale(1.025);
+  transition:
+    clip-path 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 900ms ease;
+}
+
+.philosophyImage[data-visible="true"] {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Section 04 — The MyStree point of view ---------- */
+
+.viewpointSection {
+  background: var(--navy-deep);
+  color: var(--on-navy);
+}
+
+.viewpointInner {
+  display: grid;
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 30fr 70fr;
+  align-items: start;
+}
+
+.viewpointRail {
+  position: sticky;
+  top: calc(var(--header-offset) + 2rem);
+}
+
+.viewpointRailLabel {
+  margin: 0 0 1.6rem;
+  color: var(--on-navy-muted);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.viewpointChapters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.viewpointChapter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  color: color-mix(in srgb, var(--on-navy-muted) 62%, transparent);
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  letter-spacing: 0.04em;
+  transition: color 420ms ease;
+}
+
+.viewpointChapter[data-active="true"] {
+  color: var(--on-navy);
+}
+
+.viewpointChapterNumber {
+  font-size: var(--type-metadata-tag);
+  letter-spacing: 0.1em;
+}
+
+/* The one clay accent permitted in this chapter. */
+.viewpointChapter[data-active="true"] .viewpointChapterNumber {
+  color: var(--accent-cadet);
+}
+
+.viewpointStack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 7vw, 6rem);
+}
+
+.viewpoint {
+  transition: opacity 500ms ease;
+}
+
+.viewpoint[data-active="false"] {
+  opacity: 0.55;
+}
+
+.viewpointChapterInline {
+  display: none;
+}
+
+.viewpointStatement {
+  max-width: 24ch;
+  margin: 0 0 1.25rem;
+  color: var(--on-navy);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4.2vw, 3.15rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.viewpointSupport {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--on-navy-muted);
+  font-size: var(--type-body-lg);
+  line-height: 1.7;
+}
+
+/* ---------- Section 06 — One continuous care story ---------- */
+
+.continuity {
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--alabaster);
+}
+
+.continuityInner {
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.continuityHeading {
+  max-width: 20ch;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  color: var(--ink);
+}
+
+.continuityTrack {
+  position: relative;
+}
+
+.continuityLine {
+  position: relative;
+  height: 1px;
+  margin-bottom: 2.25rem;
+  background: color-mix(in srgb, var(--navy-slate) 24%, transparent);
+}
+
+.continuityLineFill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  background: var(--navy);
+}
+
+.continuitySteps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+}
+
+.continuityStep {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.continuityNumber {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+
+.continuityStepTitle {
+  max-width: 16ch;
+  min-height: 2.8em;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.28;
+}
+
+.continuityStepBody {
+  max-width: 40ch;
+  flex: 1 0 auto;
+  margin: 0 0 1.5rem;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.68;
+}
+
+/* Small observed fragment under each moment — a crop, not a card. */
+.continuityFigure {
+  position: relative;
+  margin-top: auto;
+  overflow: hidden;
+  /* Ratio reserves the box before decode so the timeline cannot shift. */
+  aspect-ratio: 3 / 2;
+  background: color-mix(in srgb, var(--navy-slate) 12%, var(--alabaster));
+}
+
+.continuityImage {
+  object-fit: cover;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+  .philosophyInner {
+    grid-template-columns: 1fr;
+  }
+
+  /* No sticky stage on touch: each statement carries its own image inline. */
+  .philosophyMedia {
+    display: none;
+  }
+
+  .philosophyInlineFigure {
+    position: relative;
+    display: block;
+    margin-top: 1.5rem;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: color-mix(in srgb, var(--navy-slate) 16%, var(--ivory));
+  }
+
+  .philosophyInlineImage {
+    object-fit: cover;
+  }
+
+  .philosophyEntry[data-active="false"] {
+    opacity: 1;
+  }
+
+  .viewpointInner {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sticky chapter rail is desktop-only; each statement labels itself. */
+  .viewpointRail {
+    display: none;
+  }
+
+  .viewpointChapterInline {
+    display: block;
+    margin: 0 0 1rem;
+    color: var(--on-navy-muted);
+    font-family: var(--font-sans);
+    font-size: var(--type-metadata-tag);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .viewpoint[data-active="false"] {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .belief {
+    grid-template-columns: 1fr;
+  }
+
+  /* Continuity runs down the page on narrow screens. */
+  .continuityTrack {
+    padding-left: 1.75rem;
+  }
+
+  .continuityLine {
+    position: absolute;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    left: 0;
+    width: 1px;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .continuityLineFill {
+    /* Static on mobile — the draw is a desktop refinement. */
+    transform: none !important;
+  }
+
+  .continuitySteps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .philosophyImage,
+  .philosophyEntry,
+  .philosophyIndex,
+  .viewpoint,
+  .viewpointChapter {
+    transition: none;
+  }
+
+  .philosophyImage {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+
+  .philosophyEntry[data-active="false"],
+  .viewpoint[data-active="false"] {
+    opacity: 1;
+  }
+
+  .continuityLineFill {
+    transform: none !important;
+  }
+}

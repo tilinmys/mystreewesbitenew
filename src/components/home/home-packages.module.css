@@ -1,0 +1,406 @@
+/*
+ * Home Section 06, packages (revised 16 Nov 2026; color.md "home Section 06").
+ * White ground. Cards in a light burgundy tint #EFE1E3 (the reference's
+ * taupe, moved into the MyStree palette), Sanctuary Burgundy #641E2B for the
+ * solid chip and the button, ink #2A1A1E. Root fonts only.
+ */
+.section {
+  --gutter: clamp(20px, 5.5vw, 100px);
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 104px 0 112px;
+}
+
+.section.section {
+  border-top: 0;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/*
+ * Top row: heading left, engraving right, both in the layout (not floating),
+ * so the illustration keeps its place and proportions at every width. The
+ * engraving bleeds off the right edge of the page and fades toward the text.
+ */
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  column-gap: 24px;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2.75rem, 5.4vw, 5.25rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.04 !important;
+  letter-spacing: -0.03em !important;
+  color: #2a1a1e;
+  text-wrap: balance;
+}
+
+.accent {
+  font-style: italic;
+  color: #641e2b;
+}
+
+.art {
+  position: relative;
+  aspect-ratio: 1376 / 768;
+  margin-right: calc(-1 * var(--gutter) - max(0px, (100vw - 1440px) / 2));
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
+  pointer-events: none;
+}
+
+.artImage {
+  object-fit: cover;
+  object-position: left center;
+}
+
+/* ------------------------------------------------------------ the row */
+.rowHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 48px 0 20px;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #2a1a1e;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(100 30 43 / 0.3);
+  border-radius: 50%;
+  background: #ffffff;
+  color: #641e2b;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    opacity 200ms ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: #641e2b;
+  color: #ffffff;
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Cards start at the content edge and run on past the right edge of the page. */
+.track {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 4px var(--gutter) 8px max(var(--gutter), (100vw - 1440px) / 2 + var(--gutter));
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(var(--gutter), (100vw - 1440px) / 2 + var(--gutter));
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 410px;
+  scroll-snap-align: start;
+}
+
+/* ---------------------------------------------------------- the card */
+/*
+ * Editorial package card (revised 16 Nov 2026): one quiet label line, a serif
+ * title, the price as plain text, a straight photo top right and a slim
+ * button. No filled chips, no tilt, no heavy weights.
+ */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 282px;
+  padding: 24px 22px 22px;
+  border-radius: 16px;
+  background: #f6eeef;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  max-width: 60%;
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #8a4b52;
+}
+
+/* Overrides the global h3 scale for these cards. */
+.section .cardTitle {
+  position: relative;
+  z-index: 1;
+  max-width: 60%;
+  margin: 12px 0 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: 25px !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 0;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+  color: #2a1a1e;
+}
+
+.price {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 12px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #2a1a1e;
+}
+
+.priceNote {
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #7a5c63;
+}
+
+/* The photo: straight, rounded, top right. */
+.cardImage {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 0;
+  width: 34%;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #efe3e5;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.cta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: #641e2b;
+  color: #ffffff;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+
+.cta svg {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta:hover {
+  background: #4b1722;
+}
+
+.cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* Advice card: two-tone ground, link with a circled arrow, image rising from the bottom. */
+.advice {
+  padding: 28px 24px;
+  background: linear-gradient(180deg, #f6eeef 0%, #f6eeef 66%, #fbf6f6 66%, #fbf6f6 100%);
+}
+
+.advice .cardTitle {
+  max-width: none;
+  margin: 0;
+}
+
+.speak {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2a1a1e;
+  text-decoration: none;
+}
+
+.speakIcon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.6px solid currentColor;
+  border-radius: 50%;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.speak:hover .speakIcon {
+  background: #2a1a1e;
+  color: #ffffff;
+}
+
+.adviceImage {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  width: 76%;
+  height: 60%;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+}
+
+.adviceImage .photo {
+  object-fit: cover;
+}
+
+.arrow:focus-visible,
+.cta:focus-visible,
+.speak:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------- tablets */
+@media (max-width: 1023px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/*
+ * Phones: the engraving becomes a full-width banner at the top of the
+ * section (in the layout, fading at its foot), the heading sits under it,
+ * and the cards are swiped. No arrows on touch screens.
+ */
+@media (max-width: 767px) {
+  .section {
+    padding: 56px 0 80px;
+  }
+
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .art {
+    order: -1;
+    margin: 0 calc(-1 * var(--gutter)) -28px;
+    opacity: 0.38;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  }
+
+  .artImage {
+    object-position: 30% center;
+  }
+
+  .rowHead {
+    margin: 36px 0 16px;
+  }
+
+  .kicker {
+    font-size: 17px;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .slide {
+    flex-basis: min(84vw, 360px);
+  }
+
+  .card {
+    height: 264px;
+    padding: 20px 18px 18px;
+  }
+
+  .cardImage {
+    top: 20px;
+    right: 18px;
+    width: 32%;
+  }
+
+  .section .cardTitle {
+    font-size: 22px !important;
+  }
+
+  .cta {
+    height: 46px;
+  }
+
+  .advice {
+    padding: 22px 18px;
+  }
+
+  .speak {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .cta,
+  .speakIcon {
+    transition: none;
+  }
+}

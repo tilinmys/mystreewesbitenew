@@ -1,0 +1,124 @@
+/*
+ * ServiceClosing — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: a ~1080px wine panel, 24px
+ * radius, inset on Alabaster · heading ~40px on two lines, centred · two
+ * pills beneath.
+ */
+
+.section {
+  /* Symmetric air around the inset panel. */
+  padding: 2.5rem 1rem;
+  background: var(--svc-paper);
+}
+
+/* The band's wine with soft blooms — the same family as the opening band,
+   so the page closes in the colour it opened with. */
+.panel {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(55% 90% at 0% 0%, color-mix(in oklab, var(--cadet-slate) 30%, transparent) 0%, transparent 70%),
+    radial-gradient(50% 80% at 100% 100%, color-mix(in oklab, var(--alabaster-canvas) 14%, transparent) 0%, transparent 70%),
+    var(--twilight-wine);
+  color: var(--svc-on-wine);
+  text-align: center;
+}
+
+.heading {
+  max-width: 18em;
+  margin: 0 auto;
+  color: var(--svc-on-wine);
+  font-size: clamp(1.625rem, 2.6vw, 2.5rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.75rem;
+  border: 1px solid color-mix(in oklab, var(--alabaster-canvas) 60%, transparent);
+  border-radius: 999px;
+  color: var(--svc-on-wine);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.secondary:hover {
+  border-color: var(--alabaster-canvas);
+  background: color-mix(in oklab, var(--alabaster-canvas) 10%, transparent);
+}
+
+.secondary:focus-visible {
+  outline: 2px solid var(--alabaster-canvas);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .section {
+    padding: 3.5rem 2.5rem;
+  }
+
+  .panel {
+    padding: 3.5rem 2.5rem;
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .section {
+    padding: clamp(3rem, 4.4vw, 4.25rem) 0;
+  }
+
+  .panel {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+    padding: clamp(3.5rem, 5.4vw, 5.1875rem) 2.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .actions {
+    gap: 1rem;
+    margin-top: clamp(1.75rem, 2.6vw, 2.5rem);
+  }
+
+  .actions > :global(.cta-book),
+  .secondary {
+    min-height: clamp(2.75rem, 3.4vw, 3.25rem);
+    padding-inline: clamp(1.5rem, 2.1vw, 2rem);
+    font-size: clamp(0.875rem, 1.04vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secondary {
+    transition: none;
+  }
+}

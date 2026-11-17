@@ -1,0 +1,169 @@
+/*
+ * ServiceSteps — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: copy ~540px left, image 4:5
+ * ~440px right, in a ~1080px block · heading ~44px · step titles ~17px ·
+ * numerals ~22px Fraunces. Fits a 1536 x 730 screen.
+ */
+
+.section {
+  --steps-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
+
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-paper);
+}
+
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  grid-template-areas:
+    "copy"
+    "media";
+  row-gap: 2.5rem;
+}
+
+.copy {
+  grid-area: copy;
+  min-width: 0;
+}
+
+.heading {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.steps {
+  margin: var(--svc-gap-content) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--steps-rule);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  padding: 1rem 0 1.125rem;
+  border-bottom: 1px solid var(--steps-rule);
+}
+
+.number {
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: 1.375rem;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums;
+}
+
+/* Overrides the `main h3` contract: step titles are sans, UI weight. */
+.title {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: var(--type-body-lg) !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+}
+
+.text {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--svc-body);
+  line-height: 1.65;
+}
+
+.action {
+  margin-top: 2rem;
+}
+
+.action > :global(.cta-book) {
+  width: 100%;
+}
+
+.media {
+  position: relative;
+  grid-area: media;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 2px;
+  background: var(--svc-mist);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    200deg,
+    var(--uranian-mist) 0%,
+    color-mix(in oklab, color-mix(in oklab, var(--uranian-mist) 90.9%, var(--twilight-wine)) 88%, var(--cadet-slate)) 100%
+  );
+}
+
+/* Hover: the booking pill turns Twilight Wine on this light ground, matching
+   the outlined "Meet our doctors" pill (user instruction). Wine grounds keep
+   the default orange hover, where wine would vanish. */
+.action > :global(.cta-book):hover,
+.action > :global(.cta-book):focus-visible {
+  --cta-top: var(--twilight-wine);
+  --cta-bottom: color-mix(in oklab, var(--twilight-wine) 88%, var(--midnight-chamber));
+  --cta-glow: 74 21 45;
+
+  color: var(--alabaster-canvas);
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .action > :global(.cta-book) {
+    width: auto;
+  }
+
+  .media {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas: "copy media";
+    align-items: center;
+    column-gap: clamp(2.5rem, 6.25vw, 6rem);
+  }
+
+  .step {
+    padding-block: clamp(0.625rem, 0.78vw, 0.75rem);
+  }
+
+  .title {
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem) !important;
+  }
+
+  .text {
+    font-size: clamp(0.875rem, 1vw, 0.9375rem);
+  }
+
+  .action {
+    margin-top: clamp(1.5rem, 2.1vw, 2rem);
+  }
+
+  .media {
+    aspect-ratio: 4 / 5;
+    max-height: calc(100svh - 12rem);
+  }
+}

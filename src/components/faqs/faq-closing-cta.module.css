@@ -1,0 +1,125 @@
+/* ====================================================================
+   FAQ Closing Sanctuary CTA Section
+   Deep nocturnal spruce velvet with warm biscuit sand actions
+   ==================================================================== */
+
+.ctaSection {
+  position: relative;
+  /* Deep spruce / midnight velvet palette from reference */
+  background:
+    radial-gradient(circle at 50% 25%, rgba(74, 159, 216, 0.08) 0%, transparent 65%),
+    linear-gradient(180deg, #09151A 0%, #0D1E24 100%);
+  padding: clamp(4.5rem, 7.5vw, 6.5rem) 1.5rem;
+  text-align: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(139, 164, 191, 0.15);
+}
+
+.container {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 4.8vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0 0 0.85rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  line-height: 1.55;
+  color: #CADAE6;
+  max-width: 36rem;
+  margin: 0 0 clamp(1.85rem, 3vw, 2.5rem);
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  flex-wrap: wrap;
+}
+
+/* Primary Pill: Warm Peach / Biscuit Sand Fill */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(2.85rem, 4.5vh, 3.15rem);
+  padding: 0 clamp(2rem, 3vw, 2.65rem);
+  border-radius: 9999px;
+  background-color: #CDD1D7;
+  color: #182A32;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 0.98vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryButton:hover {
+  background-color: #D6DBE0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+}
+
+/* Secondary Pill: Outlined Sand Pill */
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(2.85rem, 4.5vh, 3.15rem);
+  padding: 0 clamp(1.75rem, 2.5vw, 2.35rem);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(205, 209, 215, 0.7);
+  background-color: transparent;
+  color: #CDD1D7;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 0.98vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.secondaryButton:hover {
+  background-color: rgba(205, 209, 215, 0.12);
+  border-color: #CDD1D7;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.secondaryButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 540px) {
+  .buttonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    min-height: 3.15rem;
+  }
+}

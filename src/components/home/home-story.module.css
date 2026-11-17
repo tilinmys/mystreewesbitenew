@@ -1,0 +1,144 @@
+/*
+ * Home Section 03 (revised 14 Nov 2026). White, light burgundy type:
+ * heading #641E2B with an italic #8A4B52 accent, text #4A2A31.
+ * Grid (desktop): heading on columns 1–6; text on columns 8–12, set lower.
+ * The silk ribbon (three.js) runs through the open space below them.
+ */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.section.section {
+  border-top: 0;
+}
+
+.ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 72px 40px 0;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  grid-column: 1 / span 6;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2.5rem, 4.4vw, 4rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.06 !important;
+  letter-spacing: -0.025em !important;
+  color: #641e2b;
+  text-wrap: balance;
+}
+
+.accent {
+  font-style: italic;
+  color: #8a4b52;
+}
+
+.body {
+  grid-column: 8 / span 5;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+  padding-bottom: 200px;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4a2a31;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgb(100 30 43 / 0.35);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #641e2b;
+  text-decoration: none;
+  transition: border-color 200ms ease;
+}
+
+.link svg {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link:hover {
+  border-bottom-color: #641e2b;
+}
+
+.link:hover svg {
+  transform: translateX(4px);
+}
+
+.link:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    padding: 64px 32px 0;
+  }
+
+  .section .heading {
+    grid-column: 1 / span 8;
+  }
+
+  .body {
+    grid-column: 6 / span 7;
+    margin-top: 32px;
+  }
+}
+
+/* Phones: heading, then text, with room below for the ribbon. */
+@media (max-width: 767px) {
+  .inner {
+    grid-template-columns: 1fr;
+    padding: 48px 20px 0;
+  }
+
+  .section .heading,
+  .body {
+    grid-column: 1;
+  }
+
+  .body {
+    margin-top: 28px;
+    padding-bottom: 190px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link svg {
+    transition: none;
+  }
+}

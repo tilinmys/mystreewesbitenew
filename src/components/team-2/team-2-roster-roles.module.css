@@ -1,0 +1,177 @@
+/*
+ * Team 2 Section 3: "Who's on your care team?"
+ *
+ * 3-Card architectural grid in Soft Uranian Mist (#E6F1FA -> #EDF6FC).
+ */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: clamp(4rem, 6.5vw, 5.75rem) clamp(1.25rem, 4vw, 3rem);
+  background: var(--pure-white);
+  color: var(--text-dark);
+  border-top: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* ---------------- Header ---------------- */
+
+.header {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto clamp(2.25rem, 3.5vw, 3.25rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 clamp(0.5rem, 1vw, 0.75rem);
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin: 0 0 clamp(0.75rem, 1.4vw, 1rem);
+  color: var(--botanical-midnight);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 4vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+/* ---------------- 3-Card Grid ---------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--pure-white);
+  border-radius: 1rem;
+  border: 1.5px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+  padding: clamp(1.35rem, 2.2vw, 1.85rem);
+  box-shadow: 0 8px 24px -4px color-mix(in oklab, var(--twilight-wine) 5%, transparent);
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 240ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px color-mix(in oklab, var(--twilight-wine) 9%, transparent), 0 0 20px color-mix(in oklab, var(--twilight-wine) 15%, transparent);
+  border-color: var(--twilight-wine);
+}
+
+/* Illustration Container */
+.artFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 11.5rem;
+  margin-bottom: 1.25rem;
+  background: var(--pure-white);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artImage {
+  object-fit: contain;
+  object-position: center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .artImage {
+  transform: scale(1.02);
+}
+
+/* Card Content */
+.cardTitle {
+  margin: 0 0 0.65rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-lead);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  min-height: 3rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cardBody {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .header {
+    margin-bottom: 1.75rem;
+  }
+
+  .artFrame {
+    max-height: 13rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 3rem 1.25rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .heading {
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover .artImage {
+    transition: none !important;
+    transform: none !important;
+  }
+}

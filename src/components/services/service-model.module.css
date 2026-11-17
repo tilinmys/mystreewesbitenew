@@ -1,0 +1,114 @@
+/*
+ * ServiceModel — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: a ~620px centred column ·
+ * heading ~44px on two lines · body ~17px · ~110px of air above and below.
+ */
+
+/*
+ * The wash: Uranian Mist at the top easing into Alabaster warmed with a
+ * breath of wine at the foot. The reference moves mint to lavender; ours
+ * moves from the palette's cool blue to its warm ivory, so it hands over
+ * from the paper above and to the paper below without a seam.
+ */
+.section {
+  padding: var(--svc-pad-y-statement) var(--svc-pad-x);
+  background: linear-gradient(
+    180deg,
+    var(--uranian-mist) 0%,
+    color-mix(in oklab, var(--uranian-mist) 55%, var(--alabaster-canvas)) 48%,
+    color-mix(in oklab, var(--alabaster-canvas) 93%, var(--twilight-wine) 7%) 100%
+  );
+}
+
+.inner {
+  display: flex;
+  max-width: 36rem;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  max-width: 15em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin: var(--svc-gap-lead) 0;
+  background: color-mix(in oklab, var(--twilight-wine) 45%, var(--alabaster-canvas));
+}
+
+.body {
+  max-width: 34rem;
+  margin: 0;
+  color: color-mix(in oklab, var(--midnight-chamber) 82%, var(--uranian-mist));
+  font-size: var(--svc-body);
+  line-height: 1.7;
+}
+
+/* A soft outlined pill: secondary to the orange booking pill, warm enough
+   to read as an invitation. */
+.link {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 0 1.75rem;
+  border: 1px solid color-mix(in oklab, var(--twilight-wine) 55%, var(--alabaster-canvas));
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--pure-white) 55%, transparent);
+  color: var(--twilight-wine);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.link:hover {
+  background: var(--twilight-wine);
+  color: var(--alabaster-canvas);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    max-width: min(40.4vw, 38.75rem);
+  }
+
+  .body {
+    font-size: var(--svc-body);
+    line-height: 1.75;
+  }
+
+  .link {
+    min-height: clamp(2.75rem, 3.4vw, 3.25rem);
+    margin-top: clamp(1.75rem, 2.6vw, 2.5rem);
+    padding-inline: clamp(1.5rem, 2.1vw, 2rem);
+    font-size: clamp(0.875rem, 1.04vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

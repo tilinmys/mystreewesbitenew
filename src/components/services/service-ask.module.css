@@ -1,0 +1,136 @@
+/*
+ * ServiceAsk — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: a ~310px band · heading ~44px
+ * left, two pills right, in a ~1040px block.
+ */
+
+/*
+ * Wine, lit from the left: a cadet-and-alabaster bloom at the left edge
+ * fading into Twilight Wine — the reference's light-to-deep sweep, in our
+ * palette. Lightest point keeps alabaster text above 4.5:1.
+ */
+.section {
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background:
+    radial-gradient(60% 140% at 12% 60%, color-mix(in oklab, color-mix(in oklab, var(--twilight-wine) 79.5%, var(--cadet-slate)) 88%, var(--alabaster-canvas)) 0%, transparent 70%),
+    linear-gradient(90deg, color-mix(in oklab, var(--twilight-wine) 82%, var(--cadet-slate)) 0%, var(--twilight-wine) 70%);
+  color: var(--svc-on-wine);
+}
+
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  row-gap: 1.75rem;
+}
+
+.heading {
+  margin: 0;
+  color: var(--svc-on-wine);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.note {
+  margin: var(--svc-gap-lead) 0 0;
+  color: var(--svc-on-wine-soft);
+  font-size: var(--svc-body);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+/* Alabaster warmed with a breath of flame: the reference's peach, kept
+   inside the palette and quiet enough that the orange booking pill remains
+   the brightest thing on the page. */
+.primary {
+  background: color-mix(in oklab, var(--alabaster-canvas) 88%, var(--brand-flame-swatch) 12%);
+  color: var(--twilight-wine);
+}
+
+.primary:hover {
+  background: var(--alabaster-canvas);
+}
+
+.secondary {
+  border: 1px solid color-mix(in oklab, var(--alabaster-canvas) 60%, transparent);
+  color: var(--svc-on-wine);
+}
+
+.secondary:hover {
+  border-color: var(--alabaster-canvas);
+  background: color-mix(in oklab, var(--alabaster-canvas) 10%, transparent);
+}
+
+.primary:focus-visible,
+.secondary:focus-visible {
+  outline: 2px solid var(--alabaster-canvas);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(67.7vw, 65rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 3rem;
+  }
+
+  .note {
+    font-size: var(--svc-body);
+  }
+
+  .actions {
+    gap: 1rem;
+  }
+
+  .primary,
+  .secondary {
+    min-height: clamp(2.75rem, 3.4vw, 3.25rem);
+    padding-inline: clamp(1.5rem, 2.1vw, 2rem);
+    font-size: clamp(0.875rem, 1.04vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary,
+  .secondary {
+    transition: none;
+  }
+}

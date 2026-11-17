@@ -1,0 +1,179 @@
+/*
+ * ServiceReading — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: heading ~44px left with the "all
+ * articles" link right · three cards in a ~1080px block · 4:3 images ·
+ * titles ~18px.
+ */
+
+.section {
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-mist);
+}
+
+.inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+.heading {
+  max-width: 15em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.all {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--twilight-wine);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.4em;
+}
+
+.all:hover {
+  text-decoration-color: var(--twilight-wine);
+}
+
+.all:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cards {
+  display: grid;
+  margin: var(--svc-gap-content) 0 0;
+  padding: 0;
+  list-style: none;
+  row-gap: 2.25rem;
+}
+
+.card {
+  display: grid;
+  align-content: start;
+}
+
+.media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  background: var(--alabaster-canvas);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.media:focus-visible,
+.title:focus-visible,
+.authorLink:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.category {
+  margin-top: 1rem;
+  color: var(--twilight-wine);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 0.5rem;
+  color: var(--midnight-chamber);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none;
+  text-wrap: balance;
+}
+
+.title:hover,
+.card:hover .title {
+  color: var(--twilight-wine);
+}
+
+.author {
+  margin-top: 0.625rem;
+  color: var(--text-muted);
+  font-size: var(--type-ui);
+}
+
+.authorLink {
+  color: var(--midnight-chamber);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.3em;
+}
+
+.authorLink:hover {
+  color: var(--twilight-wine);
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+  }
+
+  .all {
+    font-size: clamp(0.875rem, 1.04vw, 1rem);
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  }
+
+  .title {
+    font-size: clamp(1.125rem, 1.3vw, 1.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+}

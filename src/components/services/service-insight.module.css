@@ -1,0 +1,130 @@
+/*
+ * ServiceInsight v2 — LOCKED. Mobile-first. Follows the user's reference
+ * (9 Oct 2026) exactly.
+ *
+ * Proportions taken from the reference and expressed against the 16px body:
+ *   image      3:2 landscape, ~27.5rem wide, vertically centred on the copy
+ *   gap        ~4.5rem between image and copy
+ *   copy       ~26.5rem column; heading ~2.1x body, light serif, balanced
+ *   rhythm     heading > 24px > body > 24px > points; points 12px apart
+ *   points     fine-line check circle + text in the body's ink and weight
+ * At 1536 x 730 the block is ~960px wide, centred, with generous air above
+ * and below, and the whole section fits one screen.
+ */
+
+.section {
+  padding: var(--svc-pad-y-statement) var(--svc-pad-x);
+  background: var(--svc-paper);
+}
+
+/* Phone: copy first, image after — the answer is what the reader came for. */
+.inner {
+  display: grid;
+  max-width: 34rem;
+  margin: 0 auto;
+  grid-template-areas:
+    "copy"
+    "media";
+  row-gap: 2rem;
+}
+
+.media {
+  position: relative;
+  grid-area: media;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  background: var(--svc-mist);
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Quiet light panel until the photograph arrives: mist warmed with a trace
+   of wine, so it belongs to the page rather than reading as a grey box. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    var(--uranian-mist) 0%,
+    color-mix(in oklab, color-mix(in oklab, var(--uranian-mist) 90.7%, var(--twilight-wine)) 86%, var(--cadet-slate)) 100%
+  );
+}
+
+.copy {
+  grid-area: copy;
+  min-width: 0;
+}
+
+/* Light serif, about twice the body size, as in the reference. */
+.heading {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 1.2vw + 1.2rem, 2.125rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+  text-wrap: balance;
+}
+
+.body {
+  margin: 1.25rem 0 0;
+  color: var(--midnight-chamber);
+  font-size: var(--svc-body);
+  line-height: 1.6;
+}
+
+.points {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Icon on the first line, text hanging beside it. */
+.point {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  column-gap: 0.625rem;
+  align-items: start;
+  color: var(--midnight-chamber);
+  font-size: var(--svc-body);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Same slate-mauve as the fit drawings; centred on the first line box. */
+.check {
+  width: 1rem;
+  height: 1rem;
+  margin-top: calc((1.55em - 1rem) / 2);
+  color: color-mix(in oklab, var(--cadet-slate) 52%, var(--twilight-wine) 48%);
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  /* Image left, copy right; centres aligned, as in the reference. */
+  .inner {
+    width: min(100%, 61rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 27.5rem) minmax(0, 26.5rem);
+    grid-template-areas: "media copy";
+    justify-content: center;
+    align-items: center;
+    column-gap: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .body {
+    margin-top: 1.5rem;
+  }
+
+  .points {
+    margin-top: 1.5rem;
+  }
+}

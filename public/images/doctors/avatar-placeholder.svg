@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">MyStree clinician placeholder</title>
+  <desc id="desc">An abstract clinician avatar placeholder.</desc>
+  <rect width="128" height="128" rx="24" fill="#98b7d2"/>
+  <circle cx="64" cy="48" r="23" fill="#d49b7f"/>
+  <path d="M34 128c3-36 13-54 30-54s27 18 30 54H34Z" fill="#f4f1ea"/>
+  <path d="M42 47c2-24 14-32 22-32 16 0 24 12 24 32-12-5-22-15-27-25-5 14-11 22-19 25Z" fill="#5f463f"/>
+</svg>

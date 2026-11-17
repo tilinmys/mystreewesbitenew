@@ -1,0 +1,315 @@
+/*
+ * Team 2 Care Model & Comparative Ledger Section
+ *
+ * Designed around calming porcelain blue (#F4F8FC) and midnight navy (#1E384D).
+ * Features bespoke Indian women's care model artwork and a crisp 5-point comparative ledger.
+ */
+
+/* Warm grey band, as on /about (palette pass, 17 Oct 2026). */
+.section {
+  position: relative;
+  width: 100%;
+  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 3.5rem);
+  background: color-mix(in oklab, var(--alabaster-canvas) 98%, var(--midnight-chamber));
+  color: var(--text-dark);
+  border-top: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+/* ---------------- Top Row: Copy + Diagram ---------------- */
+
+.topRow {
+  display: grid;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.copyCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heading {
+  margin: 0 0 clamp(1rem, 2vw, 1.35rem);
+  color: var(--botanical-midnight);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  max-width: 18ch;
+}
+
+.lead {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.62;
+  max-width: 44ch;
+}
+
+/* Diagram Column */
+.diagramCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagramCard {
+  position: relative;
+  width: 100%;
+  max-width: 36rem;
+  aspect-ratio: 1184 / 730;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.diagramCard:hover {
+  transform: translateY(-2px);
+}
+
+.diagramImage {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ---------------- Bottom: Desktop Comparative Table Card ---------------- */
+
+.tableCard {
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  background: var(--pure-white);
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--twilight-wine);
+  box-shadow: 0 8px 24px -6px color-mix(in oklab, var(--twilight-wine) 6%, transparent);
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1.5px solid var(--twilight-wine);
+}
+
+.headerColLeft {
+  padding: 1.15rem 2rem;
+  background: var(--alabaster-canvas);
+  border-right: 1.5px solid var(--twilight-wine);
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.headerColRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 2rem;
+  background: var(--uranian-mist);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--uranian-mist);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  /* All-caps at 12px: capitals need real tracking to stop reading as a block. */
+  letter-spacing: 0.12em;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--twilight-wine);
+}
+
+/* Table Rows */
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+  transition: background-color 160ms ease;
+}
+
+.tableRow:last-child {
+  border-bottom: 0;
+}
+
+.tableRow:hover {
+  background-color: var(--alabaster-canvas);
+}
+
+.colLeft {
+  padding: 1.15rem 2rem;
+  border-right: 1.5px solid var(--twilight-wine);
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.55;
+}
+
+.colRight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.15rem 2rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--uranian-mist);
+  color: var(--botanical-midnight);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* ---------------- Mobile Stacked View ---------------- */
+
+.mobileView {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.mobileCard {
+  background: var(--pure-white);
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--twilight-wine);
+  box-shadow: 0 4px 14px -3px color-mix(in oklab, var(--twilight-wine) 6%, transparent);
+  overflow: hidden;
+}
+
+.mobileCardTypical {
+  padding: 1.1rem 1.2rem;
+  background: var(--alabaster-canvas);
+  border-bottom: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+}
+
+.mobileLabelTypical {
+  /* All-caps at this size needs real tracking; capitals have no descenders or x-height variety to separate them, so tight caps read as a block. */
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mobileTextTypical {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.5;
+}
+
+.mobileCardMyStree {
+  padding: 1.15rem 1.2rem;
+  background: var(--pure-white);
+}
+
+.mobileLabelMyStree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  /* 600 is the system's label weight; 700 here was an outlier. */
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mobileContentMyStree {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.mobileTextMyStree {
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1024px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .diagramCard {
+    max-width: 32rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.25rem 1.25rem;
+  }
+
+  .tableCard {
+    display: none;
+  }
+
+  .mobileView {
+    display: flex;
+  }
+
+  .heading {
+    font-size: clamp(1.85rem, 7vw, 2.35rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagramCard {
+    transition: none !important;
+    transform: none !important;
+  }
+}

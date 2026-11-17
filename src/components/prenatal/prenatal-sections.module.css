@@ -1,0 +1,1051 @@
+/*
+ * Pregnancy care page.
+ *
+ * PALETTE NOTE — a deliberate deviation from the brief, recorded in color.md.
+ * The brief asked for Warm Ivory #FFFFFF and Soft Cream #ECF0F6 grounds. The
+ * standing site rule, set earlier and authoritative in color.md, forbids
+ * orange-family colour as a background anywhere. Cream is orange-family, so
+ * the grounds below are the site's existing cool neutral family instead
+ * (--surface-pearl / --surface-mist / --surface-stone / --surface-sky), with
+ * Deep Navy for the two dark sections. Clay/terracotta appears only as small
+ * markers and rules. Switching to the brief's exact creams is a token change
+ * in this file; the conflict is flagged rather than silently resolved.
+ *
+ * Every section owns its ground. Section hairlines come from globals.
+ */
+
+/* ---------------------------------------------------------------- shared */
+
+.sectionTitle {
+  max-width: 22ch;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  /* Regular weight: the serif carries the emphasis, not the weight. */
+  font-size: clamp(1.75rem, 3.2vw, 2.85rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.sectionLead {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--accent-on-light);
+}
+
+/* Pumpkin, not the deepened mix: on navy the light accent is the legible one. */
+.hero .eyebrow {
+  color: var(--accent-cadet);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Placeholder frames. Each reserves its ratio so dropping in the final asset
+   causes no layout shift. */
+.heroPlaceholder,
+.figurePlaceholder,
+.approachFigure {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed color-mix(in srgb, var(--navy-slate) 34%, transparent);
+  border-radius: inherit;
+  background: var(--surface-stone);
+  place-items: center;
+}
+
+.heroPlaceholderLabel {
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ============================= 01 — hero ============================= */
+
+/*
+ * The hero is a saturated panel inset from the viewport, so it reads as a card
+ * rather than a full-bleed band — the shape the reference uses, in MyStree's
+ * authority colour.
+ *
+ * Deep navy, not the reference's terracotta: the site forbids orange-family
+ * grounds, white on navy measures 13:1 against terracotta's 3.9:1, and it
+ * leaves the flame CTA as the single brightest element on the screen, which is
+ * where the eye should land on a page whose whole job is a booking.
+ */
+.hero {
+  padding: 1rem 1rem 0;
+  background: var(--surface-pearl);
+}
+
+.heroInner {
+  display: grid;
+  max-width: 105rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.75rem, 4vw, 4rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 53fr 47fr;
+  align-items: center;
+  border-radius: 24px;
+  background: var(--navy-deep);
+  color: var(--on-navy);
+}
+
+.heroCopy {
+  max-width: 40rem;
+}
+
+.heroTitle {
+  max-width: 17ch;
+  margin: 0 0 1.25rem;
+  color: var(--on-navy);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 4.6vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+}
+
+.heroBody {
+  max-width: 46ch;
+  margin: 0 0 1.75rem;
+  color: var(--on-navy-muted);
+  font-size: var(--type-body-lg);
+  line-height: 1.75;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.heroCall,
+.closeCall {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 1.25rem;
+  border: 1px solid var(--section-rule);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 220ms ease, background-color 220ms ease;
+}
+
+.heroCall:hover,
+.closeCall:hover {
+  border-color: var(--navy-slate);
+  background: var(--surface-mist);
+}
+
+/* Declared AFTER the shared rule above: both are single-class selectors, so
+   source order is what decides, and the shared `color: var(--ink)` would
+   otherwise put near-black text on the navy panel (1.08:1). */
+.hero .heroCall {
+  border-color: color-mix(in srgb, var(--on-navy) 34%, transparent);
+  color: var(--on-navy);
+}
+
+.hero .heroCall:hover {
+  border-color: var(--on-navy);
+  background: color-mix(in srgb, var(--on-navy) 12%, transparent);
+}
+
+.heroUrgent {
+  max-width: 46ch;
+  margin: 1.75rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border-left: 2px solid var(--accent-cadet);
+  background: color-mix(in srgb, var(--on-navy) 9%, transparent);
+  color: var(--on-navy);
+  font-size: var(--type-caption);
+  line-height: 1.65;
+}
+
+.heroUrgent a {
+  color: var(--accent-cadet);
+  font-weight: 600;
+}
+
+.heroMeta {
+  display: flex;
+  margin: 1.75rem 0 0;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+}
+
+.heroMeta div {
+  border-top: 1px solid color-mix(in srgb, var(--on-navy) 26%, transparent);
+  padding-top: 0.6rem;
+}
+
+.heroMeta dt {
+  color: var(--on-navy);
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 600;
+}
+
+.heroMeta dd {
+  margin: 0.2rem 0 0;
+  color: var(--on-navy-muted);
+  font-size: var(--type-label);
+  letter-spacing: 0.04em;
+}
+
+/* The asymmetric curve: heavier on the outer top corner, so the frame reads
+   as an original shape rather than the reference's semicircle. */
+.heroFigure {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 40% 14rem 14rem 2rem / 12rem 9rem 3rem 2rem;
+  aspect-ratio: 16 / 10;
+  background: color-mix(in srgb, var(--on-navy) 8%, var(--navy));
+}
+
+.hero .heroPlaceholder {
+  border-color: color-mix(in srgb, var(--on-navy) 30%, transparent);
+  background: color-mix(in srgb, var(--on-navy) 6%, var(--navy));
+}
+
+.hero .heroPlaceholderLabel {
+  color: var(--on-navy-muted);
+}
+
+/* ========================= 02 — quick answers ========================= */
+
+.questions {
+  background: var(--surface-mist);
+}
+
+.questionsInner {
+  display: grid;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 42fr 58fr;
+  align-items: start;
+}
+
+.questionsFigure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  aspect-ratio: 4 / 5;
+}
+
+.questionsCopy > :first-child {
+  margin-bottom: 2rem;
+}
+
+/* --------------------------- accordion --------------------------- */
+
+.answerList {
+  border-top: 1px solid var(--section-rule);
+}
+
+.answer {
+  border-bottom: 1px solid var(--section-rule);
+}
+
+.answerQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.answerQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.answerQuestion:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--accent-cadet));
+  outline-offset: 3px;
+}
+
+.answerHeading {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  /* 600, not 800: a label, not a shout. */
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.answerChevron {
+  flex: none;
+  color: var(--navy-slate);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.answer[open] .answerChevron {
+  transform: rotate(180deg);
+}
+
+.answerBody {
+  max-width: 64ch;
+  margin: 0 0 1.35rem;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.78;
+}
+
+/* ============================ 03 — journey ============================ */
+
+.journey {
+  background: var(--surface-pearl);
+}
+
+.journeyHead {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem) 0;
+}
+
+.journeyTrack {
+  position: relative;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3.5rem) 0;
+}
+
+.journeyPath {
+  position: absolute;
+  top: clamp(2rem, 4vw, 3rem);
+  right: clamp(1.5rem, 4vw, 3.5rem);
+  left: clamp(1.5rem, 4vw, 3.5rem);
+  height: 150px;
+  color: color-mix(in srgb, var(--navy) 42%, transparent);
+}
+
+.journeyStages {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  list-style: none;
+}
+
+.journeyStage {
+  position: relative;
+  padding-top: 10rem;
+}
+
+/* Alternate the vertical rhythm so the stages follow the curve rather than
+   sitting in a flat row. */
+.journeyStage:nth-child(2n) {
+  padding-top: 6rem;
+}
+
+.journeyNode {
+  position: absolute;
+  top: 4.4rem;
+  left: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid var(--accent-cadet);
+  border-radius: 50%;
+  background: var(--surface-pearl);
+}
+
+.journeyStage:nth-child(2n) .journeyNode {
+  top: 0.6rem;
+}
+
+.journeyMarker {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent-on-light);
+  /* Utility voice for weeks and markers. */
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.journeyTitle {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.journeyBody {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-caption);
+  line-height: 1.7;
+}
+
+.journeyNote {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3.5rem)
+    clamp(3.5rem, 7vw, 6rem);
+  color: var(--muted-foreground);
+  font-size: var(--type-caption);
+  line-height: 1.7;
+}
+
+/* ============================= 04 — team ============================= */
+
+.team {
+  background: var(--surface-sky);
+}
+
+.teamHead {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem) 0;
+}
+
+.teamGrid {
+  display: grid;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3.5rem)
+    clamp(3.5rem, 7vw, 6rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+/* Two dossiers, not two identical cards: the second sits lower and reverses
+   its internal alignment. */
+.dossierAlt {
+  margin-top: clamp(0rem, 4vw, 3.5rem);
+}
+
+.dossier article {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dossierPortrait {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 4 / 5;
+  background: var(--surface-stone);
+}
+
+.dossierAlt .dossierPortrait {
+  justify-self: end;
+}
+
+.dossierImage {
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.dossierAlt .dossierBody {
+  text-align: right;
+}
+
+.dossierAlt .dossierActions {
+  justify-content: flex-end;
+}
+
+.dossierSpecialty {
+  margin: 0 0 0.6rem;
+  color: var(--accent-on-light);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dossierName {
+  margin: 0 0 0.3rem;
+  color: var(--navy-deep);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+.dossierRole {
+  margin: 0 0 1rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: 500;
+}
+
+.dossierNote {
+  max-width: 46ch;
+  margin: 0 0 1.25rem;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+.dossierAlt .dossierNote {
+  margin-left: auto;
+}
+
+.dossierFacts {
+  margin: 0 0 1.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+}
+
+.dossierFacts div {
+  display: flex;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--navy-slate) 18%, transparent);
+}
+
+.dossierAlt .dossierFacts div {
+  flex-direction: row-reverse;
+}
+
+.dossierFacts dt {
+  flex: none;
+  width: 8rem;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dossierFacts dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-caption);
+  line-height: 1.6;
+}
+
+.dossierActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dossierLink {
+  color: var(--navy-deep);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* =========================== 05 — approach =========================== */
+
+.approach {
+  background: var(--navy-deep);
+  color: var(--on-navy);
+}
+
+.approachInner {
+  display: grid;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: 52fr 48fr;
+  align-items: start;
+}
+
+.approach .sectionTitle {
+  color: var(--on-navy);
+}
+
+.principles {
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.principle {
+  padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+  border-top: 1px solid color-mix(in srgb, var(--on-navy) 18%, transparent);
+  opacity: 0.45;
+  transition: opacity 420ms ease;
+}
+
+.principle[data-active="true"] {
+  opacity: 1;
+}
+
+.principleNumber {
+  margin: 0 0 0.6rem;
+  color: var(--accent-cadet);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.principleTitle {
+  margin: 0 0 0.7rem;
+  color: var(--on-navy);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.principleBody {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--on-navy-muted);
+  font-size: var(--type-body);
+  line-height: 1.78;
+}
+
+.approachStage {
+  position: sticky;
+  top: calc(var(--nav-height) + 3rem);
+}
+
+.approachFigure {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  aspect-ratio: 4 / 5;
+  background: color-mix(in srgb, var(--on-navy) 8%, var(--navy));
+  /* The crop shifts with the reading zone instead of swapping four assets. */
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.approachFigure[data-step="1"] {
+  transform: scale(1.06) translateY(-1.5%);
+}
+
+.approachFigure[data-step="2"] {
+  transform: scale(1.1) translateY(-3%);
+}
+
+.approachFigure[data-step="3"] {
+  transform: scale(1.14) translateY(-4.5%);
+}
+
+/* This placeholder sits on navy, so it cannot borrow the light-ground label
+   colour — that measured 1.84:1 and was unreadable. */
+.approachFigure {
+  border-color: color-mix(in srgb, var(--on-navy) 30%, transparent);
+}
+
+.approach .heroPlaceholderLabel {
+  color: var(--on-navy-muted);
+}
+
+/* ============================ 06 — reviews ============================ */
+
+.reviews {
+  background: var(--surface-stone);
+}
+
+.reviewsHead {
+  display: flex;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem) 2rem;
+  gap: 2rem;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.reviewsNav {
+  display: flex;
+  flex: none;
+  gap: 0.6rem;
+}
+
+.reviewsButton {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--section-rule);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--type-body-lg);
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.reviewsButton:hover:not(:disabled) {
+  border-color: var(--navy-slate);
+  background: var(--surface-pearl);
+}
+
+.reviewsButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.reviewsButton:focus-visible {
+  outline: 2px solid var(--accent-cadet);
+  outline-offset: 3px;
+}
+
+.reviewsRail {
+  display: flex;
+  margin: 0;
+  padding: 0 max(1.5rem, calc((100vw - 88rem) / 2 + 1.5rem))
+    clamp(3.5rem, 7vw, 6rem);
+  gap: 1.25rem;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.reviewsRail::-webkit-scrollbar {
+  display: none;
+}
+
+.reviewsRail:focus-visible {
+  outline: 2px solid var(--accent-cadet);
+  outline-offset: 4px;
+}
+
+.reviewCard {
+  display: flex;
+  flex: 0 0 min(26rem, 82vw);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--section-rule);
+  border-radius: 16px;
+  background: var(--surface-pearl);
+  opacity: 0.62;
+  scroll-snap-align: center;
+  transition: opacity 360ms ease, border-color 360ms ease;
+}
+
+.reviewCard[data-active="true"] {
+  border-color: color-mix(in srgb, var(--navy-slate) 44%, transparent);
+  opacity: 1;
+}
+
+.reviewQuote {
+  margin: 0 0 1.5rem;
+}
+
+.reviewQuote p {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.reviewName {
+  margin: 0;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ============================== 07 — faq ============================== */
+
+.faq {
+  background: var(--surface-pearl);
+}
+
+.faqInner {
+  display: grid;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 40fr 60fr;
+  align-items: start;
+}
+
+.faqFigure {
+  position: sticky;
+  top: calc(var(--nav-height) + 3rem);
+  overflow: hidden;
+  border-radius: 20px;
+  aspect-ratio: 4 / 3;
+}
+
+.faqCopy > :first-child {
+  margin-bottom: 2rem;
+}
+
+.reviewedBy {
+  margin: 2rem 0 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-caption);
+}
+
+/* ============================= 08 — close ============================= */
+
+.close {
+  background: var(--navy-deep);
+  color: var(--on-navy);
+}
+
+.closeInner {
+  display: grid;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 54fr 46fr;
+  align-items: center;
+}
+
+.closeTitle {
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  color: var(--on-navy);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.85rem, 3.4vw, 2.9rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.closeBody {
+  max-width: 40ch;
+  margin: 0 0 2rem;
+  color: var(--on-navy-muted);
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+.closeActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.closeCall {
+  border-color: color-mix(in srgb, var(--on-navy) 34%, transparent);
+  color: var(--on-navy);
+}
+
+.closeCall:hover {
+  border-color: var(--on-navy);
+  background: color-mix(in srgb, var(--on-navy) 10%, transparent);
+}
+
+.closeArt {
+  justify-self: center;
+  width: 100%;
+  max-width: 26rem;
+}
+
+.closeSvg {
+  width: 100%;
+  height: auto;
+  color: color-mix(in srgb, var(--on-navy) 62%, transparent);
+}
+
+/* ============================ responsive ============================ */
+
+@media (max-width: 1100px) {
+  /* Seven columns across a laptop leaves ~128px per stage — too narrow for
+     the titles. The curve cannot survive a wrap, so it goes and the stages
+     become a plain two-row grid. */
+  .journeyStages {
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .journeyStage,
+  .journeyStage:nth-child(2n) {
+    padding-top: 8rem;
+  }
+
+  .journeyNode,
+  .journeyStage:nth-child(2n) .journeyNode {
+    top: 3rem;
+  }
+
+  .journeyPath {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroInner,
+  .questionsInner,
+  .faqInner,
+  .approachInner,
+  .closeInner,
+  .teamGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Hero stacks text above image. */
+  .heroFigure {
+    order: 2;
+    border-radius: 2rem 8rem 2rem 2rem / 3rem 5rem 2rem 2rem;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* FAQ and quick answers put the image above the accordion. */
+  .questionsFigure,
+  .faqFigure {
+    position: static;
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Timeline becomes vertical; nothing scrolls sideways. */
+  .journeyStages {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-left: 1px solid color-mix(in srgb, var(--navy) 30%, transparent);
+    padding-left: 1.5rem;
+  }
+
+  .journeyStage,
+  .journeyStage:nth-child(2n) {
+    padding-top: 0;
+    padding-bottom: 2rem;
+  }
+
+  .journeyNode,
+  .journeyStage:nth-child(2n) .journeyNode {
+    top: 0.35rem;
+    left: -1.79rem;
+  }
+
+  /* No long sticky run on a phone. */
+  .approachStage {
+    position: static;
+    order: -1;
+    margin-bottom: 2rem;
+  }
+
+  .principle {
+    opacity: 1;
+  }
+
+  .dossierAlt {
+    margin-top: 0;
+  }
+
+  .dossierAlt .dossierBody,
+  .dossierAlt .dossierFacts div {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .dossierAlt .dossierPortrait {
+    justify-self: start;
+  }
+
+  .dossierAlt .dossierActions {
+    justify-content: flex-start;
+  }
+
+  .dossierPortrait {
+    max-width: none;
+  }
+
+  .reviewsHead {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .reviewsRail {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .heroMeta {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .dossierFacts div {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .dossierFacts dt {
+    width: auto;
+  }
+
+  .heroActions,
+  .closeActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .heroCall,
+  .closeCall {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answerChevron,
+  .principle,
+  .approachFigure,
+  .reviewCard,
+  .heroCall,
+  .closeCall {
+    transition: none;
+  }
+
+  .principle {
+    opacity: 1;
+  }
+
+  .approachFigure[data-step] {
+    transform: none;
+  }
+
+  .reviewsRail {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,266 @@
+/*
+ * AboutFounder — founder's note on /about.
+ *
+ * Measured from the reference page at 100% zoom (390px and 1907px):
+ *   band       light warm grey, 80px above and below at every width
+ *   frame      645 × 837 (≈ 0.77), 24px corners, 40px gap to the card
+ *   card       851px wide, same height as the frame while collapsed,
+ *              32px corners, padding 80/80/64 (40/40/32 on phones)
+ *   letter     28 → 36px / 1.22, -0.03em, regular weight
+ *   byline     15px mono; button 52px tall, 16px corners, 2px inset ring
+ *
+ * The band is Alabaster deepened 2% toward Midnight Chamber. The button
+ * ring is Twilight Wine (the reference's warm accent ring).
+ */
+
+.section {
+  padding: 5rem 1.25rem;
+  background: color-mix(in oklab, var(--alabaster-canvas) 98%, var(--midnight-chamber));
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------ portrait frame */
+
+.frame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 645 / 837;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--uranian-mist);
+}
+
+.poster {
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+video.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.375rem;
+  background: var(--uranian-mist);
+  color: var(--twilight-wine);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Above the caption, clear of the face in a head-and-shoulders portrait. */
+.playMark {
+  position: absolute;
+  bottom: clamp(5rem, 4rem + 3vw, 7.5rem);
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  width: clamp(3.25rem, 2.9rem + 1.2vw, 4.5rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--pure-white) 90%, transparent);
+  color: var(--twilight-wine);
+  transform: translateX(-50%);
+  box-shadow: 0 10px 28px -12px color-mix(in oklab, var(--midnight-chamber) 60%, transparent);
+}
+
+/* Set like the reference's burned-in subtitle: white, centred, on a fade. */
+.caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 0.375rem;
+  padding: 4.5rem 1.5rem 1.75rem;
+  background: linear-gradient(to top, color-mix(in oklab, var(--midnight-chamber) 72%, transparent), transparent);
+  color: var(--pure-white);
+  text-align: center;
+}
+
+.captionName {
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.captionNote {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.sound {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid color-mix(in oklab, var(--pure-white) 75%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--midnight-chamber) 30%, transparent);
+  color: var(--pure-white);
+  cursor: pointer;
+}
+
+.sound:focus-visible,
+.toggle:focus-visible {
+  outline: 2px solid var(--botanical-midnight);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------ letter card */
+
+.letterCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: clamp(2rem, 1.5rem + 2vw, 3.5rem) clamp(2rem, 1.5rem + 2vw, 3.5rem)
+    clamp(1.75rem, 1.3rem + 1.5vw, 3rem);
+  border-radius: 2rem;
+  background: var(--pure-white);
+  text-align: center;
+}
+
+.label {
+  margin: 0 0 1.5rem;
+  padding: 0.375rem 0.875rem;
+  border: 1.5px solid var(--botanical-midnight);
+  border-radius: 999px;
+  color: var(--botanical-midnight);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Collapsed on phones: ~8 lines, fading out. The full text is always in the
+   DOM; only its visible height changes. */
+.letter {
+  max-width: 43rem;
+  max-height: calc(8 * 1.5em);
+  overflow: hidden;
+  color: var(--botanical-midnight);
+  font-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.375rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  mask-image: linear-gradient(to bottom, #000 65%, transparent);
+}
+
+/* The global `p` rule sets the body size; the letter's paragraphs take the
+   letter's own size and spacing instead. */
+.letter p {
+  margin: 0 0 0.9em;
+  font: inherit;
+  letter-spacing: inherit;
+  text-wrap: pretty;
+}
+
+.letterOpen {
+  max-height: none;
+  mask-image: none;
+}
+
+.letterOpen p:last-child {
+  margin-bottom: 0.5em;
+}
+
+.signature {
+  font-weight: 400;
+}
+
+.byline {
+  margin: 1rem 0 1.75rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.toggle {
+  min-height: 3.25rem;
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  border: 0;
+  border-radius: 1rem;
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--twilight-wine);
+  color: var(--botanical-midnight);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.toggle:hover {
+  background: var(--twilight-wine);
+  color: var(--pure-white);
+}
+
+/* ------------------------------------------------ tablet and desktop */
+
+@media (min-width: 900px) {
+  /* Reference: frame 645 / gap 40 / card 851 of a 1536px column. */
+  .inner {
+    grid-template-columns: minmax(0, 645fr) minmax(0, 851fr);
+    align-items: stretch;
+    gap: 2.5rem;
+  }
+
+  /* Collapsed, the card takes the frame's height and the letter fills
+     whatever space is left, fading out at the bottom. */
+  .letter {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .letterOpen {
+    flex: none;
+  }
+
+  .inner:has(.letterOpen) {
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle {
+    transition: none;
+  }
+}

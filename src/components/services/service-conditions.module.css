@@ -1,0 +1,223 @@
+/*
+ * ServiceConditions — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: heading ~44px · items ~20px at a
+ * ~44px pitch · divider at the exact centre of the screen. vw-scaled below
+ * 1536, capped at it.
+ */
+
+.section {
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-mesh);
+  color: var(--svc-on-wine);
+}
+
+/* Phone order: heading, list, then the action — read first, then act. */
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  grid-template-areas:
+    "heading"
+    "list"
+    "action";
+  row-gap: var(--svc-gap-content);
+}
+
+.heading {
+  grid-area: heading;
+  max-width: 14em;
+  margin: 0;
+  color: var(--svc-on-wine);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.list {
+  grid-area: list;
+  margin: 0;
+  /* Room on the left for the drawn divider. */
+  padding: 0 0 0 1.5rem;
+  list-style: none;
+}
+
+/*
+ * Each item carries its own SEGMENT of the divider in ::before, running its
+ * full height. Padding rather than a list gap keeps the segments touching,
+ * so without animation they form one continuous line — and with it, the
+ * line draws down in exact step with the items.
+ */
+.item {
+  position: relative;
+  padding-block: 0.5rem;
+}
+
+.item::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1.5rem;
+  width: 1px;
+  background: color-mix(in oklab, var(--svc-on-wine) 45%, transparent);
+  content: "";
+  transform-origin: top;
+}
+
+.label {
+  display: block;
+  color: var(--svc-on-wine);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.action {
+  grid-area: action;
+}
+
+.action > :global(.cta-book) {
+  width: 100%;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .action > :global(.cta-book) {
+    width: auto;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  /* Whole section within one laptop screen: at 1536 x 730 the twelve-item
+     list (~528px) plus this padding is ~694px. */
+
+  /*
+   * Two equal halves meeting at the centre of the screen, where the divider
+   * sits. Heading and action are stacked in the left half and centred on
+   * the list's height by the two flexible spacer rows.
+   */
+  .inner {
+    width: min(78vw, 75rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto 1fr;
+    grid-template-areas:
+      ".       list"
+      "heading list"
+      "action  list"
+      ".       list";
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  .heading {
+    padding-right: clamp(2rem, 6vw, 6rem);
+  }
+
+  .action {
+    margin-top: clamp(1.5rem, 2.6vw, 2.5rem);
+  }
+
+  .list {
+    padding-left: clamp(1.5rem, 2.1vw, 2rem);
+  }
+
+  .item {
+    padding-block: clamp(0.4375rem, 0.52vw, 0.5rem);
+  }
+
+  .item::before {
+    left: calc(-1 * clamp(1.5rem, 2.1vw, 2rem));
+  }
+
+  .label {
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    line-height: 1.4;
+  }
+}
+
+/* ======================================================================
+   ROLL CALL — the scroll animation for this section.
+
+   As the list scrolls up, each condition is "called" in turn: it steps in
+   from the divider (a short slide from the left plus a fade), and the
+   segment of divider beside it draws downward. The result reads as the
+   list being written out line by line as you read down it.
+
+   Built on CSS scroll-driven animations (animation-timeline: view()), so:
+     - no JavaScript and no scroll listeners; it runs off the main thread
+       and stays smooth on mid-range Android phones
+     - every item is driven by its OWN position, so the steps are exact at
+       any scroll speed, and scrolling back up reverses them
+     - it is wrapped in @supports, so a browser without the feature simply
+       shows the finished list
+     - it is wrapped in prefers-reduced-motion: no-preference, so anyone who
+       has asked for less motion sees the finished list
+
+   Range: an item is revealed while its top travels from ~10% to ~25% of
+   the way up the viewport — the lower-middle of the screen, where the eye
+   is while reading down — rather than at the very bottom edge, where a
+   reveal would happen unseen.
+   ====================================================================== */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .label {
+      animation: roll-call-step linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 24%;
+    }
+
+    .item::before {
+      animation: roll-call-line linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 24%;
+    }
+
+    .heading,
+    .action {
+      animation: roll-call-arrive linear both;
+      animation-timeline: view();
+      animation-range: cover 4% cover 22%;
+    }
+  }
+}
+
+@keyframes roll-call-step {
+  from {
+    opacity: 0;
+    transform: translateX(-0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes roll-call-line {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes roll-call-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

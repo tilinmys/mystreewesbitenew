@@ -1,0 +1,145 @@
+/*
+ * ServiceFacts — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: statement ~44px left, three facts
+ * right in a ~1080px block · figures ~60px Fraunces · labels ~16px.
+ */
+
+.section {
+  --facts-rule: color-mix(in oklab, var(--cadet-slate) 48%, var(--uranian-mist));
+
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-mist);
+}
+
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  row-gap: var(--svc-gap-content);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  color: var(--twilight-wine);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* A short flame rule: the page's one touch of orange outside the booking
+     pill. */
+  background: linear-gradient(var(--brand-flame-swatch), var(--brand-flame-swatch)) left bottom / 2rem 1.5px no-repeat;
+}
+
+.heading {
+  max-width: 14em;
+  margin: 1rem 0 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.facts {
+  margin: 0;
+  border-top: 1px solid var(--facts-rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1.25rem;
+  padding: 1.125rem 0;
+  border-bottom: 1px solid var(--facts-rule);
+}
+
+.figure {
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  /* Tabular figures: digits keep one width while counting, so nothing
+     shifts beside them. */
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+.label {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: var(--svc-body);
+  line-height: 1.55;
+}
+
+/* One figure column shared by every row, as wide as the widest figure on the
+   page ("40 weeks" as much as "4"), so a long figure never runs into its
+   label and all labels still start on one line. Browsers without subgrid
+   keep the fixed column above. */
+@supports (grid-template-columns: subgrid) {
+  .facts {
+    display: grid;
+    grid-template-columns: minmax(5rem, max-content) minmax(0, 1fr);
+    column-gap: 1.25rem;
+  }
+
+  .fact {
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+}
+
+/* Small phones: a long figure beside a label leaves the label too narrow,
+   so the figure sits above it. */
+@media (max-width: 399px) {
+  .facts,
+  .fact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact {
+    row-gap: 0.375rem;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    column-gap: clamp(2.5rem, 6.25vw, 6rem);
+  }
+
+  .fact {
+    grid-template-columns: clamp(8.5rem, 12vw, 11.5rem) minmax(0, 1fr);
+    padding-block: clamp(1rem, 1.56vw, 1.5rem);
+    column-gap: clamp(1.25rem, 2.1vw, 2rem);
+  }
+
+  @supports (grid-template-columns: subgrid) {
+    .facts {
+      grid-template-columns: minmax(8.5rem, max-content) minmax(0, 1fr);
+      column-gap: clamp(1.5rem, 2.6vw, 2.5rem);
+    }
+
+    .fact {
+      grid-template-columns: subgrid;
+    }
+  }
+
+  .figure {
+    font-size: clamp(2.75rem, 3.9vw, 3.75rem);
+  }
+
+  .label {
+    font-size: var(--svc-body);
+  }
+}

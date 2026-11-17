@@ -1,0 +1,64 @@
+/*
+ * AboutIntro — the opening statement on /about.
+ *
+ * Measured from the reference page itself at 100% zoom (15 Oct 2026), and
+ * interpolated between its 390px and 1907px layouts:
+ *   padding    112 → 128px above, 64 → 140px below
+ *   headline   48 → 90px (condensed face); Plus Jakarta Sans is wider, so
+ *              it tops out at 84px to keep the same two-line width (~1024px)
+ *   paragraph  18 → 22px / 24px, max 850px, 24px below the headline
+ *
+ * Plus Jakarta Sans 700 for the headline is a scoped exception to the
+ * Fraunces 300 h1 role, recorded in color.md.
+ */
+
+.section {
+  padding: clamp(5rem, 4.5rem + 1.5vw, 6.5rem) 1.25rem clamp(3.5rem, 2.5rem + 3vw, 6rem);
+  background: var(--pure-white);
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  row-gap: 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Overrides the global `main h1` serif display role (globals.css, !important). */
+.title {
+  max-width: 66rem;
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: clamp(2.5rem, 1.6rem + 3vw, 4rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+@media (max-width: 639px) {
+  .title {
+    line-height: 1.02 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .lead {
+    line-height: 1.33;
+    text-wrap: pretty;
+  }
+}

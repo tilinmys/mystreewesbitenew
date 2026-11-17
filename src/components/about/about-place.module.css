@@ -1,0 +1,196 @@
+/*
+ * Final Section — Closing Call to Care
+ *
+ * Minimal, serene sanctuary closing CTA replacing the photo banner.
+ * Seamlessly transitions into the deep midnight navy footer (#0F1A24).
+ */
+
+.closing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(6.5rem, 13vw, 11rem) clamp(1.5rem, 5vw, 4rem);
+  overflow: hidden;
+
+  /*
+   * Luminous Sanctuary Wash:
+   * Carefully composed multi-layer gradient blending:
+   * - Soft Celadon/Sage Mist (#D8ECE5)
+   * - Uranian Blue (#BFE2FE)
+   * - Subtle Corn Silk undertone (#F0F4FA)
+   * - Porcelain Alabaster (#FAFDFB)
+   */
+  background:
+    radial-gradient(
+      85% 60% at 50% 0%,
+      rgba(191, 226, 254, 0.45) 0%,
+      rgba(216, 236, 230, 0.42) 38%,
+      rgba(244, 249, 247, 0.25) 70%,
+      transparent 100%
+    ),
+    radial-gradient(
+      50% 50% at 10% 45%,
+      rgba(240, 244, 250, 0.45) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 50% at 90% 40%,
+      rgba(216, 238, 232, 0.38) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      #E4F0EC 0%,
+      #EFF6F3 25%,
+      #FAFDFB 65%,
+      #EEF5F2 100%
+    );
+
+  /* Clean micro boundary right before the dark midnight navy footer */
+  border-bottom: 1px solid rgba(139, 164, 191, 0.25);
+}
+
+.closingInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 52rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.closingHeading {
+  margin: 0 0 clamp(2.25rem, 4.5vw, 3.25rem);
+  color: #1A3036;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+
+.closingActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  flex-wrap: wrap;
+}
+
+/* Primary Pill Action: "Get care" */
+.primaryPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 2.6rem;
+  border-radius: 9999px;
+  background: #CDD1D7;
+  color: #182A32;
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(210, 175, 145, 0.28);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms ease,
+    filter 220ms ease;
+}
+
+.primaryPill:hover {
+  transform: translateY(-2px);
+  background: #DFC098;
+  box-shadow: 0 10px 26px rgba(195, 155, 120, 0.38);
+  filter: brightness(0.97);
+}
+
+.primaryPill:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(195, 155, 120, 0.25);
+}
+
+/* Secondary Pill Action: "Start with labs" */
+.secondaryPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 2.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(214, 186, 166, 0.85);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #A0785D;
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.secondaryPill:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(214, 186, 166, 1);
+  color: #885F45;
+  box-shadow: 0 8px 22px rgba(190, 160, 140, 0.18);
+}
+
+.secondaryPill:active {
+  transform: translateY(0);
+}
+
+.primaryPill:focus-visible,
+.secondaryPill:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 640px) {
+  .closing {
+    padding: clamp(4.5rem, 14vw, 6.5rem) 1.5rem;
+  }
+
+  .closingHeading {
+    font-size: clamp(2rem, 7.5vw, 2.75rem);
+    max-width: 18ch;
+  }
+
+  .closingActions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 18rem;
+    gap: 0.85rem;
+  }
+
+  .primaryPill,
+  .secondaryPill {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryPill,
+  .secondaryPill {
+    transition: none;
+    transform: none !important;
+  }
+}

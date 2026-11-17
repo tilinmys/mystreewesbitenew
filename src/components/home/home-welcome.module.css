@@ -1,0 +1,109 @@
+/*
+ * Home Section 02 (revised 14 Nov 2026). White ground; type and lines in the
+ * light burgundy family: Sanctuary Burgundy #641E2B for the statement,
+ * #A4505D for strands, #8A4B52 for small text.
+ */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Joins the hero without the global rule between home sections. */
+.section.section {
+  border-top: 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 160px 24px 150px;
+  text-align: center;
+}
+
+/* Section exception: a small label, not a display heading (overrides `main h2`). */
+.section .eyebrow {
+  margin: 0 0 28px;
+  font-family: var(--font-sans), sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  color: #8a4b52;
+}
+
+.statement {
+  max-width: 22em;
+  margin: 0;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.75rem, 3.2vw, 2.875rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 96, "SOFT" 0, "WONK" 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #641e2b;
+  text-wrap: balance;
+}
+
+.word,
+.wordItalic {
+  display: inline;
+}
+
+.wordItalic {
+  font-style: italic;
+  color: #8a4b52;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.figure {
+  width: min(880px, 100%);
+  margin: 112px 0 0;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 30px 60px -32px rgb(100 30 43 / 0.28);
+}
+
+.drift {
+  position: absolute;
+  inset: -5% 0;
+  will-change: transform;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 60% 50%;
+}
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 104px 20px 96px;
+  }
+
+  .section .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .figure {
+    margin-top: 72px;
+  }
+
+}

@@ -1,0 +1,94 @@
+/*
+ * ServiceStat — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport (reference at 100%): a 1115px
+ * block centred · statement ~44px on two lines · figure ~68px · caption
+ * ~16px · ~124px of air above and below. Written in vw so smaller laptops
+ * scale, and capped at the 1536 values so zooming out keeps the same
+ * centred block.
+ */
+
+.section {
+  padding: var(--svc-pad-y-statement) var(--svc-pad-x);
+  background: var(--svc-paper);
+}
+
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  gap: 1.75rem;
+}
+
+/* Outranks the site-wide `main h2` contract (a class beats `main h2` when
+   both are !important) so section headings share one service-page scale. */
+.heading {
+  max-width: 20em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.stat {
+  display: grid;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.figure {
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.75rem, 4.43vw, 4.25rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-optical-sizing: auto;
+  /* Lining figures sit on the baseline like capitals; old-style figures
+     would make "10,000+" bounce. */
+  /* Tabular figures: digits keep one width while counting, so nothing
+     shifts beside them. */
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.caption {
+  max-width: 20rem;
+  color: var(--text-muted);
+  font-size: var(--svc-body);
+  line-height: 1.65;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  /* Figure and caption side by side once there is room. */
+  .stat {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1.5rem;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    /* 72.6vw is the reference block at 1536px (1115px); capped there. */
+    width: min(72.6vw, 69.7rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(2rem, 5vw, 4.8rem);
+  }
+
+  .stat {
+    column-gap: clamp(1.5rem, 3.2vw, 3rem);
+  }
+
+  .caption {
+    font-size: clamp(0.9375rem, 1.04vw, 1rem);
+    line-height: 1.75;
+  }
+}

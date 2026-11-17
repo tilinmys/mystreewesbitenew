@@ -1,0 +1,1121 @@
+/*
+ * /doctors — clinician-led editorial page.
+ *
+ * Surface rhythm: photograph -> warm ivory ribbon -> soft cream intro ->
+ * ivory directory -> navy story -> cream FAQ -> navy close. Orange appears
+ * only on the primary actions and the active filter/chapter marker.
+ */
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.sectionLabel {
+  margin: 0 0 1rem;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ================= 01 — hero ================= */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: min(calc(88svh - var(--nav-height)), 52rem);
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+
+.heroImageLayer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  will-change: transform;
+}
+
+.heroImage {
+  object-fit: cover;
+  /* The clinician sits left of centre in the source frame, so the crop holds
+     the left third and lets the quieter right side carry the copy. */
+  object-position: 22% 28%;
+}
+
+/* Contrast only where the text sits — the photograph is not dimmed overall. */
+.heroScrim {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    /* Deep directional gradient to guarantee crisp contrast behind text while preserving clinician on left */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 22%,
+      rgba(12, 22, 29, 0.45) 36%,
+      rgba(12, 22, 29, 0.86) 50%,
+      rgba(12, 22, 29, 0.96) 66%,
+      rgba(12, 22, 29, 0.98) 100%
+    ),
+    /* Soft vertical ambient bed to prevent daylight glare at top/bottom */
+    linear-gradient(
+      180deg,
+      rgba(12, 22, 29, 0.35) 0%,
+      transparent 35%,
+      transparent 65%,
+      rgba(12, 22, 29, 0.5) 100%
+    );
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  width: min(46rem, 52%);
+  margin-left: auto;
+  /* The header sits above this section in normal flow, so the copy only needs
+     its own breathing room — no clearance arithmetic. */
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem)
+    clamp(3rem, 7vw, 6rem);
+  color: var(--on-navy);
+}
+
+.heroEyebrow {
+  margin: 0 0 1.25rem;
+  color: #BFE2FE;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.heroHeading {
+  max-width: 15ch;
+  margin: 0 0 1.5rem;
+  color: #FFFFFF;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-display-hero);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.2 !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.heroLine {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.heroLineInner {
+  display: block;
+  will-change: transform;
+}
+
+.heroLead {
+  max-width: 46ch;
+  margin: 0 0 2rem;
+  color: #E2EDF7;
+  font-size: var(--type-reading);
+  line-height: 1.65;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.heroSecondary,
+.heroPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 3rem;
+  padding: 0 1.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  background: rgb(255 255 255 / 8%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--on-navy, #ffffff);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.heroSecondary:hover,
+.heroPrimary:hover {
+  background: rgb(255 255 255 / 16%);
+  border-color: rgb(255 255 255 / 65%);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.heroSecondary:focus-visible,
+.heroPrimary:focus-visible {
+  outline: 2px solid var(--on-navy, #ffffff);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroSecondary:hover,
+  .heroPrimary:hover {
+    transform: none;
+  }
+}
+
+/* ================= 02 — proof ribbon ================= */
+
+.ribbon {
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--alabaster);
+}
+
+.ribbonList {
+  display: grid;
+  max-width: 94rem;
+  margin: 0 auto;
+  padding: 0;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+}
+
+.ribbonItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.4rem clamp(1rem, 2.5vw, 2.5rem);
+  border-left: 1px solid color-mix(in srgb, var(--navy-slate) 30%, transparent);
+}
+
+.ribbonItem:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.ribbonLabel {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ribbonValue {
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+
+/* ================= 03 — intro ================= */
+
+.intro {
+  padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(2.5rem, 5vw, 4rem);
+  background: var(--soft-neutral);
+}
+
+/*
+ * Two columns rather than a wide empty gutter: the copy holds the left, an
+ * editorial photograph occupies the right and reveals on scroll. The previous
+ * `padding-right` left roughly a third of the section visibly blank.
+ */
+.introInner {
+  display: grid;
+  max-width: 94rem;
+  margin: 0 auto;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 54fr) minmax(0, 46fr);
+  align-items: center;
+}
+
+.introCopy {
+  padding-block: clamp(0rem, 3vw, 2.5rem);
+}
+
+.introFigure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  /* Ratio reserves the box before decode — no shift as it loads. */
+  aspect-ratio: 5 / 4;
+  background: color-mix(in srgb, var(--navy-slate) 12%, var(--soft-neutral));
+}
+
+.introImage {
+  object-fit: cover;
+  object-position: center 30%;
+  will-change: transform;
+}
+
+.introHeading {
+  max-width: 17ch;
+  margin: 0 0 1.5rem;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.introLead {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+/* ================= 04 — directory ================= */
+
+.directory {
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(4rem, 9vw, 7rem);
+  background: var(--soft-neutral);
+  scroll-margin-top: var(--header-offset);
+}
+
+.directoryHead {
+  display: flex;
+  max-width: 94rem;
+  margin: 0 auto 1.75rem;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.directoryHeading {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 400;
+}
+
+.searchField {
+  flex: 1 1 20rem;
+  max-width: 26rem;
+}
+
+.searchLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 0.25rem 0.6rem;
+  border: 0;
+  /* A ruled field, not a boxed input. */
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 45%, transparent);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-lg);
+  transition: border-color 220ms ease;
+}
+
+.searchInput::placeholder {
+  color: color-mix(in srgb, var(--navy-slate) 80%, transparent);
+}
+
+.searchInput:focus {
+  border-bottom-color: var(--accent-cadet);
+  outline: none;
+}
+
+.searchInput:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.filterRow {
+  display: flex;
+  max-width: 94rem;
+  margin: 0 auto;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+  scrollbar-width: none;
+}
+
+.filterRow::-webkit-scrollbar {
+  display: none;
+}
+
+.filterButton {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 0.5rem 0 0.65rem;
+  border: 0;
+  background: none;
+  color: var(--navy-slate);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.filterButton:hover {
+  color: var(--ink);
+}
+
+/* Active state carries weight as well as colour, so it never depends on hue
+   alone. */
+.filterButton[data-active="true"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.filterButton[data-active="true"]::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--accent-cadet);
+  content: "";
+}
+
+.filterButton:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.resultCount {
+  max-width: 94rem;
+  margin: 1.25rem auto 2rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Compact directory: four across on wide desktop so the cards stay small and
+   scannable rather than becoming page-sized dossiers. */
+.grid {
+  display: grid;
+  max-width: 94rem;
+  margin: 0 auto;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Restrained corner, border hierarchy instead of a floating shadow. */
+  border: 1px solid color-mix(in srgb, var(--navy-slate) 24%, transparent);
+  border-radius: 12px;
+  background: var(--canvas);
+}
+
+.cardPortrait {
+  position: relative;
+  /* Landscape crop: 4:5 made each card tower, and even 1:1 left them tall.
+     The face still reads at this size because the crop is biased upward. */
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--navy-slate) 12%, var(--canvas));
+}
+
+.cardImage {
+  object-fit: cover;
+  /* Biased well up so the landscape crop keeps the face, not the torso. */
+  object-position: center 14%;
+}
+
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.9rem 0.95rem 1rem;
+}
+
+.cardSpecialty {
+  margin: 0 0 0.4rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-metadata-tag);
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cardName {
+  margin: 0 0 0.25rem;
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-lead);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.cardRole {
+  /* Two lines max: matches clinician role and specialty */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  margin: 0 0 0.65rem;
+  color: var(--navy-slate);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+.cardCredentials {
+  /* Capped at two lines so credentials read cleanly without truncation */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  margin: 0 0 0.85rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 18%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-label);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.cardPortraitLink {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cardPortraitLink:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.cardNameLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.cardNameLink:hover {
+  color: var(--accent-cadet);
+}
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: auto;
+  gap: 0.6rem;
+}
+
+.cardStoryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  background: var(--surface-mist);
+  color: var(--navy);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.cardStoryLink:hover {
+  background: var(--surface-mist);
+  color: var(--accent-cadet);
+}
+
+.cardBook:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.empty {
+  max-width: 94rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 22%, transparent);
+}
+
+.emptyText {
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-title-sm);
+  font-weight: 400;
+}
+
+.emptyAction {
+  min-height: 2.75rem;
+  padding: 0 1.35rem;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  background: none;
+  color: var(--navy);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: 500;
+}
+
+.emptyAction:hover {
+  background: color-mix(in srgb, var(--navy) 8%, transparent);
+}
+
+.emptyAction:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ================= 05 — scroll story ================= */
+
+/*
+ * A light editorial spread with a pinned stage.
+ *
+ * The track is three viewports tall; the stage inside it sticks below the
+ * header. As each chapter becomes active the NEXT photograph slides up from
+ * beneath the frame and covers the one before it — the stack, not a crossfade,
+ * is the effect. The index rail on the right advances with it.
+ */
+.story {
+  background: var(--surface-pearl);
+  color: var(--ink);
+}
+
+.storyTrack {
+  /* One screen of scroll per chapter. */
+  height: 300vh;
+}
+
+.storySticky {
+  position: sticky;
+  /* The header sits in flow and stays visible, so the stage pins beneath it. */
+  top: var(--nav-height);
+  height: calc(100svh - var(--nav-height));
+  overflow: hidden;
+}
+
+.storyInner {
+  display: grid;
+  max-width: 88rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  grid-template-columns: 36fr 40fr 20fr;
+  align-items: center;
+}
+
+.storyText {
+  position: relative;
+  min-height: 20rem;
+}
+
+/*
+ * Chapters are stacked in one box, so only the active one may be readable.
+ * Opacity alone is not enough — a faint layer is still legible and still
+ * catches the pointer, which is what produced the visible text crossover.
+ * Visibility switches after the fade so nothing flickers out mid-transition.
+ */
+.storyChapter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition:
+    opacity 480ms ease,
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 480ms;
+}
+
+.storyChapter[data-active="false"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-16px);
+  visibility: hidden;
+}
+
+.storyChapter[data-active="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  /* Appearing must not wait for the fade-out delay above. */
+  transition-delay: 0s;
+}
+
+.storyNumber {
+  margin: 0 0 1rem;
+  color: var(--accent-on-light);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+
+.storyTitle {
+  max-width: 16ch;
+  margin: 0 0 1.1rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.storyBody {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+.storyStage {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 22px;
+  aspect-ratio: 4 / 5;
+  max-height: 76svh;
+  background: var(--surface-stone);
+}
+
+.storyPanel {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.storyImage {
+  object-fit: cover;
+}
+
+.storyNav {
+  justify-self: end;
+}
+
+.storyNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.storyNavItem {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 420ms ease;
+}
+
+.storyNavItem[data-active="true"] {
+  color: var(--ink);
+}
+
+/* The marker is a small outlined numeral — accent as a mark, never a ground. */
+.storyNavMark {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--section-rule);
+  border-radius: 7px;
+  color: inherit;
+  font-size: var(--type-label);
+  place-items: center;
+  transition:
+    border-color 420ms ease,
+    color 420ms ease;
+}
+
+.storyNavItem[data-active="true"] .storyNavMark {
+  /* Border may stay the pure accent (3:1 is the bar for a UI boundary); the
+     numeral inside is text and takes the deepened mix. */
+  border-color: var(--accent-cadet);
+  color: var(--accent-on-light);
+}
+
+.storyMobile {
+  display: none;
+}
+
+.storyMobileFigure {
+  position: relative;
+  width: 100%;
+  margin: 1.5rem 0 0;
+  overflow: hidden;
+  /* Reserved before decode, so the stack cannot shift as photos land. */
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  background: var(--surface-stone);
+}
+
+/* ================= 06 — FAQ ================= */
+
+.faq {
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--ivory);
+}
+
+.faqInner {
+  display: grid;
+  max-width: 94rem;
+  margin: 0 auto;
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 30fr 70fr;
+  align-items: start;
+}
+
+.faqAside {
+  position: sticky;
+  top: calc(var(--header-offset) + 2rem);
+}
+
+.faqTitle {
+  max-width: 12ch;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.faqNote {
+  max-width: 32ch;
+  margin: 0;
+  color: var(--navy-slate);
+  font-size: var(--type-ui);
+  line-height: 1.65;
+}
+
+.faqList {
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+}
+
+.faqRow {
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 22%, transparent);
+}
+
+.faqHeading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.faqTrigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  transition: color 200ms ease;
+}
+
+.faqTrigger:hover {
+  color: var(--navy);
+}
+
+.faqTrigger:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.faqChevron {
+  flex: 0 0 auto;
+  color: var(--brand-ink);
+  font-size: var(--type-title-xs);
+  line-height: 1;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faqChevron[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding: 0 0 1.5rem;
+}
+
+.faqAnswer p {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.75;
+}
+
+/* ================= 07 — booking close ================= */
+
+.booking {
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--navy-deep);
+  color: var(--on-navy);
+}
+
+.bookingInner {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.bookingEyebrow {
+  margin: 0 0 1.1rem;
+  color: var(--accent-cadet);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.bookingHeading {
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  color: var(--on-navy);
+  font-weight: 400;
+}
+
+.bookingBody {
+  max-width: 48ch;
+  margin: 0 0 2rem;
+  color: var(--on-navy-muted);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.bookingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.bookingSecondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+
+
+.bookingSecondary {
+  border: 1px solid color-mix(in srgb, var(--on-navy) 45%, transparent);
+  color: var(--on-navy);
+}
+
+.bookingSecondary:hover {
+  background: rgb(255 255 255 / 12%);
+}
+
+.bookingPrimary:focus-visible,
+.bookingSecondary:focus-visible {
+  outline: 2px solid var(--on-navy);
+  outline-offset: 3px;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .introInner {
+    grid-template-columns: 1fr;
+  }
+
+  .introFigure {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Photograph leads at a readable crop, copy follows on navy — no text laid
+     over a face-cropped image. */
+  .heroImageLayer {
+    position: relative;
+    aspect-ratio: 16 / 11;
+  }
+
+  .heroImage {
+    object-position: 26% 22%;
+  }
+
+  .heroScrim {
+    display: none;
+  }
+
+  .heroCopy {
+    width: 100%;
+    margin-left: 0;
+    padding: clamp(2rem, 7vw, 3rem) 1.5rem clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .heroActions > * {
+    flex: 1 1 13rem;
+    justify-content: center;
+  }
+
+  .ribbonList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0;
+  }
+
+  .ribbonItem:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .directoryHead {
+    align-items: stretch;
+  }
+
+  .searchField {
+    max-width: none;
+  }
+
+  /* The pinned stage is desktop-only; below this width the chapters become a
+     plain vertical list and the index rail is redundant. */
+  .storyTrack {
+    display: none;
+  }
+
+  .storyMobile {
+    display: block;
+    padding: clamp(3rem, 8vw, 4.5rem) clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .storyMobileChapter {
+    padding-bottom: clamp(2.5rem, 7vw, 3.5rem);
+  }
+
+  .storyMobileChapter .storyTitle {
+    max-width: 20ch;
+  }
+
+  .faqInner {
+    grid-template-columns: 1fr;
+  }
+
+  .faqAside {
+    position: static;
+  }
+
+  .bookingActions > * {
+    flex: 1 1 13rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storyChapter,
+  .storyPanel,
+  .storyNavItem,
+  .storyNavMark,
+  .faqChevron,
+  .filterButton {
+    transition: none;
+  }
+
+}

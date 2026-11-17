@@ -1,0 +1,264 @@
+.section {
+  --reviews-surface: var(--bg-light);
+  --reviews-card: #FFFFFF;
+  --reviews-card-blue: #E8F2FA;
+  /* Blush and cream were the two orange-family card tints; both are now
+     cool steps so the rail reads as one calm family. */
+  --reviews-card-blush: #FFFFFF;
+  --reviews-card-cream: #E8F2FA;
+  --reviews-ink: #0C161D;
+  --reviews-muted: #4A6173;
+  --reviews-line: #D3E2EE;
+  --reviews-star: #0C161D;
+  --reviews-heading-accent: #0C161D;
+
+  padding: clamp(3.5rem, 5vw, 4.75rem) 0 clamp(3rem, 4vw, 4rem);
+  overflow: hidden;
+  background: var(--reviews-surface);
+  color: var(--reviews-ink);
+}
+
+.header {
+  max-width: 58rem;
+  margin: 0 auto clamp(2rem, 3vw, 2.75rem);
+  padding: 0 1.25rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  /* Cadet Gray measured 2.57:1 at this size on the white review surface.
+     The darker slate carries the same cool family at ~5.9:1. */
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--reviews-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-display-title);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.headingAccent {
+  color: var(--reviews-heading-accent);
+}
+
+.intro {
+  max-width: 34rem;
+  margin: 1.5rem auto 0;
+  color: var(--reviews-muted);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  font-size: var(--type-body-lg);
+  line-height: 1.6;
+}
+
+.railWrap {
+  width: 100%;
+}
+
+.rail {
+  display: flex;
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+  overflow-x: auto;
+  padding: 0 clamp(1.25rem, 12vw, 14rem) 0.75rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.rail:focus-visible {
+  outline: 2px solid var(--reviews-heading-accent);
+  outline-offset: 8px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  min-height: 31rem;
+  flex: 0 0 clamp(20rem, 21vw, 25rem);
+  flex-direction: column;
+  padding: clamp(1.75rem, 2.7vw, 2.8rem);
+  overflow: hidden;
+  border: 1px solid var(--reviews-line);
+  border-radius: 1.35rem;
+  background: var(--reviews-card);
+  box-shadow: 0 1.5rem 3.5rem rgb(12 22 29 / 6%);
+  scroll-snap-align: start;
+}
+
+.card[data-tone="blue"] {
+  background: var(--reviews-card-blue);
+}
+
+.card[data-tone="rose"] {
+  background: var(--reviews-card-blush);
+}
+
+.card[data-tone="olive"] {
+  background: var(--reviews-card-cream);
+}
+
+.quote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--reviews-ink);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  line-height: 1.52;
+}
+
+.cardFooter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.35rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--reviews-line);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.12rem;
+  color: var(--reviews-star);
+}
+
+.score {
+  color: var(--reviews-heading-accent);
+  font-size: var(--type-ui);
+  font-weight: 500;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  display: grid;
+  width: 3.8rem;
+  height: 3.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(90 127 232 / 18%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--brand-uranian-blue) 48%, var(--surface));
+  color: var(--reviews-heading-accent);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.name {
+  margin: 0;
+  color: var(--reviews-ink);
+  font-size: var(--type-reading);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  max-width: 1440px;
+  margin: 1.25rem auto 0;
+  padding: 0 clamp(1.25rem, 12vw, 14rem);
+}
+
+.arrowGroup {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.arrowButton {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--reviews-line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--reviews-ink);
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.arrowButton:hover:not(:disabled) {
+  border-color: var(--reviews-heading-accent);
+  background: var(--reviews-heading-accent);
+  color: var(--on-photo);
+  transform: translateY(-1px);
+}
+
+.arrowButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.34;
+}
+
+.arrowButton:focus-visible {
+  outline: 2px solid var(--reviews-heading-accent);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--surface);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-top: 3.75rem;
+  }
+
+  .header {
+    margin-bottom: 2.75rem;
+  }
+
+  .header h2 {
+    font-size: var(--type-display-title);
+  }
+
+  .card {
+    min-height: 28rem;
+    flex-basis: min(84vw, 22rem);
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail {
+    scroll-behavior: auto;
+  }
+
+  .arrowButton {
+    transition: none;
+  }
+}

@@ -1,0 +1,216 @@
+/*
+ * AboutTeam and AboutFigures — /about.
+ *
+ * Measured from the reference page at 100% zoom (390px and 1907px), on a
+ * 1536px column (96rem), white:
+ *   team band    padding 64 → 128px; heading 48 → 84px; 32 → 80px to a
+ *                18 → 22px/500 lead (max 560px); 40px to the photos
+ *   cards        3 × square photos, 20px apart, 24px corners; 20px to an
+ *                18 → 22px/700 label; 16px to a 16 → 17px line; 40px to a
+ *                52px button (16px corners, 2px inset ring, 16px/500 text)
+ *   figures      own band, padding 64 → 112px; 230px-tall tiles, 20px
+ *                apart, square corners, 32px inset; 48 → 56px/700 figure,
+ *                18 → 22px/500 label
+ *
+ * Colour follows the reference's pairing of warm tiles with cool outlines:
+ * dark text throughout, wine-blush tiles, Cadet Slate button rings.
+ */
+
+.section,
+.figuresSection {
+  --about-blush: color-mix(in oklab, var(--twilight-wine) 15%, var(--pure-white));
+  /* Cadet Slate deepened enough to give the ring 3:1 against white. */
+  --about-outline: color-mix(in oklab, var(--cadet-slate) 70%, var(--midnight-chamber));
+
+  background: var(--pure-white);
+}
+
+.section {
+  padding: clamp(4rem, 3rem + 3vw, 6.5rem) 1.25rem;
+}
+
+.inner {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: grid;
+  row-gap: clamp(1.5rem, 1rem + 2vw, 3rem);
+  margin-bottom: 2.5rem;
+}
+
+/* Overrides the global `main h2` serif display role (globals.css, !important). */
+.title {
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: clamp(2.25rem, 1.45rem + 2.2vw, 3rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.lead {
+  max-width: 35rem;
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+/* ------------------------------------------------ group cards */
+
+.groups {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border-radius: 1.5rem;
+  background: var(--uranian-mist);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.placeholder {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  border: 1px dashed color-mix(in oklab, var(--twilight-wine) 30%, transparent);
+  border-radius: inherit;
+  color: color-mix(in oklab, var(--twilight-wine) 70%, var(--uranian-mist));
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Overrides the global `main h3` role so the card label stays compact. */
+.groupTitle {
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.022em !important;
+}
+
+.groupText {
+  max-width: 31rem;
+  margin: 1rem 0 2.5rem;
+  color: var(--botanical-midnight);
+  font-size: clamp(1rem, 0.98rem + 0.066vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 0 2px var(--about-outline);
+  color: var(--botanical-midnight);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.button:hover {
+  background: var(--uranian-mist);
+  box-shadow: inset 0 0 0 2px var(--midnight-chamber);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--botanical-midnight);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------ figure tiles */
+
+.figuresSection {
+  padding: clamp(3.5rem, 2.75rem + 2.5vw, 5.5rem) 1.25rem;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: clamp(9rem, 7rem + 4vw, 12rem);
+  padding: 2rem;
+  background: var(--about-blush);
+}
+
+.figure {
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(2.25rem, 2rem + 0.8vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.figureLabel {
+  max-width: 24rem;
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+}
+
+/* ------------------------------------------------ tablet and desktop */
+
+@media (min-width: 768px) {
+  .groups,
+  .figures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

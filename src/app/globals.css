@@ -1,0 +1,1615 @@
+:root {
+  /* ---------------------------------------------------------------
+     MyStree Brand Colour Palette — the source of truth.
+     Modern · calm · trusted · feminine. Eight colours; everything
+     else on the site is an alias of, or an oklab mix between, these.
+     --------------------------------------------------------------- */
+  --botanical-midnight: #0C161D; /* text and deep accents, not grounds */
+  --midnight-chamber: #162633;
+  /* Was #FAF8F5, a warm cream that read as orange on screen (24 Oct 2026).
+     The paper is now pure white; any tint comes from Uranian Mist. */
+  --alabaster-canvas: #FFFFFF;
+  --uranian-mist: #E8F2FA;
+  --twilight-wine: #4A152D;
+  --pure-white: #FFFFFF;
+  --cadet-slate: #8BA4BF;
+  --brand-flame-swatch: #ED5B2D; /* buttons only, ~5% of any screen */
+
+  /* Neutral surfaces for a white page: one cool band tint and one
+     hairline, both mixed from the palette, never warm. */
+  --surface-soft: color-mix(in oklab, var(--uranian-mist) 42%, var(--pure-white));
+  --hairline: color-mix(in oklab, var(--cadet-slate) 30%, var(--pure-white));
+
+  /* Strict Two-Tone & Clinical Tokens */
+  --bg-dark: var(--botanical-midnight);
+  /* --bg-light is Alabaster Canvas, now pure white (see above). */
+  --bg-light: var(--alabaster-canvas);
+  --surface-card: #FFFFFF;
+  --surface-mist: #E8F2FA;
+  --text-dark: #0C161D;
+  --text-light: #FFFFFF;
+  --text-muted: #4A6173;
+  --accent-cadet: #8BA4BF;
+  --border-subtle: #D3E2EE;
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --btn-primary: #ED5B2D;
+  --btn-primary-hover: #D84A1E;
+  /* Booking fill (16 Nov 2026): Flame deepened so white text passes AA.
+     #C94A22 = 4.7:1, #A83A1A = 6.5:1 against white. Pure Flame stays for
+     glows, rules and focus rings (non-text, 3:1). */
+  --book-top: #c94a22;
+  --book-bottom: #a83a1a;
+  --book-hover-top: #b23f1c;
+
+  /* Official identity swatches mapped to zero non-button orange */
+  --brand-cadet-gray: var(--accent-cadet);
+  --brand-uranian-blue: var(--surface-mist);
+  --brand-corn-silk: var(--surface-mist);
+  --brand-pumpkin: var(--accent-cadet);
+  --brand-flame: var(--btn-primary);
+  --brand-burnt-sienna: var(--btn-primary-hover);
+
+  /* MyStree Digital Clinical Standards — canonical application tokens. */
+  --bg-primary: var(--bg-light);
+  --bg-secondary: var(--surface-mist);
+  --bg-subtle-blue: var(--surface-mist);
+
+  --text-primary: var(--text-dark);
+  /* --text-muted is declared once, above, as #4A6173. Re-declaring it here as
+     var(--text-muted) made it reference itself; a self-referencing custom
+     property is a cycle, which CSS resolves to "guaranteed-invalid" — so it
+     overrode the real value and silently broke every muted colour on the site
+     (--text-muted, --navy-slate, --accent-on-light). Do not re-alias it. */
+  --text-inverse: var(--text-light);
+
+  --border-blue: var(--border-subtle);
+
+  --accent-flame: var(--btn-primary);
+  --accent-flame-hover: var(--btn-primary-hover);
+  --accent-pumpkin: var(--accent-cadet);
+
+  /* Semantic roles used by shared primitives. */
+  --canvas: var(--bg-light);
+  --surface: var(--surface-card);
+  --foreground: var(--text-dark);
+  --muted-foreground: var(--text-muted);
+  --brand-ink: var(--text-dark);
+  --primary: var(--btn-primary);
+  --primary-hover: var(--btn-primary-hover);
+  --on-primary: var(--text-light);
+  --secondary: var(--surface-mist);
+  --accent: var(--surface-mist);
+  --accent-on-light: var(--text-muted);
+  --border-control: var(--border-subtle);
+  --focus-ring: var(--btn-primary);
+  --hero-frame: var(--bg-light);
+  --on-photo: var(--text-light);
+  --shadow-color: 12 22 29;
+
+  /* Compatibility aliases */
+  --ink: var(--text-dark);
+  --navy-deep: var(--bg-dark);
+  --navy: var(--text-dark);
+  --navy-slate: var(--text-muted);
+  --on-navy: var(--text-light);
+  --on-navy-muted: var(--accent-cadet);
+
+  --surface-pearl: var(--bg-light);
+  --surface-stone: var(--surface-mist);
+  --surface-sky: var(--surface-mist);
+  --surface-sage: var(--surface-mist);
+
+  --alabaster: var(--bg-light);
+  --ivory: var(--surface-mist);
+  --soft-neutral: var(--surface-mist);
+
+
+  /* Header geometry.
+     The header sits in normal document flow and sticks to the top, so it is no
+     longer an overlay layer that sections have to dodge. Nothing needs a
+     "clear the header" offset any more; the one remaining value is how far a
+     STICKY child (a rail, a chapter head) must sit below the bar, plus the
+     scroll-padding for anchor targets that land under it. */
+  --nav-height: 3.65rem;
+  --nav-gap: 0.75rem;
+  --header-offset: calc(var(--nav-height) + var(--nav-gap));
+  --announcement-height: 0px;
+  --home-chrome-height: 6.9rem;
+
+  /* Hairline used between page sections and under the header. */
+  --section-rule: color-mix(in srgb, var(--navy-slate) 24%, transparent);
+
+  /* ---------------------------------------------------------------
+     Footer surface — a client-requested exception to the warm-ground
+     rule, and the only place on the site that uses it.
+
+     Burgundy rather than navy: navy reads institutional, and the
+     footer is the one block that should feel like the clinic rather
+     than the chart. Mixed 12% into --navy so it sits inside the
+     palette instead of arriving as an unrelated swatch; the navy
+     cools the red just enough to stop it reading as maroon signage.
+
+     Not pink. Wine is the grown-up end of that family — warm and
+     unmistakably feminine-coded without the connotation the brief
+     rules out, and it carries white at 10:1 where a pink of the same
+     character would fail.
+     --------------------------------------------------------------- */
+  --footer-surface: color-mix(in srgb, #73304a 88%, var(--navy) 12%);
+  /* Headings, wordmark, phone number. */
+  --footer-ink: #FFFFFF;
+  /* Links. Warm off-white, never a cool grey — grey on wine goes muddy. */
+  --footer-ink-soft: #DDE2E8;
+  --footer-rule: color-mix(in srgb, var(--footer-ink) 22%, transparent);
+
+  /* ---------------------------------------------------------------
+     SERVICE PAGE SURFACE SYSTEM — LOCKED for every /services/* page.
+
+     Grounds are Twilight Wine and the light palette only. Botanical
+     Midnight and Midnight Chamber are NOT used as section grounds:
+     a near-black band reads as heavy and institutional, which is the
+     opposite of what a women's health page should feel like on arrival.
+
+     Why wine. Colour-preference research consistently finds women
+     favour reddish-purple hues, and in healthcare UI muted, lower-
+     chroma versions of them read as calm and trustworthy rather than
+     playful. Twilight Wine is that hue at its most grown-up — warm
+     and feminine without being pink.
+
+     All mixing is in oklab, which interpolates in perceived lightness,
+     so wine-to-plum stays rich instead of going muddy midway.
+
+     Rhythm rules (color.md, "Service page system"):
+       - the opening band (hero + quote) is the wine gradient
+       - never two wine-family grounds adjacent (the footer is wine)
+       - every other ground is light
+     --------------------------------------------------------------- */
+
+  /* Opening band: hero and the quote beneath it share ONE continuous
+     gradient, so the two read as a single arrival rather than two
+     stacked boxes. Twilight Wine at the top easing to a dusty plum at
+     the foot — mixed toward Cadet Slate, not toward white, so it cools
+     into plum and never drifts toward pink. */
+  --svc-band-top: var(--twilight-wine);
+  --svc-band-foot: color-mix(in oklab, var(--twilight-wine) 70%, var(--cadet-slate) 30%);
+  --svc-band: linear-gradient(180deg, var(--svc-band-top) 0%, var(--svc-band-foot) 100%);
+
+  --svc-wine: var(--twilight-wine);
+
+  /* Conditions mesh. A soft field rather than a flat fill: deep wine-plum
+     base, a mauve-violet bloom top-left, a dusty-rose glow bottom-left and
+     plum deepening bottom-right. Every layer fades to transparent over a
+     DARKER base, so the lightest point anywhere is the rose glow's centre,
+     #8c6672 — Alabaster text on it is 4.65:1. That makes text legible at
+     any position without needing to know where it lands. */
+  --svc-mesh:
+    radial-gradient(55% 62% at 4% 96%, color-mix(in oklab, var(--twilight-wine) 62%, var(--alabaster-canvas) 38%) 0%, transparent 72%),
+    radial-gradient(50% 55% at 0% 0%, color-mix(in oklab, var(--twilight-wine) 62%, var(--cadet-slate) 38%) 0%, transparent 70%),
+    radial-gradient(48% 60% at 100% 100%, color-mix(in oklab, var(--twilight-wine) 72%, var(--cadet-slate) 28%) 0%, transparent 70%),
+    color-mix(in oklab, var(--twilight-wine) 85%, var(--cadet-slate) 15%);
+  --svc-paper: var(--alabaster-canvas);
+  --svc-mist: var(--uranian-mist);
+  --svc-card: var(--pure-white);
+  /* The palette's soft transition, for a light section that hands
+     over to another light section. */
+  --svc-soft-transition: linear-gradient(180deg, var(--uranian-mist) 0%, var(--alabaster-canvas) 100%);
+
+  /* Ink on wine. Warm off-whites tinted TOWARD wine: tonal ink on a
+     wine ground sits in harmony, where cool cadet greys read cold.
+     Measured against the lightest point of the band (#623f55):
+       on-wine 8.4:1 · soft 6.8:1 · meta 5.7:1 */
+  --svc-on-wine: var(--alabaster-canvas);
+  --svc-on-wine-soft: color-mix(in oklab, var(--alabaster-canvas) 90%, var(--twilight-wine) 10%);
+  --svc-on-wine-meta: color-mix(in oklab, var(--alabaster-canvas) 82%, var(--twilight-wine) 18%);
+
+  /* Service page rhythm — one spacing system for every /services/* section,
+     on an 8-point grid. Phone values here; tablet and desktop below.
+     See color.md, "Service page rhythm". */
+  --svc-pad-y: 3.5rem; /* standard section, top and bottom: 56px */
+  --svc-pad-y-statement: 4rem; /* short statement sections: 64px */
+  --svc-pad-x: 1.25rem;
+  --svc-gap-lead: 1rem; /* heading to its intro line: 16px */
+  --svc-gap-content: 2rem; /* heading block to the section's content: 32px */
+  --svc-body: 1rem; /* running text: 16px, the phone reading minimum */
+
+  /* Editorial type measurements. The next/font classes on <html> provide
+     --font-serif, --font-sans and --font-mono. */
+  --type-display-hero: clamp(2.5rem, 5.5vw, 4.5rem);
+  --type-display-title: clamp(2rem, 4vw, 3.25rem);
+  --type-display-subhead: clamp(1.25rem, 2.5vw, 2rem);
+  --type-editorial-lead: clamp(1rem, 1.3vw, 1.25rem);
+
+  /* ---------------------------------------------------------------
+     UI type ladder. Every step below was already a dominant size in
+     the codebase; the pass that introduced these only removed the
+     near-duplicates around them (52 distinct literal sizes -> 17).
+     Use a token. A new raw rem value is how the drift comes back.
+     --------------------------------------------------------------- */
+  --type-metadata-tag: 0.6875rem;
+
+  --type-micro: 0.625rem; /* 10px · legal lines, dense tabular labels */
+  --type-label: 0.75rem; /* 12px · all-caps labels, chips */
+  --type-caption: 0.8125rem; /* 13px · captions, card metadata */
+  --type-ui: 0.875rem; /* 14px · buttons, nav, form labels */
+  --type-body: 0.9375rem; /* 15px · default running copy */
+  --type-body-lg: 1rem; /* 16px · long-form reading */
+  --type-reading: 1.0625rem; /* 17px · editorial body */
+  --type-lead: 1.125rem; /* 18px · intros, standfirsts */
+  --type-title-xs: 1.25rem; /* 20px */
+  --type-title-sm: 1.35rem; /* 22px */
+  --type-title-md: 1.5rem; /* 24px */
+  --type-title-lg: 1.875rem; /* 30px */
+  --type-title-xl: 2rem; /* 32px */
+  --type-numeral: 3.75rem; /* 60px · standalone figures and quote marks */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--canvas);
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+/* The page reset applies with or without Lenis (Lenis is off on touch and
+   low-end devices, which once left the browser's 8px body margin). */
+html.lenis,
+body {
+  margin: 0;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+/* Shared hierarchy for every route. Components set layout, not heading fonts. */
+body,
+p,
+.text-body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+h1,
+.text-hero {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-display-hero);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+}
+
+h2,
+.text-heading-lg {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-display-title);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  /* Evens out the last line of a wrapped heading. Scoped to headings only:
+     the algorithm is capped at a handful of lines and is wasted (and costly)
+     on body copy. */
+  text-wrap: balance;
+}
+
+/*
+ * Two system-wide typographic defaults. Both are the kind of thing that is
+ * invisible when right and cheap-looking when wrong.
+ */
+
+/* 1. No synthesised faces. Fraunces and Plus Jakarta Sans are variable fonts,
+      but if a requested weight or an italic is ever unavailable the browser
+      will fake it by shearing or smearing the glyphs. A real italic is a
+      different set of letterforms, not a slanted roman; a synthesised one is
+      the single clearest tell of an unconsidered type stack. Better to render
+      the true weight than a counterfeit of the requested one. */
+:root {
+  font-synthesis: none;
+}
+
+/* 2. Orphan control on body copy. `balance` evens every line and is capped at
+      a few lines, so it is wrong for paragraphs; `pretty` leaves the body of
+      the paragraph alone and only prevents the last line falling to a single
+      stranded word. Affects line breaking only — no reflow of the block. */
+:where(p, li, dd, blockquote, figcaption) {
+  text-wrap: pretty;
+}
+
+/* Semantic page headings are the system contract. Component modules may set
+   width, color and spacing, but cannot drift into a competing type scale. */
+main h1 {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
+  font-size: var(--type-display-hero) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.025em !important;
+}
+
+main h2 {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
+  font-size: var(--type-display-title) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em !important;
+}
+
+main [role="dialog"] h2 {
+  font-size: var(--type-display-subhead) !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em !important;
+}
+
+h3,
+.text-doctor-name {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+.btn-slot,
+.primary-action,
+.text-action,
+.booking-button,
+.mobile-booking-link {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+footer,
+footer p,
+.text-caption {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-label);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: inherit;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--surface);
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--text-muted); /* was cadet #8BA4BF, 2.6:1 on white */
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* CSS equivalents keep the design tokens active in the current CSS-Modules
+   build while the Tailwind theme mirrors them for future utility consumers. */
+.font-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.text-display-hero {
+  font-size: var(--type-display-hero);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.text-display-title {
+  font-size: var(--type-display-title);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.text-display-subhead {
+  font-size: var(--type-display-subhead);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.text-editorial-lead {
+  max-width: 65ch;
+  color: var(--text-muted);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-editorial-lead);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.text-metadata-tag {
+  color: var(--accent-cadet);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.primary-action,
+.booking-button,
+.mobile-booking-link,
+.text-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  background: var(--primary);
+  color: var(--on-primary);
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.primary-action:hover,
+.booking-button:hover,
+.mobile-booking-link:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.text-action {
+  border-color: var(--border-control);
+  background: transparent;
+  color: var(--brand-ink);
+}
+
+.text-action:hover {
+  background: var(--secondary);
+}
+
+.mystree-page {
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--hero-frame);
+}
+
+/*
+ * A hairline between consecutive sections. `:where()` keeps the specificity at
+ * zero for the inner selector, so any section that needs to opt out (the About
+ * closing photograph, which is pulled up over the section above it) can do so
+ * from its own module with a plain `section.className` rule.
+ */
+.mystree-page > :where(section + section) {
+  border-top: 1px solid var(--section-rule);
+}
+
+body:has(.announcement-bar) {
+  --announcement-height: 4.1rem;
+  --header-offset: calc(var(--nav-height) + var(--announcement-height) + var(--nav-gap));
+  --home-chrome-height: calc(var(--announcement-height) + var(--nav-height));
+}
+
+.announcement-bar {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  min-height: 4.1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 4rem;
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+.announcement-bar p {
+  margin: 0;
+  font-size: var(--type-ui);
+  font-weight: 500;
+  text-align: center;
+}
+
+.announcement-bar a {
+  text-underline-offset: 0.15em;
+}
+
+.announcement-bar button {
+  position: absolute;
+  top: 50%;
+  right: clamp(0.75rem, 3vw, 3rem);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font-size: var(--type-title-xl);
+  font-weight: 400;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/*
+ * The header is a normal-flow band that sticks to the top of the viewport.
+ *
+ * It used to be `position: fixed` inside a floating capsule, which meant it sat
+ * in its own layer above the page and every section had to be padded out of its
+ * way. That is what produced the repeated collisions with hero copy. In flow it
+ * simply takes its own space, and whatever follows begins beneath it.
+ */
+.site-nav {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  border-bottom: 1px solid var(--section-rule);
+  background: color-mix(in srgb, var(--canvas) 94%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  max-width: 1440px;
+  min-height: var(--nav-height);
+  margin: 0 auto;
+  /* No capsule: no radius, no shadow, no border. The band carries the surface
+     and the rule; this is only the content row inside it. */
+  padding: 0.4rem clamp(1rem, 3vw, 2rem);
+  transition:
+    min-height 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Past the hero the bar sheds mass and reads as an editorial utility strip
+   rather than a floating capsule. */
+.site-nav.is-compact .nav-inner {
+  min-height: 3.2rem;
+  padding: 0.2rem clamp(1rem, 3vw, 2rem);
+}
+
+.site-nav.is-compact .wordmark-logo {
+  width: clamp(7rem, 9vw, 8.5rem);
+}
+
+.site-nav.is-compact .booking-button {
+  min-height: 2.4rem;
+  padding-inline: 0.9rem;
+}
+
+/* Over a dark section the capsule inverts instead of burning a white hole
+   through the page. */
+.site-nav.is-on-dark {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  background: rgb(12 22 29 / 94%);
+}
+
+.site-nav.is-on-dark .nav-link,
+.site-nav.is-on-dark .wordmark,
+.site-nav.is-on-dark .nav-dropdown-trigger {
+  color: var(--on-navy);
+}
+
+.site-nav.is-on-dark .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-nav.is-on-dark .wordmark-logo,
+.site-nav.is-on-dark .nav-toggle {
+  /* The wordmark is a dark-ink SVG; lift it to warm white on navy. */
+  filter: brightness(0) saturate(100%) invert(96%) sepia(9%) saturate(354%) hue-rotate(2deg) brightness(103%);
+}
+
+.site-nav.is-on-dark .nav-link:focus-visible,
+.site-nav.is-on-dark .nav-dropdown-trigger:focus-visible {
+  outline-color: var(--on-navy);
+}
+
+/* Opt-in flow offset for routes that do NOT open with a full-bleed hero.
+   Replaces per-section padding compensation. */
+.page-offset {
+  padding-top: var(--header-offset);
+}
+
+.wordmark {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--brand-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--type-title-sm);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.wordmark-logo {
+  display: block;
+  width: clamp(9rem, 12vw, 11rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.wordmark-mark {
+  display: grid;
+  width: 1.9rem;
+  height: 1.9rem;
+  place-items: center;
+  border: 1px solid var(--accent-cadet);
+  border-radius: 50% 50% 45% 55%;
+  font-size: var(--type-body);
+}
+
+.desktop-nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.55rem, 1vw, 1rem);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-dropdown-trigger[aria-expanded="true"],
+.soul-link {
+  color: var(--brand-ink);
+}
+
+.nav-link.active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--text-dark);
+  content: "";
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  left: 50%;
+  display: grid;
+  min-width: 13rem;
+  padding: 0.45rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  background: var(--surface);
+  box-shadow: 0 16px 32px rgb(var(--shadow-color) / 12%);
+  transform: translateX(-50%);
+}
+
+.dropdown-menu a {
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.4rem;
+  color: var(--foreground);
+  font-size: var(--type-ui);
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--secondary);
+  color: var(--brand-ink);
+}
+
+.beta-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.25rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--brand-ink);
+  font-size: var(--type-micro);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.nav-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.booking-button {
+  min-height: 2.7rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--border-control);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.hero-section {
+  position: relative;
+  display: flex;
+  width: calc(100% - clamp(1.2rem, 2vw, 1.9rem));
+  min-height: clamp(38rem, 80vh, 52rem);
+  overflow: hidden;
+  align-items: center;
+  margin: 0.5rem auto 2.5rem;
+  padding: clamp(3.5rem, 7vh, 5.5rem) clamp(2.5rem, 5vw, 5.5rem);
+  border-radius: clamp(1.5rem, 2vw, 1.85rem);
+  background: var(--foreground);
+}
+
+.hero-media {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  background: var(--foreground);
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-image: var(--desktop-image);
+  will-change: opacity, transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(var(--shadow-color) / 88%) 0%, rgb(var(--shadow-color) / 78%) 38%, rgb(var(--shadow-color) / 32%) 68%, rgb(var(--shadow-color) / 6%) 100%),
+    linear-gradient(0deg, rgb(var(--shadow-color) / 35%) 0%, transparent 28%);
+}
+
+.hero-copy-panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(50rem, 58vw);
+  min-height: auto;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  color: var(--on-photo);
+}
+
+.hero-copy-panel .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 clamp(0.75rem, 1.8vh, 1.25rem);
+  color: #BFE2FE;
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(0.6875rem, 0.82vw, 0.75rem);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(12, 22, 29, 0.6);
+}
+
+.hero-eyebrow-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #BFE2FE;
+  flex-shrink: 0;
+}
+
+.hero-copy-panel h1 {
+  max-width: 18ch;
+  margin: 0;
+  color: #FFFFFF;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, min(4.4vw, 5.8vh), 3.85rem);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 16px rgba(12, 22, 29, 0.55);
+}
+
+.hero-copy-panel h1 em {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.hero-lede {
+  max-width: 36rem;
+  margin: clamp(0.85rem, 1.8vh, 1.25rem) 0 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.15vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 6px rgba(12, 22, 29, 0.5);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.85rem, 1.5vw, 1.15rem);
+  margin-top: clamp(1.5rem, 3vh, 2.25rem);
+}
+
+.hero-action-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(3rem, 4.8vh, 3.35rem);
+  padding: 0 clamp(1.5rem, 2vw, 1.85rem);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF !important;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 0.95vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(12, 22, 29, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hero-action-secondary:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: #FFFFFF;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(12, 22, 29, 0.3);
+}
+
+.hero-action-secondary:active {
+  transform: translateY(0);
+}
+
+.booking-placeholder {
+  display: grid;
+  min-height: 100svh;
+  place-content: center;
+  gap: 1rem;
+  padding: 8rem 1.5rem 4rem;
+  background: var(--canvas);
+  border-top: 0.5rem solid var(--border-subtle);
+}
+
+.booking-placeholder h1,
+.booking-placeholder p {
+  max-width: 38rem;
+}
+
+.booking-placeholder h1 {
+  margin: 0;
+}
+
+.booking-placeholder p:not(.eyebrow) {
+  color: var(--muted-foreground);
+}
+
+.booking-placeholder .primary-action {
+  justify-self: start;
+}
+
+@media (max-width: 1320px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .nav-inner {
+    justify-content: space-between;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    margin-left: 0.5rem;
+  }
+
+  .mobile-nav {
+    display: grid;
+    gap: 0.2rem;
+    max-width: 1440px;
+    max-height: calc(100svh - 11rem);
+    overflow-y: auto;
+    margin: 0.55rem auto 0;
+    padding: 0.75rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.65rem;
+    background: var(--surface);
+    box-shadow: 0 16px 32px rgb(var(--shadow-color) / 12%);
+  }
+
+  .mobile-nav > a,
+  .mobile-nav-group > a,
+  .mobile-nav-group > span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border-radius: 0.4rem;
+    color: var(--foreground);
+    font-size: var(--type-ui);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .mobile-nav > a:hover,
+  .mobile-nav-group > a:hover {
+    background: var(--secondary);
+    color: var(--brand-ink);
+  }
+
+  .mobile-nav-group {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .mobile-nav-group > span {
+    color: var(--brand-ink);
+    font-size: var(--type-label);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mobile-nav-group > a {
+    padding-left: 1.5rem;
+  }
+
+  .mobile-nav .mobile-booking-link {
+    margin-top: 0.5rem;
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  .mobile-nav .mobile-booking-link:hover {
+    background: var(--primary-hover);
+  }
+}
+
+@media (max-width: 1060px) {
+  .hero-copy-panel {
+    width: min(40rem, 68vw);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 3.75rem;
+  }
+
+  body:has(.announcement-bar) {
+    --announcement-height: 3.3rem;
+  }
+
+  html {
+    scroll-padding-top: 9rem;
+  }
+
+  .announcement-bar {
+    min-height: 3.3rem;
+    padding: 0.55rem 3.5rem 0.55rem 1rem;
+  }
+
+  .announcement-bar p {
+    font-size: var(--type-label);
+    line-height: 1.5;
+  }
+
+  .announcement-bar button {
+    right: 0.4rem;
+  }
+
+  .nav-inner {
+    min-height: 3.7rem;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .wordmark {
+    font-size: var(--type-lead);
+  }
+
+  .wordmark-logo {
+    width: 8.75rem;
+  }
+
+  .wordmark-mark {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .site-nav .booking-button.cta-book,
+  .booking-button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.7rem;
+  }
+
+  .booking-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mobile-nav {
+    max-height: calc(100svh - 10rem);
+  }
+
+  .hero-section {
+    width: calc(100% - 1.25rem);
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0.35rem auto 1.25rem;
+    padding: 0;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    background: var(--bg-dark, #0C161D);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 32px rgba(12, 22, 29, 0.22);
+  }
+
+  .hero-media {
+    position: relative;
+    width: 100%;
+    height: clamp(14.5rem, 58vw, 19.5rem);
+    overflow: hidden;
+    flex-shrink: 0;
+    order: 1;
+    background: var(--bg-dark, #0C161D);
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background-position: center 26%;
+    background-size: cover;
+    background-image: var(--mobile-image);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: clamp(14.5rem, 58vw, 19.5rem);
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 72%,
+      rgba(12, 22, 29, 0.65) 90%,
+      var(--bg-dark, #0C161D) 100%
+    );
+  }
+
+  .hero-copy-panel {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: auto;
+    padding: 1.35rem 1.25rem 1.65rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    order: 2;
+    background: var(--bg-dark, #0C161D);
+  }
+
+  .hero-copy-panel .eyebrow {
+    font-size: var(--type-metadata-tag);
+    letter-spacing: 0.14em;
+    margin-bottom: 0.45rem;
+    color: #BFE2FE;
+  }
+
+  .hero-copy-panel h1 {
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+    line-height: 1.15;
+    max-width: 100%;
+    color: #FFFFFF;
+  }
+
+  .hero-lede {
+    font-size: clamp(0.875rem, 3.4vw, 0.95rem);
+    line-height: 1.52;
+    margin-top: 0.55rem;
+    max-width: 100%;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.65rem;
+    width: 100%;
+    margin-top: 1.15rem;
+  }
+
+  .hero-actions a,
+  .hero-actions .hero-action-secondary,
+  .hero-actions .hero-action-primary,
+  .hero-actions .primary-action,
+  .hero-actions .text-action {
+    width: 100% !important;
+    min-height: 3rem !important;
+    padding: 0 1.25rem !important;
+    justify-content: center !important;
+    text-align: center;
+    font-size: var(--type-ui);
+  }
+
+  .hero-lines {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 540px) {
+  .hero-section {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .hero-copy-panel h1 {
+    font-size: var(--type-title-md);
+  }
+
+  .hero-lede {
+    display: none;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-actions a,
+  .hero-actions .hero-action-secondary,
+  .hero-actions .hero-action-primary,
+  .hero-actions .primary-action,
+  .hero-actions .text-action {
+    width: auto !important;
+    flex: 1;
+    min-height: 2.5rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =======================================================================
+ * Booking CTA
+ *
+ * Booking is the site's single conversion goal, so it gets ONE treatment and
+ * every other action stays quieter. Before this the same action appeared as
+ * five different things — flat Flame pills, a Pumpkin square, a bordered ghost
+ * and a plain underline — which is why nothing on the page read as "the
+ * button".
+ *
+ * On colour: pure Flame (#ed5b2d) carries white text at only 3.42:1, so the
+ * fill is a deepened Flame gradient, --book-top #C94A22 (4.7:1) to
+ * --book-bottom #A83A1A (6.5:1). (Until 16 Nov 2026 the top stop was still
+ * pure Flame, so the label measured 3.4:1.) Pure Flame is still here — it is the halo, the glow and the focus
+ * ring, where a 3:1 non-text contrast is the right bar. The button therefore
+ * reads brighter than it measures, which is the whole trick.
+ *
+ * Hover does NOT lighten the fill; a brighter orange would push white text
+ * under AA. It lifts the button, deepens the fill and expands the warm halo,
+ * with a specular sheen crossing once. Depth and light, not a colour change.
+ * ===================================================================== */
+
+.cta-book {
+  --cta-top: var(--book-top);
+  --cta-bottom: var(--book-bottom);
+  --cta-glow: 237 91 45;
+
+  position: relative;
+  /* Own stacking context: the sheen and halo must never escape the pill or
+     paint over the label. */
+  isolation: isolate;
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0 1.6rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(170deg, var(--cta-top), var(--cta-bottom));
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    /* A lit top edge reads as a raised surface rather than a flat swatch. */
+    inset 0 1px 0 rgb(255 255 255 / 26%),
+    0 1px 2px rgb(var(--cta-glow) / 24%),
+    0 10px 24px -8px rgb(var(--cta-glow) / 45%);
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms ease,
+    background 240ms ease;
+}
+
+/* The specular sweep. A pseudo-element rather than a background-position
+   animation so it composites on the GPU and never repaints the label. */
+.cta-book::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  content: "";
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgb(255 255 255 / 26%),
+    transparent
+  );
+  transform: translateX(-180%) skewX(-18deg);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cta-book:hover,
+.cta-book:focus-visible {
+  --cta-top: var(--book-hover-top);
+  --cta-bottom: color-mix(in srgb, var(--book-bottom) 82%, var(--text-primary));
+
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 30%),
+    0 2px 4px rgb(var(--cta-glow) / 28%),
+    0 18px 38px -10px rgb(var(--cta-glow) / 62%);
+}
+
+.cta-book:hover::after,
+.cta-book:focus-visible::after {
+  transform: translateX(320%) skewX(-18deg);
+}
+
+.cta-book:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 2px 5px rgb(90 24 6 / 34%),
+    0 2px 6px -2px rgb(var(--cta-glow) / 40%);
+}
+
+.cta-book:focus-visible {
+  outline: 2px solid var(--accent-flame-hover);
+  outline-offset: 3px;
+}
+
+/* Arrows and calendar glyphs lean toward the destination on hover. */
+.cta-book > svg,
+.cta-book [data-cta-arrow] {
+  flex: none;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cta-book:hover > svg,
+.cta-book:hover [data-cta-arrow] {
+  transform: translateX(3px);
+}
+
+/* ---- sizes ---- */
+.cta-book.is-small {
+  /* 44px: the smallest comfortable thumb target, so the compact pills in cards
+     and the nav stay tappable rather than merely legible. */
+  min-height: 2.75rem;
+  padding: 0 1.2rem;
+  font-size: var(--type-caption);
+}
+
+.cta-book.is-large {
+  min-height: 3.5rem;
+  padding: 0 2rem;
+  font-size: var(--type-body);
+}
+
+/* The prenatal journey intentionally avoids dark action blocks. Keep the
+   shared CTA everywhere else; only this route's sticky and mobile navigation
+   inherit the same luminous blue-sage conversion treatment as its content. */
+.site-nav.is-prenatal .cta-book {
+  --cta-glow: 139 164 191;
+
+  color: var(--ink);
+  background: linear-gradient(
+    132deg,
+    color-mix(in srgb, var(--brand-uranian-blue) 78%, white),
+    color-mix(in srgb, var(--surface-sage) 72%, var(--brand-uranian-blue))
+  );
+  border: 1px solid color-mix(in srgb, var(--brand-cadet-gray) 58%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 78%),
+    0 10px 24px color-mix(in srgb, var(--brand-cadet-gray) 26%, transparent);
+}
+
+.site-nav.is-prenatal .cta-book:hover,
+.site-nav.is-prenatal .cta-book:focus-visible {
+  color: var(--ink);
+  background: linear-gradient(132deg, var(--brand-uranian-blue), var(--surface-sage));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 82%),
+    0 15px 30px color-mix(in srgb, var(--brand-cadet-gray) 34%, transparent);
+}
+
+/* ---- the one that breathes ----
+   Reserved for a page's closing CTA, where it is the only thing left to do.
+   A slow, low-amplitude halo: visible in peripheral vision, not a blinking
+   advert. It stops on hover so it never fights the hover state. */
+.cta-book.is-pulse::before {
+  position: absolute;
+  z-index: -2;
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  box-shadow: 0 0 0 0 rgb(var(--cta-glow) / 55%);
+  animation: cta-pulse 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.cta-book.is-pulse:hover::before {
+  animation-play-state: paused;
+}
+
+@keyframes cta-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--cta-glow) / 48%);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 14px rgb(var(--cta-glow) / 0%);
+  }
+}
+
+/* On a dark section the ambient glow is what separates the button from the
+   ground, so it runs warmer and wider there. */
+[data-nav-theme="dark"] .cta-book,
+.on-dark .cta-book {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 30%),
+    0 2px 6px rgb(0 0 0 / 28%),
+    0 16px 40px -12px rgb(var(--cta-glow) / 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-book,
+  .cta-book::after,
+  .cta-book > svg,
+  .cta-book [data-cta-arrow] {
+    transition: none;
+  }
+
+  .cta-book:hover {
+    transform: none;
+  }
+
+  /* No sweep and no breathing: the hover state is carried by the deeper fill
+     and the wider halo alone. */
+  .cta-book::after {
+    display: none;
+  }
+
+  .cta-book.is-pulse::before {
+    animation: none;
+  }
+}
+
+/* Service page rhythm: tablet and desktop steps of the tokens above. */
+@media (min-width: 640px) {
+  :root {
+    --svc-pad-y: 4.5rem;
+    --svc-pad-y-statement: 5rem;
+    --svc-pad-x: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    /* 72px at 1536, scaling down with smaller laptops. */
+    --svc-pad-y: clamp(3.25rem, 4.7vw, 4.5rem);
+    /* 110px at 1536: room for a single statement to breathe. */
+    --svc-pad-y-statement: clamp(4rem, 7.2vw, 6.875rem);
+    --svc-pad-x: 0;
+    --svc-gap-lead: clamp(1rem, 1.3vw, 1.25rem);
+    --svc-gap-content: clamp(2rem, 2.6vw, 2.5rem);
+    --svc-body: clamp(1rem, 1.1vw, 1.0625rem);
+  }
+}
+
+
+/* ---------------------------------------------------------------
+   Photographic ground (24 Oct 2026)
+
+   A humanised photograph behind a text section, washed with a white
+   veil so dark body text keeps full contrast (WCAG AA) while the image
+   reads as an airy, editorial layer. Usage on any <section>:
+
+     className={`${styles.section} photo-ground`}
+     style={{ "--ground-image": "url(/images/grounds/name.webp)" }}
+
+   Optional: --ground-position (focal point) and --ground-veil (a
+   gradient; the default is heaviest on the left, where copy sits).
+   The photo is on ::before at z-index -1 inside an isolated stacking
+   context, so it paints above the section's own background and below
+   all of its content.
+   --------------------------------------------------------------- */
+.photo-ground {
+  position: relative;
+  isolation: isolate;
+}
+
+.photo-ground::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    var(
+      --ground-veil,
+      linear-gradient(
+        90deg,
+        rgb(255 255 255 / 0.94) 0%,
+        rgb(255 255 255 / 0.84) 42%,
+        rgb(255 255 255 / 0.42) 100%
+      )
+    ),
+    var(--ground-image);
+  background-position: var(--ground-position, center);
+  background-size: cover;
+  content: "";
+  pointer-events: none;
+}
+
+/* On a phone the copy spans the full width, so the veil is even. */
+@media (max-width: 767px) {
+  .photo-ground::before {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.88), rgb(255 255 255 / 0.88)),
+      var(--ground-image);
+  }
+}
+
+/* Centred copy: the veil is densest behind the text and thins toward the
+   edges, where the photograph shows through. */
+.photo-ground--center {
+  --ground-veil: radial-gradient(
+    ellipse 62% 72% at 50% 50%,
+    rgb(255 255 255 / 0.93) 0%,
+    rgb(255 255 255 / 0.82) 55%,
+    rgb(255 255 255 / 0.48) 100%
+  );
+}

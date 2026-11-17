@@ -1,0 +1,367 @@
+/*
+ * The Latest — Blog Articles Section
+ * Base Screen Canvas: #FFFFFF (Porcelain Canvas)
+ * Card Backdrop: #EEF2F8 (Warm Alabaster)
+ * Headings, Text & Outline Borders: #841B4D (Rich Berry / Deep Wine)
+ */
+
+.section {
+  position: relative;
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #0C161D;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 4vw, 3rem) clamp(5rem, 9vw, 8rem);
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.title {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  line-height: 1.15;
+  color: #841B4D;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.75rem 0;
+}
+
+/* Filter controls bar */
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  margin-bottom: clamp(2.5rem, 4.5vw, 3.5rem);
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.controlLabel {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-ui);
+  color: #841B4D;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.searchInput {
+  height: 38px;
+  width: clamp(170px, 18vw, 230px);
+  background-color: #FFFFFF;
+  color: #841B4D;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid rgba(132, 27, 77, 0.25);
+  border-radius: 2px;
+  padding: 0 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput::placeholder {
+  color: rgba(132, 27, 77, 0.55);
+}
+
+.searchInput:focus {
+  border-color: #841B4D;
+  box-shadow: 0 0 0 2px rgba(132, 27, 77, 0.15);
+}
+
+.selectWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.selectBox {
+  height: 38px;
+  background-color: #FFFFFF;
+  color: #841B4D;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid rgba(132, 27, 77, 0.25);
+  border-radius: 2px;
+  padding: 0 2.25rem 0 0.875rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.selectBox:focus {
+  border-color: #841B4D;
+  box-shadow: 0 0 0 2px rgba(132, 27, 77, 0.15);
+}
+
+.selectChevron {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  color: #841B4D;
+  display: flex;
+  align-items: center;
+}
+
+/* Articles Grid */
+.articlesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 640px) {
+  .articlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .articlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ====================================================================
+   The Portrait Editorial Card (#841B4D Deep Cherry Card)
+   Clear UI/UX Separation: Top for Image / Bottom for Content
+   ==================================================================== */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #841B4D; /* Solid Deep Cherry Card Foundation */
+  border: none;
+  box-shadow: 0 10px 28px rgba(132, 27, 77, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  filter: brightness(1.05) contrast(1.02);
+  box-shadow: 0 26px 54px -10px rgba(132, 27, 77, 0.42), 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Top Graphic Visual Area */
+.cardVisualArea {
+  position: relative;
+  width: 100%;
+  padding: clamp(1.25rem, 2.2vw, 1.6rem) clamp(1.25rem, 2.2vw, 1.6rem) 0;
+  box-sizing: border-box;
+  background-color: #841B4D;
+}
+
+/* Right Organic Petal Contour */
+.rightPetalShape {
+  position: absolute;
+  right: -2.5rem;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(ellipse at right center, rgba(160, 24, 94, 0.35) 0%, rgba(132, 27, 77, 0.15) 60%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Rectangular Frame with Grayscale Clinical Photo — No Border */
+.rectFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(185px, 22vw, 220px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+  background-color: #6E123F;
+  z-index: 10;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s ease;
+}
+
+.card:hover .rectFrame {
+  transform: scale(1.02);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+}
+
+.rectImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(115%) brightness(95%);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+}
+
+.card:hover .rectImage {
+  transform: scale(1.06);
+  filter: grayscale(85%) contrast(115%) brightness(102%);
+}
+
+/* Bottom Editorial Content Area: Solid #841B4D Deep Cherry */
+.cardBody {
+  padding: clamp(1.25rem, 2.2vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  min-height: 250px;
+  background-color: #841B4D;
+  position: relative;
+  z-index: 5;
+}
+
+.categoryTag {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 700;
+  margin: 0 0 0.85rem 0;
+}
+
+.cardTitle {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  line-height: 1.24;
+  color: #FFFFFF;
+  letter-spacing: -0.022em;
+  margin: 0 0 1.5rem 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover .cardTitle {
+  opacity: 0.92;
+}
+
+/* Three-Line Author & Date Ledger in White */
+.cardLedger {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #841B4D;
+}
+
+.resetButton {
+  margin-top: 1rem;
+  background-color: #841B4D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  min-height: 44px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+  opacity: 0.9;
+}
+
+/* ====================================================================
+   Mobile Responsiveness & Touch Target Enhancements
+   ==================================================================== */
+@media (max-width: 640px) {
+  .section {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .title {
+    font-size: var(--type-title-xl);
+    margin-bottom: 1.25rem;
+  }
+
+  .filterBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .controlGroup {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .controlLabel {
+    font-size: var(--type-label);
+  }
+
+  .searchInput {
+    width: 100%;
+    max-width: 100%;
+    height: 44px;
+    font-size: var(--type-label);
+  }
+
+  .selectWrapper {
+    width: 100%;
+  }
+
+  .selectBox {
+    width: 100%;
+    height: 44px;
+    font-size: var(--type-label);
+  }
+
+  .cardVisualArea {
+    padding: 1.15rem 1.15rem 0;
+  }
+
+  .rectFrame {
+    height: 185px;
+    border-radius: 10px;
+  }
+
+  .cardBody {
+    padding: 1.15rem;
+    min-height: 220px;
+  }
+
+  .cardTitle {
+    font-size: var(--type-title-xs);
+    margin-bottom: 1rem;
+  }
+}

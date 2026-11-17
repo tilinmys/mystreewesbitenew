@@ -1,0 +1,168 @@
+/*
+ * Home closing section (16 Nov 2026; color.md "home closing section").
+ * Full-bleed warm photograph under a soft shade; ivory type; blush button.
+ */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(460px, 62vh, 620px);
+  display: grid;
+  place-items: center;
+  background: #5b3a2f;
+  color: #fff8f4;
+}
+
+.section.section {
+  border-top: 0;
+}
+
+/* Taller than the section so the drift never shows an edge. */
+.media {
+  position: absolute;
+  inset: -12% 0;
+  z-index: -2;
+  will-change: transform;
+}
+
+.media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Until the photograph is added: warm skin-toned light, like the reference. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(55% 70% at 78% 40%, #b98670 0%, transparent 70%),
+    radial-gradient(60% 80% at 20% 70%, #4a2a22 0%, transparent 70%),
+    linear-gradient(110deg, #5a3428 0%, #8a5a48 55%, #a87763 100%);
+}
+
+.placeholderTag {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  max-width: calc(100% - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 0.25);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(60% 60% at 50% 50%, rgb(40 18 14 / 0.35), rgb(40 18 14 / 0.15) 70%, transparent 100%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 860px;
+  padding: 96px 24px;
+  text-align: center;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2rem, 3.4vw, 3.25rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.22 !important;
+  letter-spacing: -0.015em !important;
+  color: #fff8f4;
+  text-wrap: balance;
+  text-shadow: 0 1px 24px rgb(40 18 14 / 0.25);
+}
+
+.accent {
+  font-style: italic;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 28px;
+  margin-top: 64px;
+}
+
+.cta {
+  min-width: 320px;
+}
+
+.call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgb(255 248 244 / 0.5);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff8f4;
+  text-decoration: none;
+}
+
+.call:hover {
+  border-bottom-color: #fff8f4;
+}
+
+.cta:focus-visible,
+.call:focus-visible {
+  outline: 2px solid #fff8f4;
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: 520px;
+  }
+
+  .inner {
+    padding: 80px 20px;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 44px;
+  }
+
+  .cta {
+    width: 100%;
+    min-width: 0;
+    height: 54px;
+    font-size: 17px;
+  }
+
+  .placeholderTag {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta {
+    transition: none;
+  }
+}

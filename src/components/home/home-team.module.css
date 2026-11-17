@@ -1,0 +1,359 @@
+/*
+ * Home Section 09, team (revised 16 Nov 2026; color.md "home Section 09").
+ * A soft blush-to-white ground; compact pure-white cards with a hairline
+ * border and a soft shadow; no tinted backgrounds behind text; name in
+ * Fraunces; the book button in Sanctuary Burgundy #641E2B.
+ */
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 88px;
+  /* White, with a faint blush glow only behind the moving rows. */
+  background:
+    radial-gradient(75% 38% at 50% 62%, #f8f0f1 0%, rgb(248 240 241 / 0) 100%),
+    #ffffff;
+  color: #1c1114;
+}
+
+.section.section {
+  border-top: 0;
+}
+
+.head {
+  max-width: 980px;
+  margin: 0 auto 56px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+  color: #1c1114;
+  text-wrap: balance;
+}
+
+.accent {
+  font-style: italic;
+  color: #641e2b;
+}
+
+.lead {
+  max-width: 62ch;
+  margin: 20px auto 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: #3d2a2f;
+  text-wrap: balance;
+}
+
+/* ---------------------------------------------------------------- rows */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The row fades out at both screen edges. */
+.row {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+
+.track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  animation: drift var(--duration, 60s) linear infinite;
+  will-change: transform;
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+/* Pause: hovered, keyboard focus inside, or for a few seconds after a touch. */
+.row:hover .track,
+.row:focus-within .track,
+.paused .track {
+  animation-play-state: paused;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-50% - 8px), 0, 0);
+  }
+}
+
+/* Cards in a row share its height, so the row reads as one even band. */
+.item {
+  display: flex;
+  flex: none;
+}
+
+/* ---------------------------------------------------------------- card */
+/*
+ * After the reference card (~430 x 260): a 120px round photo on the left,
+ * vertically centred; on the right the name in Fraunces, qualification chips
+ * (outlined, no fill), the role in two calm lines, and a quiet book link.
+ */
+.card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  column-gap: 22px;
+  align-items: center;
+  width: 430px;
+  height: 100%;
+  min-height: 236px;
+  padding: 24px 26px 24px 22px;
+  border: 1px solid #f0e6e8;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgb(75 23 34 / 0.03), 0 10px 28px -18px rgb(75 23 34 / 0.18);
+  transition: box-shadow 300ms ease;
+}
+
+.card:hover {
+  box-shadow: 0 1px 2px rgb(75 23 34 / 0.04), 0 20px 40px -22px rgb(75 23 34 / 0.3);
+}
+
+.photo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f4eced;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-serif), serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: #1c1114;
+  text-decoration: none;
+}
+
+.name:hover {
+  color: #641e2b;
+}
+
+/* Chips: outlined, no fill behind the text. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 4px 8px;
+  border: 1px solid #e6d8db;
+  border-radius: 4px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #2a1a1e;
+}
+
+.role {
+  margin: 12px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: #1c1114;
+}
+
+.meta {
+  margin: 2px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #7a5c63;
+}
+
+.book {
+  margin-top: 14px;
+}
+
+.photo:focus-visible,
+.name:focus-visible,
+.book:focus-visible,
+.all:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.all {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #641e2b;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+
+/* -------------------------------------------------------------- phones */
+@media (max-width: 767px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .head {
+    margin-bottom: 32px;
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  .lead {
+    margin-left: 0;
+    font-size: 16px;
+  }
+
+  .rows,
+  .track {
+    gap: 12px;
+  }
+
+  .track {
+    padding: 6px;
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(calc(-50% - 6px), 0, 0);
+    }
+  }
+
+  /* Phones: photo beside the name; the details use the full card width. */
+  .card {
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: start;
+    align-content: start;
+    width: 300px;
+    min-height: 0;
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .info {
+    display: contents;
+  }
+
+  .photo {
+    grid-row: 1;
+    width: 56px;
+    height: 56px;
+  }
+
+  .name {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .chips,
+  .role,
+  .meta,
+  .book {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .chips {
+    margin-top: 14px;
+  }
+
+  .name {
+    font-size: 19px;
+  }
+
+  .chip {
+    padding: 3px 7px;
+    font-size: 11.5px;
+  }
+
+  .role {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .book {
+    margin-top: 12px;
+    font-size: 13.5px;
+  }
+}
+
+/* No drift: each row scrolls sideways instead. */
+.rowStill {
+  overflow-x: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.rowStill .track {
+  animation: none;
+  padding-inline: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+
+  .card,
+  .book {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

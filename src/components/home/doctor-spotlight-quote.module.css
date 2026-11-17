@@ -1,0 +1,312 @@
+.section {
+  --spotlight-sky: #0C161D;
+  --spotlight-rose: #ED5B2D;
+  --spotlight-rose-hover: #D84A1E;
+  --spotlight-cream: var(--surface-pearl);
+  --spotlight-ink: #1c1917;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 1.5rem;
+  background: var(--spotlight-sky);
+  color: #ffffff;
+  scroll-margin-top: 1rem;
+}
+
+.copyBlock {
+  position: relative;
+  z-index: 10;
+  width: min(100%, 34rem);
+  padding-top: clamp(1.5rem, 5vw, 4.5rem);
+}
+
+.copyBlock h2 {
+  max-width: 10ch;
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: var(--type-title-lg);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.copyBlock p {
+  max-width: 27rem;
+  margin: 1.25rem 0 0;
+  color: #ffffff;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.35;
+}
+
+.cta {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: var(--spotlight-rose);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.cta:hover {
+  background: var(--spotlight-rose-hover);
+  transform: translateY(-1px);
+}
+
+.doctorVisual {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.doctorImage {
+  display: block;
+  width: auto;
+  height: 70vh;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 1.5rem 1.3rem rgb(34 28 25 / 18%));
+}
+
+.quoteCard {
+  position: relative;
+  z-index: 20;
+  align-self: flex-end;
+  width: 100%;
+  max-width: 34rem;
+  min-height: 27rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid rgb(255 255 255 / 60%);
+  border-radius: 2rem;
+  background: var(--spotlight-cream);
+  box-shadow: 0 1.5rem 3rem rgb(34 28 25 / 22%);
+  color: var(--spotlight-ink);
+}
+
+.quoteContent {
+  display: flex;
+  min-height: 21rem;
+  flex-direction: column;
+}
+
+.quoteIcon {
+  flex: 0 0 auto;
+  color: var(--spotlight-rose);
+}
+
+.quoteText {
+  max-width: 30rem;
+  margin: 1rem 0 0;
+  color: var(--spotlight-ink);
+  font-size: var(--type-body-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+}
+
+.attribution {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.doctorName,
+.designation {
+  margin: 0;
+}
+
+.doctorName {
+  font-size: var(--type-title-sm);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.designation {
+  margin-top: 0.35rem;
+  color: rgb(28 25 23 / 78%);
+  font-size: var(--type-body);
+  line-height: 1.35;
+}
+
+.avatarFrame {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 56%);
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.counter {
+  color: var(--spotlight-ink);
+  font-size: var(--type-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.arrowGroup {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.arrowButton {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(28 25 23 / 22%);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--spotlight-ink);
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.arrowButton:hover {
+  border-color: var(--spotlight-ink);
+  background: var(--spotlight-ink);
+  color: var(--spotlight-cream);
+}
+
+.cta:focus-visible,
+.arrowButton:focus-visible {
+  outline: 2px solid var(--spotlight-ink);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--spotlight-cream);
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 3rem;
+  }
+
+  .quoteCard {
+    max-width: 32rem;
+    padding: 2rem;
+  }
+
+  .copyBlock h2 {
+    font-size: var(--type-numeral);
+  }
+
+  .quoteText {
+    font-size: var(--type-lead);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    min-height: 100vh;
+    padding: 4rem;
+  }
+
+  .copyBlock {
+    padding-top: 0;
+  }
+
+  .doctorImage {
+    height: 85vh;
+  }
+
+  .quoteCard {
+    max-width: 28rem;
+    min-height: 31rem;
+    margin-top: 2rem;
+  }
+
+  .quoteContent {
+    min-height: 25rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .doctorVisual {
+    position: relative;
+    order: 2;
+    min-height: clamp(18rem, 58vw, 31rem);
+    margin: 2.25rem -1.5rem -1rem;
+  }
+
+  .doctorImage {
+    height: clamp(21rem, 70vw, 36rem);
+  }
+
+  .copyBlock {
+    order: 1;
+  }
+
+  .quoteCard {
+    order: 3;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .copyBlock h2 {
+    max-width: 12ch;
+  }
+
+  .doctorVisual {
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
+  }
+
+  .quoteCard {
+    min-height: 25rem;
+  }
+
+  .quoteContent {
+    min-height: 19rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .arrowButton {
+    transition: none;
+  }
+}

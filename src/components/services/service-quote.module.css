@@ -1,0 +1,89 @@
+/* ServiceQuote — LOCKED. Mobile-first. Sits on <ServiceBand>'s gradient. */
+
+.section {
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.figure {
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+/* Replaces the reference's star row: a quiet mark that says "something
+   different starts here" without claiming a rating. */
+.rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin-bottom: 1.5rem;
+  background: color-mix(in oklab, var(--svc-on-wine) 45%, transparent);
+}
+
+.quote {
+  margin: 0;
+}
+
+.quote p {
+  margin: 0;
+  color: var(--svc-on-wine);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  /* Regular, not light: thin serif strokes on a coloured ground shimmer. */
+  /* Close to the lead's size, as in the reference — a voice, not a headline. */
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+  font-optical-sizing: auto;
+}
+
+.name {
+  margin-top: 1.375rem;
+  color: var(--svc-on-wine-meta);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-metadata-tag);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .section {
+    padding: 4.5rem 2.5rem 5rem;
+  }
+
+  .figure {
+    text-align: center;
+  }
+
+  .rule {
+    margin-inline: auto;
+  }
+}
+
+/* ------------------------------------------------ desktop  >= 1024px
+   Same calibration as the hero: reference values at a 1536px viewport,
+   written in vw so smaller laptops scale down, capped at the 1536 value. */
+
+@media (min-width: 1024px) {
+  .section {
+    padding: clamp(3.5rem, 7.8vw, 7.5rem) 2.5rem clamp(4rem, 8vw, 7.75rem);
+  }
+
+  .figure {
+    max-width: clamp(34rem, 42.5vw, 40.8rem);
+  }
+
+  .rule {
+    margin-bottom: clamp(1.5rem, 2.6vw, 2.5rem);
+  }
+
+  .quote p {
+    font-size: clamp(1.0625rem, 1.15vw, 1.125rem);
+  }
+
+  .name {
+    margin-top: clamp(1.375rem, 2.9vw, 2.8rem);
+  }
+}

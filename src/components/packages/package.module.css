@@ -1,0 +1,765 @@
+/*
+ * Package pages — /packages/[slug]. Mobile-first.
+ *
+ * Layout taken from the supplied reference (a 50%-zoom screenshot, so
+ * 1 screenshot px = 1.6 CSS px at the 1536px calibration width; color.md):
+ *
+ *   reference (50%)            built at 1536
+ *   content block 700px        70rem (1120px) centred
+ *   text column 440px          minmax(0, 1fr), about 704px
+ *   price card 240px           24rem (384px), straddles the band's foot
+ *   title ~30px, 2 lines       52px Fraunces 400
+ *   accordion rows 34px        54px, 12px apart
+ *   stats 40px / watermark     64px figures over a faint serif "mystree"
+ *
+ * Changes from the reference: the hero ground is Uranian Mist, not lilac;
+ * the cut-out photograph stands on the price card instead of floating; the
+ * price card leads with what is included rather than a struck-out price
+ * (MyStree has no "original" price to show); the stats are verifiable
+ * package facts, not patient counts or ratings (NMC notice, 06.10.2026);
+ * the watermark says "mystree".
+ */
+
+.page {
+  --pkg-block: 70rem;
+  /* Own gutter: the shared --svc-pad-x is 0 on desktop, where service
+     blocks are narrower than the window. */
+  --pkg-pad-x: clamp(1.25rem, 5vw, 4rem);
+  --pkg-side: 24rem;
+  --pkg-gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  --pkg-rule: color-mix(in oklab, var(--cadet-slate) 38%, var(--pure-white));
+  --pkg-ink-soft: color-mix(in oklab, var(--midnight-chamber) 78%, var(--pure-white));
+}
+
+/* ------------------------------------------------------------ hero band */
+
+.band {
+  position: relative;
+  padding: 2.5rem var(--pkg-pad-x) 0;
+  background: var(--uranian-mist);
+}
+
+.bandInner,
+.bodyInner {
+  display: grid;
+  max-width: var(--pkg-block);
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--pkg-gap);
+}
+
+.intro {
+  padding-bottom: 2rem;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  color: var(--pkg-ink-soft);
+  font-size: 0.875rem;
+}
+
+.crumbs li + li::before {
+  margin-right: 0.5rem;
+  content: "/";
+  color: var(--cadet-slate);
+}
+
+.crumbs a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* Overrides the global `main h1` display role (globals.css, !important). */
+.title {
+  max-width: 14em;
+  margin: 0;
+  color: var(--twilight-wine);
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--pure-white);
+  color: var(--midnight-chamber);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.lead {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.0625rem, 1.25vw, 1.1875rem);
+  line-height: 1.55;
+}
+
+.lead strong {
+  font-weight: 600;
+}
+
+/* The cut-out stands on the band's foot, which is where the price card
+   begins: on a phone it sits centred above the card. */
+.figure {
+  position: relative;
+  display: flex;
+  height: 15rem;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.figure img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+/* ------------------------------------------------------------ body */
+
+.body {
+  padding: 0 var(--pkg-pad-x) var(--svc-pad-y);
+  background: var(--alabaster-canvas);
+}
+
+.side {
+  order: -1;
+}
+
+.priceCard {
+  padding: 1.5rem;
+  border: 1px solid var(--pkg-rule);
+  border-top: 3px solid var(--twilight-wine);
+  background: var(--pure-white);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.price {
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+
+.priceNote {
+  color: var(--midnight-chamber);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.priceFor {
+  margin: 0.5rem 0 0;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.covers {
+  display: grid;
+  gap: 0.45rem;
+  margin: 1.25rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--pkg-rule);
+  list-style: none;
+  color: var(--midnight-chamber);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.covers li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* A small wine tick, drawn in CSS so screen readers skip it. */
+.covers li::before {
+  position: absolute;
+  top: 0.32em;
+  left: 0.1rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border-right: 2px solid var(--twilight-wine);
+  border-bottom: 2px solid var(--twilight-wine);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.actions :global(.cta-book) {
+  width: 100%;
+}
+
+.call {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--midnight-chamber);
+  border-radius: 999px;
+  color: var(--midnight-chamber);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.call:hover {
+  background: var(--uranian-mist);
+}
+
+.call:focus-visible,
+.tab:focus-visible,
+.panel:focus-visible,
+.row summary:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+}
+
+.terms {
+  margin: 1rem 0 0;
+  color: var(--pkg-ink-soft);
+  font-size: 0.8125rem;
+}
+
+.main {
+  min-width: 0;
+  margin-top: var(--pkg-gap);
+}
+
+/* ------------------------------------------------------------ tabs card */
+
+.tabsCard {
+  border: 1px solid var(--pkg-rule);
+  background: var(--pure-white);
+}
+
+.tabList {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid var(--pkg-rule);
+  scrollbar-width: none;
+}
+
+.tab {
+  flex: none;
+  min-height: 3.25rem;
+  padding: 0 0.75rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--pkg-ink-soft);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab[aria-selected="true"] {
+  border-bottom-color: var(--twilight-wine);
+  color: var(--twilight-wine);
+  font-weight: 600;
+}
+
+.panel {
+  padding: 1.25rem 0.75rem 1.5rem;
+}
+
+.rows {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  border: 1px solid var(--pkg-rule);
+}
+
+.row summary {
+  display: flex;
+  min-height: 3.375rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  color: var(--midnight-chamber);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  list-style: none;
+  cursor: pointer;
+}
+
+.row summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron, drawn in CSS. */
+.row summary::after {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: -0.25rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  content: "";
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.row[open] summary::after {
+  margin-top: 0.25rem;
+  transform: rotate(-135deg);
+}
+
+.row p,
+.panelText {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.panelText {
+  padding: 0 0.25rem;
+}
+
+.steps {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  counter-increment: step;
+}
+
+.steps li::before {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--uranian-mist);
+  color: var(--twilight-wine);
+  content: counter(step);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.0625rem;
+  grid-row: span 2;
+}
+
+/* Sub-heads inside tab panels: sans, matching the row labels. */
+.steps h3,
+.suits h3 {
+  margin: 0.35rem 0 0.25rem;
+  color: var(--midnight-chamber);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+
+.steps p,
+.suits p {
+  margin: 0;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.suits {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suits li {
+  padding: 1rem;
+  border-left: 3px solid var(--uranian-mist);
+  background: color-mix(in oklab, var(--uranian-mist) 35%, var(--pure-white));
+}
+
+/* ------------------------------------------------------------ at a glance */
+
+.glance {
+  padding: var(--svc-pad-y) var(--pkg-pad-x);
+  background: var(--pure-white);
+  border-top: 1px solid var(--hairline);
+}
+
+.glanceInner {
+  display: grid;
+  max-width: var(--pkg-block);
+  margin: 0 auto;
+  gap: var(--pkg-gap);
+}
+
+/* Overrides the global `main h2` display role. */
+.h2 {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.glanceLead {
+  max-width: 40rem;
+  margin: 1rem 0 0;
+  color: var(--pkg-ink-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.facts {
+  display: grid;
+  margin: 1.75rem 0 0;
+  border-top: 1px solid var(--pkg-rule);
+}
+
+.facts div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--pkg-rule);
+}
+
+.facts dt {
+  color: var(--twilight-wine);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.glanceFigure {
+  display: none;
+}
+
+/* ------------------------------------------------------------ why MyStree */
+
+.why {
+  position: relative;
+  overflow: clip;
+  padding: calc(var(--svc-pad-y) * 1.2) var(--pkg-pad-x);
+  background: var(--surface-soft);
+}
+
+/* The reference's oversized serif word, here the clinic's name. Decorative:
+   aria-hidden in the markup, and pale enough to sit under body text. */
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: color-mix(in oklab, var(--twilight-wine) 6%, var(--surface-soft));
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(8rem, 26vw, 25rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.whyInner {
+  position: relative;
+  max-width: var(--pkg-block);
+  margin: 0 auto;
+}
+
+.stats {
+  display: grid;
+  gap: 2rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 18rem;
+}
+
+.statFigure {
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.75rem, 4.2vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+}
+
+.statLabel {
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------ /packages index */
+
+.indexGrid {
+  display: grid;
+  max-width: var(--pkg-block);
+  margin: 0 auto;
+  gap: 1.25rem;
+  padding: var(--svc-pad-y) var(--pkg-pad-x);
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--pkg-rule);
+  border-top: 3px solid var(--twilight-wine);
+  background: var(--pure-white);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 180ms ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--midnight-chamber) 45%, transparent);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 3px;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--twilight-wine);
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-size: 1.625rem !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+}
+
+.cardText {
+  margin: 0;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.cardMore {
+  color: var(--midnight-chamber);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ------------------------------------------------------------ tablet */
+
+@media (min-width: 640px) {
+  .figure {
+    height: 18rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .facts div {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .indexGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------ desktop */
+
+@media (min-width: 1024px) {
+  .band {
+    padding-top: clamp(2.5rem, 4.2vw, 4rem);
+  }
+
+  .bandInner,
+  .bodyInner {
+    grid-template-columns: minmax(0, 1fr) var(--pkg-side);
+  }
+
+  .intro {
+    padding-bottom: clamp(2.5rem, 4.2vw, 4rem);
+  }
+
+  /* The cut-out sits over the price card's column, feet on the band's
+     foot, so the card below reads as the ground she stands on. */
+  .figure {
+    height: auto;
+    min-height: 100%;
+    align-self: end;
+  }
+
+  .figure img {
+    height: clamp(17rem, 22vw, 21rem);
+  }
+
+  .side {
+    order: 0;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .main {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: var(--pkg-gap);
+  }
+
+  /* Sticky so the price and the booking button stay beside every tab. */
+  .priceCard {
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .tabList {
+    padding: 0 1rem;
+  }
+
+  .glanceInner {
+    grid-template-columns: minmax(0, 1fr) var(--pkg-side);
+    align-items: end;
+  }
+
+  .glanceFigure {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Cut-outs differ in proportion (seated, cross-legged, on a mat), so they
+     are fitted inside the column's width and a capped height. */
+  .glanceFigure img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: clamp(22rem, 28vw, 27rem);
+  }
+
+  .indexGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row summary::after,
+  .call,
+  .card {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------ additions: point lists, terms, notices */
+
+.points {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0 1rem 1rem 2.1rem;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.row p + .points {
+  margin-top: -0.4rem;
+}
+
+.termsPanel {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0 0.25rem;
+}
+
+.termsPanel p {
+  margin: 0;
+  color: var(--pkg-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Legal and safety notices (MTP Act, PCPNDT): set apart, never decorative. */
+.notices {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--twilight-wine);
+  background: color-mix(in oklab, var(--uranian-mist) 55%, var(--pure-white));
+  list-style: none;
+  color: var(--midnight-chamber);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}

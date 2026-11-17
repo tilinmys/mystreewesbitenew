@@ -1,0 +1,210 @@
+/* Section 05 — sticky biography rail beside a scrolling portrait rail. */
+
+.people {
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  background: var(--canvas);
+}
+
+.head {
+  max-width: 78rem;
+  margin: 0 auto 3rem;
+}
+
+.sectionLabel {
+  margin: 0 0 0.9rem;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 20ch;
+  margin: 0;
+}
+
+.rails {
+  display: grid;
+  max-width: 78rem;
+  margin: 0 auto;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  /* Biography leads; the portrait is a companion, not the whole column. The
+     trailing fraction is intentional breathing space, not an empty slot. */
+  grid-template-columns: 48fr 36fr 16fr;
+  align-items: start;
+}
+
+.bioRail {
+  position: sticky;
+  /* Clears the fixed navigation plus a comfortable reading offset. */
+  top: 11rem;
+}
+
+.bioCard {
+  padding-left: 1.5rem;
+  border-left: 1px solid color-mix(in srgb, var(--navy) 55%, transparent);
+}
+
+.category {
+  margin: 0 0 0.55rem;
+  color: var(--navy-slate);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.name {
+  margin: 0 0 0.3rem;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.24;
+}
+
+.title {
+  margin: 0 0 1.1rem;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+}
+
+.bio,
+.background {
+  max-width: 52ch;
+  margin: 0 0 1rem;
+  color: var(--muted-foreground);
+  font-size: var(--type-body);
+  line-height: 1.68;
+}
+
+.background {
+  /* Was lightened 85% toward the canvas, which measured 4.43:1 — under the
+     floor. It now uses the full muted tone. */
+  color: var(--muted-foreground);
+  font-size: var(--type-ui);
+}
+
+.facts {
+  margin: 1.25rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--navy-slate) 28%, transparent);
+}
+
+.facts > div {
+  display: grid;
+  padding: 0.7rem 0;
+  gap: 0.15rem 1rem;
+  grid-template-columns: 8.5rem 1fr;
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-slate) 20%, transparent);
+}
+
+.facts dt {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  color: var(--ink);
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--type-ui);
+  line-height: 1.6;
+}
+
+.portraitRail {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.portraitFrame {
+  position: relative;
+  /* Intrinsic ratio reserves the box before the portrait decodes (CLS), and
+     the width cap stops it dominating the biography. */
+  max-width: 38vw;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  /* Subtle paper frame rather than a large rounded card. */
+  border: 1px solid color-mix(in srgb, var(--navy-slate) 26%, transparent);
+  background: color-mix(in srgb, var(--navy-slate) 12%, var(--canvas));
+}
+
+.portrait {
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.mobileProfile {
+  display: none;
+}
+
+.railFooter {
+  max-width: 78rem;
+  margin: 3rem auto 0;
+}
+
+.railLink {
+  /* Standalone link, not inline in a sentence, so it carries a real touch
+     target rather than relying on the WCAG inline-link exemption. */
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--navy);
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.railLink:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+  /*
+   * Mobile and tablet drop the sticky pairing entirely: linear stacked
+   * profiles, no scroll-position dependency, native momentum preserved.
+   */
+  .rails {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitFrame {
+    max-width: none;
+  }
+
+  .bioRail {
+    display: none;
+  }
+
+  .portraitFrame {
+    aspect-ratio: 3 / 4;
+  }
+
+  .mobileProfile {
+    display: block;
+    padding-top: 1.4rem;
+  }
+
+  .portraitBlock {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .facts > div {
+    grid-template-columns: 1fr;
+  }
+}

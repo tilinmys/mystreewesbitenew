@@ -1,0 +1,90 @@
+/*
+ * ServiceQuestions — LOCKED. Mobile-first.
+ *
+ * Desktop calibrated to a 1536px viewport: a ~1080px block · image 4:5,
+ * ~420px wide, held in view · accordion ~580px · heading ~44px · questions
+ * ~18px · answers ~16px.
+ */
+
+.section {
+  --q-rule: color-mix(in oklab, var(--cadet-slate) 48%, var(--uranian-mist));
+
+  padding: var(--svc-pad-y) var(--svc-pad-x);
+  background: var(--svc-mist);
+}
+
+/* Phone: questions first; the image would only push them down. */
+.inner {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  grid-template-areas: "copy";
+}
+
+.media {
+  display: none;
+  position: relative;
+  grid-area: media;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  background: var(--alabaster-canvas);
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* On mist, the waiting panel warms toward alabaster with a trace of wine. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    200deg,
+    var(--alabaster-canvas) 0%,
+    color-mix(in oklab, color-mix(in oklab, var(--alabaster-canvas) 90.3%, var(--twilight-wine)) 93%, var(--cadet-slate)) 100%
+  );
+}
+
+.copy {
+  grid-area: copy;
+  min-width: 0;
+}
+
+.heading {
+  max-width: 15em;
+  margin: 0;
+  color: var(--midnight-chamber);
+  font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.list {
+  margin-top: var(--svc-gap-content);
+}
+
+/* ------------------------------------------------ desktop  >= 1024px */
+
+@media (min-width: 1024px) {
+  .inner {
+    width: min(70.3vw, 67.5rem);
+    max-width: none;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+    grid-template-areas: "media copy";
+    align-items: start;
+    column-gap: clamp(2.5rem, 6.25vw, 6rem);
+  }
+
+  /* Held in view while the answers scroll past it. */
+  .media {
+    display: block;
+    position: sticky;
+    top: 7rem;
+    max-height: calc(100svh - 9rem);
+  }
+
+}

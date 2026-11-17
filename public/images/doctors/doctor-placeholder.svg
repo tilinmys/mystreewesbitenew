@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">MyStree doctor placeholder</title>
+  <desc id="desc">An abstract doctor silhouette used until the spotlight portrait is available.</desc>
+  <circle cx="360" cy="245" r="130" fill="#d49b7f"/>
+  <path d="M236 244c5-117 74-170 124-170 72 0 123 60 124 170-36-28-61-62-72-104-51 61-99 91-176 104Z" fill="#5f463f"/>
+  <path d="M161 900c12-236 92-334 199-334s187 98 199 334H161Z" fill="#f4f1ea"/>
+  <path d="M258 591h204l-46 309H304l-46-309Z" fill="#f7d5c1"/>
+  <path d="m246 584 114 104 114-104 42 316H204l42-316Z" fill="#fff" opacity=".72"/>
+  <path d="M272 250h34M414 250h34" stroke="#1c1917" stroke-linecap="round" stroke-width="12"/>
+  <path d="M319 330c26 15 56 15 82 0" fill="none" stroke="#1c1917" stroke-linecap="round" stroke-width="10"/>
+</svg>

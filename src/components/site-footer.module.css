@@ -1,0 +1,245 @@
+/*
+ * Site footer.
+ *
+ * A full-bleed saturated band in --navy-deep. The saturation is the point: a
+ * footer that fades into the page ground reads as the place a layout ran out,
+ * whereas a committed block of colour reads as a destination. Navy is the
+ * site's authority colour and keeps the no-orange-background rule intact,
+ * while leaving Flame free to mean "action" everywhere else on the page.
+ *
+ * Layout model, desktop:
+ *   [ brand zone 46% ][ utility zone 54% ]
+ * The utility zone is 3 columns x 2 rows, not 6 across. Six adjacent columns
+ * of links read as a wall; two rows of three give each group a horizon and a
+ * scannable start.
+ */
+
+.footer {
+  background: var(--footer-surface);
+  color: var(--footer-ink);
+}
+
+.inner {
+  display: grid;
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(2.5rem, 5vw, 4rem);
+  gap: clamp(3rem, 6vw, 5rem);
+  grid-template-columns: 46fr 54fr;
+}
+
+/* ------------------------------------------------------------- brand zone */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  /* Statement at the top, wordmark pinned to the bottom, with the gap between
+     them doing the work — the brand zone should feel inhabited, not stacked. */
+  justify-content: space-between;
+  gap: clamp(3rem, 7vw, 6rem);
+  min-width: 0;
+}
+
+.statement {
+  max-width: 16ch;
+  /* Optical top-alignment with the first column heading opposite: the serif
+     at 3.25rem/1.08 carries more leading above its cap than the 14px sans
+     heading does, so matching the box tops would leave it sitting low. */
+  margin: -0.35rem 0 0;
+  color: var(--footer-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  /* Light weight at display size: the serif carries the emphasis. */
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+
+.wordmark {
+  margin: 0;
+  /* Optically flush with the column edge: large lowercase serif carries left
+     side-bearing that makes it look indented against the text above. */
+  margin-left: -0.04em;
+  color: var(--footer-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(3.75rem, 11vw, 8.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.82;
+  font-optical-sizing: auto;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ----------------------------------------------------------- utility zone */
+
+.groups {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 8.25rem) clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+}
+
+.group {
+  min-width: 0;
+}
+
+.groupHeading {
+  /* Same size as the links it heads, separated by weight and a deliberate gap
+     rather than by scale — a heading that is also bigger shouts twice. */
+  margin: 0 0 3.1rem;
+  color: var(--footer-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+.groupLinks {
+  display: flex;
+  flex-direction: column;
+  /* Generous rhythm. Footer link lists are scanned, not read, and air between
+     rows is what makes a column scannable at a glance. Sized so the pitch
+     lands at ~42px: the link box is 20.3px, so the gap carries the rest. */
+  gap: 1.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.groupLinks a {
+  display: inline-block;
+  color: var(--footer-ink-soft);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 400;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.groupLinks a:hover {
+  color: var(--footer-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+}
+
+.groupLinks a:focus-visible {
+  outline: 2px solid var(--brand-flame);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The phone number is the single bolded item in the footer. */
+.strongLink {
+  color: var(--footer-ink) !important;
+  font-weight: 600 !important;
+}
+
+/* ------------------------------------------------------------- legal bar */
+
+.legal {
+  display: flex;
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* Hairline, not a block edge: it separates without adding a second surface. */
+  border-top: 1px solid var(--footer-rule);
+}
+
+.legalLinks {
+  display: flex;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+}
+
+.legalLinks a {
+  color: var(--footer-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  /* Bold at small size so the bar reads as deliberate rather than leftover. */
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+
+.legalLinks a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.legalLinks a:focus-visible {
+  outline: 2px solid var(--brand-flame);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.copyright {
+  margin: 0;
+  color: var(--footer-ink-soft);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 1100px) {
+  /* The side-by-side split stops working once the brand zone is narrower than
+     its own wordmark. Stack, and let the wordmark run full width. */
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .brand {
+    gap: 2.5rem;
+  }
+
+  .wordmark {
+    font-size: clamp(4.5rem, 16vw, 9rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+
+  .statement {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+}
+
+@media (max-width: 460px) {
+  .groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .legal {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .legalLinks {
+    gap: 1rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .groupLinks a,
+  .legalLinks a {
+    transition: none;
+  }
+}

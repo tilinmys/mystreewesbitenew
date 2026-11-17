@@ -1,0 +1,266 @@
+/*
+ * Team 2 Section 3: Clinical Comparison Ledger
+ *
+ * "Typical Doctor's Office vs MyStree"
+ * Pure White and Uranian Blue clinical palette with high-contrast typography,
+ * subtle rounded card boundary, and mobile-friendly responsive architecture.
+ */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: clamp(1rem, 3vw, 2.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 7vw, 6rem);
+  /* Crisp White canvas continuing seamlessly from Section 2 Care Model */
+  background: var(--pure-white);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* ---------------- Header ---------------- */
+
+.header {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto clamp(2rem, 4vw, 3.25rem);
+}
+
+.eyebrow {
+  margin: 0 0 clamp(0.65rem, 1.2vw, 0.9rem);
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin: 0 0 clamp(0.85rem, 1.8vw, 1.25rem);
+  color: var(--text-dark);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 44ch;
+}
+
+/* ---------------- Desktop Table Card (Reference Layout) ---------------- */
+
+.tableCard {
+  background: var(--pure-white);
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--botanical-midnight);
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1.5px solid var(--botanical-midnight);
+}
+
+.headerColLeft {
+  padding: 1.35rem 2.25rem;
+  background: var(--pure-white);
+  border-right: 1.5px solid var(--botanical-midnight);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.headerColRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.35rem 2.25rem;
+  background: var(--pure-white);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-reading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--uranian-mist);
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--btn-primary);
+}
+
+/* Table Rows */
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--botanical-midnight);
+  transition: background-color 160ms ease;
+}
+
+.tableRow:last-child {
+  border-bottom: 0;
+}
+
+.tableRow:hover {
+  background-color: var(--alabaster-canvas);
+}
+
+.colLeft {
+  padding: 1.35rem 2.25rem;
+  border-right: 1.5px solid var(--botanical-midnight);
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body-lg);
+  line-height: 1.6;
+}
+
+.colRight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.35rem 2.25rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body-lg);
+  font-weight: 450;
+  line-height: 1.6;
+}
+
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--uranian-mist);
+  color: var(--btn-primary);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* ---------------- Mobile Stacked View ---------------- */
+
+.mobileView {
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobileCard {
+  background: var(--pure-white);
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--botanical-midnight);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.mobileCardTypical {
+  padding: 1.15rem 1.25rem;
+  background: var(--alabaster-canvas);
+  border-bottom: 1px solid var(--botanical-midnight);
+}
+
+.mobileLabelTypical {
+  /* All-caps at this size needs real tracking; capitals have no descenders or x-height variety to separate them, so tight caps read as a block. */
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--cadet-slate);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mobileTextTypical {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.55;
+}
+
+.mobileCardMyStree {
+  padding: 1.25rem;
+  background: var(--pure-white);
+}
+
+.mobileLabelMyStree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-label);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mobileContentMyStree {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.mobileTextMyStree {
+  margin: 0;
+  color: var(--botanical-midnight);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* ---------------- Responsive Breakpoint ---------------- */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .tableCard {
+    display: none;
+  }
+
+  .mobileView {
+    display: flex;
+  }
+
+  .heading {
+    font-size: clamp(2rem, 7.5vw, 2.5rem);
+  }
+}

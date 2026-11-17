@@ -1,0 +1,320 @@
+/*
+ * CareChat (16 Nov 2026; color.md "Care chat launcher"). Sanctuary Burgundy
+ * #641E2B launcher with the mark in ivory and the flower in rose; white
+ * pills and card with burgundy type. Root fonts only.
+ */
+.root {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.root > * {
+  pointer-events: auto;
+}
+
+/* Hidden launcher: not clickable while it is faded out. */
+.root:not(.rootVisible) .launcher {
+  pointer-events: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ------------------------------------------------------------ launcher */
+.launcher {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #641e2b;
+  color: #fff8f4;
+  box-shadow:
+    0 10px 28px -8px rgb(75 23 34 / 0.55),
+    0 2px 6px rgb(75 23 34 / 0.18);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.launcher:hover {
+  background: #4b1722;
+}
+
+.launcher:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+}
+
+.launcherIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+}
+
+.mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.markFlower {
+  fill: #e9a9b2;
+}
+
+/* ------------------------------------------------------------ greeting */
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform-origin: right center;
+}
+
+.dismiss,
+.bubble {
+  border: 0;
+  background: #ffffff;
+  color: #2a1a1e;
+  box-shadow:
+    0 8px 24px -10px rgb(42 26 30 / 0.28),
+    0 1px 3px rgb(42 26 30 / 0.08);
+  cursor: pointer;
+}
+
+.dismiss {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
+  color: #4a2a31;
+  transition: background-color 200ms ease;
+}
+
+.dismiss:hover {
+  background: #f8eef0;
+}
+
+.bubble {
+  max-width: min(260px, calc(100vw - 150px));
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 200ms ease;
+}
+
+.bubble:hover {
+  background: #fdf7f8;
+}
+
+.dismiss:focus-visible,
+.bubble:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- card */
+.card {
+  width: min(340px, calc(100vw - 32px));
+  padding: 18px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #2a1a1e;
+  box-shadow:
+    0 24px 60px -18px rgb(42 26 30 / 0.35),
+    0 2px 8px rgb(42 26 30 / 0.08);
+  transform-origin: bottom right;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardMark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 50%;
+  background: #641e2b;
+  color: #fff8f4;
+}
+
+.cardTitles {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-serif), serif;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #641e2b;
+}
+
+.cardMeta {
+  margin: 2px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  color: #6e4650;
+}
+
+.cardClose {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4a2a31;
+  cursor: pointer;
+}
+
+.cardClose:hover {
+  background: #f8eef0;
+}
+
+.cardLead {
+  margin: 16px 0 10px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2a1a1e;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid #f0e2e5;
+  border-radius: 12px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b1722;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.option svg:first-child {
+  flex: none;
+  color: #8a4b52;
+}
+
+.option span {
+  flex: 1;
+}
+
+.option:hover {
+  background: #fbf3f4;
+  border-color: #e6cdd2;
+}
+
+.optionArrow {
+  flex: none;
+  color: #a96f73;
+}
+
+.cardClose:focus-visible,
+.option:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 2px;
+}
+
+.emergency {
+  margin: 14px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #6e4650;
+}
+
+/* --------------------------------------------------------------- phones */
+@media (max-width: 767px) {
+  .root {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+
+  .launcher {
+    width: 52px;
+    height: 52px;
+  }
+
+  .launcherIcon {
+    width: 31px;
+    height: 31px;
+  }
+
+  .dismiss {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bubble {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+
+/* Very small phones: the greeting drops its close button; the bubble itself still opens help. */
+@media (max-width: 340px) {
+  .dismiss {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launcher,
+  .dismiss,
+  .bubble,
+  .option {
+    transition: none;
+  }
+}

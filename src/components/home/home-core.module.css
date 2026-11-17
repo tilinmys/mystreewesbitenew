@@ -1,0 +1,144 @@
+/*
+ * Home Section 04 (14 Nov 2026). A blush wash that starts and ends in white
+ * so it joins its neighbours; stems #E3BFC5, flowers #E8C6CB; heading
+ * #641E2B with an italic #8A4B52 second line.
+ */
+.section {
+  position: relative;
+  /* One screen tall and never pinned, so scrolling is never held up. */
+  height: 100svh;
+  min-height: 620px;
+  background: linear-gradient(180deg, #ffffff 0%, #fcf3f4 22%, #faeef0 70%, #ffffff 100%);
+}
+
+.section.section {
+  border-top: 0;
+}
+
+.stage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.tree {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stems {
+  color: #e3bfc5;
+}
+
+.blooms {
+  color: #e8c6cb;
+}
+
+/* A slow breeze through the flowers (transform only). */
+.sway {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: sway 7s ease-in-out infinite alternate;
+}
+
+.blooms > g:nth-child(2n) .sway {
+  animation-duration: 9s;
+  animation-delay: -3s;
+}
+
+.blooms > g:nth-child(3n) .sway {
+  animation-duration: 8s;
+  animation-delay: -5s;
+}
+
+@keyframes sway {
+  from {
+    transform: rotate(-2.5deg);
+  }
+  to {
+    transform: rotate(2.5deg);
+  }
+}
+
+.copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* Section exception: overrides the global `main h2` scale. */
+.section .heading {
+  margin: 0;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(2.75rem, 5.2vw, 4.75rem) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  line-height: 1.04 !important;
+  letter-spacing: -0.025em !important;
+  color: #641e2b;
+}
+
+.line {
+  display: block;
+}
+
+.wordMask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0 0.06em 0.1em;
+  margin: 0 0.06em -0.1em;
+  vertical-align: top;
+}
+
+.word,
+.wordItalic {
+  display: inline-block;
+}
+
+.wordItalic {
+  font-style: italic;
+  color: #8a4b52;
+}
+
+.lead {
+  max-width: 34ch;
+  margin: 28px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #4a2a31;
+  text-wrap: balance;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .section {
+    height: 88svh;
+    min-height: 560px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sway {
+    animation: none;
+  }
+}
