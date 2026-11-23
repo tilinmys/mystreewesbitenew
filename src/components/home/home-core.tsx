@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 import { MARK_FLOWER_PATH } from "./woman-mark-paths";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-core.module.css";
 
 /*
@@ -108,7 +109,7 @@ function Word({ progress, index, text, italic, still }: { progress: MotionValue<
 
 export function HomeCore() {
   const section = useRef<HTMLElement>(null);
-  const still = useReducedMotion() ?? false;
+  const still = useStillAfterMount();
   // No pinning: the page always scrolls freely. The tree grows while the
   // section rises into view, from its top entering (90% down the screen) to
   // its centre reaching the middle of the screen, so it is fully grown and

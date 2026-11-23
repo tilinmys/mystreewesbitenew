@@ -2787,3 +2787,30 @@ User request: phones felt stuck while scrolling, everything felt too big, the do
   - Teen health: the high-risk obstetrician was replaced by the dermatologist (teen skin and hair).
   - Gynaecology, pregnancy, menopause, fertility, PCOS and psychology were already correct.
 - **Hydration:** `useStillAfterMount()` reports reduced motion only after mount. This fixes a hydration failure for reduced-motion visitors in the welcome statement, team rows, and services and packages rows.
+
+### 23 Nov 2026: fixes from the website review
+
+Source: the review in `docs/MyStree-Website-Review-2026-11-23.pdf` (kept local, not committed).
+
+- **Legal pages:**
+  - `/privacy-policy` and `/terms-and-conditions` are now full pages, replacing the "We are preparing…" placeholders.
+  - New shared layout: `components/legal/legal-page.tsx`, a 44rem white reading column with an "On this page" list, numbered Fraunces headings, and wine links.
+  - The pages moved into the `(marketing)` route group, so they have the site navbar. URLs are unchanged.
+  - The privacy policy is written for the DPDP Act 2023. The clinic still needs to have both pages legally reviewed and to name a Grievance Officer.
+- **`/contact`:**
+  - The appointment form used to fake a "Request Received" message. It is now "Request an Appointment": it opens WhatsApp with the request written out, and the success state says the appointment is confirmed only when the care team replies.
+  - Fields: name, mobile, care needed, preferred day and time. Email and the hard-coded doctor list and slots were removed.
+  - The address card now shows No. 3366, 13th Main Road, HAL 2nd Stage, 560008 (it said "2nd Floor … 560 061").
+  - The unverified second phone number (+91 99028 78279) was removed.
+- **Copy accuracy:**
+  - "Unhurried" was removed from site copy. Dr. Smitha's personal statement is kept as written.
+  - Generic "15-minute consultations" now says doctor consultations are 15 minutes, and nutrition, physiotherapy, yoga therapy and psychology are 30 minutes (psychiatry 60, in `llms.txt`), matching the booking system. Booking cards already show each clinician's live visit length.
+  - The FAQ claim "dedicated women clinicians" was removed.
+- **Redirects:**
+  - `/showcase/*`, `/events/*` and `/mystree-soul` redirect to `/about` (temporary).
+  - `/blog/egg-freezing-india-guide` redirects to `/services/fertility-clinic` (permanent).
+- **Google tag:**
+  - Pages under `/services`, `/clinics`, `/packages`, `/blog`, `/faq(s)` and `/doctors/<slug>` send `allow_ad_personalization_signals: false`, so they cannot feed remarketing audiences.
+  - Analytics and conversion measurement are unchanged.
+- **Speed:** the `/doctors` H1 is no longer faded in after hydration. Mobile LCP dropped from 3.6 s to 1.2 s (4× CPU slowdown, slow 4G).
+- **Reduced motion:** all home sections use `useStillAfterMount()`, which removes the remaining hydration style warnings.

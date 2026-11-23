@@ -81,7 +81,7 @@ export function AboutHero() {
 
         <motion.p variants={textVariants} className={styles.lead}>
           MyStree was built around a simple belief: women deserve care where
-          concerns are investigated properly, conversations are unhurried, and
+          concerns are investigated properly, questions are answered plainly, and
           the reasoning behind every clinical decision is explained in plain
           language.
         </motion.p>

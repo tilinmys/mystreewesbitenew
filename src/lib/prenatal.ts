@@ -53,7 +53,7 @@ export const quickAnswers: readonly QAItem[] = [
   {
     question: "What happens during a first pregnancy consultation?",
     answer:
-      "The first consultation is an unhurried conversation. A clinician will ask about your cycle, dates, previous medical history, nutrition, and current symptoms. From there, you agree on a tailored roadmap, including early viability and dating scans.",
+      "The first consultation is a private conversation. A clinician will ask about your cycle, dates, previous medical history, nutrition, and current symptoms. From there, you agree on a tailored roadmap, including early viability and dating scans.",
   },
   {
     question: "When is a pregnancy considered high risk?",

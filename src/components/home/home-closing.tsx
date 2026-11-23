@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
-import { isLiteMotion } from "@/lib/use-lite-motion";
+import { isLiteMotion, useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-closing.module.css";
 
 /*
@@ -51,7 +51,7 @@ const READY = true;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HomeClosing() {
-  const still = useReducedMotion();
+  const still = useStillAfterMount();
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
   const drift = useTransform(scrollYProgress, (v) => (isLiteMotion() ? "0%" : `${(v - 0.5) * -12}%`));

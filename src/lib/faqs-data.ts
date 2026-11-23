@@ -26,7 +26,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "g-1",
         question: "What type of women’s healthcare does My Stree provide in Indiranagar?",
-        answer: "My Stree provides comprehensive, integrated outpatient women’s healthcare in Indiranagar, Bengaluru. Our care spans general gynaecology, PCOS and menstrual disorders, prenatal and pregnancy care, fertility and preconception planning, perimenopause and menopause support, pelvic floor physiotherapy, clinical nutrition, adolescent health, dermatology, and mental wellness. Consultations are 15 minutes and are delivered in a safe, judgement-free clinical sanctuary.",
+        answer: "My Stree provides comprehensive, integrated outpatient women’s healthcare in Indiranagar, Bengaluru. Our care spans general gynaecology, PCOS and menstrual disorders, prenatal and pregnancy care, fertility and preconception planning, perimenopause and menopause support, pelvic floor physiotherapy, clinical nutrition, adolescent health, dermatology, and mental wellness. Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes, delivered in a safe, judgement-free clinical sanctuary.",
         internalLink: { label: "Explore clinical services", href: "/#services" },
       },
       {
@@ -44,7 +44,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "g-4",
         question: "Can I visit My Stree for a general gynaecology consultation?",
-        answer: "Yes, you can schedule an unhurried general gynaecology consultation at My Stree. Our senior gynaecologists evaluate routine preventive health, menstrual cycle changes, pelvic discomfort, vaginal discharge, contraceptive counselling, Pap smears, and breast wellness in an empathetic, private setting.",
+        answer: "Yes, you can schedule a general gynaecology consultation at My Stree. Our senior gynaecologists evaluate routine preventive health, menstrual cycle changes, pelvic discomfort, vaginal discharge, contraceptive counselling, Pap smears, and breast wellness in an empathetic, private setting.",
         internalLink: { label: "Book a gynaecology consultation", href: "/book" },
       },
       {
@@ -80,7 +80,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "g-10",
         question: "Why choose a specialised women’s health clinic instead of a general clinic?",
-        answer: "Specialized women’s clinics like My Stree are designed specifically around the privacy, psychological safety, and physiological nuances of women. My Stree provides 15-minute appointments, dedicated women clinicians, integrated nutrition and physio under one roof, and an empathetic, judgement-free environment.",
+        answer: "Specialized women’s clinics like My Stree are designed specifically around the privacy, psychological safety, and physiological nuances of women. My Stree provides women's health clinicians, integrated nutrition and physio under one roof, and an empathetic, judgement-free environment.",
         internalLink: { label: "See how MyStree is different", href: "/team#care-model" },
       },
     ],
@@ -106,7 +106,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "loc-3",
         question: "What are My Stree’s clinic timings?",
-        answer: "My Stree is open Monday through Saturday from 9:00 AM to 8:00 PM for in-person consultations, diagnostic pelvic ultrasound scans, and therapy sessions. Appointments are recommended to ensure dedicated, unhurried time with your chosen specialist.",
+        answer: "My Stree is open Monday through Saturday from 9:00 AM to 8:00 PM for in-person consultations, diagnostic pelvic ultrasound scans, and therapy sessions. Appointments are recommended to ensure dedicated time with your chosen specialist.",
         internalLink: { label: "Check clinician appointment slots", href: "/book" },
       },
       {
@@ -130,7 +130,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "loc-7",
         question: "Do I need an appointment before visiting My Stree?",
-        answer: "Yes, booking in advance is recommended. Consultations are 15 minutes, and booking ahead reserves that time with your clinician and keeps waiting to a minimum.",
+        answer: "Yes, booking in advance is recommended. Doctor consultations are 15 minutes (30 minutes for nutrition, physiotherapy and psychology), and booking ahead reserves that time with your clinician and keeps waiting to a minimum.",
         internalLink: { label: "Book your appointment online", href: "/book" },
       },
       {
@@ -317,7 +317,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
     id: "pregnancy",
     title: "Pregnancy, Prenatal and High-Risk Pregnancy Care",
     shortTitle: "Pregnancy & Prenatal",
-    description: "Unhurried prenatal visits, trimester fetal growth monitoring, prenatal nutrition, and high-risk obstetrics.",
+    description: "Prenatal visits, trimester fetal growth monitoring, prenatal nutrition, and high-risk obstetrics.",
     faqs: [
       {
         id: "pr-1",
@@ -900,7 +900,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "bk-10",
         question: "How long does a consultation usually take?",
-        answer: "Consultations at My Stree are 15 minutes. Bring your reports and a list of your questions so your clinician can go through what matters most to you.",
+        answer: "Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes. Bring your reports and a list of your questions so your clinician can go through what matters most to you.",
         internalLink: { label: "Learn about our care model", href: "/team#care-model" },
       },
       {

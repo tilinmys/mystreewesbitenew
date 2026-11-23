@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MotionConfig, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { MotionConfig, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, CalendarDays } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
-import { isLiteMotion } from "@/lib/use-lite-motion";
+import { isLiteMotion, useStillAfterMount } from "@/lib/use-lite-motion";
 import { HOME_IMAGES } from "./home-images";
 import { HOURS_DISPLAY, TEL_HREF } from "./home-nav-data";
 import styles from "./home-hero.module.css";
@@ -101,7 +101,7 @@ function HeroCard({ card, index, still }: { card: Card; index: number; still: bo
 
 export function HomeHero() {
   const section = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion() ?? false;
+  const reducedMotion = useStillAfterMount();
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end start"] });
   // Phones: photo and heading stay put while scrolling (no per-frame work
   // under the cards); the entrance animations remain.

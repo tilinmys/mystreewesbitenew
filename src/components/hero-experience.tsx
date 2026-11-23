@@ -73,7 +73,7 @@ export function HeroExperience() {
           <em>judgement.</em>
         </h1>
         <p className="hero-lede">
-          15-minute consultations with gynaecologists, obstetricians and a nutritionist. In-clinic on 13th Main Road, Indiranagar, or by secure video consultation.
+          Consultations with gynaecologists, obstetricians and a nutritionist. In-clinic on 13th Main Road, Indiranagar, or by secure video consultation.
         </p>
         <div className="hero-actions">
           <a className="hero-action-secondary" href="#services">

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About MyStree: Women's Health Clinic in Indiranagar, Bengaluru",
     description:
-      "Unhurried women's healthcare on 13th Main Road, Indiranagar, from first periods and pregnancy to fertility and menopause.",
+      "Women's healthcare on 13th Main Road, Indiranagar, from first periods and pregnancy to fertility and menopause.",
     url: `${SITE_URL}${PAGE_PATH}`,
     type: "website",
     siteName: "MyStree Women's Health Clinic",

@@ -239,7 +239,7 @@ export default async function ObgynConsultsPage() {
         <ServiceHero
           image={{ src: "/images/services/pages/gynaecologist-consultation-indiranagar-bengaluru.webp", alt: "A gynaecologist takes notes while a patient describes her symptoms" }}
           headingId="obgyn-hero-heading"
-          title="Unhurried gynaecology and pregnancy care"
+          title="Gynaecology and pregnancy care in Indiranagar"
           lead="15-minute consultations and in-clinic scans for irregular cycles, PCOS and pregnancy, on 13th Main Road, Indiranagar."
           primaryCta={{ label: "Book a consultation", href: "/book" }}
           secondaryCta={{
@@ -323,7 +323,7 @@ export default async function ObgynConsultsPage() {
           },
           {
             title: "Meet your gynaecologist",
-            text: "Talk it through in an unhurried consultation at our Indiranagar clinic, with a pelvic ultrasound in the same visit if it is needed.",
+            text: "Talk it through in a private consultation at our Indiranagar clinic, with a pelvic ultrasound in the same visit if it is needed.",
           },
           {
             title: "Leave with a plan",
@@ -434,7 +434,7 @@ export default async function ObgynConsultsPage() {
 
       <ServiceClosing
         headingId="obgyn-closing-heading"
-        heading="Unhurried gynaecology care in Indiranagar starts with one visit."
+        heading="Gynaecology care in Indiranagar starts with one visit."
         primary={{ label: "Book a consultation", href: "/book" }}
         secondary={{ label: "Meet our doctors", href: "/doctors" }}
       />

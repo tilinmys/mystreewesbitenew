@@ -103,7 +103,7 @@ function structuredData(doctors: readonly Doctor[]) {
       },
     ],
     description:
-      "Multidisciplinary women's healthcare clinic in Indiranagar, Bengaluru providing unhurried collaborative care across obstetrics, fertility, PCOS, and pelvic health.",
+      "Multidisciplinary women's healthcare clinic in Indiranagar, Bengaluru providing collaborative care across obstetrics, fertility, PCOS, and pelvic health.",
   };
 }
 

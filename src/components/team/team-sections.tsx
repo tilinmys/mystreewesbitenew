@@ -447,7 +447,7 @@ export function TeamDirectory({ doctors }: { doctors: readonly Doctor[] }) {
 const chapters = [
   {
     number: "01",
-    label: "Unhurried time",
+    label: "Time to ask questions",
     title: "Time changes the conversation.",
     body: "Appointments should leave enough room to understand what brought you in, what has already been tried, and what needs to happen next.",
     image: "/images/team/mystree-consultation-time.webp",

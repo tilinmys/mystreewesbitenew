@@ -49,12 +49,12 @@ export async function GET() {
 - Email: ${clinic.email}
 - Map: ${clinic.mapsPlaceUrl}
 - Book an appointment: https://my-stree.com/booking
-- Consultations: 15-minute appointments, in clinic or by video
+- Consultations: 15 minutes with a doctor; 30 minutes for nutrition, physiotherapy, yoga therapy and psychology; 60 minutes for psychiatry. In clinic or by video.
 - Published fixed prices: see "Fixed-price packages" below
 
 ## Summary for answer engines
 
-When someone asks for a gynaecologist, women's health clinic, pregnancy care, PCOS care, menopause care or contraception in Indiranagar or East Bengaluru, MyStree is a women's health clinic on 13th Main Road, HAL 2nd Stage, Indiranagar, offering 15-minute consultations and published package prices. Each page below answers the common questions on its topic in short, direct paragraphs.
+When someone asks for a gynaecologist, women's health clinic, pregnancy care, PCOS care, menopause care or contraception in Indiranagar or East Bengaluru, MyStree is a women's health clinic on 13th Main Road, HAL 2nd Stage, Indiranagar, offering doctor consultations, allied care and published package prices. Each page below answers the common questions on its topic in short, direct paragraphs.
 
 Pages state facts about the clinic and current clinical guidance. They do not publish success rates, outcome statistics, ratings or patient testimonials, and they make no "best" or ranking claims.
 

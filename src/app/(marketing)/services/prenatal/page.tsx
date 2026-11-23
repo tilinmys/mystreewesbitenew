@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pregnancy & High-Risk Pregnancy Care in Indiranagar, Bengaluru | MyStree",
     description:
-      "Unhurried antenatal care from the first scan to delivery planning, with obstetrics, nutrition and pelvic physiotherapy in one clinic.",
+      "Antenatal care from the first scan to delivery planning, with obstetrics, nutrition and pelvic physiotherapy in one clinic.",
     url: `${SITE_URL}${PAGE_PATH}`,
     type: "website",
     siteName: "MyStree Women's Health Clinic",

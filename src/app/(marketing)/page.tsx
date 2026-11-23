@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MyStree: Women's Health Clinic in Indiranagar, Bengaluru",
     description:
-      "15-minute consultations with gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist on 13th Main Road, Indiranagar. In clinic or by video.",
+      "Gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist on 13th Main Road, Indiranagar. 15-minute doctor consultations, in clinic or by video.",
     url: SITE_URL,
     images: [{ url: "/images/hero/mystree-hero-care-desktop.webp", width: 2560, height: 1440, alt: "A gynaecologist talking with a patient at MyStree, Indiranagar" }],
   },

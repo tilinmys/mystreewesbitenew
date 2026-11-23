@@ -2,11 +2,12 @@
 
 import { useId, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 
 import { HOME_IMAGES } from "./home-images";
 import { ImageSlot } from "./image-slot";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-journey.module.css";
 
 /*
@@ -50,7 +51,7 @@ const STEPS = [
 ] as const;
 
 export function HomeJourney() {
-  const still = useReducedMotion();
+  const still = useStillAfterMount();
   const id = useId();
   const [open, setOpen] = useState<number | null>(null);
 

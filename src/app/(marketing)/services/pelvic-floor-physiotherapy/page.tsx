@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pelvic Floor Physiotherapy for Women in Indiranagar, Bengaluru | MyStree",
     description:
-      "Private, unhurried physiotherapy for leaks, pelvic pain, vaginismus and recovery after birth, alongside our gynaecologists.",
+      "Private physiotherapy for leaks, pelvic pain, vaginismus and recovery after birth, alongside our gynaecologists.",
     url: `${SITE_URL}${PAGE_PATH}`,
     type: "website",
     siteName: "MyStree Women's Health Clinic",
@@ -221,7 +221,7 @@ export default function PelvicFloorPhysiotherapyPage() {
           image={{ src: "/images/services/pages/pelvic-floor-physiotherapy-indiranagar-bengaluru.webp", alt: "A physiotherapist guides a patient through a breathing exercise on a treatment table" }}
           headingId="physio-hero-heading"
           title="Pelvic floor physiotherapy for women in Indiranagar"
-          lead="Private, unhurried physiotherapy for bladder leaks, pelvic pain, vaginismus, diastasis recti and recovery after birth, working alongside our gynaecologists on 13th Main Road, Indiranagar."
+          lead="Private physiotherapy for bladder leaks, pelvic pain, vaginismus, diastasis recti and recovery after birth, working alongside our gynaecologists on 13th Main Road, Indiranagar."
           primaryCta={{ label: "Book a pelvic health assessment", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: "tel:+916366573772" }}
         />

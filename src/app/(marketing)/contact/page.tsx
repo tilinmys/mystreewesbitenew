@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE_URL}/contact` },
   title: "Contact MyStree: 13th Main Road, Indiranagar, Bengaluru",
   description:
-    "Address, phone and directions for MyStree women's health clinic: No. 3366, 13th Main Road, HAL 2nd Stage, Indiranagar, Bengaluru 560008. Call or WhatsApp +91 63665 73772, or book a 15-minute consultation online.",
+    "Address, phone and directions for MyStree women's health clinic: No. 3366, 13th Main Road, HAL 2nd Stage, Indiranagar, Bengaluru 560008. Call or WhatsApp +91 63665 73772, or book a consultation online.",
 };
 
 /*

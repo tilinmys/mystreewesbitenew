@@ -30,13 +30,12 @@ export function Team2Hero() {
             13th Main Road, Indiranagar · Bengaluru
           </motion.span>
 
-          <motion.h1
-            id="team-2-hero-heading"
-            className={styles.heading}
-            {...rise(0.06)}
-          >
+          {/* Visible in the server HTML (no fade-in): it is the page's largest
+              element, and hiding it until scripts load pushed LCP to ~3.6 s
+              on phones (website review, 23 Nov 2026). */}
+          <h1 id="team-2-hero-heading" className={styles.heading}>
             Doctors, Nutritionists and Specialists at MyStree
-          </motion.h1>
+          </h1>
 
           <motion.p className={styles.lead} {...rise(0.12)}>
             At MyStree on 13th Main Road, Indiranagar, gynaecologists, obstetricians,

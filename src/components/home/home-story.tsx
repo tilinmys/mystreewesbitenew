@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { ThreeBackdrop } from "./three/three-backdrop";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-story.module.css";
 
 /*
@@ -22,7 +23,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const loadLines = () => import("./three/hair-scene");
 
 export function HomeStory() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useStillAfterMount();
 
   const rise = (delay: number) =>
     reducedMotion

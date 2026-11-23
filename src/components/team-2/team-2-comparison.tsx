@@ -27,7 +27,7 @@ const COMPARISONS: readonly ComparisonPoint[] = [
   },
   {
     typical: "Rushed 5-minute consultations after hours in a crowded hospital waiting room",
-    mystree: "15-minute appointments where your story and questions are heard",
+    mystree: "Appointments where your story and questions are heard",
   },
   {
     typical: "Symptom-masking prescriptions, weight stigma, or dismissive advice",

@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Clock,
+  MessageCircle,
   ExternalLink,
   Mail,
   MapPin,
@@ -16,18 +17,47 @@ import {
   Phone,
   Share2,
 } from "lucide-react";
-import { seedDoctors } from "@/lib/doctors";
+import { clinic } from "@/lib/clinic";
 import styles from "./contact.module.css";
 
-const TIME_SLOTS = [
-  "09:30 AM – 10:00 AM",
-  "10:30 AM – 11:00 AM",
-  "11:30 AM – 12:00 PM",
-  "02:00 PM – 02:30 PM",
-  "03:30 PM – 04:00 PM",
-  "05:00 PM – 05:30 PM",
-  "06:30 PM – 07:00 PM",
+/*
+ * Appointment request (23 Nov 2026). The form used to show "Appointment
+ * Request Received" without sending anything. It now opens WhatsApp with the
+ * request written out, so it reaches the care team, and says exactly that.
+ * Instant booking with live slots stays on /book. Only what the care team
+ * needs to call back is asked for; no medical details.
+ */
+const CARE_AREAS = [
+  "Gynaecology",
+  "Pregnancy care",
+  "PCOS",
+  "Fertility",
+  "Menopause",
+  "Pelvic floor physiotherapy",
+  "Nutrition",
+  "Skin and hair (dermatology)",
+  "Mental health",
+  "Teen health",
+  "Not sure, please advise",
 ];
+
+const TIMES_OF_DAY = ["Morning (9 am to 12 pm)", "Afternoon (12 pm to 4 pm)", "Evening (4 pm to 8 pm)"];
+
+const WHATSAPP_NUMBER = clinic.telephone.replace("+", "");
+
+function requestMessage(data: { name: string; phone: string; area: string; date: string; time: string }) {
+  const day = data.date
+    ? new Date(`${data.date}T00:00:00`).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })
+    : "";
+  return [
+    "Hello MyStree, I would like to book an appointment.",
+    `Name: ${data.name}`,
+    `Phone: ${data.phone}`,
+    `Care needed: ${data.area}`,
+    `Preferred day: ${day}`,
+    `Preferred time: ${data.time}`,
+  ].join("\n");
+}
 
 function MapFoldPinIcon() {
   return (
@@ -91,44 +121,29 @@ function MailEnvelopeIcon() {
 export function ContactHubClient() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    specialtyOrDoctor: "",
-    appointmentDate: "",
-    appointmentTime: "",
+    area: "",
+    date: "",
+    time: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(requestMessage(formData))}`;
   // The map stays inert while the page scrolls past it, so the iframe never
   // swallows wheel or touch events from the smooth scroller (Lenis). A click
   // or tap switches it on; leaving the map switches it off again.
   const [mapActive, setMapActive] = useState(false);
 
-  // Find currently selected doctor if matched
-  const selectedDoctor = seedDoctors.find(
-    (doc) => doc.slug === formData.specialtyOrDoctor
-  );
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate booking confirmation
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 800);
+    window.open(whatsappHref, "_blank", "noopener,noreferrer");
+    // Not a conversion (the booking app fires those); a plain event for reporting.
+    window.gtag?.("event", "contact_whatsapp_request", { care_area: formData.area });
+    setIsSubmitted(true);
   };
 
   const handleReset = () => {
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      specialtyOrDoctor: "",
-      appointmentDate: "",
-      appointmentTime: "",
-    });
+    setFormData({ name: "", phone: "", area: "", date: "", time: "" });
     setIsSubmitted(false);
   };
 
@@ -148,7 +163,7 @@ export function ContactHubClient() {
           <p className={styles.heroSubtitle}>
             Visit us at No. 3366, 13th Main Road, HAL 2nd Stage, Indiranagar, or call{" "}
             <a className={styles.heroPhone} href="tel:+916366573772">+91 63665 73772</a>. Our team is here to
-            guide your care with unhurried listening and dignity.
+            guide your care with careful listening and dignity.
           </p>
         </div>
 
@@ -213,11 +228,11 @@ export function ContactHubClient() {
               <h3 className={styles.cardTitle}>Address</h3>
               <div className={styles.cardContentBox}>
                 <address className={styles.cardDescription}>
-                  2nd Floor, 13th Main Road,
+                  No. 3366, 13th Main Road,
                   <br />
-                  Indiranagar, Bengaluru,
+                  HAL 2nd Stage, Indiranagar,
                   <br />
-                  <span className={styles.cardHighlight}>Karnataka - 560 061</span>
+                  <span className={styles.cardHighlight}>Bengaluru 560008</span>
                 </address>
               </div>
             </article>
@@ -233,9 +248,7 @@ export function ContactHubClient() {
                   <a href="tel:+916366573772" className={styles.cardLink}>
                     +91 63665 73772
                   </a>
-                  <a href="tel:+919902878279" className={styles.cardLink}>
-                    +91 99028 78279
-                  </a>
+                  <span className={styles.cardDescription}>Call or WhatsApp, Mon to Sat, 9 am to 8 pm</span>
                 </div>
               </div>
             </article>
@@ -268,31 +281,31 @@ export function ContactHubClient() {
         <div className={styles.bookingContainer}>
           <div className={styles.formCard}>
             <div className={styles.formHeader}>
-              <h2 className={styles.formTitle}>Book an Appointment</h2>
+              <h2 className={styles.formTitle}>Request an Appointment</h2>
               <p className={styles.formSubtitle}>
-                Schedule a 15-minute consultation with one of our specialists.
+                Send your request to our care team on WhatsApp. To pick a doctor and a live time slot
+                yourself, <Link href="/book">book online</Link>.
               </p>
             </div>
 
             {isSubmitted ? (
-              <div className={styles.successFeedback}>
+              <div className={styles.successFeedback} role="status">
                 <CheckCircle2 size={48} className={styles.successIcon} aria-hidden="true" />
-                <h3 className={styles.successTitle}>Appointment Request Received</h3>
+                <h3 className={styles.successTitle}>Send the message in WhatsApp</h3>
                 <p className={styles.successMessage}>
-                  Thank you, <strong>{formData.name}</strong>. Our care coordinator will contact you at <strong>{formData.phone}</strong> or <strong>{formData.email}</strong> to confirm your slot for {formData.appointmentDate} at {formData.appointmentTime}.
+                  WhatsApp has opened with your request written out. Press send, and our care team will reply
+                  to confirm a time, Monday to Saturday, 9 am to 8 pm. Your appointment is confirmed only when
+                  they reply.
                 </p>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className={styles.submitBtn}
-                  style={{ maxWidth: "260px", marginTop: "1rem" }}
-                >
-                  Book Another Visit
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={styles.submitBtn} style={{ maxWidth: "300px", marginTop: "1rem" }}>
+                  <MessageCircle size={18} aria-hidden="true" /> Open WhatsApp again
+                </a>
+                <button type="button" onClick={handleReset} className={styles.resetLink}>
+                  Start a new request
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.appointmentForm}>
-                {/* Name */}
                 <div className={styles.inputGroup}>
                   <label htmlFor="patient-name" className={styles.label}>
                     Name <span className={styles.requiredAsterisk}>*</span>
@@ -301,151 +314,90 @@ export function ContactHubClient() {
                     id="patient-name"
                     type="text"
                     required
-                    placeholder="Name"
+                    autoComplete="name"
+                    placeholder="Your name"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={styles.inputField}
                   />
                 </div>
 
-                {/* Email */}
-                <div className={styles.inputGroup}>
-                  <label htmlFor="patient-email" className={styles.label}>
-                    Email <span className={styles.requiredAsterisk}>*</span>
-                  </label>
-                  <input
-                    id="patient-email"
-                    type="email"
-                    required
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className={styles.inputField}
-                  />
-                </div>
-
-                {/* Phone */}
                 <div className={styles.inputGroup}>
                   <label htmlFor="patient-phone" className={styles.label}>
-                    Phone <span className={styles.requiredAsterisk}>*</span>
+                    Mobile number <span className={styles.requiredAsterisk}>*</span>
                   </label>
                   <input
                     id="patient-phone"
                     type="tel"
                     required
-                    placeholder="Mobile"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    pattern="[+]?[0-9 ]{10,15}"
+                    title="A 10-digit mobile number, with or without +91"
+                    placeholder="+91"
                     value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className={styles.inputField}
                   />
                 </div>
 
-                {/* Specialty / Doctor with Placeholders */}
                 <div className={styles.inputGroup}>
-                  <label htmlFor="patient-specialty" className={styles.label}>
-                    Specialty <span className={styles.requiredAsterisk}>*</span>
+                  <label htmlFor="patient-area" className={styles.label}>
+                    Care needed <span className={styles.requiredAsterisk}>*</span>
                   </label>
                   <div className={styles.selectWrapper}>
                     <select
-                      id="patient-specialty"
+                      id="patient-area"
                       required
-                      value={formData.specialtyOrDoctor}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          specialtyOrDoctor: e.target.value,
-                        })
-                      }
+                      value={formData.area}
+                      onChange={(e) => setFormData({ ...formData, area: e.target.value })}
                       className={styles.selectField}
                     >
                       <option value="" disabled>
-                        Select Speciality
+                        Choose an area of care
                       </option>
-                      {seedDoctors.map((doc) => (
-                        <option key={doc.slug} value={doc.slug}>
-                          {doc.specialty} · {doc.name} ({doc.title})
+                      {CARE_AREAS.map((area) => (
+                        <option key={area} value={area}>
+                          {area}
                         </option>
                       ))}
-                      <option value="general-obgyn">
-                        General Women’s Health &amp; Diagnostic Triage
-                      </option>
                     </select>
                     <ChevronDown size={18} className={styles.selectChevron} />
                   </div>
-
-                  {/* Doctor preview card when selected */}
-                  {selectedDoctor && (
-                    <div className={styles.selectedDoctorPreview}>
-                      <Image
-                        src={selectedDoctor.image}
-                        alt={selectedDoctor.name}
-                        width={44}
-                        height={44}
-                        className={styles.doctorPreviewAvatar}
-                      />
-                      <div className={styles.doctorPreviewMeta}>
-                        <span className={styles.doctorPreviewName}>
-                          {selectedDoctor.name}
-                        </span>
-                        <span className={styles.doctorPreviewTitle}>
-                          {selectedDoctor.title} · {selectedDoctor.specialty}
-                        </span>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
-                {/* Date & Time Row */}
                 <div className={styles.formRowDual}>
-                  {/* Appointment Date */}
                   <div className={styles.inputGroup}>
                     <label htmlFor="appointment-date" className={styles.label}>
-                      Appointment Date <span className={styles.requiredAsterisk}>*</span>
+                      Preferred day <span className={styles.requiredAsterisk}>*</span>
                     </label>
                     <input
                       id="appointment-date"
                       type="date"
                       required
                       min={new Date().toISOString().split("T")[0]}
-                      value={formData.appointmentDate}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          appointmentDate: e.target.value,
-                        })
-                      }
+                      value={formData.date}
+                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                       className={styles.inputField}
                     />
                   </div>
 
-                  {/* Appointment Time */}
                   <div className={styles.inputGroup}>
                     <label htmlFor="appointment-time" className={styles.label}>
-                      Appointment Time <span className={styles.requiredAsterisk}>*</span>
+                      Preferred time <span className={styles.requiredAsterisk}>*</span>
                     </label>
                     <div className={styles.selectWrapper}>
                       <select
                         id="appointment-time"
                         required
-                        value={formData.appointmentTime}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            appointmentTime: e.target.value,
-                          })
-                        }
+                        value={formData.time}
+                        onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                         className={styles.selectField}
                       >
                         <option value="" disabled>
-                          Select Time Slot
+                          Choose a time
                         </option>
-                        {TIME_SLOTS.map((slot) => (
+                        {TIMES_OF_DAY.map((slot) => (
                           <option key={slot} value={slot}>
                             {slot}
                           </option>
@@ -456,13 +408,13 @@ export function ContactHubClient() {
                   </div>
                 </div>
 
-                {/* Submit Action */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={styles.submitBtn}
-                >
-                  {isSubmitting ? "Submitting..." : "Book Appointment"}
+                <p className={styles.formNote}>
+                  Please do not include medical details. Your request opens in WhatsApp; nothing is sent until
+                  you press send there. See our <Link href="/privacy-policy">privacy policy</Link>.
+                </p>
+
+                <button type="submit" className={styles.submitBtn}>
+                  <MessageCircle size={18} aria-hidden="true" /> Send request on WhatsApp
                 </button>
               </form>
             )}

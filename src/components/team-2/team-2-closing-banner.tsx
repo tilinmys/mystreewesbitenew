@@ -35,7 +35,7 @@ export function Team2ClosingBanner() {
             </h2>
             <p className={styles.lead}>
               Consult our gynaecologists, obstetricians, nutritionist and other clinicians
-              on 13th Main Road, Indiranagar. Book a 15-minute consultation, in clinic or
+              on 13th Main Road, Indiranagar. Book a consultation, in clinic or
               by video.
             </p>
 

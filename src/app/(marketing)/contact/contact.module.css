@@ -916,3 +916,44 @@
     transform: none;
   }
 }
+
+/* Appointment request via WhatsApp (23 Nov 2026). */
+.formSubtitle a,
+.formNote a {
+  color: var(--twilight-wine);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.formNote {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+a.submitBtn {
+  text-decoration: none;
+}
+
+.resetLink {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border: 0;
+  background: none;
+  color: var(--twilight-wine);
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.resetLink:focus-visible,
+.formSubtitle a:focus-visible,
+.formNote a:focus-visible {
+  outline: 2px solid var(--twilight-wine);
+  outline-offset: 2px;
+}

@@ -2,10 +2,10 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-import { isLiteMotion } from "@/lib/use-lite-motion";
+import { isLiteMotion, useStillAfterMount } from "@/lib/use-lite-motion";
 import { HOME_IMAGES } from "./home-images";
 import { ImageSlot } from "./image-slot";
 import styles from "./home-generations.module.css";
@@ -24,7 +24,7 @@ import styles from "./home-generations.module.css";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HomeGenerations() {
-  const still = useReducedMotion();
+  const still = useStillAfterMount();
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
   // Phones: no clip-path / parallax tied to scroll (repaints every frame).

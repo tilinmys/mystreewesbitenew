@@ -98,7 +98,7 @@ export const HOME_IMAGES = {
   },
   journeyConsult: {
     src: "/images/home/journey/journey-consultation.webp",
-    alt: "Warm unhurried consultation setting with two handcrafted ceramic teacups with rising steam, an open linen notebook, brass pen, mint water carafe, and pink lotus flower on teakwood table draped in dusty-rose khadi",
+    alt: "Calm consultation setting with two handcrafted ceramic teacups with rising steam, an open linen notebook, brass pen, mint water carafe, and pink lotus flower on teakwood table draped in dusty-rose khadi",
     width: 600,
     height: 450,
     ready: true,

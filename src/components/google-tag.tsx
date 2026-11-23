@@ -24,6 +24,15 @@ import { Suspense, useEffect } from "react";
  */
 
 const GOOGLE_TAG_ID = "GT-NFR3JS3N";
+
+/*
+ * Health pages and ads (23 Nov 2026, privacy policy section 6): visits to
+ * pages about conditions, treatments, packages, articles, FAQs and individual
+ * clinicians are sent with ad personalisation switched off, so they can never
+ * feed a remarketing audience (Google's personalised-ads policy treats health
+ * as a sensitive category). Analytics and conversion measurement still work.
+ */
+const HEALTH_PATHS = "^/(services|clinics|packages|blog|faq|faqs|doctors/)";
 const ANALYTICS_ID = "G-68RLGLNDY6";
 
 declare global {
@@ -42,6 +51,7 @@ export function GoogleTag() {
         {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
+gtag('set', 'allow_ad_personalization_signals', !new RegExp('${HEALTH_PATHS}').test(location.pathname));
 gtag('config', '${GOOGLE_TAG_ID}');
 gtag('config', '${ANALYTICS_ID}', { send_page_view: false });`}
       </Script>
@@ -62,6 +72,7 @@ function PageViews() {
     if (typeof window.gtag !== "function") return;
     // After paint, so document.title is the new page's title.
     const frame = window.requestAnimationFrame(() => {
+      window.gtag?.("set", "allow_ad_personalization_signals", !new RegExp(HEALTH_PATHS).test(pathname));
       window.gtag?.("event", "page_view", {
         page_title: document.title,
         page_location: window.location.href,

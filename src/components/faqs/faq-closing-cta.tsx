@@ -11,7 +11,7 @@ export function FAQClosingCTA() {
           Ready to get started?
         </h2>
         <p className={styles.subtitle}>
-          Experience collaborative, relationship-based women’s healthcare with 15-minute consultations on 13th Main Road, Indiranagar.
+          Experience collaborative, relationship-based women’s healthcare on 13th Main Road, Indiranagar.
         </p>
         <div className={styles.buttonGroup}>
           <Link href="/book" className={styles.primaryButton}>

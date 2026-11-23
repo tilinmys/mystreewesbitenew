@@ -33,7 +33,7 @@ const COMPARISONS: readonly ComparisonPoint[] = [
   },
   {
     typical: "Time to ask your questions",
-    mystree: "15-minute consultations, in clinic or by video",
+    mystree: "Consultations in clinic or by video",
   },
   {
     typical: "Advice you can follow",

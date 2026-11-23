@@ -145,7 +145,7 @@ export function FAQHub() {
 
             {/* Compact Help Card */}
             <div className={styles.helpCard}>
-              <p className={styles.helpTitle}>Have an unhurried question?</p>
+              <p className={styles.helpTitle}>Have a question?</p>
               <p className={styles.helpText}>
                 Speak directly with our women’s care coordinators on 100ft Road, Indiranagar.
               </p>

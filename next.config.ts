@@ -42,6 +42,15 @@ const nextConfig: NextConfig = {
       { source: "/services/nutrition", destination: "/services/nutrition-counselling", permanent: true },
       { source: "/services/physiotherapy", destination: "/services/pelvic-floor-physiotherapy", permanent: true },
       { source: "/terms-of-service", destination: "/terms-and-conditions", permanent: true },
+
+      // Old pages with no equivalent on this site (website review, 23 Nov 2026).
+      // Temporary, so they can point back if gallery, events or MyStree Soul
+      // pages are rebuilt here. The egg-freezing article was retired on purpose
+      // and its nearest page is the fertility consultation page.
+      { source: "/showcase/:path*", destination: "/about", permanent: false },
+      { source: "/events/:path*", destination: "/about", permanent: false },
+      { source: "/mystree-soul", destination: "/about", permanent: false },
+      { source: "/blog/egg-freezing-india-guide", destination: "/services/fertility-clinic", permanent: true },
     ];
   },
   images: {
