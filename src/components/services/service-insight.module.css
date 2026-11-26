@@ -14,7 +14,7 @@
 
 .section {
   padding: var(--svc-pad-y-statement) var(--svc-pad-x);
-  background: var(--svc-paper);
+  background: var(--svc-mist);
 }
 
 /* Phone: copy first, image after — the answer is what the reader came for. */
@@ -50,8 +50,8 @@
   inset: 0;
   background: linear-gradient(
     160deg,
-    var(--uranian-mist) 0%,
-    color-mix(in oklab, color-mix(in oklab, var(--uranian-mist) 90.7%, var(--twilight-wine)) 86%, var(--cadet-slate)) 100%
+    var(--surface-mist, #EFE0E4) 0%,
+    var(--surface-blush, #E5CCD3) 100%
   );
 }
 
@@ -103,7 +103,7 @@
   width: 1rem;
   height: 1rem;
   margin-top: calc((1.55em - 1rem) / 2);
-  color: color-mix(in oklab, var(--cadet-slate) 52%, var(--twilight-wine) 48%);
+  color: var(--twilight-wine);
 }
 
 /* ------------------------------------------------ desktop  >= 1024px */

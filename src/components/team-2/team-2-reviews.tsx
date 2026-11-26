@@ -29,7 +29,7 @@ const REVIEWS: readonly ReviewItem[] = [
   },
   {
     name: "Richa Raj",
-    location: "100ft Road, Indiranagar",
+    location: "13th Main Road, Indiranagar",
     quote:
       "Dr. Surbhi was patient, kind, and straightforward. She explained everything in layman’s language, suggested only necessary tests, and understood all my concerns. I would highly recommend her and MyStree Clinic for women’s health issues.",
   },
@@ -153,8 +153,8 @@ export function Team2Reviews() {
                       <Star
                         key={i}
                         size={14}
-                        fill="var(--twilight-wine)"
-                        stroke="var(--twilight-wine)"
+                        fill="currentColor"
+                        stroke="currentColor"
                         aria-hidden="true"
                       />
                     ))}

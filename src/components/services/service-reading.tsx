@@ -62,7 +62,7 @@ export function ServiceReading({
               <Link href={`/blog/${article.slug}`} className={styles.media} tabIndex={-1} aria-hidden="true">
                 <Image
                   src={article.image}
-                  alt=""
+                  alt={article.title}
                   fill
                   sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
                   className={styles.image}

@@ -93,7 +93,7 @@
 }
 
 .authorLocation {
-  color: var(--cadet-slate);
+  color: var(--surface-mist);
   font-family: var(--font-sans), sans-serif;
   font-size: var(--type-caption);
   font-weight: 500;
@@ -103,7 +103,7 @@
 .stars {
   display: flex;
   gap: 0.25rem;
-  color: var(--twilight-wine);
+  color: var(--surface-blush);
   margin-bottom: 1rem;
   font-size: var(--type-body);
   line-height: 1;

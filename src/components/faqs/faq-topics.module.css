@@ -29,10 +29,10 @@
 .indexTitle {
   margin: 0 0 0.75rem;
   color: var(--midnight-chamber);
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.375rem;
-  font-weight: 500;
-  line-height: 1.2;
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-size: 1.65rem !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
 }
 
 /* Phones: one row of chips that scrolls sideways, no wrapping. */
@@ -104,16 +104,15 @@
   display: none;
 }
 
-/* Small caps label, not a display heading: overrides the global
-   `main h2` display style (globals.css), which is marked !important. */
+/* Topic category label in unified JetBrains Mono 500 eyebrow role. */
 .group .groupTitle {
   margin: 0 0 0.25rem;
   color: var(--twilight-wine);
-  font-family: var(--font-sans), system-ui, sans-serif !important;
-  font-size: var(--type-label) !important;
-  font-weight: 700 !important;
+  font-family: var(--font-mono), monospace !important;
+  font-size: var(--type-metadata-tag) !important;
+  font-weight: 500 !important;
   line-height: 1.4 !important;
-  letter-spacing: 0.14em !important;
+  letter-spacing: 0.16em !important;
   text-transform: uppercase;
 }
 

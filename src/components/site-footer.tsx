@@ -54,6 +54,7 @@ const groups: readonly FooterGroup[] = [
   {
     heading: "More services",
     links: [
+      { label: "Women's health check", href: "/services/womens-health-check" },
       { label: "Dermatology", href: "/services/dermatology" },
       { label: "Adolescent health", href: "/services/adolescent-health" },
       { label: "Menopause support", href: "/services/menopause" },
@@ -65,8 +66,7 @@ const groups: readonly FooterGroup[] = [
     // from every page so search engines find and value them.
     heading: "Packages",
     links: [
-      { label: "Hormonal IUD Care", href: "/packages/mirena-comfort-care" },
-      { label: "MTP Care Package", href: "/packages/mtp-care" },
+      { label: "Hormonal IUD Care", href: "/packages/hormonal-iud-care" },
       { label: "Care Journey: Basic", href: "/packages/care-journey-basic" },
       { label: "Care Journey: Bloom", href: "/packages/care-journey-bloom" },
       { label: "Nutrition Care: 3 Months", href: "/packages/nutrition-care-3-months" },
@@ -177,6 +177,9 @@ export function SiteFooter() {
             </Link>
           ))}
         </nav>
+        <p className={styles.disclaimer}>
+          Information on this website is for awareness only and is not a substitute for medical advice.
+        </p>
         <p className={styles.copyright}>
           © {new Date().getFullYear()} {clinic.legalName}
         </p>

@@ -9,23 +9,23 @@ const output = new URL('../docs/theme-preview/', import.meta.url);
 await mkdir(output, { recursive: true });
 
 const expectedTokens = {
-  '--bg-primary': '#faf8f5',
-  '--bg-secondary': '#f5eedb',
-  '--bg-subtle-blue': '#ebf4fa',
+  '--bg-primary': '#fff',
+  '--bg-secondary': '#faf1f3',
+  '--bg-subtle-blue': '#faf1f3',
   '--surface-card': '#fff',
-  '--text-primary': '#243038',
-  '--text-muted': '#5a6e7f',
+  '--text-primary': '#3e1e26',
+  '--text-muted': '#6a424d',
   '--text-inverse': '#fff',
-  '--border-subtle': '#e6dec8',
-  '--border-blue': '#d2e3f0',
-  '--accent-flame': '#e85d30',
-  '--accent-flame-hover': '#d34e24',
-  '--accent-pumpkin': '#ff833c',
-  '--accent-cadet': '#8ba4bf',
+  '--border-subtle': '#e5ced3',
+  '--border-blue': '#e5ced3',
+  '--accent-flame': '#ad002b',
+  '--accent-flame-hover': '#d60036',
+  '--accent-pumpkin': '#9e6e7b',
+  '--accent-cadet': '#9e6e7b',
 };
 
 const errors = [];
-const routes = ['/', '/about', '/doctors', '/book', '/services/prenatal'];
+const routes = ['/', '/about', '/doctors', '/contact', '/services/prenatal', '/services/womens-health-check'];
 
 for (const width of [390, 1440]) {
   const context = await browser.newContext({

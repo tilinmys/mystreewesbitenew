@@ -1,0 +1,101 @@
+/*
+ * Mobile bottom glassmorphic dock (< 768px).
+ * Frosted translucent floating capsule with crisp pure-white highlight rim,
+ * subtle rose-burgundy ambient shadow, Call action, and official WhatsApp logo.
+ */
+.bar {
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
+  z-index: 44;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  padding: 0.45rem;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  border-radius: 1.35rem;
+  background: rgb(255 255 255 / 0.74);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  box-shadow:
+    0 12px 32px -10px rgb(92 0 23 / 0.24),
+    0 2px 8px rgb(92 0 23 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.95);
+}
+
+.call,
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 0.85rem;
+  border-radius: 1rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 160ms ease,
+    box-shadow 180ms ease;
+}
+
+.call {
+  border: 1px solid rgb(128 0 32 / 0.28);
+  background: rgb(255 255 255 / 0.82);
+  color: var(--palette-oxblood, #5C0017);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+
+.call:hover {
+  background: #ffffff;
+  border-color: var(--palette-burgundy, #800020);
+}
+
+.whatsapp {
+  border: 1px solid rgb(255 255 255 / 0.28);
+  background: linear-gradient(160deg, rgb(173 0 43 / 0.92), rgb(128 0 32 / 0.96));
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 6px 16px -6px rgb(128 0 32 / 0.45);
+}
+
+.whatsapp:hover {
+  background: linear-gradient(160deg, rgb(214 0 54 / 0.96), rgb(173 0 43 / 0.98));
+}
+
+.call:active,
+.whatsapp:active {
+  transform: scale(0.98);
+}
+
+.waIcon {
+  flex: none;
+  display: block;
+}
+
+.call:focus-visible,
+.whatsapp:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .bar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .call,
+  .whatsapp {
+    transition: none;
+  }
+}

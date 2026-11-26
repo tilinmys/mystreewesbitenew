@@ -32,8 +32,32 @@ const nextConfig: NextConfig = {
       },
 
       // Booking lives in the booking app under /booking on the same domain
-      // (it fires the Google Ads conversion). /book was a placeholder.
+      // (it fires the Google Ads conversion). /book and staging /booking hits
+      // redirect straight to the live booking flow.
       { source: "/book", destination: "https://my-stree.com/booking", permanent: false },
+      {
+        source: "/booking",
+        missing: [
+          { type: "host", value: "my-stree.com" },
+          { type: "host", value: "www.my-stree.com" },
+        ],
+        destination: "https://my-stree.com/booking",
+        permanent: false,
+      },
+      {
+        source: "/booking/:path*",
+        missing: [
+          { type: "host", value: "my-stree.com" },
+          { type: "host", value: "www.my-stree.com" },
+        ],
+        destination: "https://my-stree.com/booking/:path*",
+        permanent: false,
+      },
+
+      // Hormonal IUD package renamed from brand URL; preventive health aliases.
+      { source: "/packages/mirena-comfort-care", destination: "/packages/hormonal-iud-care", permanent: true },
+      { source: "/services/pap-smear", destination: "/services/womens-health-check", permanent: true },
+      { source: "/services/womens-health-checkup", destination: "/services/womens-health-check", permanent: true },
 
       // URLs of the previous my-stree.com site (its sitemap, Oct 2026), so
       // indexed pages, ads and shared links land on their new equivalents.

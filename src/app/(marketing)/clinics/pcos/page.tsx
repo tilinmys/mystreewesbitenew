@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   // The root layout appends "| MyStree".
   title: "PCOS & PCOD Consultations in Indiranagar, Bengaluru",
   description:
-    "PCOS and PCOD care in Indiranagar, Bengaluru: assessment of irregular periods, acne, hair growth and metabolic health, with a gynaecologist, nutritionist and dermatologist in one clinic, whether or not you are planning a pregnancy.",
+    "PCOS and PCOD care in Indiranagar, Bengaluru: irregular periods, acne, hair growth and metabolic health with gynaecology, nutrition and dermatology.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "PCOS & PCOD Consultations in Indiranagar, Bengaluru | MyStree",
@@ -206,11 +206,20 @@ export default function PcosPage() {
           primaryCta={{ label: "Book a PCOS consultation", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: `tel:${clinic.telephone}` }}
         />
-        <ServiceQuote
-          quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
-          name="Dr. Surbhi Sinha"
-        />
       </ServiceBand>
+
+      <ServiceSpecialists
+        headingId="pcos-specialists-heading"
+        heading="Book a PCOS consultation"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          { bookingId: 1, tag: "Gynaecology", focus: ["PCOS", "Irregular periods"], profileHref: "/doctors/dr-surbhi-sinha" },
+          { bookingId: 2, tag: "Gynaecology", focus: ["Hormonal health", "Menstrual health"], profileHref: "/doctors/dr-smitha-ap" },
+          { bookingId: 3, tag: "Nutrition", focus: ["PCOS diet", "Weight and metabolism"], profileHref: "/doctors/priyanka-savina" },
+          { bookingId: 8, tag: "Dermatology", focus: ["Acne", "Hair growth and hair thinning"], profileHref: "/doctors/dr-nivetha" },
+        ]}
+      />
 
       <ServiceConditions
         headingId="pcos-conditions-heading"
@@ -232,19 +241,6 @@ export default function PcosPage() {
         cta={{ label: "Book a PCOS consultation", href: "/book" }}
       />
 
-      <ServiceSpecialists
-        headingId="pcos-specialists-heading"
-        heading="Book a PCOS consultation"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          { bookingId: 1, tag: "Gynaecology", focus: ["PCOS", "Irregular periods"], profileHref: "/doctors/dr-surbhi-sinha" },
-          { bookingId: 2, tag: "Gynaecology", focus: ["Hormonal health", "Menstrual health"], profileHref: "/doctors/dr-smitha-ap" },
-          { bookingId: 3, tag: "Nutrition", focus: ["PCOS diet", "Weight and metabolism"], profileHref: "/doctors/priyanka-savina" },
-          { bookingId: 8, tag: "Dermatology", focus: ["Acne", "Hair growth and hair thinning"], profileHref: "/doctors/dr-nivetha" },
-        ]}
-      />
-
       <ServiceSteps
         image={{
           src: "/images/services/pages/evening-skincare-routine-at-home.webp",
@@ -261,6 +257,22 @@ export default function PcosPage() {
         cta={{ label: "Book a PCOS consultation", href: "/book" }}
       />
 
+      <ServiceQuote
+        quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
+        name="Dr. Surbhi Sinha"
+      />
+
+      <ServiceFit
+        headingId="pcos-fit-heading"
+        heading="Our PCOS care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that are irregular, far apart or have stopped" },
+          { icon: "mind", label: "Acne, extra hair growth or hair thinning that worries you" },
+          { icon: "monitor", label: "Weight changes, tiredness or concerns about blood sugar" },
+          { icon: "conversation", label: "A PCOS diagnosis and questions no one has had time to answer" },
+        ]}
+      />
+
       <ServiceInsight
         image={{
           src: "/images/services/pages/hormonal-acne-dermatology-indiranagar-bengaluru.webp",
@@ -273,17 +285,6 @@ export default function PcosPage() {
           "Acne, hair growth and irregular periods are treated separately, without asking whether they are connected",
           "Care is sometimes offered only around pregnancy, even when that is not your goal",
           "Blood sugar, cholesterol, sleep and mood can be affected too, and are worth checking over time",
-        ]}
-      />
-
-      <ServiceFit
-        headingId="pcos-fit-heading"
-        heading="Our PCOS care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that are irregular, far apart or have stopped" },
-          { icon: "mind", label: "Acne, extra hair growth or hair thinning that worries you" },
-          { icon: "monitor", label: "Weight changes, tiredness or concerns about blood sugar" },
-          { icon: "conversation", label: "A PCOS diagnosis and questions no one has had time to answer" },
         ]}
       />
 

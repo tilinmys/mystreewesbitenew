@@ -19,7 +19,7 @@ const UPDATED = "23 November 2026";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How MyStree, a women's health clinic in Indiranagar, Bengaluru, collects, uses, protects and shares your personal and health information, and how to exercise your rights.",
+    "How MyStree women's health clinic in Indiranagar, Bengaluru collects, uses, protects and shares personal and health data under Indian law.",
   alternates: { canonical: `${SITE_URL}/privacy-policy` },
 };
 

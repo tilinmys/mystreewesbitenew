@@ -14,12 +14,12 @@
  */
 
 .section {
-  --care-blush: color-mix(in oklab, var(--twilight-wine) 15%, var(--pure-white));
-  --care-slate: color-mix(in oklab, var(--cadet-slate) 45%, var(--midnight-chamber));
+  --care-blush: var(--surface-mist, #EFE0E4);
+  --care-slate: var(--palette-velvet, #661026);
   --care-flood: var(--twilight-wine);
   --care-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  padding: clamp(4rem, 3rem + 3vw, 6.5rem) 1.25rem;
+  padding: clamp(3.5rem, 3rem + 2.5vw, 5.5rem) 1.25rem;
   background: var(--pure-white);
 }
 
@@ -28,16 +28,16 @@
   margin: 0 auto;
 }
 
-/* Overrides the global `main h2` serif display role (globals.css, !important). */
+/* Follows the global `main h2` Fraunces 400 display role with scoped spacing. */
 .title {
   max-width: 20ch;
   margin: 0 0 clamp(2rem, 1.5rem + 2vw, 3.5rem);
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.25rem, 1.45rem + 2.2vw, 3rem) !important;
-  font-weight: 700 !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.045em !important;
+  font-weight: 400 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.025em !important;
   text-wrap: balance;
 }
 

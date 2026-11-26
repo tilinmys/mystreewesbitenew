@@ -57,9 +57,9 @@ const PAGE_PATH = "/services/psychology";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Psychology, Counselling & Psychiatry for Women in Indiranagar, Bengaluru",
+  title: "Women's Psychology & Counselling, Indiranagar",
   description:
-    "Counselling for women in Indiranagar, Bengaluru: anxiety, low mood, pregnancy and postpartum emotional health, infertility and miscarriage grief, and relationships. In clinic or online.",
+    "Women's counselling in Indiranagar, Bengaluru: anxiety, low mood, pregnancy & postpartum care, infertility & miscarriage grief, and relationships.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Psychology, Counselling & Psychiatry for Women in Indiranagar, Bengaluru | MyStree",
@@ -228,26 +228,6 @@ export default async function PsychologyPage() {
         />
       </ServiceBand>
 
-      <ServiceConditions
-        headingId="psychology-conditions-heading"
-        heading="What our psychologist and psychiatrist help with"
-        conditions={[
-          "Anxiety and panic",
-          "Body image and eating worries",
-          "Feeling low or depressed",
-          "Grief and loss",
-          "Stress during infertility and fertility treatment",
-          "Life changes and transitions",
-          "Miscarriage and pregnancy loss",
-          "Mood changes before periods (PMDD)",
-          "Postpartum depression and anxiety",
-          "Pregnancy worries and fear of birth",
-          "Relationship and couple difficulties",
-          "Stress and burnout",
-        ]}
-        cta={{ label: "Book a counselling session", href: "/book" }}
-      />
-
       <ServiceSpecialists
         headingId="psychology-specialists-heading"
         heading="Book with our psychology and psychiatry team"
@@ -272,6 +252,26 @@ export default async function PsychologyPage() {
             profileHref: "/doctors/priyanka-savina",
           },
         ]}
+      />
+
+      <ServiceConditions
+        headingId="psychology-conditions-heading"
+        heading="What our psychologist and psychiatrist help with"
+        conditions={[
+          "Anxiety and panic",
+          "Body image and eating worries",
+          "Feeling low or depressed",
+          "Grief and loss",
+          "Stress during infertility and fertility treatment",
+          "Life changes and transitions",
+          "Miscarriage and pregnancy loss",
+          "Mood changes before periods (PMDD)",
+          "Postpartum depression and anxiety",
+          "Pregnancy worries and fear of birth",
+          "Relationship and couple difficulties",
+          "Stress and burnout",
+        ]}
+        cta={{ label: "Book a counselling session", href: "/book" }}
       />
 
       <ServiceSteps
@@ -299,6 +299,17 @@ export default async function PsychologyPage() {
         cta={{ label: "Book a counselling session", href: "/book" }}
       />
 
+      <ServiceFit
+        headingId="psychology-fit-heading"
+        heading="Counselling is right for you if you"
+        items={[
+          { icon: "pregnancy", label: "Feel anxious or low in pregnancy or since having your baby" },
+          { icon: "branch", label: "Are grieving a miscarriage or finding fertility treatment hard" },
+          { icon: "mind", label: "Have anxiety, low mood or stress that is affecting daily life" },
+          { icon: "conversation", label: "Want a private space to talk, on your own or as a couple" },
+        ]}
+      />
+
       <ServiceInsight
         image={{ src: "/images/services/pages/woman-feeling-stressed-and-exhausted.webp", alt: "A tired woman sitting alone on an apartment stairwell" }}
         headingId="psychology-insight-heading"
@@ -308,17 +319,6 @@ export default async function PsychologyPage() {
           "Low mood in pregnancy or after birth is often brushed off as normal tiredness or the baby blues",
           "Grief after a miscarriage or unsuccessful fertility treatment is a real loss, yet women are often expected to move on quickly",
           "Mood changes linked to periods, fertility treatment or menopause need care that understands both body and mind",
-        ]}
-      />
-
-      <ServiceFit
-        headingId="psychology-fit-heading"
-        heading="Counselling is right for you if you"
-        items={[
-          { icon: "pregnancy", label: "Feel anxious or low in pregnancy or since having your baby" },
-          { icon: "branch", label: "Are grieving a miscarriage or finding fertility treatment hard" },
-          { icon: "mind", label: "Have anxiety, low mood or stress that is affecting daily life" },
-          { icon: "conversation", label: "Want a private space to talk, on your own or as a couple" },
         ]}
       />
 

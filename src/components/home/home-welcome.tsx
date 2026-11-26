@@ -40,7 +40,7 @@ function Word({
 }) {
   const start = index / total;
   // Function form keeps this on the JS path (see home-hero.tsx).
-  const opacity = useTransform(progress, (v) => 0.16 + 0.84 * Math.min(1, Math.max(0, (v - start) * total)));
+  const opacity = useTransform(progress, (v) => 0.48 + 0.52 * Math.min(1, Math.max(0, (v - start) * total)));
   return (
     <>
       <motion.span className={italic ? styles.wordItalic : styles.word} style={{ opacity }}>
@@ -52,7 +52,7 @@ function Word({
 
 export function HomeWelcome() {
   const reducedMotion = useStillAfterMount();
-  const statement = useRef<HTMLParagraphElement>(null);
+  const statement = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll({ target: statement, offset: ["start 0.85", "end 0.45"] });
   // The clinic photograph: a slow zoom-out and gentle drift while it crosses the screen.
   const frame = useRef<HTMLDivElement>(null);
@@ -64,11 +64,9 @@ export function HomeWelcome() {
   return (
     <section className={styles.section} aria-labelledby="welcome-heading">
       <div className={styles.inner}>
-        <h2 id="welcome-heading" className={styles.eyebrow}>
-          Welcome to MyStree
-        </h2>
+        <p className={styles.eyebrow}>Welcome to MyStree</p>
 
-        <p ref={statement} className={styles.statement}>
+        <h2 id="welcome-heading" ref={statement} className={styles.statement}>
           {reducedMotion ? (
             STATEMENT.map((part) =>
               "italic" in part ? (
@@ -96,7 +94,7 @@ export function HomeWelcome() {
               </span>
             </>
           )}
-        </p>
+        </h2>
 
         <motion.figure
           className={styles.figure}

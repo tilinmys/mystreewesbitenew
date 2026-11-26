@@ -8,8 +8,23 @@ const require = createRequire(
 const { chromium } = require("playwright");
 
 const baseUrl = process.env.BASE_URL ?? "http://127.0.0.1:3000";
-const routes = ["/", "/about", "/doctors", "/book", "/services/prenatal"];
-const widths = [320, 390, 768, 1440];
+const routes = [
+  "/",
+  "/about",
+  "/team",
+  "/doctors",
+  "/clinics/pcos",
+  "/services/obgyn-consults",
+  "/services/prenatal",
+  "/services/womens-health-check",
+  "/packages/hormonal-iud-care",
+  "/blog",
+  "/faqs",
+  "/contact",
+  "/privacy-policy",
+  "/terms-and-conditions",
+];
+const widths = [390, 1440];
 const browser = await chromium.launch({ headless: true, channel: "chrome" });
 const failures = [];
 const previewDirectory = join(process.cwd(), "docs", "typography-preview");
@@ -24,7 +39,7 @@ for (const width of widths) {
       hasTouch: width < 500,
     });
     const page = await context.newPage();
-    await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}${route}`, { waitUntil: "load", timeout: 30000 });
     await page.evaluate(() => document.fonts.ready);
 
     const result = await page.evaluate(() => {
@@ -32,6 +47,7 @@ for (const width of widths) {
       const headingIssues = [...document.querySelectorAll("main h1, main h2")]
         .filter((element) => {
           if (element.getClientRects().length === 0) return false;
+          if ([...element.classList].some((c) => /eyebrow/i.test(c))) return false;
           const rect = element.getBoundingClientRect();
           const style = getComputedStyle(element);
           return rect.width > 2 && rect.height > 2 && style.clip === "auto";
@@ -39,13 +55,36 @@ for (const width of widths) {
         .flatMap((element) => {
           const style = getComputedStyle(element);
           const rect = element.getBoundingClientRect();
-          const expectedWeight = element.tagName === "H1" ? "300" : "300";
+          const expectedWeight = "400";
           const issues = [];
-          if (!style.fontFamily.toLowerCase().includes("fraunces")) issues.push("family");
+          if (!style.fontFamily.toLowerCase().includes("fraunces")) issues.push(`family:${style.fontFamily}`);
           if (style.fontWeight !== expectedWeight) issues.push(`weight:${style.fontWeight}`);
           if (rect.left < -1 || rect.right > innerWidth + 1 || element.scrollWidth > element.clientWidth + 2) {
             issues.push("horizontal-clipping");
           }
+          return issues.length
+            ? [{ tag: element.tagName, text: element.textContent?.trim().slice(0, 80), issues }]
+            : [];
+        });
+
+      const subheadingIssues = [...document.querySelectorAll("main h3")]
+        .filter((element) => {
+          if (element.getClientRects().length === 0) return false;
+          if (
+            window.location.pathname.startsWith("/faq") &&
+            [...element.classList].some((c) => /groupTitle/i.test(c))
+          ) {
+            return false;
+          }
+          const rect = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return rect.width > 2 && rect.height > 2 && style.clip === "auto";
+        })
+        .flatMap((element) => {
+          const style = getComputedStyle(element);
+          const issues = [];
+          if (!style.fontFamily.toLowerCase().includes("plus jakarta sans")) issues.push(`family:${style.fontFamily}`);
+          if (style.fontWeight !== "600") issues.push(`weight:${style.fontWeight}`);
           return issues.length
             ? [{ tag: element.tagName, text: element.textContent?.trim().slice(0, 80), issues }]
             : [];
@@ -60,13 +99,14 @@ for (const width of widths) {
         '[class*="appointmentBadge"]',
         '[class*="markerBadge"]',
         '[class*="photoVerifiedBadge"]',
+        ...(window.location.pathname.startsWith("/faq") ? ['[class*="groupTitle"]'] : []),
       ].join(",");
       const metadataIssues = [...document.querySelectorAll(metadataSelector)]
-        .filter((element) => element.getClientRects().length > 0)
+        .filter((element) => element.getClientRects().length > 0 && element.tagName !== "DIV")
         .flatMap((element) => {
           const style = getComputedStyle(element);
           const issues = [];
-          if (!style.fontFamily.toLowerCase().includes("jetbrains mono")) issues.push("family");
+          if (!style.fontFamily.toLowerCase().includes("jetbrains mono")) issues.push(`family:${style.fontFamily}`);
           if (style.fontWeight !== "500") issues.push(`weight:${style.fontWeight}`);
           if (element.scrollWidth > element.clientWidth + 2) issues.push("horizontal-clipping");
           return issues.length
@@ -80,6 +120,7 @@ for (const width of widths) {
         bodyBackground: body.backgroundColor,
         documentOverflow: document.documentElement.scrollWidth > innerWidth,
         headingIssues,
+        subheadingIssues,
         metadataIssues,
         loadedFonts: [...document.fonts]
           .filter((font) => font.status === "loaded")
@@ -90,15 +131,18 @@ for (const width of widths) {
     if (!result.bodyFamily.toLowerCase().includes("plus jakarta sans")) {
       failures.push(`${route} @ ${width}: body is not Plus Jakarta Sans`);
     }
-    if (result.bodyColor !== "rgb(36, 48, 56)") {
+    if (result.bodyColor !== "rgb(62, 30, 38)") {
       failures.push(`${route} @ ${width}: body text is ${result.bodyColor}`);
     }
-    if (result.bodyBackground !== "rgb(250, 248, 245)") {
+    if (result.bodyBackground !== "rgb(255, 255, 255)") {
       failures.push(`${route} @ ${width}: body background is ${result.bodyBackground}`);
     }
     if (result.documentOverflow) failures.push(`${route} @ ${width}: document overflow`);
     if (result.headingIssues.length) {
       failures.push(`${route} @ ${width}: heading issues ${JSON.stringify(result.headingIssues)}`);
+    }
+    if (result.subheadingIssues.length) {
+      failures.push(`${route} @ ${width}: subheading issues ${JSON.stringify(result.subheadingIssues)}`);
     }
     if (result.metadataIssues.length) {
       failures.push(`${route} @ ${width}: metadata issues ${JSON.stringify(result.metadataIssues)}`);

@@ -95,9 +95,9 @@ function Bloom({ progress, x, y, size, rotate, at, still }: { progress: MotionVa
 }
 
 function Word({ progress, index, text, italic, still }: { progress: MotionValue<number>; index: number; text: string; italic: boolean; still: boolean }) {
-  const start = 0.3 + index * 0.06;
-  const t = useTransform(progress, (v) => easeOut(range(v, start, start + 0.14)));
-  const y = useTransform(t, (o) => `${(1 - o) * 110}%`);
+  const start = 0.08 + index * 0.05;
+  const t = useTransform(progress, (v) => 0.35 + 0.65 * easeOut(range(v, start, start + 0.22)));
+  const y = useTransform(progress, (v) => `${(1 - easeOut(range(v, start, start + 0.22))) * 45}%`);
   return (
     <span className={styles.wordMask}>
       <motion.span className={italic ? styles.wordItalic : styles.word} style={still ? undefined : { y, opacity: t }}>
@@ -110,13 +110,9 @@ function Word({ progress, index, text, italic, still }: { progress: MotionValue<
 export function HomeCore() {
   const section = useRef<HTMLElement>(null);
   const still = useStillAfterMount();
-  // No pinning: the page always scrolls freely. The tree grows while the
-  // section rises into view, from its top entering (90% down the screen) to
-  // its centre reaching the middle of the screen, so it is fully grown and
-  // the words are in place just as the reader arrives on it.
-  const { scrollYProgress: progress } = useScroll({ target: section, offset: ["start 0.9", "center 0.5"] });
-  const lineOpacity = useTransform(progress, (v) => range(v, 0.62, 0.76));
-  const lineY = useTransform(progress, (v) => 16 * (1 - easeOut(range(v, 0.62, 0.76))));
+  const { scrollYProgress: progress } = useScroll({ target: section, offset: ["start 0.96", "start 0.4"] });
+  const lineOpacity = useTransform(progress, (v) => 0.35 + 0.65 * range(v, 0.25, 0.7));
+  const lineY = useTransform(progress, (v) => 12 * (1 - easeOut(range(v, 0.25, 0.7))));
 
   const firstLine = HEADING.filter((w) => !w.italic);
   const secondLine = HEADING.filter((w) => w.italic);

@@ -20,6 +20,7 @@ import { PACKAGES } from "@/lib/packages";
 const P = "/images/services/pages/";
 const SERVICE_IMAGES: Record<string, string[]> = {
   "obgyn-consults": ["gynaecologist-consultation-indiranagar-bengaluru", "period-pain-at-work", "gynaecology-clinic-waiting-area", "auto-rickshaw-ride-to-clinic-bengaluru"],
+  "womens-health-check": ["gynaecologist-consultation-indiranagar-bengaluru", "woman-tracking-menstrual-cycle-on-phone", "gynaecology-clinic-waiting-area", "auto-rickshaw-ride-to-clinic-bengaluru"],
   "adolescent-health": ["teen-gynaecology-consultation-indiranagar-bengaluru", "teenager-period-pain-at-home", "mother-and-daughter-clinic-registration", "mother-and-teen-daughter-walking-indiranagar"],
   menopause: ["menopause-consultation-indiranagar-bengaluru", "night-sweats-hot-flushes-perimenopause", "morning-walk-women-in-their-fifties-bengaluru", "friends-sharing-filter-coffee-bengaluru"],
   "nutrition-counselling": ["nutritionist-consultation-indiranagar-bengaluru", "home-cooking-dal-ragi-and-vegetables", "office-lunch-from-steel-tiffin", "buying-fresh-greens-vegetable-cart-bengaluru"],
@@ -67,7 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    ...PACKAGES.map((pkg) => ({
+    ...PACKAGES.filter((pkg) => pkg.slug !== "mtp-care").map((pkg) => ({
       url: `${SITE_URL}/packages/${pkg.slug}`,
       lastModified,
       images: [pkg.image.src, pkg.glanceImage.src].map((src) => `${SITE_URL}${src}`),
@@ -87,7 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...["obgyn-consults", "adolescent-health", "menopause", "nutrition-counselling", "pelvic-floor-physiotherapy", "dermatology", "psychology"].map((slug) => ({
+    ...["obgyn-consults", "womens-health-check", "adolescent-health", "menopause", "nutrition-counselling", "pelvic-floor-physiotherapy", "dermatology", "psychology"].map((slug) => ({
       url: `${SITE_URL}/services/${slug}`,
       images: serviceImages(slug),
       lastModified,

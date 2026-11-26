@@ -24,7 +24,7 @@ export type ServiceFitProps = {
 
 export function ServiceFit({ heading, items, headingId = "service-fit-heading" }: ServiceFitProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="fit" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <h2 id={headingId} className={styles.heading}>
           {heading}

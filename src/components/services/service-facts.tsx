@@ -30,7 +30,7 @@ export type ServiceFactsProps = {
 
 export function ServiceFacts({ eyebrow, heading, facts, headingId = "service-facts-heading" }: ServiceFactsProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="facts" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <div className={styles.intro}>
           <p className={styles.eyebrow}>{eyebrow}</p>

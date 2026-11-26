@@ -8,6 +8,7 @@ type Props = {
   sizes: string;
   className?: string;
   priority?: boolean;
+  eager?: boolean;
   /** Decorative use (e.g. a hero background): empty alt on the real image. */
   decorative?: boolean;
   /** Small slots: the placeholder shows only its label and file name. */
@@ -19,7 +20,7 @@ type Props = {
  * fallback photograph if there is one, otherwise a quiet placeholder that
  * names the expected file and shows the brief (the slot's alt).
  */
-export function ImageSlot({ slot, sizes, className, priority, decorative, compact }: Props) {
+export function ImageSlot({ slot, sizes, className, priority, eager, decorative, compact }: Props) {
   const src = slot.ready ? slot.src : slot.fallback;
   if (src) {
     return (
@@ -29,6 +30,7 @@ export function ImageSlot({ slot, sizes, className, priority, decorative, compac
         fill
         sizes={sizes}
         priority={priority}
+        loading={eager && !priority ? "eager" : undefined}
         className={className}
       />
     );

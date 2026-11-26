@@ -1,75 +1,183 @@
 /*
- * CareChat (16 Nov 2026; color.md "Care chat launcher"). Sanctuary Burgundy
- * #641E2B launcher with the mark in ivory and the flower in rose; white
- * pills and card with burgundy type. Root fonts only.
+ * MyStree Assistant (24 Nov 2026; color.md "MyStree Assistant").
+ * Sanctuary Burgundy #641E2B launcher and user bubbles; white panel on a
+ * faint blush log #FBF7F7; booking orange (--book-*) only for "Book";
+ * emergency red #B4232C only for urgent help. Root fonts only.
  */
-.root {
+
+/* ================================================================ dock */
+.dock {
   position: fixed;
   right: max(20px, env(safe-area-inset-right));
   bottom: max(20px, env(safe-area-inset-bottom));
-  z-index: 45;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-  pointer-events: none;
-}
-
-.root > * {
-  pointer-events: auto;
-}
-
-/* Hidden launcher: not clickable while it is faded out. */
-.root:not(.rootVisible) .launcher {
-  pointer-events: none;
-}
-
-.row {
+  z-index: 46;
   display: flex;
   align-items: center;
   gap: 10px;
+  pointer-events: none;
 }
 
-/* ------------------------------------------------------------ launcher */
-.launcher {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #641e2b;
-  color: #fff8f4;
-  box-shadow:
-    0 10px 28px -8px rgb(75 23 34 / 0.55),
-    0 2px 6px rgb(75 23 34 / 0.18);
-  cursor: pointer;
-  transition: background-color 200ms ease;
+.dock > * {
+  pointer-events: auto;
 }
 
-.launcher:hover {
-  background: #4b1722;
+.dock:not(.dockVisible) .launcherWrap,
+.dock:not(.dockVisible) .launcher {
+  pointer-events: none;
+}
+
+/* ============================================================ launcher */
+.launcherWrap {
+  position: relative;
+  display: flex;
+  border-radius: 999px;
 }
 
 /*
- * A soft ring that breathes out from the launcher a few times while the
- * greeting has not been seen (17 Nov 2026). Transform and opacity on a
- * pseudo-element only: it runs on the compositor and never touches scroll.
+ * A circle that widens to the left into a pill on hover. The icon stays
+ * pinned to the right edge (justify-content: flex-end), so the circle never
+ * jumps; the label is revealed by the button's own overflow.
  */
 .launcher {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 56px;
+  height: 56px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #AD002B 0%, #800020 55%, #5C0017 100%);
+  color: #FFFFFF;
+  box-shadow:
+    0 10px 28px -8px rgb(92 0 23 / 0.55),
+    0 2px 6px rgb(92 0 23 / 0.18),
+    inset 0 1px 0 rgb(255 255 255 / 0.16);
+  cursor: pointer;
+  transition:
+    width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease;
 }
 
+.launcherLabel {
+  flex: none;
+  padding-right: 10px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition:
+    opacity 200ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.launcherIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+}
+
+.iconSwap {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.markWrap {
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.markFlower {
+  fill: #e9a9b2;
+  transform-box: fill-box;
+  transform-origin: 30% 80%;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* A soft light sweep that crosses the pill once per hover. */
+.launcher::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.16) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+/* Mouse and trackpad only: touch screens never get a stuck hover state. */
+@media (hover: hover) and (pointer: fine) {
+  .launcher:not(.launcherOpen):hover,
+  .launcher:not(.launcherOpen):focus-visible {
+    width: 170px;
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 36px -12px rgb(75 23 34 / 0.6),
+      0 3px 8px rgb(75 23 34 / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
+  }
+
+  .launcher:not(.launcherOpen):hover .launcherLabel,
+  .launcher:not(.launcherOpen):focus-visible .launcherLabel {
+    opacity: 1;
+    transform: none;
+    transition-delay: 70ms, 40ms;
+  }
+
+  .launcher:not(.launcherOpen):hover .markWrap {
+    transform: rotate(-8deg) scale(1.05);
+  }
+
+  .launcher:not(.launcherOpen):hover .markFlower {
+    transform: rotate(-14deg) scale(1.08);
+  }
+
+  .launcher:not(.launcherOpen):hover::before {
+    transform: translateX(120%);
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+  }
+
+  .launcherOpen:hover .iconSwap {
+    transform: rotate(90deg);
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.launcher:active {
+  transform: scale(0.94);
+  transition-duration: 120ms;
+}
+
+.launcher:focus-visible {
+  outline: 2px solid #641e2b;
+  outline-offset: 3px;
+}
+
+/* Attention ring: a few soft pulses until the greeting has been seen. */
 .pulse::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 50%;
   border: 2px solid rgb(100 30 43 / 0.55);
+  border-radius: 999px;
   pointer-events: none;
-  animation: chat-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) 1s 4;
   opacity: 0;
+  animation: chat-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) 1s 4;
 }
 
 @keyframes chat-ring {
@@ -83,46 +191,7 @@
   }
 }
 
-/* The mark's flower sways gently once on arrival. */
-.pulse .markFlower {
-  transform-box: fill-box;
-  transform-origin: 30% 80%;
-  animation: chat-flower 1.6s ease-in-out 0.6s 2;
-}
-
-@keyframes chat-flower {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-8deg);
-  }
-}
-
-.launcher:focus-visible {
-  outline: 2px solid #641e2b;
-  outline-offset: 3px;
-}
-
-.launcherIcon {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-}
-
-.mark {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.markFlower {
-  fill: #e9a9b2;
-}
-
-/* ------------------------------------------------------------ greeting */
+/* ============================================================ greeting */
 .greeting {
   display: flex;
   align-items: center;
@@ -131,7 +200,7 @@
 }
 
 .dismiss,
-.bubble {
+.bubbleCta {
   border: 0;
   background: #ffffff;
   color: #2a1a1e;
@@ -144,200 +213,631 @@
 .dismiss {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   flex: none;
   border-radius: 50%;
   color: #4a2a31;
-  transition: background-color 200ms ease;
 }
 
-.dismiss:hover {
-  background: #f8eef0;
-}
-
-.bubble {
+.bubbleCta {
   max-width: min(260px, calc(100vw - 150px));
-  padding: 12px 18px;
-  border-radius: 999px;
+  padding: 11px 17px;
+  border-radius: 999px 999px 6px 999px;
   font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 500;
-  line-height: 1.3;
-  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background-color 200ms ease;
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
 }
 
-.bubble:hover {
-  background: #fdf7f8;
+@media (hover: hover) and (pointer: fine) {
+  .dismiss:hover,
+  .bubbleCta:hover {
+    background: #fbf3f4;
+  }
+
+  .bubbleCta:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .dismiss:focus-visible,
-.bubble:focus-visible {
+.bubbleCta:focus-visible {
   outline: 2px solid #641e2b;
   outline-offset: 2px;
 }
 
-/* ---------------------------------------------------------------- card */
-.card {
-  width: min(340px, calc(100vw - 32px));
-  padding: 18px;
-  border-radius: 18px;
+/* ============================================================== panel */
+.panel {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 56px + 14px);
+  z-index: 47;
+  display: flex;
+  flex-direction: column;
+  width: 384px;
+  height: min(640px, calc(100dvh - 120px));
+  border-radius: 22px;
   background: #ffffff;
   color: #2a1a1e;
   box-shadow:
-    0 24px 60px -18px rgb(42 26 30 / 0.35),
-    0 2px 8px rgb(42 26 30 / 0.08);
+    0 30px 70px -20px rgb(42 26 30 / 0.38),
+    0 4px 14px rgb(42 26 30 / 0.08),
+    0 0 0 1px rgb(100 30 43 / 0.06);
+  overflow: hidden;
   transform-origin: bottom right;
 }
 
-.cardHead {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.panel:focus {
+  outline: none;
 }
 
-.cardMark {
+/* Phones: a bottom sheet. */
+.sheet {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: min(88dvh, 760px);
+  border-radius: 22px 22px 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 46;
+  background: rgb(28 10 14 / 0.42);
+}
+
+/* --------------------------------------------------------------- head */
+.head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px 12px 14px;
+  border-bottom: 1px solid #f1e6e8;
+  background: linear-gradient(180deg, #ffffff 0%, #fdf9f9 100%);
+}
+
+.sheet .head {
+  padding-top: 20px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.handle {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 40px;
+  height: 4px;
+  margin-left: -20px;
+  border-radius: 99px;
+  background: #e2d3d6;
+}
+
+.headAvatar {
   display: grid;
   place-items: center;
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   padding: 6px;
   border-radius: 50%;
-  background: #641e2b;
+  background: linear-gradient(150deg, #7a2637, #561826);
   color: #fff8f4;
 }
 
-.cardTitles {
+.headText {
   flex: 1;
   min-width: 0;
 }
 
-.cardTitle {
+.title {
   margin: 0;
   font-family: var(--font-serif), serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
-  color: #641e2b;
+  color: #2a1a1e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cardMeta {
-  margin: 2px 0 0;
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0 0;
   font-family: var(--font-sans), sans-serif;
-  font-size: 12px;
+  font-size: 11.5px;
   color: #6e4650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cardClose {
+.live {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2f9e62;
+  box-shadow: 0 0 0 3px rgb(47 158 98 / 0.16);
+}
+
+.sos {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  height: 32px;
+  padding: 0 11px;
+  border: 1px solid #f2c4c8;
+  border-radius: 999px;
+  background: #fdeef0;
+  color: #b4232c;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.close {
   display: grid;
   place-items: center;
   flex: none;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border: 0;
   border-radius: 50%;
   background: transparent;
   color: #4a2a31;
   cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    transform 220ms ease;
 }
 
-.cardClose:hover {
-  background: #f8eef0;
+@media (hover: hover) and (pointer: fine) {
+  .sos:hover {
+    background: #fbdde1;
+    border-color: #e9a6ad;
+  }
+
+  .close:hover {
+    background: #f6ecee;
+    transform: rotate(90deg);
+  }
 }
 
-.cardLead {
-  margin: 16px 0 10px;
+/* ---------------------------------------------------------------- log */
+.log {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 14px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fbf7f7;
+  scrollbar-width: thin;
+  scrollbar-color: #e6d6d9 transparent;
+}
+
+.botRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.botAvatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 4px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: #800020;
+  color: #FFFFFF;
+}
+
+.avatarMark {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.botStack {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  max-width: calc(100% - 34px);
+}
+
+.bubble {
   font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.bot {
+  justify-self: start;
+  padding: 10px 13px;
+  border: 1px solid #f0e4e6;
+  border-radius: 4px 16px 16px 16px;
+  background: #ffffff;
   color: #2a1a1e;
 }
 
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.bot p {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.option {
+.bot p + p {
+  margin-top: 6px;
+}
+
+.urgent {
+  border-color: #f2c4c8;
+  background: #fff5f6;
+}
+
+.bot .urgentLabel {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 46px;
-  padding: 0 14px;
-  border: 1px solid #f0e2e5;
-  border-radius: 12px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #4b1722;
+  gap: 5px;
+  margin-bottom: 4px;
+  color: #b4232c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.userRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user {
+  max-width: 82%;
+  padding: 9px 13px;
+  border-radius: 16px 4px 16px 16px;
+  background: #5C0017;
+  color: #ffffff;
+}
+
+/* Rows of doctors, fees or packages inside a bot bubble. */
+.list {
+  display: grid;
+  margin: 10px 0 2px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #F3E2E6;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #F3E2E6;
+}
+
+.listItem:last-child {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+
+.listText {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.listTitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.listMeta {
+  font-size: 12px;
+  line-height: 1.35;
+  color: #6A424D;
+}
+
+.listCta {
+  flex: none;
+  padding: 5px 12px;
+  border: 1px solid #E5CED3;
+  border-radius: 999px;
+  color: #800020;
+  font-size: 12.5px;
+  font-weight: 600;
   text-decoration: none;
   transition:
-    background-color 200ms ease,
-    border-color 200ms ease;
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
 }
 
-.option svg:first-child {
-  flex: none;
-  color: #8a4b52;
+/* Action buttons under a bot bubble. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.option span {
-  flex: 1;
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid #E5CED3;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #5C0017;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
-.option:hover {
-  background: #fbf3f4;
-  border-color: #e6cdd2;
+.actionPrimary {
+  border-color: transparent;
+  background: linear-gradient(170deg, var(--book-top), var(--book-bottom));
+  color: #ffffff;
 }
 
-.optionArrow {
-  flex: none;
-  color: #a96f73;
+.actionDanger {
+  border-color: transparent;
+  background: #AD002B;
+  color: #ffffff;
 }
 
-.cardClose:focus-visible,
-.option:focus-visible {
-  outline: 2px solid #641e2b;
+/* Suggested replies. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.chip {
+  padding: 7px 12px;
+  border: 1px solid #E5CED3;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #800020;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listCta:hover {
+    background: #800020;
+    border-color: #800020;
+    color: #ffffff;
+  }
+
+  .action:hover {
+    border-color: #AD002B;
+    background: #FAF1F3;
+    transform: translateY(-1px);
+  }
+
+  .actionPrimary:hover {
+    background: linear-gradient(170deg, var(--book-hover-top), var(--book-hover-bottom));
+  }
+
+  .actionDanger:hover {
+    background: #800020;
+  }
+
+  .chip:hover {
+    background: #800020;
+    border-color: #800020;
+    color: #ffffff;
+  }
+}
+
+.chip:active,
+.action:active {
+  transform: scale(0.97);
+}
+
+.listCta:focus-visible,
+.action:focus-visible,
+.chip:focus-visible,
+.sos:focus-visible,
+.close:focus-visible,
+.send:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
   outline-offset: 2px;
 }
 
-.emergency {
-  margin: 14px 0 0;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12px;
-  line-height: 1.45;
-  color: #6e4650;
+/* Typing indicator. */
+.typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 13px 14px;
 }
 
-/* --------------------------------------------------------------- phones */
-/* Compact on phones (17 Nov 2026). */
+.typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b08a92;
+  animation: chat-dot 1.1s ease-in-out infinite;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes chat-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------- composer */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 6px;
+  border-top: 1px solid #f1e6e8;
+  background: #ffffff;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid #ecdfe2;
+  border-radius: 999px;
+  background: #f8f3f4;
+  color: #2a1a1e;
+  font-family: var(--font-sans), sans-serif;
+  /* 16px stops iOS Safari zooming the page when the field is focused. */
+  font-size: 16px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.input::placeholder {
+  color: #8f747a;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #b98a94;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgb(100 30 43 / 0.1);
+}
+
+.send {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #641e2b;
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.send:disabled {
+  background: #e8dadd;
+  cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .send:not(:disabled):hover {
+    background: #4b1722;
+    transform: translateY(-1px);
+  }
+}
+
+.send:not(:disabled):active {
+  transform: scale(0.92);
+}
+
+.disclaimer {
+  margin: 0;
+  padding: 2px 16px 10px;
+  background: #ffffff;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  color: #8a6c73;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================= phones */
 @media (max-width: 767px) {
-  .root {
+  .dock {
     right: max(12px, env(safe-area-inset-right));
-    bottom: max(12px, env(safe-area-inset-bottom));
-    gap: 8px;
+    bottom: calc(4.95rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 639px) {
+  .dock {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(4.95rem + env(safe-area-inset-bottom, 0px));
+    gap: 6px;
   }
 
   .launcher {
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
+    padding: 0 9px;
   }
 
   .launcherIcon {
-    width: 27px;
-    height: 27px;
-  }
-
-  .row {
-    gap: 6px;
+    width: 32px;
+    height: 32px;
   }
 
   .dismiss {
@@ -345,60 +845,26 @@
     height: 30px;
   }
 
-  .dismiss svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .bubble {
-    padding: 8px 13px;
+  .bubbleCta {
+    padding: 9px 13px;
     font-size: 13px;
   }
 
-  .card {
-    width: min(310px, calc(100vw - 24px));
-    padding: 14px;
-    border-radius: 16px;
+  .sos {
+    height: 30px;
+    padding: 0 9px;
+    font-size: 12px;
   }
 
-  .cardMark {
-    width: 34px;
-    height: 34px;
-    padding: 5px;
+  .subtitle {
+    font-size: 11px;
   }
 
-  .cardTitle {
-    font-size: 16px;
-  }
-
-  .cardMeta {
-    font-size: 11.5px;
-  }
-
-  .cardLead {
-    margin: 12px 0 8px;
-    font-size: 14px;
-  }
-
-  .options {
-    gap: 5px;
-  }
-
-  .option {
-    min-height: 40px;
-    gap: 10px;
-    padding: 0 12px;
-    font-size: 13.5px;
-    border-radius: 10px;
-  }
-
-  .emergency {
-    margin-top: 10px;
-    font-size: 11.5px;
+  .bubble {
+    font-size: 14.5px;
   }
 }
 
-/* Very small phones: the greeting drops its close button; the bubble itself still opens help. */
 @media (max-width: 340px) {
   .dismiss {
     display: none;
@@ -406,15 +872,31 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pulse::after,
-  .pulse .markFlower {
-    animation: none;
+  .launcher,
+  .launcherLabel,
+  .markWrap,
+  .markFlower,
+  .close,
+  .chip,
+  .action,
+  .send {
+    transition: none !important;
   }
 
-  .launcher,
-  .dismiss,
-  .bubble,
-  .option {
-    transition: none;
+  .launcher::before,
+  .pulse::after {
+    display: none;
+  }
+
+  .typing span {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* Small phones: the header avatar gives its room to the title. */
+@media (max-width: 389px) {
+  .headAvatar {
+    display: none;
   }
 }

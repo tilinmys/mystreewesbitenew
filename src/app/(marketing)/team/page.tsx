@@ -5,6 +5,7 @@ import { Team2CareModel } from "@/components/team-2/team-2-care-model";
 import { Team2RosterRoles } from "@/components/team-2/team-2-roster-roles";
 import { Team2MeetProviders } from "@/components/team-2/team-2-meet-providers";
 import { Team2ClosingBanner } from "@/components/team-2/team-2-closing-banner";
+import { getBatchNextSlots, getBookingDoctors, type NextSlot } from "@/lib/booking";
 import { getDoctors } from "@/lib/doctors-repository";
 import type { Doctor } from "@/lib/doctors";
 import { SITE_URL, clinic } from "@/lib/clinic";
@@ -12,16 +13,16 @@ import { CLINIC_ID, clinicNode, clinicianRef } from "@/lib/service-schema";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Doctors & Specialists in Indiranagar, Bengaluru",
+  title: "Doctors & Care Team in Indiranagar, Bengaluru",
   description:
-    "Meet MyStree's gynaecologists, obstetricians, reproductive medicine specialist, nutritionist, pelvic physiotherapist and wider team on 13th Main Road, Indiranagar, Bengaluru.",
+    "Meet MyStree's gynaecologists, obstetricians, reproductive endocrinologist, nutritionist & pelvic physiotherapist in Indiranagar, Bengaluru.",
   alternates: {
     canonical: `${SITE_URL}/team`,
   },
   openGraph: {
     title: "Doctors, Nutritionists & Care Team | MyStree Indiranagar",
     description:
-      "Gynaecologists, obstetricians, nutrition and pelvic physiotherapy working together on 13th Main Road, Indiranagar, Bengaluru.",
+      "Gynaecologists, obstetricians, reproductive medicine, nutrition and pelvic physiotherapy working together on 13th Main Road, Indiranagar, Bengaluru.",
     url: `${SITE_URL}/team`,
     siteName: clinic.name,
     locale: "en_IN",
@@ -46,7 +47,7 @@ function structuredData(doctors: readonly Doctor[]) {
         "@type": "CollectionPage",
         "@id": `${SITE_URL}/team#page`,
         url: `${SITE_URL}/team`,
-        name: "Doctors and specialists at MyStree, Indiranagar",
+        name: "Doctors and care team at MyStree, Indiranagar",
         inLanguage: "en-IN",
         about: { "@id": CLINIC_ID },
         mainEntity: {
@@ -70,7 +71,31 @@ function structuredData(doctors: readonly Doctor[]) {
 }
 
 export default async function TeamPage() {
-  const doctors = await getDoctors();
+  const [doctors, bookingRoster] = await Promise.all([getDoctors(), getBookingDoctors()]);
+  const bookingById = new Map(bookingRoster.map((record) => [record.id, record]));
+
+  const slotsBySlug: Record<string, NextSlot | null> = {};
+  const feesBySlug: Record<string, { fee: number; durationMinutes: number }> = {};
+  const slugIdPairs: Array<{ slug: string; bookingId: number }> = [];
+
+  for (const doctor of doctors) {
+    const match = doctor.bookingUrl?.match(/appointment\/(\d+)/);
+    const bookingId = match ? Number(match[1]) : null;
+    const record = bookingId ? bookingById.get(bookingId) : undefined;
+    if (record) {
+      feesBySlug[doctor.slug] = { fee: record.fee, durationMinutes: record.durationMinutes };
+    }
+    if (bookingId && !doctor.practisesElsewhere) {
+      slugIdPairs.push({ slug: doctor.slug, bookingId });
+    } else {
+      slotsBySlug[doctor.slug] = null;
+    }
+  }
+
+  const slotMap = await getBatchNextSlots(slugIdPairs.map((item) => item.bookingId));
+  for (const { slug, bookingId } of slugIdPairs) {
+    slotsBySlug[slug] = slotMap[bookingId] ?? null;
+  }
 
   return (
     <main className="mystree-page">
@@ -81,14 +106,14 @@ export default async function TeamPage() {
       {/* 1. Hero: Collaborative care for every chapter of womanhood */}
       <Team2Hero />
 
-      {/* 2. Care Model & Integrated Comparison Table */}
+      {/* 2. Calm, zero-animation Doctors Directory immediately visible after Hero */}
+      <Team2MeetProviders doctors={doctors} slotsBySlug={slotsBySlug} feesBySlug={feesBySlug} />
+
+      {/* 3. Care Model & Integrated Comparison Table */}
       <Team2CareModel />
 
-      {/* 3. Care Team Roster Roles */}
+      {/* 4. Care Team Roster Roles */}
       <Team2RosterRoles />
-
-      {/* 4. Meet Our Providers & Doctors Directory */}
-      <Team2MeetProviders doctors={doctors} />
 
       {/* 5. Patient testimonials are not shown (NMC Guidelines 2026, Expl. V). */}
 

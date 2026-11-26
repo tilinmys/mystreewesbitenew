@@ -63,9 +63,9 @@ const PAGE_PATH = "/services/pelvic-floor-physiotherapy";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Pelvic Floor Physiotherapy for Women in Indiranagar, Bengaluru",
+  title: "Pelvic Floor Physiotherapy in Indiranagar",
   description:
-    "Women's pelvic floor physiotherapy in Indiranagar, Bengaluru for bladder leaks, vaginismus, painful sex, diastasis recti, C-section recovery and pregnancy pain.",
+    "Women's pelvic floor physiotherapy in Indiranagar, Bengaluru for leaks, vaginismus, painful sex, diastasis recti, C-section recovery & pregnancy pain.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Pelvic Floor Physiotherapy for Women in Indiranagar, Bengaluru | MyStree",
@@ -225,11 +225,22 @@ export default function PelvicFloorPhysiotherapyPage() {
           primaryCta={{ label: "Book a pelvic health assessment", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: "tel:+916366573772" }}
         />
-        <ServiceQuote
-          quote="Pelvic health is often overlooked. After childbirth or with conditions like vaginismus, women are sometimes told their pain is normal. It is worth having it assessed."
-          name="Dr. Jasmine Flora"
-        />
       </ServiceBand>
+
+      <ServiceSpecialists
+        headingId="physio-specialists-heading"
+        heading="Book with our pelvic floor physiotherapist"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 7,
+            tag: "Pelvic physiotherapy",
+            focus: ["Vaginismus and pelvic pain", "Leaks and postnatal recovery"],
+            profileHref: "/doctors/dr-jasmine-flora",
+          },
+        ]}
+      />
 
       <ServiceConditions
         headingId="physio-conditions-heading"
@@ -249,21 +260,6 @@ export default function PelvicFloorPhysiotherapyPage() {
           "Vaginismus",
         ]}
         cta={{ label: "Book a pelvic health assessment", href: "/book" }}
-      />
-
-      <ServiceSpecialists
-        headingId="physio-specialists-heading"
-        heading="Book with our pelvic floor physiotherapist"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 7,
-            tag: "Pelvic physiotherapy",
-            focus: ["Vaginismus and pelvic pain", "Leaks and postnatal recovery"],
-            profileHref: "/doctors/dr-jasmine-flora",
-          },
-        ]}
       />
 
       <ServiceSteps
@@ -291,16 +287,9 @@ export default function PelvicFloorPhysiotherapyPage() {
         cta={{ label: "Book a pelvic health assessment", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/postpartum-back-pain-lifting-toddler.webp", alt: "A mother bracing her lower back as she lifts her toddler" }}
-        headingId="physio-insight-heading"
-        heading="Why pelvic floor problems are often missed"
-        body="Many women are told that leaking after children, or pain during sex, is just part of life. Both are common, and both can be assessed and treated."
-        points={[
-          "“Do more Kegels” is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
-          "C-section scars can stay stiff and sensitive for months, and are rarely checked after the six-week visit",
-          "Crunches and planks too soon after birth can strain a healing core and pelvic floor",
-        ]}
+      <ServiceQuote
+        quote="Pelvic health is often overlooked. After childbirth or with conditions like vaginismus, women are sometimes told their pain is normal. It is worth having it assessed."
+        name="Dr. Jasmine Flora"
       />
 
       <ServiceFit
@@ -311,6 +300,18 @@ export default function PelvicFloorPhysiotherapyPage() {
           { icon: "conversation", label: "Feel pain or tightness with sex, tampons or a gynaecological examination" },
           { icon: "monitor", label: "Leak when you laugh, sneeze or exercise, or rush to reach the toilet" },
           { icon: "pregnancy", label: "Are pregnant and have pubic bone, hip or lower back pain" },
+        ]}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/postpartum-back-pain-lifting-toddler.webp", alt: "A mother bracing her lower back as she lifts her toddler" }}
+        headingId="physio-insight-heading"
+        heading="Why pelvic floor problems are often missed"
+        body="Many women are told that leaking after children, or pain during sex, is just part of life. Both are common, and both can be assessed and treated."
+        points={[
+          "“Do more Kegels” is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
+          "C-section scars can stay stiff and sensitive for months, and are rarely checked after the six-week visit",
+          "Crunches and planks too soon after birth can strain a healing core and pelvic floor",
         ]}
       />
 

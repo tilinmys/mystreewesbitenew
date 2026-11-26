@@ -75,7 +75,7 @@ export const seedDoctors: readonly Doctor[] = [
     bio: "Dr. Smitha specializes in High Risk Obstetrics and In-utero Fetal Programming with a keen interest in treatment of endocrine disorders, recurrent pregnancy loss, bad obstetric history and high risk pregnancy. She strongly believes in patient care that goes beyond the illness by holistically approaching the care with the right mix of evidence-based medicine and personalized care.",
     background:
       "Alumnus of Dr. B.R. Ambedkar Medical College, Bangalore and Diplomate of the National Board. Active member of BSOG and ISUOG.",
-    credentials: ["MBBS, DNB (Obstetrics & Gynaecology)", "23 years experience, 15 as specialist"],
+    credentials: ["MBBS, DNB (Obstetrics & Gynaecology)", "23 years experience, 15 in speciality"],
     languages: ["English", "Kannada", "Hindi", "Tamil"],
     bookingUrl: "https://my-stree.com/booking/appointment/2",
     stories: [
@@ -110,7 +110,7 @@ export const seedDoctors: readonly Doctor[] = [
     founder: true,
     image: "/drsurbhi.webp",
     bio: "Dr. Surbhi Sinha is an obstetrician and gynaecologist and a co-founder of MyStree. She sees women for gynaecology, fertility consultations, early pregnancy and minimal access surgery.",
-    credentials: ["MBBS, MS (Obstetrics & Gynaecology), DNB", "13 years experience, 9 as specialist", "Reg. No. MAH 2018 0000672 KTK"],
+    credentials: ["MBBS, MS (Obstetrics & Gynaecology), DNB", "13 years experience, 9 in speciality", "Reg. No. MAH 2018 0000672 KTK"],
     languages: ["English", "Hindi"],
     bookingUrl: "https://my-stree.com/booking/appointment/1",
     stories: [
@@ -164,10 +164,10 @@ export const seedDoctors: readonly Doctor[] = [
     slug: "dr-chaitra-nayak",
     category: "Reproductive Medicine",
     name: "Dr. Chaitra Nayak",
-    title: "Reproductive Medicine Specialist",
+    title: "Reproductive Endocrinologist & Gynaecologist",
     specialty: "Fertility",
     image: "/DrChaitraNayak.webp",
-    bio: "Dr. Chaitra Nayak is a reproductive medicine specialist who consults at MyStree. She is the founder of Kalpa Clinic, and her clinical work covers PCOS, endometriosis and fertility evaluation.",
+    bio: "Dr. Chaitra Nayak is a reproductive endocrinologist and gynaecologist who consults at MyStree. She is the founder of Kalpa Clinic, and her clinical work covers PCOS, endometriosis and fertility evaluation.",
     credentials: ["MBBS, MS (OBG), FNB (Reproductive Medicine), Fellowship in Reproductive Medicine", "24 years experience"],
     languages: ["English", "Hindi", "Kannada", "Tamil"],
     bookingUrl: "https://my-stree.com/booking/appointment/4",

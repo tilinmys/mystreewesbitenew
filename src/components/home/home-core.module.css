@@ -5,10 +5,9 @@
  */
 .section {
   position: relative;
-  /* One screen tall and never pinned, so scrolling is never held up. */
-  height: 100svh;
-  min-height: 620px;
-  background: linear-gradient(180deg, #ffffff 0%, #fcf3f4 22%, #faeef0 70%, #ffffff 100%);
+  height: auto;
+  min-height: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #FAF1F3 26%, #F3E2E6 74%, #ffffff 100%);
 }
 
 .section.section {
@@ -17,8 +16,13 @@
 
 .stage {
   position: relative;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 290px;
   overflow: hidden;
+  padding: 56px 24px 60px;
 }
 
 .tree {
@@ -29,11 +33,11 @@
 }
 
 .stems {
-  color: #e3bfc5;
+  color: #E5CED3;
 }
 
 .blooms {
-  color: #e8c6cb;
+  color: #DFBDC4;
 }
 
 /* A slow breeze through the flowers (transform only). */
@@ -63,13 +67,12 @@
 }
 
 .copy {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
   text-align: center;
 }
 
@@ -82,7 +85,7 @@
   font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
   line-height: 1.04 !important;
   letter-spacing: -0.025em !important;
-  color: #641e2b;
+  color: #5C0017;
 }
 
 .line {
@@ -104,7 +107,7 @@
 
 .wordItalic {
   font-style: italic;
-  color: #8a4b52;
+  color: #800020;
 }
 
 .lead {
@@ -113,7 +116,7 @@
   font-family: var(--font-sans), sans-serif;
   font-size: 17px;
   line-height: 1.65;
-  color: #4a2a31;
+  color: #3E1E26;
   text-wrap: balance;
 }
 
@@ -127,34 +130,17 @@
 }
 
 @media (max-width: 767px) {
-  .section {
-    height: 88svh;
-    min-height: 560px;
-  }
-
-  .lead {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sway {
-    animation: none;
-  }
-}
-
-/* Compact phones (17 Nov 2026): tighter spacing and type, same design. */
-@media (max-width: 767px) {
-  .section {
-    height: 76svh;
-    min-height: 500px;
+  .stage {
+    min-height: 220px;
+    padding: 40px 20px;
   }
 
   .section .heading {
-    font-size: 2.3rem !important;
+    font-size: 2.2rem !important;
   }
 
   .lead {
+    margin-top: 18px;
     font-size: 15px;
   }
 }

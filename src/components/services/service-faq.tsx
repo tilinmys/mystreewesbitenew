@@ -32,7 +32,7 @@ export type ServiceFaqProps = {
 
 export function ServiceFaq({ heading, items, allLink, headingId = "service-faq-heading" }: ServiceFaqProps) {
   return (
-    <section className={styles.section} id="faq" aria-labelledby={headingId}>
+    <section className={styles.section} id="faq" data-svc-band="faq" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <div className={styles.intro}>
           <h2 id={headingId} className={styles.heading}>

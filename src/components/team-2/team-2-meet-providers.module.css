@@ -7,8 +7,8 @@
 .section {
   position: relative;
   width: 100%;
-  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 3.5rem);
-  background: var(--surface-soft);
+  padding: clamp(3rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 3.5rem);
+  background: var(--surface-mist);
   color: var(--botanical-midnight);
   overflow: hidden;
 }
@@ -22,14 +22,24 @@
 
 .header {
   text-align: center;
-  margin-bottom: clamp(2rem, 3.5vw, 2.75rem);
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--twilight-wine);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .heading {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.75rem;
   color: var(--botanical-midnight);
   font-family: var(--font-serif), Georgia, "Times New Roman", serif;
-  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.15rem, 4vw, 3rem);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -41,8 +51,66 @@
   font-family: var(--font-sans), sans-serif;
   font-size: clamp(0.95rem, 1.25vw, 1.0625rem);
   font-weight: 400;
-  line-height: 1.62;
-  max-width: 52ch;
+  line-height: 1.6;
+  max-width: 54ch;
+}
+
+/* ---------------- Concern Shortcuts ---------------- */
+.concernWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.concernBtn {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 2.35rem;
+  padding: 0 0.95rem;
+  border: 1px solid var(--border-component, #DDD3D5);
+  border-radius: 999px;
+  background: var(--pure-white);
+  color: var(--text-dark, #3E1E26);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.concernBtn:hover {
+  border-color: var(--palette-burgundy, #800020);
+  color: var(--palette-burgundy, #800020);
+}
+
+.concernBtnActive,
+.concernBtnActive:hover {
+  border-color: var(--palette-burgundy, #800020);
+  background: var(--palette-burgundy, #800020);
+  color: var(--pure-white);
+  font-weight: 500;
+}
+
+.concernBtn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.resultCount {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--text-muted, #5C484D);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ---------------- Filters Bar ---------------- */
@@ -69,7 +137,7 @@
   color: var(--text-muted);
   font-family: var(--font-sans), sans-serif;
   font-size: var(--type-caption);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -129,7 +197,8 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(0.85rem, 1.4vw, 1.25rem);
+  row-gap: clamp(1rem, 1.6vw, 1.4rem);
+  column-gap: clamp(0.85rem, 1.4vw, 1.25rem);
   width: 100%;
 }
 
@@ -139,10 +208,13 @@
   align-items: center;
   text-align: center;
   height: 100%;
-  background: var(--pure-white);
-  border: 1px solid var(--hairline);
-  border-radius: 0.875rem;
-  padding: 1.25rem 1rem 1rem;
+  background: var(--pure-white, #FFFFFF);
+  border: 1px solid var(--border-subtle, #EED4DC);
+  border-radius: 0.9375rem;
+  padding: 1.65rem 1.25rem 1.25rem;
+  box-shadow:
+    0 1px 2px rgb(92 0 23 / 0.04),
+    0 10px 26px -18px rgb(92 0 23 / 0.14);
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 220ms ease,
     border-color 220ms ease;
@@ -151,20 +223,23 @@
 .card:hover,
 .card:focus-within {
   transform: translateY(-2px);
-  border-color: color-mix(in oklab, var(--cadet-slate) 60%, var(--pure-white));
-  box-shadow: 0 14px 30px -18px color-mix(in oklab, var(--midnight-chamber) 45%, transparent);
+  border-color: var(--palette-crimson, #AD002B);
+  box-shadow: 0 18px 34px -18px rgb(128 0 32 / 0.22);
 }
 
-/* Avatar disc: the clinician's tone, with their cutout standing on it in full colour. */
+/* Circular solid-color portrait disc matching reference silhouette */
 .avatar {
   position: relative;
-  width: 6.5rem;
-  height: 6.5rem;
-  margin: 0 auto 0.9rem;
+  display: block;
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0 auto 0.95rem;
   flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--tone, var(--uranian-mist));
+  background: var(--tone, var(--palette-burgundy, #800020));
+  box-shadow: inset 0 0 0 1px rgb(92 0 23 / 0.08);
+  text-decoration: none;
 }
 
 .avatarImage {
@@ -177,84 +252,186 @@
   inset: 0;
   display: grid;
   place-items: center;
-  color: var(--twilight-wine);
+  color: #FFFFFF;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 2.1rem;
+  font-weight: 400;
   letter-spacing: 0.02em;
 }
 
 .doctorName {
-  margin: 0;
-  color: var(--botanical-midnight);
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-body-lg);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  margin: 0 0 0.25rem;
+  color: #2A151A;
+  font-family: var(--font-sans), sans-serif !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  line-height: 1.28 !important;
+  letter-spacing: -0.015em;
+}
+
+.doctorNameLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.doctorNameLink:hover {
+  color: var(--palette-burgundy, #800020);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .designation {
-  margin: 0.2rem 0 0;
-  color: var(--text-muted);
+  margin: 0 0 0.8rem;
+  color: var(--text-muted, #5C484D);
   font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-caption);
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .badgesWrap {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   justify-content: center;
-  gap: 0.35rem;
-  margin: 0.8rem 0 1rem;
+  gap: 0.375rem;
+  margin: 0 0 0.9rem;
   padding: 0;
   list-style: none;
+  width: 100%;
 }
 
 .badge {
-  padding: 0.2rem 0.6rem;
-  border: 1px solid var(--hairline);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid var(--border-subtle, #E8E1E2);
   border-radius: 9999px;
-  background: var(--pure-white);
-  color: var(--midnight-chamber);
+  background: var(--surface-whisper, #FBF9F9);
+  color: var(--text-dark, #3E1E26);
   font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-label);
+  font-size: 0.74rem;
   font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  line-height: 1.25;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.viewProfileBtn {
+.clinicalStrip {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 0.85rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-subtle, #E8E1E2);
+  border-radius: 0.625rem;
+  background: var(--surface-well, #F3EFEF);
+}
+
+.feeText {
+  color: var(--text-muted, #5C484D);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.feeText strong {
+  color: var(--palette-oxblood, #5C0017);
+  font-weight: 600;
+}
+
+.slotLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #2A151A;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.slotLine svg {
+  color: var(--palette-burgundy, #800020);
+  flex-shrink: 0;
+}
+
+.cardActions {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.profileOutlineBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-component, #DDD3D5);
+  border-radius: 9999px;
+  background: #FFFFFF;
+  color: var(--palette-oxblood, #5C0017);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.profileOutlineBtn:hover {
+  border-color: var(--palette-burgundy, #800020);
+  background: var(--surface-whisper, #FBF9F9);
+}
+
+.profileOutlineBtn:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 2px;
+}
+
+.viewProfileBtn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 2.75rem;
-  margin-top: auto;
-  padding: 0.5rem 1rem;
-  background: var(--twilight-wine);
-  color: var(--pure-white);
-  border-radius: 0.5rem;
+  min-height: 2.65rem;
+  padding: 0.5rem 0.85rem;
+  border: 0;
+  border-radius: 9999px;
+  background: linear-gradient(95deg, #AD002B 0%, #800020 100%);
+  color: #FFFFFF;
   font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-ui);
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition:
+    background 180ms ease,
+    transform 160ms ease,
+    box-shadow 180ms ease;
 }
 
 .viewProfileBtn:hover {
-  background: var(--midnight-chamber);
+  background: linear-gradient(95deg, #43081C 0%, #260310 100%);
+  box-shadow: 0 8px 18px -10px rgb(38 3 16 / 0.45);
+}
+
+.viewProfileBtn:active {
+  transform: scale(0.98);
 }
 
 .viewProfileBtn:focus-visible {
-  outline: 2px solid var(--twilight-wine);
-  outline-offset: 3px;
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 2px;
 }
 
 /* "You're viewing 8 of 13" and Show more */
@@ -373,99 +550,63 @@
 }
 
 /*
- * Phones (compact list, 17 Nov 2026): one card per row, photo on the left,
- * name, role, qualification and registration beside it, two specialty chips
- * and a small "View profile" button. About 150px tall instead of 330px.
- * Desktop and tablet are unchanged.
+ * Phones: preserve the exact centered circular-portrait + outlined chips +
+ * full-width View profile card pattern so mobile follows the same UI grammar.
  */
 @media (max-width: 600px) {
   .section {
-    padding: 2.75rem 1rem;
+    padding: 2.5rem 1rem 3rem;
   }
 
-  /* Filters: role and location side by side, specialty under them. */
-  .filtersBar {
-    gap: 0.6rem;
-  }
-
-  .filterGroup {
-    flex: 1 1 calc(50% - 0.3rem);
-  }
-
-  .filterGroup:last-child {
-    flex-basis: 100%;
-  }
-
-  .select {
-    min-height: 2.6rem;
-    font-size: 14px;
-  }
-
-  .cardsGrid {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
-
-  .card {
-    display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr);
-    column-gap: 0.85rem;
-    align-items: start;
-    padding: 0.85rem 0.9rem;
-    text-align: left;
-  }
-
-  .card > * {
-    grid-column: 2;
-  }
-
-  .avatar {
-    grid-column: 1;
-    grid-row: 1 / span 6;
-    width: 4rem;
-    height: 4rem;
-    margin: 0;
-  }
-
-  .doctorName {
-    font-size: 16px;
-    line-height: 1.25;
-  }
-
-  .designation {
-    margin-top: 0.15rem;
-    font-size: 12.5px;
-    line-height: 1.35;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .badgesWrap {
-    justify-content: flex-start;
+  .concernWrap {
     flex-wrap: nowrap;
-    overflow: hidden;
-    gap: 0.3rem;
-    margin: 0.5rem 0 0.6rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin: 0 -1rem 0.9rem;
+    padding: 0.15rem 1rem 0.35rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .badge {
-    padding: 0.12rem 0.5rem;
-    font-size: 11.5px;
-  }
-
-  .badge:nth-child(n + 3) {
+  .concernWrap::-webkit-scrollbar {
     display: none;
   }
 
+  .cardsGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+    max-width: 23rem;
+    margin: 0 auto;
+  }
+
+  .card {
+    padding: 1.45rem 1.15rem 1.15rem;
+  }
+
+  .avatar {
+    width: 7.5rem;
+    height: 7.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .doctorName {
+    font-size: 1.125rem !important;
+    margin-bottom: 0.75rem;
+  }
+
+  .badgesWrap {
+    gap: 0.4rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .badge {
+    padding: 0.3rem 0.72rem;
+    font-size: 0.76rem;
+  }
+
   .viewProfileBtn {
-    justify-self: start;
-    width: auto;
-    min-height: 2.25rem;
-    margin-top: 0;
-    padding: 0.35rem 0.95rem;
-    font-size: 13px;
+    min-height: 2.75rem;
+    font-size: 0.9rem;
   }
 }
 

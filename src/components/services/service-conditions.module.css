@@ -8,8 +8,8 @@
 
 .section {
   padding: var(--svc-pad-y) var(--svc-pad-x);
-  background: var(--svc-mesh);
-  color: var(--svc-on-wine);
+  background: var(--svc-mist);
+  color: var(--text-dark);
 }
 
 /* Phone order: heading, list, then the action — read first, then act. */
@@ -28,7 +28,7 @@
   grid-area: heading;
   max-width: 14em;
   margin: 0;
-  color: var(--svc-on-wine);
+  color: var(--midnight-chamber);
   font-size: clamp(1.75rem, 2.86vw, 2.75rem) !important;
   font-weight: 400 !important;
   line-height: 1.2 !important;
@@ -59,15 +59,15 @@
   top: 0;
   bottom: 0;
   left: -1.5rem;
-  width: 1px;
-  background: color-mix(in oklab, var(--svc-on-wine) 45%, transparent);
+  width: 1.5px;
+  background: color-mix(in oklab, var(--twilight-wine) 45%, transparent);
   content: "";
   transform-origin: top;
 }
 
 .label {
   display: block;
-  color: var(--svc-on-wine);
+  color: var(--text-dark);
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: var(--type-body-lg);
   font-weight: 500;
@@ -252,9 +252,10 @@
 
   .label {
     padding: 0.4rem 0.75rem;
-    border: 1px solid color-mix(in oklab, var(--svc-on-wine) 38%, transparent);
+    border: 1px solid var(--border-subtle);
     border-radius: 999px;
-    background: color-mix(in oklab, var(--svc-on-wine) 7%, transparent);
+    background: var(--pure-white);
+    color: var(--midnight-chamber);
     font-size: 13.5px;
     line-height: 1.3;
   }

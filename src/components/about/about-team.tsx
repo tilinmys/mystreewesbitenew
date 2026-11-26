@@ -40,7 +40,7 @@ const GROUPS: readonly Group[] = [
   {
     key: "doctors",
     title: "Doctors",
-    text: "Gynaecologists, obstetricians and a reproductive medicine specialist who see you in Indiranagar and know your history.",
+    text: "Gynaecologists, obstetricians and a reproductive endocrinologist who see you in Indiranagar and know your history.",
     link: { label: "Our doctors", href: "/doctors#meet-providers" },
     placeholder: "Doctors photo",
   },
@@ -67,7 +67,7 @@ export function AboutTeam() {
           <h2 id="team-heading" className={styles.title}>
             Meet the MyStree team
           </h2>
-          <p className={styles.lead}>The doctors, specialists and founders behind every visit to MyStree.</p>
+          <p className={styles.lead}>The doctors, clinicians and founders behind every visit to MyStree.</p>
         </header>
 
         <ul className={styles.groups}>

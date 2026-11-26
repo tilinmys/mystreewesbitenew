@@ -22,6 +22,8 @@ export const revalidate = 3600;
 
 const SERVICES = [
   ["OB-GYN consultations", "/services/obgyn-consults", "gynaecology and pregnancy care, in-clinic pelvic ultrasound, irregular periods, PCOS, endometriosis, cervical cancer screening and prevention advice"],
+  ["Women's health check and Pap smear", "/services/womens-health-check", "preventive women's health check-ups, Pap smear and cervical screening, clinical breast examination and annual gynaecology reviews"],
+  ["PCOS and metabolic care", "/clinics/pcos", "PCOS and PCOD care with gynaecology, clinical nutrition and dermatology"],
   ["Pregnancy care", "/services/prenatal", "antenatal care and high-risk pregnancy, scans, gestational diabetes, delivery planning"],
   ["Menopause and perimenopause", "/services/menopause", "menopause care for hot flushes, sleep, mood and bone health"],
   ["Adolescent health clinic", "/services/adolescent-health", "teen gynaecology, period problems, PCOS in teenagers, cervical cancer prevention advice, nutrition and mental wellbeing, with parent-and-teen consultations"],
@@ -37,7 +39,7 @@ export async function GET() {
 
   const body = `# MyStree
 
-> MyStree (also listed as "My Stree Clinic") is a women's health clinic at ${address}, a short walk from 100 Feet Road. Gynaecologists, obstetricians, a reproductive medicine specialist, a nutritionist, a pelvic floor physiotherapist, a dermatologist, a psychologist and a psychiatrist care for women from first periods and pregnancy to menopause, in the clinic and online.
+> MyStree (also listed as "My Stree Clinic") is a women's health clinic at ${address}, a short walk from 100 Feet Road. Gynaecologists, obstetricians, a reproductive endocrinologist, a nutritionist, a pelvic floor physiotherapist, a dermatologist, a psychologist and a psychiatrist care for women from first periods and pregnancy to menopause, in the clinic and online.
 
 ## Clinic facts
 
@@ -66,7 +68,7 @@ ${SERVICES.map(([name, path, note]) => `- [${name}](${SITE_URL}${path}): ${note}
 
 ${PACKAGES.map((pkg) => `- [${pkg.name}](${SITE_URL}/packages/${pkg.slug}): ${[pkg.priceDisplay, pkg.priceNote].filter(Boolean).join(" ")}. ${pkg.tagline} Includes: ${pkg.items.map((item) => item.name.replace(/^0\d\s+/, "")).join("; ")}. ${pkg.terms[0]}`).join("\n")}
 
-## Doctors and specialists
+## Doctors and care team
 
 ${doctors.map((doctor) => `- [${doctor.name}](${SITE_URL}/doctors/${doctor.slug}): ${doctor.title}`).join("\n")}
 - [All doctors](${SITE_URL}/team)

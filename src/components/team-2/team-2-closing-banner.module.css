@@ -29,8 +29,8 @@
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  background: linear-gradient(135deg, var(--uranian-mist) 0%, var(--uranian-mist) 100%);
-  border: 1.5px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
+  background: linear-gradient(135deg, #FBF9F9 0%, #F4EFEF 100%);
+  border: 1px solid #E8E1E2;
   border-radius: 1.25rem;
   padding: clamp(2.75rem, 5vw, 4rem) clamp(2rem, 4.5vw, 3.75rem);
   box-shadow: 0 12px 32px -6px color-mix(in oklab, var(--twilight-wine) 8%, transparent);
@@ -104,37 +104,39 @@
   min-height: 3rem;
   padding: 0.75rem 1.85rem;
   border-radius: 9999px;
-  border: 1.5px solid var(--botanical-midnight);
-  background-color: transparent;
-  color: var(--botanical-midnight);
+  border: 1.5px solid var(--palette-oxblood, #5C0017);
+  background-color: #FFFFFF;
+  color: var(--palette-oxblood, #5C0017);
   font-family: var(--font-sans), sans-serif;
   font-size: var(--type-body);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   text-decoration: none;
-  transition: background-color 180ms ease, transform 180ms ease;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .secondaryAction:hover {
-  background-color: color-mix(in oklab, var(--twilight-wine) 6%, transparent);
+  background-color: var(--palette-oxblood, #5C0017);
+  color: #FFFFFF;
   transform: translateY(-2px);
 }
 
-/* Right Decorative Organic Silhouette Wave */
+/* Right Editorial Team Portrait Illustration */
 .silhouetteWrap {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: clamp(1.5rem, 3vw, 3rem);
+  padding-left: clamp(1rem, 2.5vw, 2.25rem);
   flex-shrink: 0;
 }
 
-.silhouetteSvg {
-  width: clamp(5.5rem, 9.5vw, 8rem);
-  height: clamp(12rem, 19vw, 16rem);
+.silhouetteImg {
+  width: clamp(13rem, 19vw, 17.5rem);
+  height: auto;
   display: block;
-  overflow: visible;
+  border-radius: 0.875rem;
+  mix-blend-mode: multiply;
 }
 
 /* ---------------- Responsive ---------------- */
@@ -150,12 +152,7 @@
   }
 
   .silhouetteWrap {
-    position: absolute;
-    right: 0.75rem;
-    bottom: 0.5rem;
-    padding-left: 0;
-    opacity: 0.18;
-    pointer-events: none;
+    display: none;
   }
 
   .silhouetteSvg {

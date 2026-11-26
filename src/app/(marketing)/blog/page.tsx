@@ -7,9 +7,9 @@ import { assetUrl, authorName, formatDate, getPosts, plainText, toArticle, topic
 import { getDoctors } from "@/lib/doctors-repository";
 
 export const metadata: Metadata = {
-  title: "The MyStree Take | Clinical Journal & Women's Health Science",
+  title: "The MyStree Take: Women's Health Journal",
   description:
-    "Diving deep into female biology, hormonal science, and clinical truths. Evidence-based perspectives from the clinicians at MyStree Clinic Indiranagar, Bangalore.",
+    "Evidence-based articles on female biology, hormones, pregnancy, PCOS and menopause by clinicians at MyStree Clinic in Indiranagar, Bengaluru.",
   alternates: {
     canonical: `${SITE_URL}/blog`,
   },

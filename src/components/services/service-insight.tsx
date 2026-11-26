@@ -41,7 +41,7 @@ export function ServiceInsight({
   headingId = "service-insight-heading",
 }: ServiceInsightProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="insight" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <div className={styles.media}>
           {image ? (

@@ -38,7 +38,7 @@ export function ServiceQuestions({
   headingId = "service-questions-heading",
 }: ServiceQuestionsProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="questions" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <div className={styles.media}>
           {image ? (

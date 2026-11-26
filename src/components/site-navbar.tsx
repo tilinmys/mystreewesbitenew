@@ -94,6 +94,13 @@ const SEARCH_ITEMS: SearchItem[] = [
     href: "/services/psychology",
   },
   {
+    id: "s-10b",
+    title: "Women's Health Check & Pap Smear",
+    category: "Care",
+    subtitle: "Annual check-ups, cervical cancer screening & clinical breast exams",
+    href: "/services/womens-health-check",
+  },
+  {
     id: "s-11",
     title: "Dr. Smitha A.P",
     category: "Doctor",
@@ -150,6 +157,8 @@ const SEARCH_ITEMS: SearchItem[] = [
 
 const SERVICES_ITEMS = [
   { title: "OBGYN Consults", href: "/services/obgyn-consults" },
+  { title: "Women's Health Check & Pap Smear", href: "/services/womens-health-check" },
+  { title: "PCOS & Metabolic Care", href: "/clinics/pcos" },
   { title: "Adolescent Health Clinic", href: "/services/adolescent-health" },
   { title: "Pre-Natal Clinic", href: "/services/prenatal" },
   { title: "Menopausal Clinic", href: "/services/menopause" },
@@ -473,7 +482,7 @@ export function SiteNavbar() {
                   className={`${styles.navLink} ${isTeamActive ? styles.navLinkActive : ""}`}
                   onClick={closeAllMenus}
                 >
-                  Our Specialists
+                  Our Care Team
                 </Link>
               </div>
 
@@ -672,7 +681,7 @@ export function SiteNavbar() {
                   className={`${styles.mobileNavLink} ${isTeamActive ? styles.navLinkActive : ""}`}
                   onClick={closeAllMenus}
                 >
-                  <span>Our Specialists</span>
+                  <span>Our Care Team</span>
                   <ArrowUpRight size={16} opacity={0.6} />
                 </Link>
 

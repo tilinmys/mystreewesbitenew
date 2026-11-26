@@ -35,7 +35,7 @@ export function ServiceConditions({
   headingId = "service-conditions-heading",
 }: ServiceConditionsProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="conditions" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <h2 id={headingId} className={styles.heading}>
           {heading}

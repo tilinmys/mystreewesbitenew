@@ -3,6 +3,7 @@ import { Fraunces, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { GoogleTag } from "@/components/google-tag";
+import { ConsentNotice } from "@/components/consent-notice";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE_URL } from "@/lib/clinic";
 
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s | MyStree",
   },
   description:
-    "MyStree is a women's health clinic on 13th Main Road, Indiranagar, Bengaluru, with gynaecologists, obstetricians, fertility specialists, a nutritionist and a pelvic physiotherapist.",
+    "MyStree is a women's health clinic on 13th Main Road, Indiranagar, Bengaluru, with gynaecologists, obstetricians, a reproductive endocrinologist, a nutritionist and a pelvic physiotherapist.",
   applicationName: "MyStree",
   openGraph: {
     type: "website",
@@ -62,12 +63,13 @@ export default function RootLayout({
       className={`${fontSerif.variable} ${fontSans.variable} ${fontMono.variable}`}
       data-scroll-behavior="smooth"
     >
-      <body className="font-sans antialiased text-[#0C161D] bg-[#F8FAFC]">
+      <body className="font-sans antialiased">
         <GoogleTag />
         <SmoothScroll>
           {children}
           <SiteFooter />
         </SmoothScroll>
+        <ConsentNotice />
       </body>
     </html>
   );

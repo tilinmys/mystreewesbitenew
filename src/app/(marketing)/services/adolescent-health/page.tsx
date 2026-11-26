@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   // The root layout appends "| MyStree".
   title: "Adolescent Health Clinic in Indiranagar, Bengaluru",
   description:
-    "Private, judgement-free care for teenagers in Indiranagar, Bengaluru: period problems, PCOS, acne and hormones, nutrition, mental wellbeing and sexual health, with a parent in the room or not.",
+    "Judgement-free care for teens in Indiranagar, Bengaluru: period concerns, PCOS, acne, hormones, nutrition, mental wellbeing and sexual health.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Adolescent Health Clinic in Indiranagar, Bengaluru | MyStree",
@@ -218,31 +218,7 @@ export default function AdolescentHealthPage() {
             external: true,
           }}
         />
-        <ServiceQuote
-          quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
-          name="Dr. Surbhi Sinha"
-        />
       </ServiceBand>
-
-      <ServiceConditions
-        headingId="adolescent-conditions-heading"
-        heading="Teen health concerns we help with"
-        conditions={[
-          "Acne and skin changes",
-          "Anxiety, low mood and stress",
-          "Early or late puberty",
-          "Eating concerns and nutrition",
-          "Cervical cancer prevention advice",
-          "Heavy or painful periods",
-          "Irregular or missed periods",
-          "Polycystic ovary syndrome (PCOS)",
-          "Sexual health and consent questions",
-          "Sleep problems",
-          "Thyroid problems",
-          "Vaginal discharge and infections",
-        ]}
-        cta={{ label: "Book a teen consultation", href: "/book" }}
-      />
 
       <ServiceSpecialists
         headingId="adolescent-specialists-heading"
@@ -276,6 +252,26 @@ export default function AdolescentHealthPage() {
         ]}
       />
 
+      <ServiceConditions
+        headingId="adolescent-conditions-heading"
+        heading="Teen health concerns we help with"
+        conditions={[
+          "Acne and skin changes",
+          "Anxiety, low mood and stress",
+          "Early or late puberty",
+          "Eating concerns and nutrition",
+          "Cervical cancer prevention advice",
+          "Heavy or painful periods",
+          "Irregular or missed periods",
+          "Polycystic ovary syndrome (PCOS)",
+          "Sexual health and consent questions",
+          "Sleep problems",
+          "Thyroid problems",
+          "Vaginal discharge and infections",
+        ]}
+        cta={{ label: "Book a teen consultation", href: "/book" }}
+      />
+
       <ServiceSteps
         image={{ src: "/images/services/pages/mother-and-daughter-clinic-registration.webp", alt: "A mother fills in a clinic form at reception with her teenage daughter beside her" }}
         headingId="adolescent-steps-heading"
@@ -301,16 +297,9 @@ export default function AdolescentHealthPage() {
         cta={{ label: "Book a teen consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/teenager-period-pain-at-home.webp", alt: "A teenager resting on her bed with a hot-water bag and a schoolbook" }}
-        headingId="adolescent-insight-heading"
-        heading="Why teen health concerns are often missed"
-        body="Painful or irregular periods, acne and low mood are often brushed off as just growing up, and many teens find them hard to raise in front of family."
-        points={[
-          "Period pain bad enough to miss school is not something to put up with",
-          "Cycles that stay irregular years after the first period can point to PCOS or thyroid problems",
-          "Low mood, anxiety and eating concerns often appear alongside physical symptoms",
-        ]}
+      <ServiceQuote
+        quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
+        name="Dr. Surbhi Sinha"
       />
 
       <ServiceFit
@@ -321,6 +310,18 @@ export default function AdolescentHealthPage() {
           { icon: "branch", label: "Acne, hair growth or weight changes that worry you" },
           { icon: "conversation", label: "Questions about your body you would rather not Google" },
           { icon: "mind", label: "Stress, low mood or trouble sleeping" },
+        ]}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/teenager-period-pain-at-home.webp", alt: "A teenager resting on her bed with a hot-water bag and a schoolbook" }}
+        headingId="adolescent-insight-heading"
+        heading="Why teen health concerns are often missed"
+        body="Painful or irregular periods, acne and low mood are often brushed off as just growing up, and many teens find them hard to raise in front of family."
+        points={[
+          "Period pain bad enough to miss school is not something to put up with",
+          "Cycles that stay irregular years after the first period can point to PCOS or thyroid problems",
+          "Low mood, anxiety and eating concerns often appear alongside physical symptoms",
         ]}
       />
 

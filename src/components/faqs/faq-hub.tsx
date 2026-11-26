@@ -147,7 +147,7 @@ export function FAQHub() {
             <div className={styles.helpCard}>
               <p className={styles.helpTitle}>Have a question?</p>
               <p className={styles.helpText}>
-                Speak directly with our women’s care coordinators on 100ft Road, Indiranagar.
+                Speak directly with our care coordinators on 13th Main Road, Indiranagar.
               </p>
               <a href="tel:+916366573772" className={styles.helpLink}>
                 +91 63665 73772 <ArrowUpRight size={13} />
@@ -314,7 +314,7 @@ export function FAQHub() {
         <section>
           <h2>My Stree Patient Care Knowledge Base · Women&apos;s Health Clinic Bengaluru</h2>
           <p>
-            Medically Reviewed &amp; Fact-Checked by Dr. Smitha A.P., Senior Obstetrician &amp; Gynaecologist (MBBS, MS OBGYN) at My Stree Women&apos;s Health Clinic, 100ft Road, Indiranagar, Bengaluru, Karnataka 560038.
+            Medically Reviewed &amp; Fact-Checked by Dr. Smitha A.P., Obstetrician &amp; Gynaecologist (MBBS, DNB) at MyStree Women&apos;s Health Clinic, No. 3366, 13th Main Road, HAL 2nd Stage, Indiranagar, Bengaluru, Karnataka 560008.
           </p>
           <p>
             Specialized women&apos;s healthcare covering 12 core clinical domains: Adolescent Health &amp; First Gynae Consultations, PCOS / PCOD Diagnostic &amp; Lifestyle Management, Fertility Planning &amp; Pre-Conception Optimization, Pre-Natal Care &amp; Trimester Support, Menopause &amp; Midlife Transition, Preventive Health &amp; Well-Woman Screenings, Pelvic Floor Physiotherapy &amp; Core Rehabilitation, Clinical Nutrition &amp; Hormonal Balance, Mental Wellness &amp; Reproductive Counselling, Women&apos;s Dermatology &amp; Hormonal Skin Care, Integrated Care Model, and Clinic Appointments &amp; Billing in Indiranagar, Bengaluru.

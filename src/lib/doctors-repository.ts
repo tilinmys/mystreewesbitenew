@@ -174,12 +174,27 @@ function specialtyFor(speciality: string): Specialty | undefined {
  * praises the clinician (awards, "best", "renowned", "leading") is left out.
  */
 const PLAIN_TITLES: Record<string, string> = {
+  "high risk obstetrician and fertility expert": "High-Risk Obstetrician & Gynaecologist",
+  "gynecologist & fertility specialist, obstetrician": "Obstetrician & Gynaecologist",
+  "gynaecologist & fertility specialist, obstetrician": "Obstetrician & Gynaecologist",
+  "infertility specialist & reproductive endocrinologist": "Reproductive Endocrinologist & Gynaecologist",
   "consultant psychologist & women's mental health specialist": "Consultant Psychologist",
+  "obstetrics and gynaecology physiotherapy": "Obstetric & Gynaecological Physiotherapist",
 };
 
 function plainTitle(raw: string) {
   const title = raw.replace(/Gynecolog/g, "Gynaecolog").replace(/\s+/g, " ").trim();
-  return PLAIN_TITLES[title.toLowerCase()] ?? title.replace(/\s*(?:&|and)\s*[A-Za-z' ]*\bExpert\b/gi, "").trim();
+  const mapped = PLAIN_TITLES[title.toLowerCase()];
+  if (mapped) return mapped;
+  return (
+    title
+      .replace(/\s*(?:&|and|,)\s*[A-Za-z' ]*\b(?:Expert|Specialist)\b/gi, "")
+      .replace(/\b(?:In)?[Ff]ertility\s+(?:Expert|Specialist)\b/gi, "")
+      .replace(/\b(?:Expert|Specialist)\b/gi, "")
+      .replace(/\s{2,}/g, " ")
+      .replace(/^[,\s&]+|[,\s&]+$/g, "")
+      .trim() || "Clinician"
+  );
 }
 
 const SELF_PRAISE = /\b(best|award(?:ed|s)?|renowned|leading|top[- ]rated|unmatched|world[- ]class|expert in|no\.? ?1)\b/i;
@@ -228,7 +243,7 @@ function doctorFromBooking(record: BookingDoctor): Doctor | null {
  */
 function credentialsFromBooking(record: BookingDoctor): string[] {
   const experience = record.experienceYears
-    ? `${record.experienceYears} experience${record.specialistYears ? `, ${record.specialistYears.replace(/ years$/, "")} as specialist` : ""}`
+    ? `${record.experienceYears} experience`
     : "";
   const registration = record.registrationNumber ? `Reg. No. ${record.registrationNumber}` : "";
   return [record.degree, experience, registration].filter(Boolean);

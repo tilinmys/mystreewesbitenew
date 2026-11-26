@@ -1,9 +1,9 @@
 .section {
-  --spotlight-sky: #0C161D;
-  --spotlight-rose: #ED5B2D;
-  --spotlight-rose-hover: #D84A1E;
+  --spotlight-sky: #5C0017;
+  --spotlight-rose: #AD002B;
+  --spotlight-rose-hover: #D60036;
   --spotlight-cream: var(--surface-pearl);
-  --spotlight-ink: #1c1917;
+  --spotlight-ink: #3E1E26;
 
   position: relative;
   isolation: isolate;

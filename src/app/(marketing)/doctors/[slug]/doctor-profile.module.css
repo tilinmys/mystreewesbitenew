@@ -1,149 +1,395 @@
 /*
- * Clinician profile — mobile-first.
+ * Clinician profile — /doctors/[slug].
  *
- * Desktop calibrated to a 1536px viewport, following the reference: a
- * rounded 3:4 portrait (~400px) left, held in view while the profile is
- * read; name ~40px Fraunces with credentials, a full-width hairline, the
- * role, then ~17px paragraphs at a generous 1.75 line height in a column
- * of ~70 characters. Phone: portrait first, then the profile.
+ * Designed after a classic clinical dossier hierarchy inside MyStree's approved
+ * Velvet Rose Mist (#EFE0E4) + Pure White (#FFFFFF) + Burgundy CTA palette:
+ *   Band 1 (Hero): Breadcrumb rail -> Framed portrait left -> Identity middle
+ *     (Fraunces name, designation, Burgundy specialty accent, qualifications) ->
+ *     Right-aligned conditional REG. NO + Book Appointment & Telemedicine rail.
+ *   Band 2 (Overview & Details): Structured Overview narrative on #FFFFFF paired
+ *     with Areas of Care, related clinic services, and Consultation Details card.
  */
 
 .page {
-  --profile-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
-
-  background: var(--svc-paper);
-  color: var(--midnight-chamber);
+  background: var(--pure-white, #FFFFFF);
+  color: var(--text-dark, #3E1E26);
 }
 
-.layout {
-  display: grid;
-  max-width: 42rem;
+/* ===================================================== Band 1: Top Header */
+
+.heroBand {
+  background: var(--surface-mist, #FFF5F7);
+  border-bottom: 1px solid var(--border-subtle, #EED4DC);
+}
+
+.heroInner {
+  max-width: 74rem;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
-  row-gap: 2rem;
+  padding: 1.125rem 1.25rem 1.75rem;
 }
 
-/* ------------------------------------------------------------ portrait */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted, #5A3440);
+}
 
-.portraitColumn {
-  min-width: 0;
+.crumbLink {
+  color: var(--text-muted, #5A3440);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.crumbLink:hover {
+  color: var(--twilight-wine, #800020);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.crumbLink:focus-visible,
+.relatedLink:focus-visible,
+.sideCallLink:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.crumbSep {
+  color: var(--accent-cadet, #9E6E7B);
+  flex: none;
+}
+
+.crumbCurrent {
+  color: var(--midnight-chamber, #5C0017);
+  font-weight: 500;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.25rem;
+  align-items: center;
+}
+
+/* Portrait square frame */
+.portraitWrap {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .portrait {
   position: relative;
-  width: 100%;
-  max-height: 70svh;
+  width: 9.75rem;
+  height: 10.25rem;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  border-radius: 1.25rem;
-  background: var(--uranian-mist);
+  border: 2px solid #FFFFFF;
+  outline: 1px solid var(--border-subtle, #EED4DC);
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  box-shadow: 0 10px 24px -16px rgb(92 0 23 / 0.18);
 }
 
 .portraitImage {
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 15%;
 }
 
-/* ------------------------------------------------------------- content */
+.monogram {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 2.75rem;
+  font-weight: 400;
+  color: var(--twilight-wine, #800020);
+}
 
-.content {
+/* Middle identity column */
+.identity {
   min-width: 0;
 }
 
-.back {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  color: var(--twilight-wine);
-  font-size: var(--type-ui);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
-  text-underline-offset: 0.4em;
-}
-
-.back:hover {
-  text-decoration-color: var(--twilight-wine);
-}
-
-.back:focus-visible,
-.relatedLink:focus-visible,
-.call:focus-visible {
-  outline: 2px solid var(--twilight-wine);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* The name: Fraunces, with a full-width hairline beneath — the reference's
-   rule, in a flame tint softened toward the paper. Outranks `main h1`. */
 .name {
-  margin: 0.75rem 0 0;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid color-mix(in oklab, var(--brand-flame-swatch) 45%, var(--alabaster-canvas));
-  color: var(--midnight-chamber);
-  font-size: clamp(1.875rem, 2.6vw, 2.5rem) !important;
+  margin: 0;
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-size: clamp(1.75rem, 2.5vw, 2.3rem) !important;
   font-weight: 400 !important;
-  line-height: 1.2 !important;
-  letter-spacing: -0.015em !important;
-}
-
-.nameCredentials {
-  color: color-mix(in oklab, var(--midnight-chamber) 72%, var(--alabaster-canvas));
-  font-size: 0.62em;
-  letter-spacing: 0;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
 }
 
 .role {
-  margin: 1rem 0 0;
-  color: var(--midnight-chamber);
-  font-size: var(--type-lead);
+  margin: 0.4rem 0 0;
+  color: var(--text-dark, #3E1E26);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
   font-weight: 500;
+  line-height: 1.4;
+}
+
+.specialtyLine {
+  margin: 0.25rem 0 0;
+  color: var(--twilight-wine, #800020);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.credentialsSummary {
+  margin: 0.65rem 0 0;
+  color: var(--text-muted, #5A3440);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
   line-height: 1.5;
 }
 
-.narrative {
-  margin-top: 1.5rem;
+/* Right action rail + conditional Reg. No */
+.actionRail {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
 }
 
-.narrative p {
-  max-width: 44rem;
+.regBadge {
   margin: 0;
-  color: color-mix(in oklab, var(--midnight-chamber) 86%, var(--alabaster-canvas));
-  font-size: var(--type-body-lg);
-  line-height: 1.75;
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.narrative p + p {
+.ctaStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.primaryCta {
+  width: 100%;
+  min-height: 2.95rem !important;
+  border-radius: 0.5rem !important;
+  padding-inline: 1.15rem !important;
+  justify-content: center;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.95rem;
+  padding: 0 1.15rem;
+  border: 1.5px solid var(--palette-burgundy, #800020);
+  border-radius: 0.5rem;
+  background: #FFFFFF;
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.secondaryCta:hover {
+  background: var(--surface-blush, #FFEBF0);
+  border-color: var(--midnight-chamber, #5C0017);
+}
+
+.secondaryCta:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 2px;
+}
+
+/* ===================================================== Band 2: Overview */
+
+.bodySection {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.75rem;
+}
+
+.bodyGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 2.25rem;
+}
+
+.overviewCol {
+  min-width: 0;
+}
+
+.overviewHeading {
+  margin: 0;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border-subtle, #EED4DC);
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-size: clamp(1.45rem, 2.1vw, 1.85rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.narrative {
   margin-top: 1.25rem;
 }
 
-/* ---------------------------------------------- facts before booking */
+.narrative p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-dark, #3E1E26);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.72;
+}
+
+.narrative p + p {
+  margin-top: 1rem;
+}
+
+.areasBlock {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle, #EED4DC);
+}
+
+.subHeading {
+  margin: 0 0 0.85rem;
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: 1.0625rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+
+.areasList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.areaItem {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border-subtle, #EED4DC);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--text-dark, #3E1E26);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.related {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle, #EED4DC);
+}
+
+.relatedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.relatedLink {
+  display: inline-flex;
+  min-height: 2.35rem;
+  align-items: center;
+  color: var(--twilight-wine, #800020);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
+  text-underline-offset: 0.35em;
+}
+
+.relatedLink:hover {
+  color: var(--midnight-chamber, #5C0017);
+  text-decoration-color: var(--midnight-chamber, #5C0017);
+}
+
+/* Right consultation details sidebar card */
+.sideCol {
+  min-width: 0;
+}
+
+.sideCard {
+  padding: 1.25rem 1.35rem 1.4rem;
+  border: 1px solid var(--border-subtle, #EED4DC);
+  border-radius: 0.875rem;
+  background: #FFFFFF;
+  box-shadow: 0 10px 26px -20px rgb(92 0 23 / 0.16);
+}
+
+.sideHeading {
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border-subtle, #EED4DC);
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
 
 .facts {
-  margin: 2.5rem 0 0;
-  border-top: 1px solid var(--profile-rule);
+  margin: 0;
 }
 
 .fact {
-  display: grid;
-  padding: 1rem 0;
-  row-gap: 0.375rem;
-  border-bottom: 1px solid var(--profile-rule);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-subtle, #EED4DC);
+}
+
+.fact:last-of-type {
+  border-bottom: 0;
 }
 
 .fact dt {
-  color: var(--twilight-wine);
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  margin-bottom: 0.2rem;
+  color: var(--twilight-wine, #800020);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .fact dd {
   margin: 0;
-  color: var(--midnight-chamber);
-  font-size: var(--type-body);
-  line-height: 1.6;
+  color: var(--text-dark, #3E1E26);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
 }
 
 .plainList {
@@ -153,138 +399,119 @@
 }
 
 .plainList li + li {
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
 }
 
-/* ------------------------------------------------------ related care */
-
-.related {
-  margin-top: 2rem;
-}
-
-.relatedTitle {
-  margin: 0;
-  color: var(--twilight-wine);
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.relatedList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.5rem;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.relatedLink {
+.sideCallLink {
   display: inline-flex;
-  min-height: 2.75rem;
   align-items: center;
-  color: var(--midnight-chamber);
-  font-size: var(--type-body);
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
-  text-underline-offset: 0.35em;
-}
-
-.relatedLink:hover {
-  color: var(--twilight-wine);
-  text-decoration-color: var(--twilight-wine);
-}
-
-/* ------------------------------------------------------------ actions */
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.call {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  width: 100%;
   justify-content: center;
-  color: var(--twilight-wine);
-  font-size: var(--type-ui);
+  min-height: 2.65rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border-subtle, #EED4DC);
+  border-radius: 0.5rem;
+  background: var(--surface-mist, #FFF5F7);
+  color: var(--midnight-chamber, #5C0017);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.875rem;
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklab, var(--twilight-wine) 35%, transparent);
-  text-underline-offset: 0.4em;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
-/* ------------------------------------------------- tablet  >= 640px */
+.sideCallLink:hover {
+  background: var(--surface-blush, #FFEBF0);
+  border-color: var(--twilight-wine, #800020);
+}
+
+/* =================================================== Tablet  >= 640px */
 
 @media (min-width: 640px) {
-  .layout {
-    padding: 2.5rem 2.5rem 5rem;
+  .heroInner {
+    padding: 1.35rem 2rem 2.125rem;
+  }
+
+  .heroGrid {
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    column-gap: 1.75rem;
+    row-gap: 1.35rem;
+    align-items: center;
   }
 
   .portrait {
-    max-width: 24rem;
+    width: 11.5rem;
+    height: 12.25rem;
   }
 
-  .fact {
-    grid-template-columns: 10rem minmax(0, 1fr);
-    column-gap: 1.5rem;
-    align-items: baseline;
+  .actionRail {
+    grid-column: 1 / -1;
   }
 
-  .actions {
+  .ctaStack {
     flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
+  }
+
+  .bodySection {
+    padding: 2.5rem 2rem 4.25rem;
   }
 }
 
-/* ------------------------------------------------ desktop  >= 1024px */
+/* =================================================== Desktop >= 1024px */
 
 @media (min-width: 1024px) {
-  .layout {
-    width: min(80vw, 77rem);
-    max-width: none;
-    padding: clamp(3rem, 4.4vw, 4.25rem) 0 clamp(4rem, 6.25vw, 6rem);
-    grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-    align-items: start;
-    column-gap: clamp(3rem, 6.5vw, 6.25rem);
+  .heroInner {
+    padding: 1.35rem clamp(2rem, 4vw, 3rem) 2.25rem;
   }
 
-  /* Held in view while the profile is read. */
-  .portraitColumn {
+  .heroGrid {
+    grid-template-columns: 13.5rem minmax(0, 1fr) minmax(15.5rem, 18rem);
+    column-gap: clamp(1.75rem, 3vw, 2.75rem);
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .portrait {
+    width: 13.5rem;
+    height: 14.25rem;
+  }
+
+  .actionRail {
+    grid-column: auto;
+    align-items: stretch;
+  }
+
+  .regBadge {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .ctaStack {
+    flex-direction: column;
+  }
+
+  .bodySection {
+    padding: 2.75rem clamp(2rem, 4vw, 3rem) 5rem;
+  }
+
+  .bodyGrid {
+    grid-template-columns: minmax(0, 1.55fr) minmax(17rem, 0.72fr);
+    column-gap: clamp(2.5rem, 4.5vw, 4.25rem);
+    align-items: start;
+  }
+
+  .sideCol {
     position: sticky;
     top: 7rem;
   }
+}
 
-  .portrait {
-    max-width: none;
-    max-height: calc(100svh - 9rem);
-    aspect-ratio: 3 / 4;
-  }
-
-  .back {
-    margin-top: -0.5rem;
-  }
-
-  .narrative {
-    margin-top: clamp(1.5rem, 2.1vw, 2rem);
-  }
-
-  .narrative p {
-    font-size: clamp(1rem, 1.12vw, 1.0625rem);
-  }
-
-  .narrative p + p {
-    margin-top: clamp(1.25rem, 2vw, 1.875rem);
-  }
-
-  .facts {
-    margin-top: clamp(2.5rem, 3.6vw, 3.5rem);
+@media (prefers-reduced-motion: reduce) {
+  .secondaryCta,
+  .sideCallLink,
+  .crumbLink {
+    transition: none;
   }
 }

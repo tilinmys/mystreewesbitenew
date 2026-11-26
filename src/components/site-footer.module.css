@@ -130,7 +130,7 @@
 }
 
 .groupLinks a:focus-visible {
-  outline: 2px solid var(--brand-flame);
+  outline: 2px solid var(--footer-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -178,7 +178,7 @@
 }
 
 .legalLinks a:focus-visible {
-  outline: 2px solid var(--brand-flame);
+  outline: 2px solid var(--footer-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -189,6 +189,18 @@
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: var(--type-caption);
   font-weight: 400;
+}
+
+.disclaimer {
+  margin: 0;
+  color: var(--footer-ink-soft);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  font-weight: 400;
+  line-height: 1.5;
+  flex-basis: 100%;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--footer-ink-soft) 24%, transparent);
 }
 
 /* ------------------------------------------------------------ responsive */
@@ -218,6 +230,12 @@
 
   .statement {
     font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   }
 }
 

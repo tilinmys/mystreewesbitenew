@@ -5,11 +5,11 @@
  */
 
 .list {
-  border-top: 1px solid var(--q-rule, color-mix(in oklab, var(--cadet-slate) 45%, var(--alabaster-canvas)));
+  border-top: 1px solid var(--q-rule, var(--border-subtle));
 }
 
 .item {
-  border-bottom: 1px solid var(--q-rule, color-mix(in oklab, var(--cadet-slate) 45%, var(--alabaster-canvas)));
+  border-bottom: 1px solid var(--q-rule, var(--border-subtle));
 }
 
 /* ---- the row you tap ---- */
@@ -42,7 +42,7 @@
   color: var(--midnight-chamber);
   font-family: var(--font-sans), system-ui, sans-serif !important;
   font-size: var(--svc-body) !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   line-height: 1.45 !important;
   letter-spacing: 0 !important;
 }
@@ -87,7 +87,7 @@
   max-width: 34rem;
   margin: 0;
   padding: 0 2.5rem 1.25rem 0;
-  color: color-mix(in oklab, var(--midnight-chamber) 80%, var(--uranian-mist));
+  color: var(--text-dark);
   font-size: var(--svc-body);
   line-height: 1.7;
 }

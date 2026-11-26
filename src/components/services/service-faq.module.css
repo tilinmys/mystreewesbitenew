@@ -6,11 +6,17 @@
  */
 
 .section {
-  --q-rule: color-mix(in oklab, var(--cadet-slate) 42%, var(--alabaster-canvas));
+  --q-rule: var(--border-subtle);
 
   padding: var(--svc-pad-y) var(--svc-pad-x);
   background: var(--svc-paper);
   scroll-margin-top: 6rem;
+}
+
+/* On compact pages where Questions is omitted (e.g. fertility-clinic),
+   Faq immediately follows Facts (#FFFFFF) and flips cleanly to Porcelain Rose. */
+:global([data-svc-band="facts"]) + .section {
+  background: var(--svc-mist);
 }
 
 .inner {

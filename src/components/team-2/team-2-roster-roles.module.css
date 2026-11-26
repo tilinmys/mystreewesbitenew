@@ -7,8 +7,8 @@
 .section {
   position: relative;
   width: 100%;
-  padding: clamp(4rem, 6.5vw, 5.75rem) clamp(1.25rem, 4vw, 3rem);
-  background: var(--pure-white);
+  padding: clamp(3.5rem, 5.5vw, 5rem) clamp(1.25rem, 4vw, 3rem);
+  background: var(--surface-mist);
   color: var(--text-dark);
   border-top: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
   overflow: hidden;
@@ -32,8 +32,8 @@
   margin: 0 0 clamp(0.5rem, 1vw, 0.75rem);
   color: var(--text-muted);
   font-family: var(--font-mono), monospace;
-  font-size: var(--type-label);
-  font-weight: 600;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }

@@ -8,21 +8,76 @@
 
 .section {
   /* Symmetric air around the inset panel. */
-  padding: 2.5rem 1rem;
+  padding: 2.5rem 1rem 2.75rem;
   background: var(--svc-paper);
 }
 
-/* The band's wine with soft blooms — the same family as the opening band,
-   so the page closes in the colour it opened with. */
+.exploreServices {
+  max-width: 67.5rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.exploreLabel {
+  margin: 0 0 0.75rem;
+  color: var(--twilight-wine);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.exploreList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.explorePill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
+  border: 1px solid var(--border-subtle, #D4B5BE);
+  border-radius: 999px;
+  background: var(--svc-mist);
+  color: var(--midnight-chamber);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--type-caption);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.explorePill:hover {
+  border-color: var(--twilight-wine);
+  background: var(--twilight-wine);
+  color: var(--pure-white);
+}
+
+.explorePill:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Eye-comfort Velvet Burgundy panel framing the closing invitation. */
 .panel {
   max-width: 42rem;
   margin: 0 auto;
   padding: 3rem 1.5rem;
   border-radius: 1.25rem;
   background:
-    radial-gradient(55% 90% at 0% 0%, color-mix(in oklab, var(--cadet-slate) 30%, transparent) 0%, transparent 70%),
-    radial-gradient(50% 80% at 100% 100%, color-mix(in oklab, var(--alabaster-canvas) 14%, transparent) 0%, transparent 70%),
-    var(--twilight-wine);
+    radial-gradient(58% 90% at 0% 0%, rgb(255 236 241 / 0.1) 0%, transparent 72%),
+    radial-gradient(50% 80% at 100% 100%, rgb(255 255 255 / 0.08) 0%, transparent 70%),
+    linear-gradient(150deg, var(--palette-velvet, #661026) 0%, var(--palette-velvet-deep, #470818) 100%);
   color: var(--svc-on-wine);
   text-align: center;
 }
@@ -43,6 +98,26 @@
   align-items: stretch;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.actions > :global(.cta-book) {
+  --cta-top: #FFFFFF;
+  --cta-bottom: #FAF1F3;
+  --cta-glow: 255 255 255;
+
+  color: #5C0017;
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 2px 8px rgb(40 0 10 / 0.28),
+    0 12px 26px -10px rgb(255 255 255 / 0.24);
+}
+
+.actions > :global(.cta-book):hover,
+.actions > :global(.cta-book):focus-visible {
+  --cta-top: #FFFFFF;
+  --cta-bottom: #F3E2E6;
+
+  color: #5C0017;
 }
 
 .secondary {

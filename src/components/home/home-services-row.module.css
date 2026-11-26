@@ -1,17 +1,14 @@
 /*
- * Home Section 08, services row (16 Nov 2026; color.md "home Section 08").
- * Blush ground #EFE2E3 (the reference's taupe moved into the MyStree
- * palette), white cards, ink #2A1A1E, Sanctuary Burgundy #641E2B for the
- * next button and the badge. Root fonts only.
+ * HomeServicesRow — Uniform High-Visibility Services Grid (Desktop 3-col,
+ * Tablet 2-col, Mobile 1-col) + 4-specialty companion strip.
  */
 .section {
   --gutter: clamp(20px, 5.5vw, 100px);
-  --start: max(var(--gutter), (100vw - 1440px) / 2 + var(--gutter));
   position: relative;
-  overflow: hidden;
-  padding: 72px 0 96px;
-  background: #f5eced;
-  color: #2a1a1e;
+  padding: 52px 0 60px;
+  background: var(--pure-white, #FFFFFF);
+  border-top: 1px solid var(--border-subtle, #E8E1E2);
+  color: var(--text-dark, #3E1E26);
 }
 
 .section.section {
@@ -19,291 +16,454 @@
 }
 
 .inner {
-  max-width: 1440px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
 .head {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 48px;
+  gap: 16px 28px;
+  margin-bottom: 28px;
 }
 
-/* Section exception: overrides the global `main h2` scale. */
+.headCopy {
+  max-width: 60ch;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--twilight-wine, #800020);
+}
+
+/* Display role: Fraunces 400 */
 .section .heading {
   margin: 0;
   font-family: var(--font-serif), serif !important;
-  font-size: clamp(2.25rem, 3.4vw, 3.25rem) !important;
+  font-size: clamp(2.15rem, 3.4vw, 3.15rem) !important;
   font-weight: 400 !important;
   font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
   line-height: 1.1 !important;
   letter-spacing: -0.02em !important;
-  color: #2a1a1e;
+  color: var(--midnight-chamber, #5C0017);
+  text-wrap: balance;
 }
 
 .accent {
   font-style: italic;
-  color: #641e2b;
+  color: var(--twilight-wine, #800020);
 }
 
-.arrows {
-  display: flex;
-  flex: none;
-  gap: 36px;
+.lead {
+  margin: 10px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--text-muted, #6A424D);
 }
 
-.arrow {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border: 0;
-  border-radius: 50%;
-  background: rgb(42 26 30 / 0.12);
-  color: #ffffff;
-  cursor: pointer;
+.findDoctorCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--border-subtle, #D4B5BE);
+  border-radius: 999px;
+  background: var(--pure-white, #FFFFFF);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--twilight-wine, #800020);
+  text-decoration: none;
   transition:
-    background-color 200ms ease,
-    transform 200ms ease,
-    opacity 200ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
 }
 
-.arrowNext,
-.arrow:not(:disabled) {
-  background: #2a1a1e;
+.findDoctorCta:hover {
+  border-color: var(--twilight-wine, #800020);
+  background: var(--twilight-wine, #800020);
+  color: var(--pure-white, #FFFFFF);
 }
 
-.arrow:hover:not(:disabled) {
-  background: #641e2b;
-  transform: scale(1.04);
-}
-
-.arrow:disabled {
-  background: rgb(42 26 30 / 0.12);
-  cursor: default;
-}
-
-.arrow:focus-visible {
-  outline: 2px solid #641e2b;
-  outline-offset: 3px;
-}
-
-/* ----------------------------------------------------------------- row */
-.track {
-  display: flex;
-  gap: 16px;
+/* ----------------------------------------------------- 6 Core Service Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
   margin: 0;
-  padding: 4px var(--gutter) 16px var(--start);
+  padding: 0;
   list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--start);
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-.slide {
+.gridItem {
   display: flex;
-  flex: 0 0 375px;
-  scroll-snap-align: start;
+  min-width: 0;
 }
 
-/* After the reference card (375 wide): 20px frame, 24px radius, image 335 × 228. */
 .card {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 24px 20px 28px;
-  border-radius: 24px;
-  background: #ffffff;
+  padding: 14px;
+  border: 1px solid var(--border-subtle, #D4B5BE);
+  border-radius: 16px;
+  background: var(--pure-white, #FFFFFF);
   color: inherit;
   text-decoration: none;
+  box-shadow:
+    0 1px 2px rgb(92 0 23 / 0.05),
+    0 12px 26px -18px rgb(92 0 23 / 0.16);
   transition:
-    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 300ms ease;
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 44px -22px rgb(75 23 34 / 0.28);
+  transform: translateY(-3px);
+  border-color: var(--palette-crimson, #AD002B);
+  box-shadow:
+    0 4px 10px rgb(92 0 23 / 0.08),
+    0 18px 34px -18px rgb(128 0 32 / 0.22);
 }
 
-.card:focus-visible {
-  outline: 2px solid #641e2b;
-  outline-offset: 3px;
+@media (min-width: 640px) {
+  @supports (grid-template-rows: subgrid) {
+    .gridItem,
+    .card {
+      grid-row: span 3;
+      display: grid;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
 }
 
 .media {
   position: relative;
   display: block;
-  aspect-ratio: 335 / 228;
-  border-radius: 18px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-subtle, #E8E1E2);
+  border-radius: 12px;
   overflow: hidden;
-  background: #f4e9ea;
+  background: var(--surface-mist, #F8F5F5);
 }
 
 .photo {
   object-fit: cover;
-  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  object-position: center center;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card:hover .photo {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .badge {
   position: absolute;
-  left: 16px;
-  bottom: 16px;
-  padding: 7px 10px;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 9px;
   border-radius: 6px;
-  background: #f4cfd4;
-  color: #2a1a1e;
+  background: rgb(255 255 255 / 0.94);
+  color: var(--midnight-chamber, #5C0017);
   font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
+  font-size: 11.5px;
   font-weight: 500;
 }
 
-.title {
-  margin-top: 26px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-  color: #1c1114;
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 0 10px;
+}
+
+/* Unified H3 subheading: Plus Jakarta Sans 600 */
+.section .title {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif !important;
+  font-size: 1.075rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.015em !important;
+  color: var(--midnight-chamber, #5C0017);
 }
 
 .text {
-  margin-top: 14px;
-  flex: 1;
   font-family: var(--font-sans), sans-serif;
-  font-size: 18px;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
-  color: #1c1114;
+  font-size: 13.5px;
+  line-height: 1.48;
+  color: var(--text-dark, #3E1E26);
 }
 
 .more {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin-top: 16px;
+  padding-top: 9px;
+  border-top: 1px solid var(--border-subtle, #D4B5BE);
   font-family: var(--font-sans), sans-serif;
-  font-size: 19px;
-  font-weight: 600;
-  color: #1c1114;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--twilight-wine, #800020);
 }
 
 .moreIcon {
   display: grid;
+  flex: none;
   place-items: center;
   width: 24px;
   height: 24px;
-  border: 1.8px solid currentColor;
+  border: 1.5px solid currentColor;
   border-radius: 50%;
   transition:
-    background-color 200ms ease,
-    color 200ms ease;
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 .card:hover .moreIcon {
-  background: #2a1a1e;
-  color: #ffffff;
+  background: var(--twilight-wine, #800020);
+  color: var(--pure-white, #FFFFFF);
 }
 
-/* --------------------------------------------------------------- phones */
-/*
- * Phones (compact, 17 Nov 2026): smaller cards (about 260 x 330) so the next
- * card peeks in clearly, a shorter image, two lines of description and a
- * smaller title. Proximity snap: a swipe never fights the page scroll.
- */
-@media (max-width: 767px) {
+/* ------------------------------------------- 4-Column Specialty Services Row */
+.specialtyBand {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle, #D4B5BE);
+}
+
+.specialtyHeading {
+  margin: 0 0 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--twilight-wine, #800020);
+}
+
+.specialtyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.specialtyItem {
+  display: flex;
+  min-width: 0;
+}
+
+.specialtyCard {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px 10px 10px;
+  border: 1px solid var(--border-subtle, #E8E1E2);
+  border-radius: 14px;
+  background: var(--pure-white, #FFFFFF);
+  color: var(--text-dark, #3E1E26);
+  text-decoration: none;
+  box-shadow: 0 2px 10px -8px rgb(42 21 26 / 0.1);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.specialtyCard:hover {
+  border-color: var(--palette-crimson, #AD002B);
+  box-shadow: 0 8px 20px -14px rgb(92 0 23 / 0.22);
+}
+
+.specialtyThumb {
+  position: relative;
+  display: block;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--border-subtle, #E8E1E2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-mist, #F8F5F5);
+}
+
+.specialtyCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.specialtyTitle {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--midnight-chamber, #5C0017);
+}
+
+.specialtyText {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-muted, #5A3440);
+}
+
+.specialtyArrow {
+  color: var(--twilight-wine, #800020);
+}
+
+.card:focus-visible,
+.findDoctorCta:focus-visible,
+.specialtyCard:focus-visible {
+  outline: 2px solid var(--focus-ring, #FF0040);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------- tablet */
+@media (max-width: 1120px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .specialtyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* -------------------------------------------------------------- phones */
+@media (max-width: 639px) {
   .section {
-    padding: 44px 0 52px;
+    padding: 36px 0 40px;
   }
 
   .head {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .section .heading {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
-  .arrows {
-    display: none;
+  .lead {
+    font-size: 14.5px;
   }
 
-  .track {
+  .findDoctorCta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
-    padding-bottom: 8px;
-    scroll-snap-type: x proximity;
-  }
-
-  .slide {
-    flex-basis: min(68vw, 270px);
   }
 
   .card {
-    padding: 10px 10px 14px;
-    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: start;
+    padding: 12px;
+    border-radius: 14px;
   }
 
   .media {
-    aspect-ratio: 16 / 10;
-    border-radius: 12px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 96px;
+    height: 100%;
+    min-height: 92px;
+    aspect-ratio: auto;
+    border-radius: 10px;
   }
 
   .badge {
-    left: 8px;
-    bottom: 8px;
-    padding: 4px 7px;
-    font-size: 11.5px;
+    display: none;
   }
 
-  .title {
-    margin-top: 12px;
-    padding: 0 4px;
-    font-size: 16px;
-    line-height: 1.3;
+  .cardBody {
+    grid-column: 2;
+    padding: 0;
+    gap: 4px;
+  }
+
+  .section .title {
+    font-size: 1rem !important;
   }
 
   .text {
-    margin-top: 6px;
-    padding: 0 4px;
     font-size: 13px;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    line-height: 1.4;
   }
 
   .more {
-    margin-top: 10px;
-    padding: 0 4px;
-    font-size: 14px;
+    grid-column: 2;
+    padding-top: 6px;
+    font-size: 12.5px;
   }
 
   .moreIcon {
     width: 20px;
     height: 20px;
   }
+
+  .specialtyBand {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
+  .specialtyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .specialtyCard {
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .specialtyThumb {
+    display: none;
+  }
+
+  .specialtyTitle {
+    font-size: 12.5px;
+  }
+
+  .specialtyText {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
   .photo,
-  .arrow,
-  .moreIcon {
+  .moreIcon,
+  .specialtyCard,
+  .findDoctorCta {
     transition: none;
   }
 

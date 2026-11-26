@@ -2,38 +2,43 @@ const config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
-            colors: {
+      colors: {
         mystree: {
-          // Deep Navy Foundations
-          midnight: "#0C161D",        // Primary deep navy canvas & headers
-          chamber: "#13222E",         // Elevated navy card surface
-          
-          // Light Foundations & Highlights
-          canvas: "#F8FAFC",          // Clean porcelain light canvas
-          card: "#FFFFFF",            // Pure crisp white card surface
-          mist: "#E8F2FA",            // Calming uranian blue tint for sections
-          
+          // Pure Deep Burgundy Foundations
+          midnight: "#5C0017",        // Pure Oxblood Deep headers & deep accents
+          chamber: "#800020",         // Pure Classic Burgundy surfaces & accents
+          velvet: "#7A001E",          // Pure Deep Burgundy dark ground top
+          "velvet-deep": "#520014",   // Pure Deep Oxblood dark ground base
+
+          // Pure Light Foundations & Highlights
+          canvas: "#FFFFFF",          // Pure white crisp canvas
+          card: "#FFFFFF",            // Pure white card surface
+          mist: "#FFF5F7",            // Pure Soft Rose White tint (zero muddy grey)
+          blush: "#FFEBF0",           // Pure Crisp Blush for secondary highlights
+
           // Borders & Dividers
-          border: "#D3E2EE",          // Subtle border stroke
-          "border-dark": "rgba(255, 255, 255, 0.12)",
-          
+          border: "#EED4DC",          // Crisp pure rose hairline stroke
+          "border-dark": "rgba(255, 255, 255, 0.18)",
+
           // Text Hierarchy
           text: {
-            primary: "#0C161D",       // Deep navy for titles
-            light: "#FFFFFF",         // Pure white for dark sections
-            muted: "#4A6173",         // Readable slate body text
-            cadet: "#8BA4BF",         // Brand Cadet Gray for metadata & tags
+            primary: "#5C0017",       // Pure Oxblood Deep titles
+            body: "#3E1E26",          // Rested dark plum-charcoal body prose
+            light: "#FFFFFF",         // Pure white on burgundy grounds
+            muted: "#5A3440",         // Rich muted plum body metadata
+            cadet: "#9E6E7B",         // Warm rose-mauve for muted labels
           },
-          
-          // Isolated Primary Button Accent ONLY
-          flame: "#ED5B2D",           // Brand Flame for CTAs
-          "flame-hover": "#D84A1E",
+
+          // Primary Button & Crimson Accents
+          flame: "#AD002B",           // Pure Garnet Crimson CTA base
+          "flame-hover": "#D60036",   // Pure Rich Ruby CTA hover
+          vivid: "#FF0040",           // Pure Vivid Crimson focus/hairline highlight
 
           // Flat compatibility tokens
-          cadet: "#8BA4BF",
-          slate: "#0C161D",
-          muted: "#4A6173",
-          uranian: "#E8F2FA",
+          cadet: "#9E6E7B",
+          slate: "#3E1E26",
+          muted: "#5A3440",
+          uranian: "#FFF5F7",
         },
       },
       fontFamily: {

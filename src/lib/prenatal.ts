@@ -240,11 +240,11 @@ export const prenatalTeamSlugs = [
 
 export const prenatalTeamNotes: Record<string, string> = {
   "dr-smitha-ap":
-    "Founder & High Risk Obstetrician with 23+ years of clinical experience, specializing in high-risk pregnancies, fetal programming, and compassionate delivery planning.",
+    "Founder & High Risk Obstetrician with 23+ years of clinical experience in high-risk pregnancies, fetal monitoring, and delivery planning.",
   "dr-surbhi-sinha":
-    "Co-Founder & Fertility Specialist with 12+ years experience, guiding couples through preconceptional optimization and early pregnancy transitions.",
+    "Co-Founder, Obstetrician and Gynaecologist (MS OBG) with 13 years of clinical experience in preconception and early pregnancy care.",
   "priyanka-savina":
-    "Lactation & Nutrition Consultant with 10+ years experience in trimester-by-trimester nutritional health and postnatal feeding support.",
+    "Nutritionist and Counsellor with 10+ years experience in trimester-by-trimester nutritional health and postnatal feeding support.",
 };
 
 export type PrenatalDoctorMeta = {
@@ -252,7 +252,6 @@ export type PrenatalDoctorMeta = {
   credentials: string[];
   languages: string[];
   experience: string;
-  rating?: string;
   verified: boolean;
   fee: string;
   note: string;
@@ -263,25 +262,24 @@ export type PrenatalDoctorMeta = {
 export const prenatalDoctorMeta: Record<string, PrenatalDoctorMeta> = {
   "dr-smitha-ap": {
     title: "High Risk Obstetrician & Founder",
-    credentials: ["MBBS, DGO, DNB, MRCOG (London)"],
+    credentials: ["MBBS, DNB (Obstetrics & Gynaecology)"],
     languages: ["English", "Kannada", "Hindi"],
     experience: "23+ Years",
-    rating: "4.9 (120+ reviews)",
     verified: true,
-    fee: "₹600",
-    note: "Founder & High Risk Obstetrician with 23+ years of clinical experience, specializing in high-risk pregnancies, fetal programming, and compassionate delivery planning.",
+    fee: "₹700",
+    note: "Founder & High Risk Obstetrician with 23+ years of clinical experience in high-risk pregnancies, fetal monitoring, and delivery planning.",
     tags: ["High-Risk Care", "Fetal Medicine", "Normal Delivery", "Preconception", "23+ Yrs Exp", "+2"],
     clinicLocation: "Indiranagar Clinic",
   },
   "dr-surbhi-sinha": {
-    title: "Fertility & Early Pregnancy",
-    credentials: ["MBBS, MS, Fellowship"],
+    title: "Obstetrician and Gynaecologist",
+    credentials: ["MS (Obstetrics & Gynaecology), MBBS, DNB"],
     languages: ["English", "Hindi"],
-    experience: "12+ Years",
+    experience: "13 Years",
     verified: true,
-    fee: "₹600",
-    note: "Co-Founder & Fertility Specialist with 12+ years experience, guiding couples through preconceptional optimization and early pregnancy transitions.",
-    tags: ["Fertility Care", "Early Pregnancy", "PCOS & Hormones", "Ultrasound Scans", "12+ Yrs Exp", "+1"],
+    fee: "₹700",
+    note: "Co-Founder, Obstetrician and Gynaecologist (MS OBG) guiding patients through preconception and early pregnancy transitions.",
+    tags: ["Preconception", "Early Pregnancy", "PCOS & Hormones", "Ultrasound Scans", "13 Yrs Exp", "+1"],
     clinicLocation: "Indiranagar Clinic",
   },
   "priyanka-savina": {

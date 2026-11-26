@@ -92,67 +92,45 @@ export function FeaturedBlogSlider({ posts }: { posts: readonly FeaturedBlogPost
                 className={styles.cardAnchor}
               >
                 <div className={styles.cardGrid}>
-                  {/* Left Block: Deep Wine / Rich Berry (#841B4D) */}
+                  {/* Left Block: Pure Deep Burgundy Editorial Copy */}
                   <div className={styles.leftBlock}>
                     <div>
-                      {/* Eyebrow */}
-                      <p className={styles.eyebrow}>
-                        {post.eyebrow}
-                      </p>
+                      <div className={styles.eyebrowRow}>
+                        <p className={styles.eyebrow}>{post.eyebrow}</p>
+                        {post.topicTag ? (
+                          <span className={styles.topicPill}>{post.topicTag}</span>
+                        ) : null}
+                      </div>
 
-                      {/* Heading: Fraunces serif light */}
                       <h2 className={styles.headline}>
                         {post.title}
                       </h2>
 
-                      {/* Metadata: JetBrains Mono */}
                       <div className={styles.metadata}>
                         <span>{post.author}</span>
-                        <span className={styles.dotSeparator}>•</span>
+                        <span className={styles.dotSeparator}>·</span>
                         <span>{post.date}</span>
-                        <span className={styles.dotSeparator}>•</span>
+                        <span className={styles.dotSeparator}>·</span>
                         <span>{post.readTime}</span>
                       </div>
                     </div>
 
-                    {/* CTA link: Read more */}
                     <div className={styles.readMoreRow}>
-                      <span>Read more</span>
+                      <span>Read article</span>
                       <ArrowUpRight className={styles.readMoreIcon} />
                     </div>
                   </div>
 
-                  {/* Right Block: Soft Oat Canvas (#E6EAF0) with geometric overlay tones */}
+                  {/* Right Block: Clean Full-Bleed Editorial Photo (zero protruding semicircle) */}
                   <div className={styles.rightBlock}>
-                    {/* Background Left Rounded Berry Arc */}
-                    <div
-                      className={styles.berryArc}
-                      aria-hidden="true"
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 899px) 100vw, 54vw"
+                      className={styles.coverImage}
+                      priority={currentIndex === 0}
                     />
-
-                    {/* Topic Label alongside the arc */}
-                    <span
-                      className={styles.topicTag}
-                    >
-                      {post.topicTag}
-                    </span>
-
-                    {/* Central Circular Vignette Frame */}
-                    <div
-                      className={styles.vignetteFrame}
-                      style={{ position: "relative", borderRadius: "50%", overflow: "hidden" }}
-                    >
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        sizes="(max-width: 768px) 300px, 400px"
-                        className={styles.vignetteImage}
-                        priority={currentIndex === 0}
-                      />
-                      <div className={styles.vignetteOverlay} />
-                    </div>
-
                   </div>
                 </div>
               </Link>

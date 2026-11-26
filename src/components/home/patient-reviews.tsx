@@ -140,7 +140,7 @@ export function PatientReviews() {
           because your story matters.
         </h2>
         <p className={styles.intro}>
-          Real reflections from women who trusted MyStree with their care in Bangalore.
+          Real reflections from women who visited MyStree for care in Bengaluru.
         </p>
       </div>
 

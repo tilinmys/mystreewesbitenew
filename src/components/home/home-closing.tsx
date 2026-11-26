@@ -69,13 +69,13 @@ export function HomeClosing() {
 
   return (
     <section ref={section} className={styles.section} aria-labelledby="closing-heading">
-      <motion.div className={styles.media} style={still ? undefined : { y: drift, scale: zoom }} aria-hidden="true">
+      <motion.div className={styles.media} style={still ? undefined : { y: drift, scale: zoom }}>
         {READY ? (
           <picture>
             <source media="(max-width: 767px)" srcSet="/images/home/closing/mystree-closing-skin-mobile.webp" />
             <Image
               src="/images/home/closing/mystree-closing-skin-desktop.webp"
-              alt=""
+              alt="Warm sunlit doorway at MyStree Women's Health Clinic on 13th Main Road, Indiranagar"
               fill
               sizes="100vw"
               className={styles.image}

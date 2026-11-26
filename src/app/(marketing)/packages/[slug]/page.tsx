@@ -255,7 +255,7 @@ export default async function PackagePage({ params }: Props) {
           <div className={s.figure}>
             <Image
               src={pkg.image.src}
-              alt=""
+              alt={pkg.imageAlt}
               width={pkg.image.width}
               height={pkg.image.height}
               priority
@@ -321,10 +321,11 @@ export default async function PackagePage({ params }: Props) {
               ))}
             </dl>
           </div>
-          <div className={s.glanceFigure}>
+          <div className={s.glanceFigure} aria-hidden="true">
             <Image
               src={pkg.glanceImage.src}
               alt=""
+              aria-hidden="true"
               width={pkg.glanceImage.width}
               height={pkg.glanceImage.height}
               quality={92}

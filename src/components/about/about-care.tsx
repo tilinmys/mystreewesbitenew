@@ -55,17 +55,17 @@ const TILES: readonly Tile[] = [
   { label: "Hot flushes & poor sleep", href: "/services/menopause", image: photo("hot-flushes-sleep") },
   { label: "Weight & nutrition", href: "/services/nutrition-counselling" },
   { label: "Pregnancy scans", href: "/services/prenatal", image: photo("pregnancy-scans") },
-  { label: "Contraception & IUDs", href: "/packages/mirena-comfort-care" },
+  { label: "Contraception & IUDs", href: "/packages/hormonal-iud-care" },
 
   { label: "Endometriosis & pelvic pain", href: "/services/obgyn-consults", image: photo("endometriosis-pelvic-pain") },
-  { label: "Cervical cancer screening", href: "/services/obgyn-consults" },
+  { label: "Cervical cancer screening", href: "/services/womens-health-check" },
   { label: "Painful sex & vaginismus", href: "/services/pelvic-floor-physiotherapy", image: photo("painful-sex-vaginismus") },
   { label: "Bladder leaks", href: "/services/pelvic-floor-physiotherapy" },
 
   { label: "Skin & hair concerns", href: "/services/dermatology", image: photo("skin-hair") },
   { label: "Nutrition in pregnancy", href: "/services/nutrition-counselling" },
   { label: "Anxiety & low mood", href: "/services/psychology", image: photo("anxiety-low-mood") },
-  { label: "Unplanned pregnancy", href: "/packages/mtp-care" },
+  { label: "Annual women's health check", href: "/services/womens-health-check" },
 
   { label: "Recovery after birth", href: "/services/pelvic-floor-physiotherapy", image: photo("recovery-after-birth") },
   { label: "Tummy gap after birth", href: "/services/pelvic-floor-physiotherapy" },
@@ -91,6 +91,7 @@ export function AboutCare() {
                     <Image
                       src={tile.image.src}
                       alt=""
+                      aria-hidden="true"
                       fill
                       sizes="(max-width: 639px) 50vw, (max-width: 899px) 33vw, 24rem"
                       quality={90}

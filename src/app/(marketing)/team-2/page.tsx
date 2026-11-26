@@ -10,9 +10,9 @@ import type { Doctor } from "@/lib/doctors";
 import { SITE_URL, clinic } from "@/lib/clinic";
 
 export const metadata: Metadata = {
-  title: "Care Providers & Specialists | MyStree Indiranagar, Bengaluru",
+  title: "Doctors & Care Team | MyStree Indiranagar, Bengaluru",
   description:
-    "Meet the multidisciplinary women's health doctors, gynecologists, and specialists at MyStree Indiranagar, Bengaluru. Collaborative care for PCOS, pregnancy, fertility, and pelvic health.",
+    "Meet the multidisciplinary women's health doctors, gynaecologists and allied clinicians at MyStree on 13th Main Road, Indiranagar, Bengaluru.",
   alternates: {
     canonical: `${SITE_URL}/team-2`,
   },
@@ -56,10 +56,10 @@ function structuredData(doctors: readonly Doctor[]) {
         name: "MyStree Indiranagar",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "100ft Road, Indiranagar",
-          addressLocality: "Indiranagar",
-          addressRegion: "Bengaluru, Karnataka",
-          postalCode: "560038",
+          streetAddress: clinic.streetAddress,
+          addressLocality: clinic.locality,
+          addressRegion: `${clinic.city}, ${clinic.region}`,
+          postalCode: clinic.postalCode,
           addressCountry: "IN",
         },
       },
@@ -69,27 +69,27 @@ function structuredData(doctors: readonly Doctor[]) {
         "@type": "MedicalOrganization",
         name: "Care Providers",
         description:
-          "Gynaecologists, obstetricians, a reproductive medicine specialist, a pelvic floor physiotherapist and a nutritionist.",
+          "Gynaecologists, obstetricians, a reproductive endocrinologist, a pelvic floor physiotherapist and a nutritionist.",
       },
       {
         "@type": "MedicalOrganization",
         name: "Clinical Support",
         description:
-          "In-house diagnostic ultrasound scans, comprehensive hormonal profiling, and specialized pathology blood tests on site in Indiranagar.",
+          "In-house diagnostic ultrasound scans, comprehensive hormonal profiling, and pathology blood tests on site in Indiranagar.",
       },
       {
         "@type": "Organization",
         name: "Care Coordinators",
         description:
-          "Personal care managers navigating same-day appointments, cashless insurance TPA desk, and continuous WhatsApp clinic support.",
+          "Care coordinators helping with appointments and continuous WhatsApp clinic support.",
       },
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "100ft Road, Indiranagar",
-      addressLocality: "Indiranagar",
-      addressRegion: "Bengaluru, Karnataka",
-      postalCode: "560038",
+      streetAddress: clinic.streetAddress,
+      addressLocality: clinic.locality,
+      addressRegion: `${clinic.city}, ${clinic.region}`,
+      postalCode: clinic.postalCode,
       addressCountry: "IN",
     },
     areaServed: [
@@ -116,17 +116,17 @@ export default async function Team2Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData(doctors)) }}
       />
-      {/* 01: Compact Hero Section matching reference Image 1 */}
+      {/* 01: Compact Hero Section */}
       <Team2Hero />
 
-      {/* 02: Collaborative Care Model + Integrated Comparative Ledger */}
+      {/* 02: Meet our providers - 4-Column Directory Grid immediately accessible */}
+      <Team2MeetProviders doctors={doctors} />
+
+      {/* 03: Collaborative Care Model + Integrated Comparative Ledger */}
       <Team2CareModel />
 
-      {/* 03: Who's on your care team? 3-Card Editorial Grid */}
+      {/* 04: Who's on your care team? 3-Card Editorial Grid */}
       <Team2RosterRoles />
-
-      {/* 04: Meet our providers - 4-Column Directory Grid with Interactive Filters matching reference media_1789566903057.png */}
-      <Team2MeetProviders doctors={doctors} />
 
       {/* 05: Patient testimonials are not shown (NMC Guidelines 2026). */}
 

@@ -46,7 +46,7 @@ export const FAQ_TOPICS: readonly FaqTopic[] = [
       {
         question: "What is MyStree?",
         answer:
-          "MyStree is a women's health clinic in Indiranagar, Bengaluru. In one place you can see gynaecologists and obstetricians, a reproductive medicine specialist, a nutritionist, a pelvic floor physiotherapist, a dermatologist, a yoga therapist, a psychologist and a psychiatrist.",
+          "MyStree is a women's health clinic in Indiranagar, Bengaluru. In one place you can see gynaecologists and obstetricians, a reproductive endocrinologist, a nutritionist, a pelvic floor physiotherapist, a dermatologist, a yoga therapist, a psychologist and a psychiatrist.",
       },
       {
         question: "Will the doctor judge me if I'm not married?",
@@ -61,7 +61,7 @@ export const FAQ_TOPICS: readonly FaqTopic[] = [
       {
         question: "Can I see a woman doctor?",
         answer:
-          "Yes. MyStree's founders, obstetrician Dr. Smitha A.P and obstetrician and gynaecologist Dr. Surbhi Sinha, and reproductive medicine specialist Dr. Chaitra Nayak are women, and you can choose your doctor when you book. Male partners can see urologist and andrologist Dr. Sitaram M.",
+          "Yes. MyStree's founders, obstetrician Dr. Smitha A.P and obstetrician and gynaecologist Dr. Surbhi Sinha, and reproductive endocrinologist Dr. Chaitra Nayak are women, and you can choose your doctor when you book. Male partners can see urologist and andrologist Dr. Sitaram M.",
       },
       {
         question: "Where is MyStree?",

@@ -40,15 +40,15 @@
   margin-bottom: 2.5rem;
 }
 
-/* Overrides the global `main h2` serif display role (globals.css, !important). */
+/* Follows the global `main h2` Fraunces 400 display role with scoped spacing. */
 .title {
   margin: 0;
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.25rem, 1.45rem + 2.2vw, 3rem) !important;
-  font-weight: 700 !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.045em !important;
+  font-weight: 400 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.025em !important;
 }
 
 .lead {
@@ -107,15 +107,15 @@
   text-transform: uppercase;
 }
 
-/* Overrides the global `main h3` role so the card label stays compact. */
+/* Subheading follows unified Plus Jakarta Sans 600 role. */
 .groupTitle {
   margin: 0;
   color: var(--botanical-midnight);
   font-family: var(--font-sans), system-ui, sans-serif !important;
   font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.1 !important;
-  letter-spacing: -0.022em !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
 }
 
 .groupText {
@@ -182,11 +182,11 @@
 
 .figure {
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
   font-size: clamp(2.25rem, 2rem + 0.8vw, 2.75rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   font-variant-numeric: lining-nums tabular-nums;
 }
 

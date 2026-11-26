@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   // The root layout appends "| MyStree".
   title: "Gynaecologist Consultations in Indiranagar, Bengaluru",
   description:
-    "Consult a gynaecologist in Indiranagar, Bengaluru about irregular, heavy or painful periods, pelvic pain, PCOS, cervical screening or pregnancy planning, with a pelvic scan in the same visit if it is needed.",
+    "Consult a gynaecologist in Indiranagar, Bengaluru for irregular, heavy or painful periods, pelvic pain, PCOS, screening or pregnancy planning.",
   alternates: {
     canonical: `${SITE_URL}/services/obgyn-consults`,
   },
@@ -119,7 +119,7 @@ const LOCAL_QUESTIONS = [
   {
     question: "Are the gynaecologists at MyStree women?",
     answer:
-      "Yes. Pregnancy and gynaecology care at MyStree is led by Dr. Smitha A.P, the clinic's founder and a high-risk obstetrician, with obstetrician and gynaecologist Dr. Surbhi Sinha and reproductive medicine specialist Dr. Chaitra Nayak. Each doctor's qualifications are listed on the Our doctors page.",
+      "Yes. Pregnancy and gynaecology care at MyStree is led by Dr. Smitha A.P, the clinic's founder and a high-risk obstetrician, with obstetrician and gynaecologist Dr. Surbhi Sinha and reproductive endocrinologist Dr. Chaitra Nayak. Each doctor's qualifications are listed on the Our doctors page.",
   },
   {
     question: "Can I have a pelvic ultrasound in the same visit?",
@@ -134,7 +134,7 @@ const LOCAL_QUESTIONS = [
   {
     question: "How much does a gynaecology consultation cost at MyStree?",
     answer:
-      "The consultation fee depends on the specialist you choose and is shown before you confirm your booking. If you are trying to conceive, the MyStree Care Journey Basic plan covers two gynaecologist consultations, three follicular scans and one nutrition consultation for ₹2,999.",
+      "The consultation fee depends on the doctor you choose and is shown before you confirm your booking. If you are trying to conceive, the MyStree Care Journey Basic plan covers two gynaecologist consultations, three follicular scans and one nutrition consultation for ₹2,999.",
   },
   {
     question: "Where is MyStree in Indiranagar?",
@@ -248,34 +248,7 @@ export default async function ObgynConsultsPage() {
             external: true,
           }}
         />
-        <ServiceQuote
-          quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
-          name="Dr. Surbhi Sinha"
-        />
       </ServiceBand>
-
-      {/* SECTION 4 — conditions, revealed with the Roll Call animation.
-          Clinical scope only, alphabetical, no outcome claims. */}
-
-      <ServiceConditions
-        headingId="obgyn-conditions-heading"
-        heading="Gynaecology conditions we treat"
-        conditions={[
-          "Adenomyosis",
-          "Cervical cancer screening and prevention advice",
-          "Endometriosis",
-          "Heavy or painful periods",
-          "High-risk pregnancy",
-          "Irregular periods",
-          "Pain during intercourse (dyspareunia)",
-          "Perimenopause",
-          "Polycystic ovary syndrome (PCOS)",
-          "Pre-conception planning",
-          "Recurrent pregnancy loss",
-          "Uterine fibroids",
-        ]}
-        cta={{ label: "Book a consultation", href: "/book" }}
-      />
 
       <ServiceSpecialists
         headingId="obgyn-specialists-heading"
@@ -308,6 +281,43 @@ export default async function ObgynConsultsPage() {
         ]}
       />
 
+      {/* SECTION — conditions, revealed with the Roll Call animation.
+          Clinical scope only, alphabetical, no outcome claims. */}
+
+      <ServiceConditions
+        headingId="obgyn-conditions-heading"
+        heading="Gynaecology conditions we treat"
+        conditions={[
+          "Adenomyosis",
+          "Cervical cancer screening and prevention advice",
+          "Endometriosis",
+          "Heavy or painful periods",
+          "High-risk pregnancy",
+          "Irregular periods",
+          "Pain during intercourse (dyspareunia)",
+          "Perimenopause",
+          "Polycystic ovary syndrome (PCOS)",
+          "Pre-conception planning",
+          "Recurrent pregnancy loss",
+          "Uterine fibroids",
+        ]}
+        cta={{ label: "Book a consultation", href: "/book" }}
+      />
+
+      <ServicePlan
+        headingId="obgyn-plan-heading"
+        heading="A care plan for trying to conceive"
+        lead="Gynaecologist consultations, follicular scans and nutrition advice in one plan, at one price, at our Indiranagar clinic."
+        plan={{
+          name: CARE_JOURNEY_BASIC.name,
+          audience: "For women trying to conceive",
+          price: "₹2,999",
+          priceNote: "One price for the full plan",
+        }}
+        items={CARE_JOURNEY_BASIC.items}
+        cta={{ label: "Book a consultation", href: "/book" }}
+      />
+
       <ServiceSteps
         image={{ src: "/images/services/pages/gynaecology-clinic-waiting-area.webp", alt: "A patient with a file of reports waits in the clinic waiting area" }}
         headingId="obgyn-steps-heading"
@@ -333,18 +343,20 @@ export default async function ObgynConsultsPage() {
         cta={{ label: "Book a consultation", href: "/book" }}
       />
 
-      <ServicePlan
-        headingId="obgyn-plan-heading"
-        heading="A care plan for trying to conceive"
-        lead="Gynaecologist consultations, follicular scans and nutrition advice in one plan, at one price, at our Indiranagar clinic."
-        plan={{
-          name: CARE_JOURNEY_BASIC.name,
-          audience: "For women trying to conceive",
-          price: "₹2,999",
-          priceNote: "One price for the full plan",
-        }}
-        items={CARE_JOURNEY_BASIC.items}
-        cta={{ label: "Book a consultation", href: "/book" }}
+      <ServiceQuote
+        quote="Every woman deserves a doctor who explains her options plainly, without jargon or judgement."
+        name="Dr. Surbhi Sinha"
+      />
+
+      <ServiceFit
+        headingId="obgyn-fit-heading"
+        heading="Our gynaecology care is right for you if you have"
+        items={[
+          { icon: "cycle", label: "Periods that are irregular, heavy or painful" },
+          { icon: "uterus", label: "Pelvic symptoms that have not settled with earlier treatment" },
+          { icon: "seedling", label: "Plans for pregnancy, now or in the years ahead" },
+          { icon: "branch", label: "Changes in your cycle or body in your forties and beyond" },
+        ]}
       />
 
       <ServiceInsight
@@ -356,17 +368,6 @@ export default async function ObgynConsultsPage() {
           "Symptoms are often treated one at a time rather than together",
           "Painful periods are often accepted as normal, which can delay a diagnosis such as endometriosis",
           "Cycles, hormones, fertility and mood are connected, and care works better when they are seen together",
-        ]}
-      />
-
-      <ServiceFit
-        headingId="obgyn-fit-heading"
-        heading="Our gynaecology care is right for you if you have"
-        items={[
-          { icon: "cycle", label: "Periods that are irregular, heavy or painful" },
-          { icon: "uterus", label: "Pelvic symptoms that have not settled with earlier treatment" },
-          { icon: "seedling", label: "Plans for pregnancy, now or in the years ahead" },
-          { icon: "branch", label: "Changes in your cycle or body in your forties and beyond" },
         ]}
       />
 
@@ -385,7 +386,7 @@ export default async function ObgynConsultsPage() {
         headingId="obgyn-stat-heading"
         heading="Answers to your questions, not just your symptoms."
         figure="23 years"
-        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
+        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them in obstetrics and gynaecology."
       />
 
       <ServiceFacts

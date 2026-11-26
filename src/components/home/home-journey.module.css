@@ -8,10 +8,9 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(42% 55% at 100% 72%, rgb(255 236 238 / 0.16), transparent 70%),
-    radial-gradient(60% 50% at 0% 0%, rgb(20 6 10 / 0.25), transparent 70%),
-    #4a2d33;
-  color: #fff8f4;
+    radial-gradient(50% 60% at 92% 84%, rgb(128 0 32 / 0.1), transparent 72%),
+    linear-gradient(155deg, #6E0A22 0%, #4A0516 100%);
+  color: #FFFFFF;
 }
 
 .section.section {
@@ -24,7 +23,7 @@
   align-items: center;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 72px 24px 120px;
+  padding: 56px 24px 68px;
 }
 
 /* Section exception: overrides the global `main h2` scale. */
@@ -36,19 +35,19 @@
   font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
   line-height: 1.06 !important;
   letter-spacing: -0.025em !important;
-  color: #fff8f4;
+  color: #FFFFFF;
   text-align: center;
   text-wrap: balance;
 }
 
 .accent {
   font-style: italic;
-  color: #f4cfd4;
+  color: var(--surface-blush, #E5CCD3);
 }
 
 .panel {
   width: min(750px, 100%);
-  margin-top: 96px;
+  margin-top: 40px;
 }
 
 .kicker {
@@ -59,14 +58,14 @@
   font-family: var(--font-sans), sans-serif;
   font-size: 18px;
   font-weight: 500;
-  color: #fff8f4;
+  color: #F3E5E9;
   white-space: nowrap;
 }
 
 .rule {
   flex: 1;
   height: 1px;
-  background: rgb(255 248 244 / 0.35);
+  background: rgb(243 229 233 / 0.34);
 }
 
 /* ------------------------------------------------------------ accordion */
@@ -74,20 +73,22 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid rgb(255 255 255 / 0.18);
+  border: 1px solid rgb(255 255 255 / 0.2);
   border-radius: 16px;
-  background: #6c4a51;
+  background: rgb(120 22 48 / 0.72);
+  box-shadow: 0 18px 40px -22px rgb(24 0 6 / 0.55);
   overflow: hidden;
 }
 
 .item + .item {
-  border-top: 2px solid rgb(40 16 22 / 0.4);
+  border-top: 1px solid rgb(255 255 255 / 0.14);
 }
 
 /* Overrides the global h3 scale. */
 .section .itemHeading {
   margin: 0;
-  font: inherit !important;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
 }
 
 .trigger {
@@ -99,18 +100,18 @@
   padding: 0 50px;
   border: 0;
   background: transparent;
-  color: #fff8f4;
+  color: #FFFFFF;
   text-align: left;
   cursor: pointer;
   transition: background-color 200ms ease;
 }
 
 .trigger:hover {
-  background: rgb(255 255 255 / 0.04);
+  background: rgb(255 255 255 / 0.05);
 }
 
 .trigger:focus-visible {
-  outline: 2px solid #f4cfd4;
+  outline: 2px solid #FFFFFF;
   outline-offset: -4px;
   border-radius: 12px;
 }
@@ -120,31 +121,31 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: rgb(255 248 244 / 0.55);
+  background: rgb(255 255 255 / 0.52);
   transition:
     background-color 250ms ease,
     box-shadow 250ms ease;
 }
 
 .itemOpen .dot {
-  background: #f4cfd4;
-  box-shadow: 0 0 0 4px rgb(244 207 212 / 0.18), 0 0 14px rgb(244 207 212 / 0.7);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px rgb(250 241 243 / 0.24), 0 0 14px rgb(255 255 255 / 0.6);
 }
 
 .title {
   flex: 1;
   font-family: var(--font-sans), sans-serif;
-  font-size: 21px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1.3;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.015em;
 }
 
 .icon {
   display: grid;
   flex: none;
   place-items: center;
-  color: #fff8f4;
+  color: #FAF1F3;
 }
 
 .body {
@@ -157,7 +158,7 @@
   align-items: end;
   gap: 32px;
   padding: 0 50px 0 75px;
-  background: radial-gradient(38% 80% at 82% 100%, rgb(255 236 238 / 0.18), transparent 70%);
+  background: radial-gradient(38% 80% at 82% 100%, rgb(250 241 243 / 0.14), transparent 70%);
 }
 
 .text {
@@ -166,7 +167,7 @@
   font-family: var(--font-sans), sans-serif;
   font-size: 17px;
   line-height: 1.75;
-  color: rgb(255 248 244 / 0.92);
+  color: rgb(255 255 255 / 0.94);
 }
 
 .media {
@@ -175,8 +176,8 @@
   margin-bottom: 16px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.16);
-  box-shadow: 0 10px 28px -8px rgb(20 6 10 / 0.5);
+  border: 1px solid rgb(255 255 255 / 0.18);
+  box-shadow: 0 10px 28px -8px rgb(40 0 10 / 0.5);
 }
 
 .photo {
@@ -185,11 +186,31 @@
 
 /* ---------------------------------------------------------------- button */
 .actions {
-  margin-top: 60px;
+  margin-top: 36px;
 }
 
 .cta {
   min-width: 340px;
+}
+
+.actions :global(.cta-book) {
+  --cta-top: #FFFFFF;
+  --cta-bottom: #FAF1F3;
+  --cta-glow: 255 255 255;
+
+  color: #5C0017;
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 2px 8px rgb(40 0 10 / 0.35),
+    0 12px 28px -10px rgb(255 255 255 / 0.28);
+}
+
+.actions :global(.cta-book):hover,
+.actions :global(.cta-book):focus-visible {
+  --cta-top: #FFFFFF;
+  --cta-bottom: #F3E2E6;
+
+  color: #5C0017;
 }
 
 /* ---------------------------------------------------------------- phones */

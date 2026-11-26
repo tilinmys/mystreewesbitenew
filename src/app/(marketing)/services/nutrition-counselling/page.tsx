@@ -62,7 +62,7 @@ const PAGE_PATH = "/services/nutrition-counselling";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Women's Nutritionist & Dietitian in Indiranagar, Bengaluru",
+  title: "Women's Nutritionist & Dietitian, Indiranagar",
   description:
     "Nutrition counselling for women in Indiranagar, Bengaluru: PCOS, thyroid, weight, pregnancy and menopause diet plans built around Indian home food.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
@@ -225,11 +225,22 @@ export default async function NutritionCounsellingPage() {
           primaryCta={{ label: "Book a nutrition consultation", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: "tel:+916366573772" }}
         />
-        <ServiceQuote
-          quote="Whether a woman has gestational diabetes in pregnancy or is recovering after birth, the meal plan is built around her own foods and everyday life."
-          name="Priyanka Savina"
-        />
       </ServiceBand>
+
+      <ServiceSpecialists
+        headingId="nutrition-specialists-heading"
+        heading="Book with our nutritionist"
+        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
+        consultationLabel="Clinic consultation"
+        specialists={[
+          {
+            bookingId: 3,
+            tag: "Nutrition",
+            focus: ["PCOS and weight", "Pregnancy and after birth"],
+            profileHref: "/doctors/priyanka-savina",
+          },
+        ]}
+      />
 
       <ServiceConditions
         headingId="nutrition-conditions-heading"
@@ -249,21 +260,6 @@ export default async function NutritionCounsellingPage() {
           "Weight loss and weight gain",
         ]}
         cta={{ label: "Book a nutrition consultation", href: "/book" }}
-      />
-
-      <ServiceSpecialists
-        headingId="nutrition-specialists-heading"
-        heading="Book with our nutritionist"
-        lead="Times shown are live from the MyStree booking system. Choose the doctor and time that suit you."
-        consultationLabel="Clinic consultation"
-        specialists={[
-          {
-            bookingId: 3,
-            tag: "Nutrition",
-            focus: ["PCOS and weight", "Pregnancy and after birth"],
-            profileHref: "/doctors/priyanka-savina",
-          },
-        ]}
       />
 
       <ServiceSteps
@@ -291,16 +287,9 @@ export default async function NutritionCounsellingPage() {
         cta={{ label: "Book a nutrition consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/home-cooking-dal-ragi-and-vegetables.webp", alt: "Hands chopping vegetables beside dal and ragi flour in a home kitchen" }}
-        headingId="nutrition-insight-heading"
-        heading="Why most diets don't last"
-        body="A printed diet chart rarely survives a busy week, a family dinner or a bad night's sleep. Lasting change comes from a plan that fits the life you actually have."
-        points={[
-          "Generic plans ignore your home food, your culture, your working hours and your budget",
-          "The scale can't tell fat from muscle or water, so progress is easy to miss or misread",
-          "Cravings and stress eating have reasons, and willpower alone doesn't fix them",
-        ]}
+      <ServiceQuote
+        quote="Whether a woman has gestational diabetes in pregnancy or is recovering after birth, the meal plan is built around her own foods and everyday life."
+        name="Priyanka Savina"
       />
 
       <ServiceFit
@@ -311,6 +300,18 @@ export default async function NutritionCounsellingPage() {
           { icon: "pregnancy", label: "Are planning a pregnancy, pregnant or breastfeeding" },
           { icon: "mind", label: "Struggle with cravings, stress eating or diets that never last" },
           { icon: "seedling", label: "Want steady, lasting change rather than a quick fix" },
+        ]}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/home-cooking-dal-ragi-and-vegetables.webp", alt: "Hands chopping vegetables beside dal and ragi flour in a home kitchen" }}
+        headingId="nutrition-insight-heading"
+        heading="Why most diets don't last"
+        body="A printed diet chart rarely survives a busy week, a family dinner or a bad night's sleep. Lasting change comes from a plan that fits the life you actually have."
+        points={[
+          "Generic plans ignore your home food, your culture, your working hours and your budget",
+          "The scale can't tell fat from muscle or water, so progress is easy to miss or misread",
+          "Cravings and stress eating have reasons, and willpower alone doesn't fix them",
         ]}
       />
 

@@ -26,16 +26,16 @@
   text-align: center;
 }
 
-/* Overrides the global `main h1` serif display role (globals.css, !important). */
+/* Follows the global `main h1` Fraunces 400 display role with scoped spacing. */
 .title {
   max-width: 66rem;
   margin: 0;
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.5rem, 1.6rem + 3vw, 4rem) !important;
-  font-weight: 700 !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.045em !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
   text-wrap: balance;
 }
 

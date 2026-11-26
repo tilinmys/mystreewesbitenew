@@ -21,32 +21,32 @@
   align-items: center;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 160px 24px 150px;
+  padding: 44px 24px 36px;
   text-align: center;
 }
 
-/* Section exception: a small label, not a display heading (overrides `main h2`). */
+/* Unified eyebrow label in JetBrains Mono 500; display <h2> sits on .statement. */
 .section .eyebrow {
-  margin: 0 0 28px;
-  font-family: var(--font-sans), sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
+  margin: 0 0 18px;
+  font-family: var(--font-mono), monospace !important;
+  font-size: var(--type-metadata-tag) !important;
+  font-weight: 500 !important;
   line-height: 1.4 !important;
-  letter-spacing: 0.16em !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase;
-  color: #8a4b52;
+  color: #800020;
 }
 
 .statement {
   max-width: 22em;
   margin: 0;
-  font-family: var(--font-serif), serif;
-  font-size: clamp(1.75rem, 3.2vw, 2.875rem);
-  font-weight: 400;
+  font-family: var(--font-serif), serif !important;
+  font-size: clamp(1.75rem, 3.2vw, 2.875rem) !important;
+  font-weight: 400 !important;
   font-variation-settings: "opsz" 96, "SOFT" 0, "WONK" 0;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #641e2b;
+  color: #5C0017;
   text-wrap: balance;
 }
 
@@ -57,7 +57,7 @@
 
 .wordItalic {
   font-style: italic;
-  color: #8a4b52;
+  color: #800020;
 }
 
 .srOnly {
@@ -71,7 +71,7 @@
 
 .figure {
   width: min(880px, 100%);
-  margin: 112px 0 0;
+  margin: 28px 0 0;
 }
 
 .frame {

@@ -22,9 +22,10 @@
 
 .inner {
   display: grid;
+  width: 100%;
   max-width: 65rem;
   margin: 0 auto;
-  padding: 2.25rem 1.25rem 0;
+  padding: 2.25rem 1.25rem 2.75rem;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -33,33 +34,26 @@
 }
 
 /*
- * Heading. Service pages set their own heading scale and weight, so these
- * outrank the site-wide `main h1` contract: a single class (0,1,0) beats
- * `main h1` (0,0,2) when both are !important.
- *
- * 400, not 300. Fraunces Light at this size on a coloured ground thins out
- * and starts to shimmer; Regular holds its strokes and matches the
- * reference's even, confident weight.
+ * Heading. Service pages keep their own readable display proportion against
+ * the framed clinical photography while preserving Fraunces 400 clarity.
  */
 .title {
-  max-width: 15em;
+  max-width: 15ch;
   margin: 0;
   color: var(--svc-on-wine);
-  /* ~40px at the reference width; 32px on a phone. */
-  /* 32px on a phone; 61px at 1536, its cap. */
-  font-size: clamp(2rem, 3.97vw, 3.8rem) !important;
+  font-size: clamp(1.95rem, 3.25vw, 3.25rem) !important;
   font-weight: 400 !important;
-  line-height: 1.12 !important;
-  letter-spacing: -0.02em !important;
+  line-height: 1.14 !important;
+  letter-spacing: -0.024em !important;
 }
 
 .lead {
-  max-width: 32rem;
+  max-width: 34rem;
   margin: 1.125rem 0 0;
   color: var(--svc-on-wine-soft);
-  font-size: var(--type-body-lg);
+  font-size: clamp(0.98rem, 1.15vw, 1.125rem);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* ---- actions: thumb-first on a phone ---- */
@@ -68,13 +62,30 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.25rem;
+  gap: 0.35rem;
   margin-top: 1.75rem;
 }
 
 /* Full width on a phone: the easiest target in one-handed reach. */
 .actions > :global(.cta-book) {
   width: 100%;
+  --cta-top: #FFFFFF;
+  --cta-bottom: var(--surface-mist, #EFE0E4);
+  --cta-glow: 255 255 255;
+
+  color: var(--palette-oxblood, #5C0017);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 2px 8px rgb(40 0 10 / 0.28),
+    0 12px 26px -10px rgb(255 255 255 / 0.24);
+}
+
+.actions > :global(.cta-book):hover,
+.actions > :global(.cta-book):focus-visible {
+  --cta-top: #FFFFFF;
+  --cta-bottom: var(--surface-blush, #E5CCD3);
+
+  color: var(--palette-oxblood, #5C0017);
 }
 
 .secondary {
@@ -107,41 +118,39 @@
 
 .media {
   position: relative;
-  /* Explicit width and zero min-width: a grid item with an aspect-ratio
-     otherwise derives its width from its height (justify-self: normal
-     behaves as `start`), which pushed the image off-screen at 1024px in
-     the previous build. */
   width: 100%;
   min-width: 0;
   margin-top: 2rem;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  background: var(--svc-band-foot);
+  border-radius: 16px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: var(--palette-velvet-deep, #470818);
+  box-shadow: 0 24px 48px -20px rgb(24 0 8 / 0.52);
 }
 
 .image {
   object-fit: cover;
+  object-position: center 22%;
 }
 
-/* A quiet tonal panel — no label, no dashed frame. It reads as a space
-   waiting for a photograph rather than as unfinished work. */
+/* A quiet tonal panel waiting cleanly in Velvet Burgundy. */
 .placeholder {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     165deg,
-    color-mix(in oklab, var(--twilight-wine) 66%, var(--alabaster-canvas) 34%) 0%,
-    color-mix(in oklab, var(--twilight-wine) 80%, var(--alabaster-canvas) 20%) 100%
+    var(--palette-velvet, #661026) 0%,
+    var(--palette-velvet-deep, #470818) 100%
   );
 }
 
-/* --------------------------------------- short phones, < 700px tall
-   On a typical 360 x 800 Android the URL bar and system navigation leave
-   ~640px visible on load; this keeps the booking pill in that first view. */
+/* --------------------------------------- short phones, < 700px tall */
 
 @media (max-width: 639px) and (max-height: 700px) {
   .inner {
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
+    padding-bottom: 2.25rem;
   }
 
   .lead {
@@ -158,8 +167,8 @@
 
 @media (min-width: 640px) {
   .inner {
-    max-width: 42rem;
-    padding: 3rem 2.5rem 0;
+    max-width: 44rem;
+    padding: 3rem 2.5rem 3.5rem;
   }
 
   .actions {
@@ -177,7 +186,7 @@
   }
 
   .media {
-    margin-top: 2.5rem;
+    margin-top: 2.25rem;
     aspect-ratio: 3 / 2;
   }
 }
@@ -185,55 +194,59 @@
 /* ------------------------------------------------ desktop  >= 1024px */
 
 @media (min-width: 1024px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: clamp(500px, 66vh, 620px);
+  }
+
   .inner {
     max-width: none;
-    /* 7.3vw is the reference's margin at 1536px; once the viewport is wide
-       enough, the second term takes over and centres a 1312px (82rem) block. */
-    /* Top padding trimmed from the reference's ~91px to ~66px: at 1536 x 730
-       visible, 91px pushed the image's lower edge 23px below the fold. */
-    padding: clamp(2.5rem, 4.3vw, 4.125rem) max(7.3vw, calc((100% - 82rem) / 2)) 0;
-    column-gap: clamp(2rem, 3.65vw, 3.5rem);
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    width: 100%;
+    padding: clamp(3.25rem, 5vw, 4.75rem) max(6vw, calc((100% - 82rem) / 2));
+    column-gap: clamp(2.5rem, 4.25vw, 4.5rem);
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
     align-items: center;
   }
 
   .lead {
-    /* Fill the column, as the reference does; the 32rem phone measure would
-       otherwise force a third line. */
-    max-width: none;
-    margin-top: clamp(1rem, 1.7vw, 1.625rem);
-    font-size: clamp(1rem, 1.37vw, 1.3125rem);
-    line-height: 1.55;
+    max-width: 44ch;
+    margin-top: clamp(1rem, 1.5vw, 1.375rem);
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+    line-height: 1.65;
   }
 
   .actions {
-    margin-top: clamp(1.5rem, 2.6vw, 2.5rem);
+    margin-top: clamp(1.5rem, 2.3vw, 2.125rem);
     gap: clamp(1.25rem, 1.6vw, 1.5rem);
   }
 
   /* Two-class specificity outranks .cta-book on its own. */
   .actions > :global(.cta-book) {
-    min-height: clamp(2.75rem, 3.85vw, 3.6875rem);
-    padding-inline: clamp(1.375rem, 2.3vw, 2.25rem);
-    font-size: clamp(0.875rem, 1.04vw, 1rem);
+    min-height: clamp(2.85rem, 3.6vw, 3.45rem);
+    padding-inline: clamp(1.45rem, 2.15vw, 2.15rem);
+    font-size: clamp(0.875rem, 0.98vw, 0.975rem);
   }
 
   .secondary {
-    font-size: clamp(0.875rem, 1.04vw, 1rem);
+    font-size: clamp(0.875rem, 0.98vw, 0.975rem);
   }
 
   .media {
     margin: 0;
-    aspect-ratio: 21 / 20;
+    aspect-ratio: 5 / 4;
+    border-radius: 18px;
   }
 }
 
-/* Short laptop screens. A 1366 x 768 laptop shows ~650px once the browser
-   chrome is drawn; at the standard padding the image's lower edge sat 9px
-   below that. */
+/* Short laptop screens: keep image and copy balanced with even breathing room. */
 @media (min-width: 1024px) and (max-height: 700px) {
+  .hero {
+    min-height: 460px;
+  }
+
   .inner {
-    padding-top: 2.5rem;
+    padding-block: 2.5rem;
   }
 }
 
@@ -244,8 +257,7 @@
 }
 
 /*
- * Phones (17 Nov 2026, compact; color.md "Service pages on phones").
- * The photograph is a rounded 16:10 card under the actions; smaller type.
+ * Phones: clean 16:10 framed card under actions; readable body rhythm.
  */
 @media (max-width: 639px) {
   .title {
@@ -263,7 +275,7 @@
   }
 
   .media {
-    margin-top: 1.25rem;
+    margin-top: 1.35rem;
     aspect-ratio: 16 / 10;
     border-radius: 14px;
   }

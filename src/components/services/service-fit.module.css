@@ -7,6 +7,7 @@
  */
 
 .section {
+  --fit-rule: var(--border-subtle);
   padding: var(--svc-pad-y) var(--svc-pad-x);
   background: var(--svc-paper);
 }
@@ -46,28 +47,10 @@
   border-bottom: 1px solid var(--fit-rule);
 }
 
-.section {
-  --fit-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
-}
-
-/* Soft mist circle with a whisper of wine, so the drawings sit on
-   something without needing a card. */
-/* No badge: the fine-line drawings sit straight on the paper, with air
-   around them, as in the reference. The class keeps its name so the
-   drawing's box and spacing stay in one place. */
-.badge {
-  display: grid;
-  width: 4rem;
-  aspect-ratio: 1;
-  place-items: center;
-}
-
-/* Hairline drawings in a soft slate-mauve: Cadet Slate warmed with Twilight
-   Wine, quieter than the text beside them. */
 .icon {
   width: 100%;
   height: 100%;
-  color: color-mix(in oklab, var(--cadet-slate) 52%, var(--twilight-wine) 48%);
+  color: var(--twilight-wine);
 }
 
 .label {

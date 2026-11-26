@@ -111,8 +111,8 @@
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: #641e2b;
-  color: #fbf6f1;
+  background: linear-gradient(170deg, var(--book-top, #AD002B), var(--book-bottom, #800020));
+  color: #FFFFFF;
   font-family: var(--font-sans), sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -120,12 +120,12 @@
 }
 
 .book:hover {
-  background: #4b1722;
+  background: linear-gradient(170deg, var(--book-hover-top, #D60036), var(--book-hover-bottom, #AD002B));
 }
 
 .close:focus-visible,
 .book:focus-visible {
-  outline: 2px solid #641e2b;
+  outline: 2px solid var(--focus-ring, #FF0040);
   outline-offset: 3px;
 }
 

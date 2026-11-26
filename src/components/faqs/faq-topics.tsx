@@ -22,9 +22,9 @@ export function FaqTopics({ topics }: { topics: readonly FaqTopic[] }) {
     <section className={styles.section} aria-label="Frequently asked questions">
       <div className={styles.inner}>
         <nav className={styles.index} aria-labelledby="faq-topics-title">
-          <p id="faq-topics-title" className={styles.indexTitle}>
+          <h2 id="faq-topics-title" className={styles.indexTitle}>
             Topics
-          </p>
+          </h2>
           <ul className={styles.topicList}>
             {options.map((option) => (
               <li key={option.id}>
@@ -50,9 +50,9 @@ export function FaqTopics({ topics }: { topics: readonly FaqTopic[] }) {
               aria-labelledby={`faq-${topic.id}`}
               hidden={active !== "all" && active !== topic.id}
             >
-              <h2 id={`faq-${topic.id}`} className={styles.groupTitle}>
+              <h3 id={`faq-${topic.id}`} className={styles.groupTitle}>
                 {topic.label}
-              </h2>
+              </h3>
               {topic.entries.map((entry) => (
                 <details key={entry.question} className={styles.item}>
                   <summary className={styles.question}>

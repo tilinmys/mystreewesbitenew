@@ -1,16 +1,14 @@
 .section {
   --reviews-surface: var(--bg-light);
   --reviews-card: #FFFFFF;
-  --reviews-card-blue: #E8F2FA;
-  /* Blush and cream were the two orange-family card tints; both are now
-     cool steps so the rail reads as one calm family. */
+  --reviews-card-blue: #FAF1F3;
   --reviews-card-blush: #FFFFFF;
-  --reviews-card-cream: #E8F2FA;
-  --reviews-ink: #0C161D;
-  --reviews-muted: #4A6173;
-  --reviews-line: #D3E2EE;
-  --reviews-star: #0C161D;
-  --reviews-heading-accent: #0C161D;
+  --reviews-card-cream: #F3E2E6;
+  --reviews-ink: #5C0017;
+  --reviews-muted: #6A424D;
+  --reviews-line: #E5CED3;
+  --reviews-star: #800020;
+  --reviews-heading-accent: #800020;
 
   padding: clamp(3.5rem, 5vw, 4.75rem) 0 clamp(3rem, 4vw, 4rem);
   overflow: hidden;

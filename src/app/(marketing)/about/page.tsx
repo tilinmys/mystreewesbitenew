@@ -34,9 +34,9 @@ const PAGE_PATH = "/about";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "About MyStree: Women's Health Clinic in Indiranagar, Bengaluru",
+  title: "About MyStree Clinic in Indiranagar, Bengaluru",
   description:
-    "MyStree is a women's health clinic in Indiranagar, Bengaluru, with gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist under one roof.",
+    "MyStree is a women's health clinic in Indiranagar, Bengaluru with gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "About MyStree: Women's Health Clinic in Indiranagar, Bengaluru",
@@ -103,10 +103,10 @@ export default function AboutPage() {
       />
       <AboutIntro />
       <AboutFounder />
-      <AboutTeam />
-      <AboutFigures />
-      <AboutMore />
       <AboutCare />
+      <AboutFigures />
+      <AboutTeam />
+      <AboutMore />
       <AboutInquiries />
       <AboutFinale />
     </main>

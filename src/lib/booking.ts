@@ -46,6 +46,10 @@ export type NextSlot = {
   dayLabel: string;
   /** "2:00 PM". */
   time: string;
+  /** "YYYY-MM-DD" in IST when available. */
+  isoDate?: string;
+  /** Consultation mode returned by the booking backend. */
+  mode?: "offline" | "online";
 };
 
 type RawDoctor = {
@@ -144,6 +148,7 @@ async function fetchRoster(): Promise<unknown> {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const response = await fetch(`${BOOKING_ORIGIN}/api/doctors`, {
+        signal: AbortSignal.timeout(5000),
         next: { revalidate: REVALIDATE_SECONDS, tags: ["booking-doctors"] },
       });
       if (response.ok) return await response.json();
@@ -224,21 +229,33 @@ function dayLabel(offsetDays: number, date: Date) {
   return date.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
 }
 
-/** The first bookable in-clinic slot in the next two weeks, or null. */
-export async function getNextSlot(doctorId: number): Promise<NextSlot | null> {
-  const nowMinutes = istNow().minutes;
+async function fetchDayFirstSlot(
+  offset: number,
+  nowMinutes: number,
+  doctorId: number,
+  mode: "offline" | "online" = "offline",
+  bypassCache = false,
+): Promise<NextSlot | null> {
+  const date = istDate(offset);
+  const iso = date.toISOString().slice(0, 10);
 
-  for (let offset = 0; offset < SEARCH_DAYS; offset += 1) {
-    const date = istDate(offset);
-    const iso = date.toISOString().slice(0, 10);
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const response = await fetch(
-        `${BOOKING_ORIGIN}/api/availability?doctor_id=${doctorId}&date=${iso}&mode=offline`,
-        { next: { revalidate: REVALIDATE_SECONDS, tags: ["booking-availability"] } },
+        `${BOOKING_ORIGIN}/api/availability?doctor_id=${doctorId}&date=${iso}&mode=${mode}`,
+        bypassCache
+          ? {
+              signal: AbortSignal.timeout(6500),
+              cache: "no-store",
+            }
+          : {
+              signal: AbortSignal.timeout(6500),
+              next: { revalidate: REVALIDATE_SECONDS, tags: ["booking-availability"] },
+            },
       );
       if (!response.ok) return null;
       const slots: unknown = await response.json();
-      if (!Array.isArray(slots)) continue;
+      if (!Array.isArray(slots)) return null;
 
       for (const slot of slots as RawSlot[]) {
         const time = text(slot.time);
@@ -246,11 +263,68 @@ export async function getNextSlot(doctorId: number): Promise<NextSlot | null> {
         const minutes = minutesOf(time);
         if (minutes === null) continue;
         if (offset === 0 && minutes < nowMinutes + LEAD_MINUTES) continue;
-        return { dayLabel: dayLabel(offset, date), time: time.replace(/^0/, "") };
+        return {
+          dayLabel: dayLabel(offset, date),
+          time: time.replace(/^0/, ""),
+          isoDate: iso,
+          mode,
+        };
       }
-    } catch {
       return null;
+    } catch {
+      if (attempt === 1) return null;
     }
   }
   return null;
+}
+
+/**
+ * The first bookable slot in the next two weeks (checks in-clinic first,
+ * falling back to video/online slots for teleconsult clinicians), or null.
+ * Scans in tight 4-day waves so upstream connections stay reliable under load.
+ */
+export async function getNextSlot(
+  doctorId: number,
+  options?: { bypassCache?: boolean },
+): Promise<NextSlot | null> {
+  const nowMinutes = istNow().minutes;
+  const bypass = options?.bypassCache === true;
+
+  for (const mode of ["offline", "online"] as const) {
+    for (let start = 0; start < SEARCH_DAYS; start += 4) {
+      const count = Math.min(4, SEARCH_DAYS - start);
+      const wave = await Promise.all(
+        Array.from({ length: count }, (_, idx) =>
+          fetchDayFirstSlot(start + idx, nowMinutes, doctorId, mode, bypass),
+        ),
+      );
+      const hit = wave.find((slot) => slot !== null);
+      if (hit) return hit;
+    }
+  }
+  return null;
+}
+
+/**
+ * Resolve next available slots for multiple doctor IDs with bounded concurrency
+ * (4 doctors at a time) so batch API and SSR requests never saturate upstream sockets.
+ */
+export async function getBatchNextSlots(
+  doctorIds: readonly number[],
+  options?: { bypassCache?: boolean },
+): Promise<Record<number, NextSlot | null>> {
+  const uniqueIds = Array.from(new Set(doctorIds.filter((id) => Number.isFinite(id) && id > 0)));
+  const out: Record<number, NextSlot | null> = {};
+  const CONCURRENCY = 4;
+
+  for (let i = 0; i < uniqueIds.length; i += CONCURRENCY) {
+    const chunk = uniqueIds.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(
+      chunk.map(async (id) => [id, await getNextSlot(id, options)] as const),
+    );
+    for (const [id, slot] of results) {
+      out[id] = slot;
+    }
+  }
+  return out;
 }

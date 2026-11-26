@@ -99,9 +99,9 @@ export const doctorProfiles: Record<string, DoctorProfile> = {
     ],
   },
   "dr-chaitra-nayak": {
-    role: "Reproductive Medicine Specialist",
+    role: "Reproductive Endocrinologist & Gynaecologist",
     paragraphs: [
-      "Dr. Chaitra Nayak is a reproductive medicine specialist who consults at MyStree in Indiranagar, Bengaluru. She has 24 years of experience and is the founder of Kalpa Clinic.",
+      "Dr. Chaitra Nayak is a reproductive endocrinologist and gynaecologist who consults at MyStree in Indiranagar, Bengaluru. She has 24 years of experience and is the founder of Kalpa Clinic.",
       "Her clinical work covers PCOS, endometriosis and fertility evaluation. She assesses insulin resistance, ovulation and metabolic health step by step, and explains the options with each woman.",
       "Dr. Chaitra consults in English, Hindi, Kannada and Tamil.",
     ],

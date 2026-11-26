@@ -8,7 +8,7 @@ import { CLINIC_ID, clinicNode, faqNode } from "@/lib/service-schema";
 const PATH = "/faqs";
 const TITLE = "Women's Health Questions, Answered";
 const DESCRIPTION =
-  "Straight answers to the questions women ask before a gynaecology visit: first visits, cost, PCOS, periods, pregnancy, fertility, menopause and more, from MyStree in Indiranagar, Bengaluru.";
+  "Answers to common questions on women's health, first gynaecology visits, PCOS, periods, pregnancy, menopause and fees at MyStree Indiranagar.";
 
 export const metadata: Metadata = {
   title: TITLE,

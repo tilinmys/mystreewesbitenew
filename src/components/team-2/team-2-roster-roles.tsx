@@ -1,11 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 
 import styles from "./team-2-roster-roles.module.css";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface RoleCard {
   title: string;
@@ -36,20 +31,6 @@ const ROLES: readonly RoleCard[] = [
 ];
 
 export function Team2RosterRoles() {
-  const reducedMotion = Boolean(useReducedMotion());
-
-  const rise = (delay: number) =>
-    reducedMotion
-      ? // Same first frame as the server (no hydration mismatch), then shown
-        // at once on mount: reduced-motion visitors never get a blank section.
-        { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
-      : {
-          initial: { opacity: 0, y: 16 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 } as const,
-          transition: { duration: 0.6, delay, ease: EASE },
-        };
-
   return (
     <section
       id="care-team-roles"
@@ -58,7 +39,7 @@ export function Team2RosterRoles() {
     >
       <div className={styles.inner}>
         {/* Section Header */}
-        <motion.div className={styles.header} {...rise(0.04)}>
+        <div className={styles.header}>
           <span className={styles.eyebrow}>Collaborative Care Roles</span>
           <h2 id="care-team-roles-heading" className={styles.heading}>
             Who is on your care team?
@@ -67,21 +48,21 @@ export function Team2RosterRoles() {
             Your care is supported by doctors, a nutritionist and care coordinators
             working together on 13th Main Road, Indiranagar.
           </p>
-        </motion.div>
+        </div>
 
-        {/* 3-Card Grid matching Image 2 */}
+        {/* 3-Card Grid */}
         <div className={styles.grid}>
-          {ROLES.map((role, idx) => (
-            <motion.div
+          {ROLES.map((role) => (
+            <div
               key={role.title}
               className={styles.card}
-              {...rise(0.08 + idx * 0.06)}
             >
               <div className={styles.artFrame}>
                 <Image
                   src={role.image}
                   alt={role.alt}
                   fill
+                  loading="eager"
                   sizes="(max-width: 960px) 100vw, 33vw"
                   quality={92}
                   className={styles.artImage}
@@ -90,7 +71,7 @@ export function Team2RosterRoles() {
 
               <h3 className={styles.cardTitle}>{role.title}</h3>
               <p className={styles.cardBody}>{role.body}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

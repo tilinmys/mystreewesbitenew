@@ -25,10 +25,11 @@
   /* Own gutter: the shared --svc-pad-x is 0 on desktop, where service
      blocks are narrower than the window. */
   --pkg-pad-x: clamp(1.25rem, 5vw, 4rem);
-  --pkg-side: 24rem;
-  --pkg-gap: clamp(1.5rem, 2.6vw, 2.5rem);
-  --pkg-rule: color-mix(in oklab, var(--cadet-slate) 38%, var(--pure-white));
-  --pkg-ink-soft: color-mix(in oklab, var(--midnight-chamber) 78%, var(--pure-white));
+  --pkg-side: 23.5rem;
+  --pkg-gap: clamp(1.5rem, 2.6vw, 2.25rem);
+  --pkg-rule: var(--border-subtle, #E8E1E2);
+  --pkg-border-strong: var(--border-component, #DDD3D5);
+  --pkg-ink-soft: var(--text-muted, #5C484D);
 }
 
 /* ------------------------------------------------------------ hero band */
@@ -36,7 +37,8 @@
 .band {
   position: relative;
   padding: 2.5rem var(--pkg-pad-x) 0;
-  background: var(--uranian-mist);
+  background: var(--surface-mist, #F8F5F5);
+  border-bottom: 1px solid var(--pkg-rule);
 }
 
 .bandInner,
@@ -66,7 +68,7 @@
 .crumbs li + li::before {
   margin-right: 0.5rem;
   content: "/";
-  color: var(--cadet-slate);
+  color: var(--text-muted);
 }
 
 .crumbs a {
@@ -96,9 +98,10 @@
 
 .chip {
   padding: 0.4rem 0.75rem;
-  border-radius: 0.5rem;
+  border: 1px solid var(--pkg-rule);
+  border-radius: 999px;
   background: var(--pure-white);
-  color: var(--midnight-chamber);
+  color: var(--text-dark, #3E1E26);
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.3;
@@ -136,8 +139,8 @@
 /* ------------------------------------------------------------ body */
 
 .body {
-  padding: 0 var(--pkg-pad-x) var(--svc-pad-y);
-  background: var(--alabaster-canvas);
+  padding: clamp(1.75rem, 3vw, 2.75rem) var(--pkg-pad-x) var(--svc-pad-y);
+  background: var(--surface-whisper, #FBF9F9);
 }
 
 .side {
@@ -145,10 +148,15 @@
 }
 
 .priceCard {
+  overflow: hidden;
   padding: 1.5rem;
-  border: 1px solid var(--pkg-rule);
-  border-top: 3px solid var(--twilight-wine);
+  border: 1px solid var(--pkg-border-strong);
+  border-top: 3px solid var(--palette-burgundy, #800020);
+  border-radius: 1rem;
   background: var(--pure-white);
+  box-shadow:
+    0 1px 2px rgb(42 21 26 / 0.04),
+    0 12px 28px -18px rgb(42 21 26 / 0.1);
 }
 
 .priceRow {
@@ -224,17 +232,19 @@
   min-height: 3rem;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid var(--midnight-chamber);
+  border: 1px solid var(--pkg-border-strong);
   border-radius: 999px;
-  color: var(--midnight-chamber);
-  font-size: 1rem;
-  font-weight: 600;
+  background: #FFFFFF;
+  color: var(--palette-oxblood, #5C0017);
+  font-size: 0.9375rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: background-color 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .call:hover {
-  background: var(--uranian-mist);
+  border-color: var(--palette-burgundy, #800020);
+  background: var(--surface-mist, #F8F5F5);
 }
 
 .call:focus-visible,
@@ -253,14 +263,19 @@
 
 .main {
   min-width: 0;
-  margin-top: var(--pkg-gap);
+  margin-top: 1.5rem;
 }
 
 /* ------------------------------------------------------------ tabs card */
 
 .tabsCard {
-  border: 1px solid var(--pkg-rule);
+  overflow: hidden;
+  border: 1px solid var(--pkg-border-strong);
+  border-radius: 1rem;
   background: var(--pure-white);
+  box-shadow:
+    0 1px 2px rgb(42 21 26 / 0.04),
+    0 12px 28px -18px rgb(42 21 26 / 0.1);
 }
 
 .tabList {
@@ -268,6 +283,7 @@
   gap: 0.25rem;
   overflow-x: auto;
   padding: 0 0.75rem;
+  background: var(--surface-well, #F3EFEF);
   border-bottom: 1px solid var(--pkg-rule);
   scrollbar-width: none;
 }
@@ -275,7 +291,7 @@
 .tab {
   flex: none;
   min-height: 3.25rem;
-  padding: 0 0.75rem;
+  padding: 0 0.85rem;
   border: 0;
   border-bottom: 2px solid transparent;
   background: none;
@@ -284,16 +300,21 @@
   font-size: 0.9375rem;
   font-weight: 500;
   cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.tab:hover {
+  color: var(--palette-oxblood, #5C0017);
 }
 
 .tab[aria-selected="true"] {
-  border-bottom-color: var(--twilight-wine);
-  color: var(--twilight-wine);
+  border-bottom-color: var(--palette-burgundy, #800020);
+  color: var(--palette-oxblood, #5C0017);
   font-weight: 600;
 }
 
 .panel {
-  padding: 1.25rem 0.75rem 1.5rem;
+  padding: 1.25rem 0.875rem 1.5rem;
 }
 
 .rows {
@@ -306,6 +327,14 @@
 
 .row {
   border: 1px solid var(--pkg-rule);
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.row[open] {
+  border-color: var(--pkg-border-strong);
+  background: var(--surface-whisper, #FBF9F9);
 }
 
 .row summary {
@@ -585,10 +614,11 @@
 .cardTitle {
   margin: 0;
   color: var(--twilight-wine);
-  font-family: var(--font-serif), Georgia, serif !important;
-  font-size: 1.625rem !important;
-  font-weight: 400 !important;
-  line-height: 1.2 !important;
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  font-size: 1.375rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.25 !important;
 }
 
 .cardText {
@@ -641,14 +671,14 @@
   .bandInner,
   .bodyInner {
     grid-template-columns: minmax(0, 1fr) var(--pkg-side);
+    align-items: start;
   }
 
   .intro {
     padding-bottom: clamp(2.5rem, 4.2vw, 4rem);
   }
 
-  /* The cut-out sits over the price card's column, feet on the band's
-     foot, so the card below reads as the ground she stands on. */
+  /* The cut-out sits over the price card's column, feet resting cleanly on the hero band baseline. */
   .figure {
     height: auto;
     min-height: 100%;
@@ -663,12 +693,13 @@
     order: 0;
     grid-column: 2;
     grid-row: 1;
+    margin-top: 0;
   }
 
   .main {
     grid-column: 1;
     grid-row: 1;
-    margin-top: var(--pkg-gap);
+    margin-top: 0;
   }
 
   /* Sticky so the price and the booking button stay beside every tab. */
@@ -756,10 +787,11 @@
   gap: 0.5rem;
   margin: 1rem 0 0;
   padding: 0.85rem 1rem;
-  border-left: 3px solid var(--twilight-wine);
-  background: color-mix(in oklab, var(--uranian-mist) 55%, var(--pure-white));
+  border-left: 3px solid var(--palette-burgundy, #800020);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--surface-mist, #F8F5F5);
   list-style: none;
-  color: var(--midnight-chamber);
+  color: var(--text-dark, #3E1E26);
   font-size: 0.8125rem;
-  line-height: 1.45;
+  line-height: 1.48;
 }

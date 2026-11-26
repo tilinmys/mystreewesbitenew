@@ -12,28 +12,34 @@ Read and apply this document before every coding task, as required by `AGENTS.md
 4. Keep color values centralized in the applicable token block. Components consume variables. Existing CSS Modules implement the same measurements as the requested utility-style specifications. `tailwind.config.ts` mirrors the canonical `mystree.*` color map so future Tailwind-enabled components resolve to the same system; current CSS Modules must continue consuming the CSS variables.
 5. Check the finished rendering and interactions at narrow mobile, tablet, and desktop widths. Verify real link destinations, keyboard/touch operation, reduced motion, unclipped text, and contrast. State verification limitations instead of claiming unperformed checks.
 
-## MyStree Digital Clinical Standards — Global Deep Navy & White Specification
+## MyStree Pure Burgundy & Crisp White Specification (26 Nov 2026)
 
-Refactored globally to an editorial, clinical Deep Navy, Porcelain Canvas, Uranian Mist, and Crisp White system.
+Updated globally to pure clinical colours with zero muddy grey/mauve undertones: **Pure White (`#FFFFFF`)** as the dominant architectural ground, **Pure Soft Rose White (`#FFF5F7`)** and **Pure Crisp Blush (`#FFEBF0`)** for subtle non-muddy section/card separation, **Pure Burgundy (`#800020`)** & **Pure Oxblood (`#5C0017`)** (`#7A001E -> #520014` on dark bands), **Pure Garnet Crimson (`#AD002B`)** -> **Pure Ruby (`#D60036`)** CTA fills, rested oxblood-plum prose (`#3E1E26`), and the preserved footer surface (`color-mix(in srgb, #73304a 88%, #0C161D 12%)`).
 
-### CRITICAL COLOR MANDATE:
-- **ZERO orange** (`#FF833C`, `#ED5B2D`, `#EF6A40`), amber, terracotta, or yellow tones anywhere in backgrounds, text, borders, illustrations, icons, or card surfaces.
-- Orange (`#ED5B2D` / hover `#D84A1E`) is permitted **EXCLUSIVELY** on primary action and booking buttons (`<button>`, `<a>`).
+### CRITICAL COLOR RULES:
+- **Zero blue section grounds or card fills** (`#E8F2FA` / `#8BA4BF`), **zero muddy mauve/grey washes** (`#EFE0E4` / `#E5CCD3`), and **zero orange text/fills** (`#ED5B2D`).
+- **Pure White Canvas First:** Pure `#FFFFFF` is the primary background across pages, punctuated selectively by Pure Soft Rose White (`#FFF5F7`) and crisp `#EED4DC` hairlines so section transitions feel bright, clean, and cohesive rather than heavily striped.
+- **Pure Burgundy & Crimson Hierarchy:** `#7A001E -> #520014` on full-width dark bands, `#800020` / `#5C0017` on headings and directory buttons, `#AD002B -> #800020` (hover `#D60036 -> #AD002B`) on primary booking CTAs, `#FF0040` focus outlines.
+- **Footer Surface:** Explicitly preserved at `--footer-surface` (`#692B43`) with white headings/links (`#FFFFFF`, `#DDE2E8`).
+- **Directory Cards, Booking Cards & Profile Policy:** `/doctors` (`Team2MeetProviders`) renders centered pure white cards with solid Burgundy/Crimson circular portrait discs (using transparent doctor cutouts), clinician name, outlined white specialty pill tags with `+N` overflow, and a single full-width Burgundy `View profile` button. Booking sections on `/` (`HomeTeam`) and all `/services/*` & `/clinics/pcos` pages (`ServiceSpecialists`) use compact dark Burgundy glassmorphic booking cards (`#6E0A24 -> #4E0418 -> #380210` with radial crimson glow, frosted specialty/experience/date-time pills, `Available` indicator, consultation fee replacing star ratings, and glowing Crimson pill `Book Appointment` CTA — zero star ratings or `Reg. No.`). Registration numbers (`Reg. No.`) appear exclusively on `/doctors/[slug]` profiles (right-aligned `REG. NO - <value>` only when present).
+- **Mobile Glassmorphic Dock & Cookie Banner:** `MobileActionBar` renders as a floating frosted-glass bottom dock with an official WhatsApp vector logo; `ConsentNotice` sits compactly above the dock on mobile with equal-width action buttons.
 
-| Token | Value | Role | Contrast vs Canvas |
+| Token | Value | Role | Contrast |
 | --- | --- | --- | --- |
-| `--bg-dark` | `#0C161D` | Midnight Navy foundation (dark canvases, split reveal) | Baseline dark |
-| `--bg-light` / `--canvas` | `#F8FAFC` | Porcelain White light canvas | Baseline light |
-| `--surface-card` | `#FFFFFF` | Pure crisp white card surfaces | High elevation |
-| `--surface-mist` | `#E8F2FA` | Calming Uranian mist for clinical sections | Soft contrast |
-| `--text-dark` / `--text-primary` | `#0C161D` | Deep navy for titles and primary headings | 16.4:1 on `#F8FAFC` (AAA) |
-| `--text-light` | `#FFFFFF` | Crisp white for dark canvas headings and buttons | 18.2:1 on `#0C161D` (AAA) |
-| `--text-muted` | `#4A6173` | Readable slate body text on light canvases | 6.8:1 on `#F8FAFC` (AAA) |
-| `--accent-cadet` | `#8BA4BF` | Brand Cadet Gray for metadata, tags, badges, dividers | 3.8:1 non-text boundary |
-| `--border-subtle` | `#D3E2EE` | Subtle border stroke on light canvases | 1.3:1 subtle hairline |
-| `--border-dark` | `rgba(255, 255, 255, 0.12)` | Card stroke on dark canvases | 1.2:1 hairline |
-| `--btn-primary` | `#ED5B2D` | Brand Flame for primary booking / consultation CTAs ONLY | 4.7:1 gradient fill |
-| `--btn-primary-hover` | `#D84A1E` | Brand Flame hover state | Deepened gradient |
+| `--palette-velvet` / `--palette-velvet-deep` | `#7A001E -> #520014` | Pure Deep Burgundy dark bands | 11.4:1–14.8:1 w/ `#FFFFFF` |
+| `--palette-oxblood` / `--midnight-chamber` | `#5C0017` | Pure Oxblood Deep (primary headings, anchors, dark ink) | 14.31:1 on `#FFFFFF` / 13.4:1 on `#FFF5F7` |
+| `--palette-burgundy` / `--twilight-wine` | `#800020` | Pure Classic Burgundy (eyebrows, accents, profile CTAs) | 10.83:1 on `#FFFFFF` / 10.1:1 on `#FFF5F7` |
+| `--bg-light` / `--canvas` / `--surface-card` | `#FFFFFF` | Pure White primary canvas & crisp card foregrounds | Baseline light |
+| `--surface-mist` / `--uranian-mist` | `#FFF5F7` | Pure Soft Rose White (clean non-muddy section tint) | Pure luminous contrast |
+| `--surface-blush` / `--blush-veil` | `#FFEBF0` | Pure Crisp Blush (badges, fee cells, accents) | Clean tonal highlight |
+| `--text-dark` / `--botanical-midnight` | `#3E1E26` | Rested dark oxblood-charcoal body prose | 14.8:1 on `#FFFFFF` / 13.9:1 on `#FFF5F7` |
+| `--text-muted` | `#5A3440` | Rich muted rose-plum captions & metadata | 9.6:1 on `#FFFFFF` / 9.0:1 on `#FFF5F7` |
+| `--accent-cadet` / `--cadet-slate` | `#9E6E7B` | Warm rose-mauve for subtle dividers | Subtle boundary |
+| `--border-subtle` | `#EED4DC` | Crisp pure rose hairline stroke for cards & dividers | Clean edge definition |
+| `--btn-primary` / `--book-top` | `#AD002B` | Pure Garnet Crimson primary CTA gradient top (`#AD002B -> #800020`) | 7.47:1 w/ `#FFFFFF` |
+| `--btn-primary-hover` / `--book-hover-top` | `#D60036` | Pure Rich Ruby primary CTA hover gradient top (`#D60036 -> #AD002B`) | 5.37:1 w/ `#FFFFFF` |
+| `--focus-ring` / `--palette-vivid` | `#FF0040` | Non-text keyboard focus outline & glow highlight | 3.94:1 non-text UI contrast |
+| `--footer-surface` | `#692B43` (`color-mix(in srgb, #73304a 88%, #0C161D 12%)`) | Approved Footer Burgundy (preserved unchanged) | 10.36:1 w/ `#FFFFFF` |
 
 ## Brand palette
 
@@ -2814,3 +2820,122 @@ Source: the review in `docs/MyStree-Website-Review-2026-11-23.pdf` (kept local, 
   - Analytics and conversion measurement are unchanged.
 - **Speed:** the `/doctors` H1 is no longer faded in after hydration. Mobile LCP dropped from 3.6 s to 1.2 s (4× CPU slowdown, slow 4G).
 - **Reduced motion:** all home sections use `useStillAfterMount()`, which removes the remaining hydration style warnings.
+
+## 24 Nov 2026: MyStree Assistant (replaces the care chat help card)
+
+Files:
+- `src/components/care-chat.tsx` and `care-chat.module.css`: the UI.
+- `src/lib/care-chat/brain.ts`: the answers.
+- `app/(marketing)/layout.tsx`: passes the live booking roster and the packages to the chat.
+
+**How it answers:**
+- It is rule-based; there is no AI model and no server call. What visitors type never leaves the browser.
+- Order of checks:
+  1. Emergency and crisis wording, always first and answered with no delay:
+     - pregnancy red flags;
+     - heavy bleeding, severe pain, fainting, breathing, fits;
+     - self-harm: Tele-MANAS 14416 and 112;
+     - violence: 112 and the Women Helpline 181.
+  2. Clinic intents: booking, cancelling, hours, address, fees (grouped live from the booking roster), payment, insurance, video visits, packages, talk to a person.
+  3. Areas of care: the matching doctors with live fee and visit length, a "Book" button, and the service page.
+  4. FAQ search over `lib/faq-hub.ts`.
+  5. An honest fallback that hands over to WhatsApp with the question prefilled.
+- Analytics: `care_chat_open`, plus `care_chat_reply` with the matched topic only (never the text).
+
+**Launcher:**
+- A 56px circle (50px on phones), gradient `#7A2637 → #641E2B → #561826`, with the ivory mark and rose flower.
+- Hover (mouse and trackpad only, `(hover: hover) and (pointer: fine)`):
+  - the circle widens to the left into a 170px "Ask MyStree" pill (420ms ease-out); the icon stays pinned on the right;
+  - the label slides in and the mark tilts −8°;
+  - the flower turns, the button lifts 2px with a deeper shadow, and a light sweep crosses it once.
+- Press scales it to 0.94. When open it shows a close ×, which turns 90° on hover.
+- A few soft pulse rings play until the greeting has been seen.
+- Greeting pill: "Hi, have a question? Ask me." Same once-per-visit rules as before.
+
+**Desktop panel:**
+- 384px wide, `min(640px, 100dvh − 120px)` tall, 22px radius.
+- It springs out of the launcher (origin bottom right, scale 0.88 → 1). It is non-modal; Escape closes it and focus returns to the launcher.
+
+**Phones:**
+- A bottom sheet, `min(88dvh, 760px)` tall, over a dimmed page (`rgb(28 10 14 / 0.42)`).
+- It springs up from the bottom. Drag the handle or header down to close, or tap the backdrop.
+- The page behind is locked and Tab stays inside the sheet. No autofocus, so the keyboard doesn't pop up.
+
+**Panel content:**
+- Header: avatar (hidden below 390px), "MyStree Assistant" in Fraunces 16px, a green dot with "Instant answers", a red outline "Emergency" button (`#B4232C` on `#FDEEF0`), and a close button.
+- Message log on blush `#FBF7F7`:
+  - bot bubbles are white with a hairline border; user bubbles are burgundy;
+  - emergency bubbles are tinted red with an "Urgent help" label;
+  - doctor, fee and package rows carry outline "Book"/"View" buttons;
+  - actions: booking orange for "Book online", red for "Call 112", outline for the rest;
+  - suggestion chips rise in with a stagger; a typing indicator shows for 0.5–1.1s.
+- Composer: a 44px input (16px text, so iOS doesn't zoom), a round send button, and the disclaimer "Automated answers, not medical advice. Nothing you type is sent to the clinic."
+
+**Reduced motion:** fades only, no typing delay, no pulse or sweep.
+
+## 25 Nov 2026: Website audit, typography unification, compliance & preventive health updates
+
+- **Unified Typography System across all routes:**
+  - Main headings (`<h1>`) & section headings (`<h2>`, plus footer statement/wordmark and large editorial numerals): `Fraunces` (`--font-serif`), weight `400` everywhere (`/about` Sans 700 overrides and `/blog` `.sansWord` aligned to Fraunces 400; `HomeWelcome` display `<h2>` moved to `.statement`).
+  - Subheadings (`<h3>`, doctor card names, step titles, contact cards, article cards, package cards): `Plus Jakarta Sans` (`--font-sans`), weight `600` uniformly across every section.
+  - Eyebrows, category badges, section labels, and metadata overlines: `JetBrains Mono` (`--font-mono`), weight `500`, uppercase.
+  - Body text (`400`) & small captions/legal/disclaimers (`400`–`500`): `Plus Jakarta Sans` (`--font-sans`).
+- **24 Nov 2026 Review compliance & UX updates:**
+  - Renamed `/packages/mirena-comfort-care` -> `/packages/hormonal-iud-care` (with 308 permanent redirect and renamed image files without brand name).
+  - Removed `/packages/mtp-care` links from footer, navigation dropdown, and `/about` concern grid (the `/packages/mtp-care` page stays live).
+  - Added `/booking` and `/booking/:path*` redirects for non-production proxy hosts in `next.config.ts`.
+  - Added `/services/womens-health-check` ("Women's Health Check & Pap Smear in Indiranagar, Bengaluru") with aliases `/services/pap-smear` and `/services/womens-health-checkup`, wired into sitemap, navbar, footer, CareChat, and `llms.txt`.
+  - Removed `"trusted"`, `"Expert"`, and `"Specialist"` role titles from doctor normalizer/roster/SEO copy; added `Reg. No.` display to `HomeTeam` cards; deferred duplicate marquee loop clone in `HomeTeam` to client-side motion only and added descriptive `alt` text on all content images across `/`.
+  - Added footer medical disclaimer (`"Information on this website is for awareness only and is not a substitute for medical advice."`), DPDP `ConsentNotice` (`consent-notice.tsx`), sticky mobile `Call / WhatsApp` bar (`mobile-action-bar.tsx`, shifting `CareChat` dock upward on mobile), and updated `GoogleTag` to disable `allow_ad_personalization_signals` everywhere and never execute on staging/preview hostnames.
+- **`HomeTeam` compact horizontal cutout cards (updated 25 Nov 2026):**
+  - Replaced the marquee with a static compact horizontal card grid (3 columns desktop, 2 columns tablet, 1 column phone) inspired by the uploaded horizontal doctor card silhouette and styled in the MyStree corporate palette (`#F8FBFE` to `#E8F2FA` mist studio card, `#0C161D` ink, `#4A152D` speciality eyebrow in JetBrains Mono 500, `#4A6173` concise info & metadata, `#FFFFFF` concentric studio watermark arcs, and full-width bottom `.cta-book` Flame CTA/schedule bar showing next available date, time, and booking arrow alongside a top-right quick-book arrow).
+  - Uses transparent cutout portraits (`/images/specialists/*-cutout.webp`, falling back cleanly to Fraunces monograms where no portrait is available). Zero star ratings, review counts, or verification ticks.
+  - Shows 6 priority clinicians first (`Dr. Smitha A.P`, `Dr. Surbhi Sinha`, `Dr. Chaitra Nayak`, `Dr. Raksha M`, `Priyanka Savina`, `Dr. Jasmine Flora`), with a `"Show more doctors"` toggle revealing all remaining clinicians inline and a link to `/doctors`.
+- **`HomePackages`, Uniform `.cta-book` Spotlight & Compact Home Spacing (updated 25 Nov 2026):**
+  - Rebuilt `HomePackages` (`home-packages.tsx`, `home-packages-view.tsx`, `home-packages.module.css`) into a 4-column desktop / 2-column tablet / 1-column mobile grid of 4-part pricing cards (`16:9` rich media + factual badge, `<h3>` title & 2-line intro, bold price + billing/scope interval, and full-width uniform CTA button) with tight engraving header and explicit navigation guide copy.
+  - Unified `.cta-book` across all pages in `globals.css` (`12px` rounded corners, `0.3s cubic-bezier(0.4, 0, 0.2, 1)` lift `-3px`, flame hover glow, `scale(0.98)` active press, accessible focus ring) paired with `<CtaSpotlight />` (`src/components/cta-spotlight.tsx`) for gentle backdrop dim/blur focus on desktop hover/focus (skipped under reduced motion).
+  - Compacted excessive vertical padding across home sections (`HomeWelcome`, `HomeStory`, `HomeCore`, `HomeGenerations`, `HomePackages`, `HomeJourney`, `HomeServicesRow`, `HomeTeam`, `HomeClosing`).
+- **Burgundy Palette Overhaul, Circle-Free `HomeTeam` & Service Page Scroll Cadence (updated 25 Nov 2026):**
+  - Transitioned global design tokens (`globals.css`, `tailwind.config.ts`) from navy/blue/orange to the approved 5-swatch Burgundy system (`#800020`, `#5C0017`, `#FF0040`, `#D60036`, `#AD002B`) with `#FAF1F3` Porcelain Rose, `#F3E2E6` Warm Blush Veil, `#FFFFFF` White, rested `#3E1E26` / `#6A424D` rose-plum prose, and frozen footer surface (`--footer-surface`).
+  - Removed the SVG background circles (`styles.arcs`) behind `HomeTeam` portraits and changed `HomeTeam` cards to soft burgundy gradient (`#FDF7F8 -> #F3E2E6`) with `#E5CED3` border and `#5C0017`/`#800020` text hierarchy.
+  - Removed `<CtaSpotlight />` and `.cta-spotlight-backdrop` page dimming/blackout on button hover; upgraded `.cta-book` to Garnet-to-Burgundy `#AD002B -> #800020` (hover `#D60036 -> #AD002B`, `#FF0040` focus ring, white inversion on dark burgundy grounds).
+  - Re-sequenced all `/services/*` and `/clinics/pcos` bands to alternate cleanly (`Band #800020->#5C0017` -> `Conditions #FAF1F3` -> `Specialists #FFFFFF` w/ burgundy cards -> `Steps #FAF1F3` -> `Plan #F3E2E6` -> `Insight #FFFFFF` -> `Fit #FAF1F3` -> `Model #FFFFFF` -> `Stat #FAF1F3` -> `Facts #FFFFFF` -> `Questions #FAF1F3` -> `Faq #FFFFFF` [or `#FAF1F3` when immediately after `Facts` on `/services/fertility-clinic`] -> `Ask #5C0017->#800020` -> `Reading #FAF1F3` -> `Closing #FFFFFF canvas + #800020->#5C0017 panel` -> `SiteFooter #692B43`).
+  - Refined `HomePackages` (`home-packages.tsx`, `home-packages-view.tsx`, `home-packages.module.css`): removed floating corner overlay pills (`"Starting Steps"` etc.) and icon/copy clutter, enlarged card imagery to `4:3` (`object-contain` header engraving fit cleanly at `right center`), and removed 2-line sentence truncation so every package summary finishes with a complete sentence.
+  - Redesigned `ServiceSpecialists` & `HomeTeam` doctor cards with highlighted portrait frames, horizontal & vertical hairline separators (`#E5CED3`), complete unbroken text (no `ellipsis` / `line-clamp`), bold `700` decision metrics (`Next Available` date/time + `Fee` rate), and full-width primary `.cta-book` booking buttons.
+  - Fixed `HomeCore` CSS stage collapse (`position: relative` normal flow over SVG tree) and tightened vertical padding in `HomeStory`, `HomeCore`, `HomeWelcome`, `HomePackages`, and `HomeGenerations` to eliminate excess vertical blank space.
+
+## 26 Nov 2026: Luminous Rose-Pearl Glassmorphic Booking Cards, Editorial Artworks, Blog Polish & Font-Weight Refinement
+
+- **Luminous Light Rose-Pearl Glassmorphism (`HomeTeam` & `ServiceSpecialists`):**
+  - Replaced dark burgundy booking cards with light frosted rose-pearl glass (`rgb(255 255 255 / 0.96) -> rgb(255 238 243 / 0.95)`, subtle rose radial corner blooms, `backdrop-filter: blur(16px)`, `1px solid #ECC9D4` edge).
+  - Enlarged circular doctor portraits (`76px` desktop / `66px` mobile on `HomeTeam`; `72px` desktop / `66px` mobile on `ServiceSpecialists`) with white ring framing.
+  - Made consultation rate (`1.2rem`–`1.25rem`, `600`, `#5C0017`) and doctor name (`1.15rem`–`1.1875rem`, Plus Jakarta Sans `600`) distinctly prominent; zero star ratings and zero `Reg. No.` on summary cards (`Reg. No.` remains profile-only on `/doctors/[slug]`).
+  - `Book Appointment` pill button uses MyStree Crimson-to-Burgundy (`#AD002B -> #800020`) and shifts on hover to a contrasting deep velvet plum-oxblood (`#43081C -> #260310`).
+- **Bespoke Burgundy Fine-Line & Watercolor Editorial Illustrations:**
+  - Added `src/components/home/editorial-art.tsx` with 14 bespoke fine-line Burgundy/Oxblood ink & soft rose watercolor SVG illustrations across all 10 `HomeServicesRow` cards and all 4 `HomePackagesView` cards (`#FFF9FA -> #FFE8EF` paper ground, `#5C0017` / `#800020` / `#AD002B` ink contours) so every clinical specialty and package shares one unmistakable, human-drawn gallery voice.
+  - Replaced the 5-petal SVG flower in `/doctors` `Team2ClosingBanner` with a fine-line ink-and-wash side-profile portrait inside a botanical sanctuary arch.
+- **`/blog` Hero & Featured Card Fixes (`BlogHero`, `FeaturedBlogSlider`, `BlogLatest`):**
+  - Fixed `THE mystree TAKE` vertical descender overlap (`line-height: 1.08`, `margin-top: 0.14em`) and synced hero, featured slider, and latest cards to MyStree's pure `#800020` / `#5C0017` / `#FFF5F7` palette.
+  - Removed the protruding semicircle (`.berryArc`) and circular cutout from `FeaturedBlogSlider`, replacing it with a clean 2-column split editorial card (`#7A001E -> #520014` left copy + warm full-bleed right photo).
+- **Sitewide Editorial Font-Weight Refinement:**
+  - Softened secondary UI chrome, nav links, filter labels, badges, secondary outlines, and link pills from uniform `600` to `500` Medium while strictly preserving Fraunces `400` (`h1`/`h2`), Plus Jakarta Sans `600` (`h3`), and JetBrains Mono `500` metadata.
+
+## 26 Nov 2026 (v2): OKLCH Perceptual Neutral Architecture, Live `/api/availability` Backend Wiring & Uniform Package Layout
+
+- **Perceptual Color-Engineering Overhaul (Eliminating Pastel-Pink Chroma Fatigue):**
+  - Audited MyStree's light grounds in OKLCH against pure Burgundy (`#800020`, `H=18.6°`) following Stripe, Radix Colors, OKLCH chroma-budgeting, and Refactoring UI 60-30-10 architecture.
+  - Replaced high-chroma pink light washes (`#FFEEF3` / `#FFEBF0` / `#FFF5F7`, `C=0.011–0.023`) and pink borders (`#EED4DC`, `C=0.031`) with hue-locked (`H ≈ 17°`) ultra-low-chroma luxury architectural neutrals in `src/app/globals.css`:
+    - Primary Canvas: `#FFFFFF` (`C=0`)
+    - Porcelain Whisper (`--surface-whisper`): `#FBF9F9` (`C=0.0021`)
+    - Warm Alabaster (`--surface-mist`): `#F8F5F5` (`C=0.0032`)
+    - Recessed Data Well (`--surface-well` / `--surface-blush`): `#F3EFEF` (`C=0.0043`)
+    - Subtle Hairline (`--border-subtle`): `#E8E1E2` (`C=0.0077`)
+    - Component Border (`--border-component`): `#DDD3D5` (`C=0.0113`)
+    - Muted Ink (`--text-muted`): `#5C484D` (`8.4:1` contrast on white)
+    - Pure Brand Burgundy (`#800020`, `#5C0017`, `#AD002B`) and Preserved Footer (`#692B43`) remain intact and now command crisp focal priority under the 60-30-10 rule.
+- **Architectural Booking Cards + Live Availability API (`src/app/api/availability/route.ts`):**
+  - Built `GET /api/availability` (with `POST` webhook revalidation support) and `src/lib/use-live-availability.ts`, backed by bounded-concurrency 4-day wave lookups + retry + `offline`/`online` fallback in `src/lib/booking.ts` (`getBatchNextSlots`).
+  - Wired both `HomeTeam` and `ServiceSpecialists` (`service-specialists-grid.tsx`) to stay synced with live original IST appointment timings from the booking database.
+  - Removed the duplicate `"Available"` pill and pink radial-glow backdrop; rebuilt cards with crisp `#FFFFFF` body, recessed `#F3EFEF` live timing well, prominent `#5C0017` consultation fee + doctor name beside the portrait, single truthful live status badge, and compact mobile grid (`#doctors` horizontal touch filter strip + tight 14px–15px mobile card spacing).
+- **Uniform `/packages/[slug]` Two-Column Layout (`src/components/packages/package.module.css`):**
+  - Aligned left `.tabsCard` and right sticky `.priceCard` on the exact same horizontal top baseline (`align-items: start; margin-top: 0;` on desktop) inside a calm `#FBF9F9` body ground with matching `1rem` corners, `#DDD3D5` borders, recessed `#F3EFEF` tab rail, and `#F8F5F5` Warm Alabaster hero & Why-MyStree bands.

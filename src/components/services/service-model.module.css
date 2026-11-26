@@ -13,12 +13,7 @@
  */
 .section {
   padding: var(--svc-pad-y-statement) var(--svc-pad-x);
-  background: linear-gradient(
-    180deg,
-    var(--uranian-mist) 0%,
-    color-mix(in oklab, var(--uranian-mist) 55%, var(--alabaster-canvas)) 48%,
-    color-mix(in oklab, var(--alabaster-canvas) 93%, var(--twilight-wine) 7%) 100%
-  );
+  background: var(--svc-paper);
 }
 
 .inner {
@@ -51,7 +46,7 @@
 .body {
   max-width: 34rem;
   margin: 0;
-  color: color-mix(in oklab, var(--midnight-chamber) 82%, var(--uranian-mist));
+  color: var(--text-dark);
   font-size: var(--svc-body);
   line-height: 1.7;
 }

@@ -2,17 +2,18 @@ import Link from "next/link";
 
 import styles from "./service-closing.module.css";
 
-/*
- * ServiceClosing — LOCKED. Section 15, the last section of every
- * /services/* page, directly above the footer.
- *
- * One line and two actions in an inset wine panel on a light ground. The
- * reference runs a full-bleed dark band here; ours is inset because the
- * footer below is already wine, and two wine grounds must never touch.
- *
- * Primary: book. Secondary: a page-relevant next step (the doctors for this
- * service). No arrows.
- */
+const OTHER_SERVICES = [
+  { label: "OBGYN Consults", href: "/services/obgyn-consults" },
+  { label: "Pregnancy Care", href: "/services/prenatal" },
+  { label: "PCOS Clinic", href: "/clinics/pcos" },
+  { label: "Menopause", href: "/services/menopause" },
+  { label: "Women's Health Check", href: "/services/womens-health-check" },
+  { label: "Pelvic Physio", href: "/services/pelvic-floor-physiotherapy" },
+  { label: "Nutrition", href: "/services/nutrition-counselling" },
+  { label: "Dermatology", href: "/services/dermatology" },
+  { label: "Teen Health", href: "/services/adolescent-health" },
+  { label: "Mental Health", href: "/services/psychology" },
+] as const;
 
 export type ServiceClosingProps = {
   heading: string;
@@ -24,6 +25,19 @@ export type ServiceClosingProps = {
 export function ServiceClosing({ heading, primary, secondary, headingId = "service-closing-heading" }: ServiceClosingProps) {
   return (
     <section className={styles.section} aria-labelledby={headingId}>
+      <nav className={styles.exploreServices} aria-label="Explore all women's health services">
+        <p className={styles.exploreLabel}>Explore other MyStree care services</p>
+        <ul className={styles.exploreList}>
+          {OTHER_SERVICES.map((svc) => (
+            <li key={svc.href}>
+              <Link href={svc.href} className={styles.explorePill}>
+                {svc.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <div className={styles.panel}>
         <h2 id={headingId} className={styles.heading}>
           {heading}

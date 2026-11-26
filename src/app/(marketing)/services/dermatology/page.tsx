@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   // The root layout appends "| MyStree".
   title: "Dermatologist for Women in Indiranagar, Bengaluru",
   description:
-    "Women's dermatology in Indiranagar, Bengaluru: hormonal and PCOS acne, hair fall after delivery, melasma, pregnancy-safe skin care and scalp and skin conditions.",
+    "Women's dermatology in Indiranagar, Bengaluru: hormonal and PCOS acne, postpartum hair fall, melasma, pregnancy-safe skin and scalp care.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Dermatologist for Women in Indiranagar, Bengaluru | MyStree",
@@ -222,26 +222,6 @@ export default async function DermatologyPage() {
         />
       </ServiceBand>
 
-      <ServiceConditions
-        headingId="dermatology-conditions-heading"
-        heading="Skin and hair concerns we care for"
-        conditions={[
-          "Acne along the jaw and chin",
-          "Dandruff and scalp conditions",
-          "Eczema and dry, itchy skin",
-          "Excess facial or body hair",
-          "Fungal skin infections",
-          "Genital skin conditions",
-          "Hair fall after delivery",
-          "Hair thinning and hair loss",
-          "Hives and skin allergies",
-          "Melasma and dark patches",
-          "Skin changes in pregnancy",
-          "Teenage acne",
-        ]}
-        cta={{ label: "Book a skin consultation", href: "/book" }}
-      />
-
       <ServiceSpecialists
         headingId="dermatology-specialists-heading"
         heading="Book with our dermatologist and nutritionist"
@@ -261,6 +241,26 @@ export default async function DermatologyPage() {
             profileHref: "/doctors/priyanka-savina",
           },
         ]}
+      />
+
+      <ServiceConditions
+        headingId="dermatology-conditions-heading"
+        heading="Skin and hair concerns we care for"
+        conditions={[
+          "Acne along the jaw and chin",
+          "Dandruff and scalp conditions",
+          "Eczema and dry, itchy skin",
+          "Excess facial or body hair",
+          "Fungal skin infections",
+          "Genital skin conditions",
+          "Hair fall after delivery",
+          "Hair thinning and hair loss",
+          "Hives and skin allergies",
+          "Melasma and dark patches",
+          "Skin changes in pregnancy",
+          "Teenage acne",
+        ]}
+        cta={{ label: "Book a skin consultation", href: "/book" }}
       />
 
       <ServiceSteps
@@ -288,6 +288,17 @@ export default async function DermatologyPage() {
         cta={{ label: "Book a skin consultation", href: "/book" }}
       />
 
+      <ServiceFit
+        headingId="dermatology-fit-heading"
+        heading="Our dermatology care is right for you if you have"
+        items={[
+          { icon: "ovary", label: "Acne, excess hair or hair thinning with irregular periods or PCOS" },
+          { icon: "pregnancy", label: "Skin or hair changes in pregnancy, after birth or while breastfeeding" },
+          { icon: "cycle", label: "Breakouts that flare every month before your period" },
+          { icon: "conversation", label: "Tried many products and want a plan that explains why" },
+        ]}
+      />
+
       <ServiceInsight
         image={{ src: "/images/services/pages/dermatologist-dermatoscope-skin-examination.webp", alt: "A dermatologist examines a patient's cheek with a handheld dermatoscope" }}
         headingId="dermatology-insight-heading"
@@ -297,17 +308,6 @@ export default async function DermatologyPage() {
           "Jawline acne, new facial hair and thinning hair can be signs of PCOS or thyroid problems",
           "Harsh scrubs and strong peels can irritate Indian skin and leave dark marks that outlast the acne",
           "Many skin medicines are not safe in pregnancy or breastfeeding, so treatment needs planning around them",
-        ]}
-      />
-
-      <ServiceFit
-        headingId="dermatology-fit-heading"
-        heading="Our dermatology care is right for you if you have"
-        items={[
-          { icon: "ovary", label: "Acne, excess hair or hair thinning with irregular periods or PCOS" },
-          { icon: "pregnancy", label: "Skin or hair changes in pregnancy, after birth or while breastfeeding" },
-          { icon: "cycle", label: "Breakouts that flare every month before your period" },
-          { icon: "conversation", label: "Tried many products and want a plan that explains why" },
         ]}
       />
 
@@ -322,7 +322,7 @@ export default async function DermatologyPage() {
         headingId="dermatology-stat-heading"
         heading="Skin and hair often show what is happening inside."
         figure="MD (DVL)"
-        caption="the specialist degree in dermatology, venereology and leprosy behind Dr. Nivetha's care."
+        caption="the postgraduate degree in dermatology, venereology and leprosy behind Dr. Nivetha's care."
       />
 
       <ServiceFacts
@@ -330,7 +330,7 @@ export default async function DermatologyPage() {
         eyebrow="At a glance"
         heading="What skin care at MyStree is built on"
         facts={[
-          { figure: "MD (DVL)", label: "specialist dermatologist, in clinic or online" },
+          { figure: "MD (DVL)", label: "consultant dermatologist, in clinic or online" },
           { figure: "3", label: "specialities on hormonal skin and hair: dermatology, gynaecology and nutrition" },
           { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}

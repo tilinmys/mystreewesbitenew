@@ -25,7 +25,7 @@ export type ServiceQuoteProps = {
 
 export function ServiceQuote({ quote, name }: ServiceQuoteProps) {
   return (
-    <section className={styles.section} aria-label="A patient's experience">
+    <section className={styles.section} data-svc-band="quote" aria-label="A patient's experience">
       <figure className={styles.figure}>
         <span className={styles.rule} aria-hidden="true" />
         <blockquote className={styles.quote}>

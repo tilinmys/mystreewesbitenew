@@ -28,7 +28,7 @@ export function ServiceModel({
   headingId = "service-model-heading",
 }: ServiceModelProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="model" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <h2 id={headingId} className={styles.heading}>
           {heading}

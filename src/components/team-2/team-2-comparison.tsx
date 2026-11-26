@@ -19,7 +19,7 @@ const COMPARISONS: readonly ComparisonPoint[] = [
   },
   {
     typical: "No connection or shared notes between your providers",
-    mystree: "Seamless context and real-time data-sharing across all your specialists",
+    mystree: "Seamless context and real-time data-sharing across all your doctors",
   },
   {
     typical: "Different health records, bulky paper files, and conflicting care plans",

@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 
 import { HomeHero } from "@/components/home/home-hero";
-import { HomeWelcome } from "@/components/home/home-welcome";
-import { HomeStory } from "@/components/home/home-story";
-import { HomeCore } from "@/components/home/home-core";
-import { HomeGenerations } from "@/components/home/home-generations";
 import { HomePackages } from "@/components/home/home-packages";
 import { HomeJourney } from "@/components/home/home-journey";
 import { HomeServicesRow } from "@/components/home/home-services-row";
 import { HomeTeam } from "@/components/home/home-team";
 import { HomeClosing } from "@/components/home/home-closing";
+import { getBatchNextSlots, getBookingDoctors, type NextSlot } from "@/lib/booking";
 import { getDoctors } from "@/lib/doctors-repository";
 import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, clinicNode } from "@/lib/service-schema";
@@ -48,21 +45,45 @@ const homeSchema = {
  * competitor pages lean on "best", which the NMC notice rules out for us.
  */
 export const metadata: Metadata = {
-  title: { absolute: "Gynaecologist & Women's Health Clinic in Indiranagar, Bengaluru | MyStree" },
+  title: { absolute: "Gynaecologist & Women's Health, Indiranagar | MyStree" },
   description:
-    "Women's health clinic on 13th Main Road, Indiranagar, Bengaluru: gynaecology consultations, pregnancy and high-risk pregnancy care, PCOS, menopause care, nutrition and pelvic physiotherapy. Call +91 63665 73772.",
+    "Women's health clinic on 13th Main Rd, Indiranagar, Bengaluru: gynaecology, pregnancy, PCOS, menopause, nutrition & pelvic physio. +91 63665 73772.",
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: "MyStree: Women's Health Clinic in Indiranagar, Bengaluru",
     description:
-      "Gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist on 13th Main Road, Indiranagar. 15-minute doctor consultations, in clinic or by video.",
+      "Gynaecologists, obstetricians, a nutritionist and a pelvic physiotherapist on 13th Main Road, Indiranagar. In-clinic and video consultations across all specialties.",
     url: SITE_URL,
     images: [{ url: "/images/hero/mystree-hero-care-desktop.webp", width: 2560, height: 1440, alt: "A gynaecologist talking with a patient at MyStree, Indiranagar" }],
   },
 };
 
 export default async function HomePage() {
-  const doctors = await getDoctors();
+  const [doctors, bookingRoster] = await Promise.all([getDoctors(), getBookingDoctors()]);
+  const bookingById = new Map(bookingRoster.map((record) => [record.id, record]));
+
+  const slotsBySlug: Record<string, NextSlot | null> = {};
+  const feesBySlug: Record<string, { fee: number; durationMinutes: number }> = {};
+  const slugIdPairs: Array<{ slug: string; bookingId: number }> = [];
+
+  for (const doctor of doctors) {
+    const match = doctor.bookingUrl?.match(/appointment\/(\d+)/);
+    const bookingId = match ? Number(match[1]) : null;
+    const record = bookingId ? bookingById.get(bookingId) : undefined;
+    if (record) {
+      feesBySlug[doctor.slug] = { fee: record.fee, durationMinutes: record.durationMinutes };
+    }
+    if (bookingId && !doctor.practisesElsewhere) {
+      slugIdPairs.push({ slug: doctor.slug, bookingId });
+    } else {
+      slotsBySlug[doctor.slug] = null;
+    }
+  }
+
+  const slotMap = await getBatchNextSlots(slugIdPairs.map((item) => item.bookingId));
+  for (const { slug, bookingId } of slugIdPairs) {
+    slotsBySlug[slug] = slotMap[bookingId] ?? null;
+  }
 
   return (
     <main className="mystree-page">
@@ -71,19 +92,15 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
       />
       {/*
-        Booking-first order (16 Nov 2026): what we treat, who will see you,
-        how a visit works (with booking), prices, the clinic, then our story,
-        ending on one more booking prompt.
+        Streamlined conversion architecture: what care we offer (high service visibility),
+        whom to book (with symptom filters & live slots), transparent fixed-price care
+        packages, how a visit works, and direct closing booking action.
       */}
       <HomeHero />
       <HomeServicesRow />
-      <HomeTeam doctors={doctors} />
-      <HomeJourney />
+      <HomeTeam doctors={doctors} slotsBySlug={slotsBySlug} feesBySlug={feesBySlug} />
       <HomePackages />
-      <HomeWelcome />
-      <HomeStory />
-      <HomeCore />
-      <HomeGenerations />
+      <HomeJourney />
       <HomeClosing />
     </main>
   );

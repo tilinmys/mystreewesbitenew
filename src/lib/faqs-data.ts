@@ -26,13 +26,13 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "g-1",
         question: "What type of women’s healthcare does My Stree provide in Indiranagar?",
-        answer: "My Stree provides comprehensive, integrated outpatient women’s healthcare in Indiranagar, Bengaluru. Our care spans general gynaecology, PCOS and menstrual disorders, prenatal and pregnancy care, fertility and preconception planning, perimenopause and menopause support, pelvic floor physiotherapy, clinical nutrition, adolescent health, dermatology, and mental wellness. Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes, delivered in a safe, judgement-free clinical sanctuary.",
+        answer: "My Stree provides comprehensive, integrated outpatient women’s healthcare in Indiranagar, Bengaluru. Our care spans general gynaecology, PCOS and menstrual disorders, prenatal and pregnancy care, fertility and preconception planning, perimenopause and menopause support, pelvic floor physiotherapy, clinical nutrition, adolescent health, dermatology, and mental wellness. Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes; and psychiatry consultations are 60 minutes, delivered in a private, judgement-free clinic.",
         internalLink: { label: "Explore clinical services", href: "/#services" },
       },
       {
         id: "g-2",
         question: "Is My Stree a women’s health clinic in Indiranagar, Bengaluru?",
-        answer: "Yes, My Stree is a specialized women’s health and wellness clinic situated on 100 Feet Road in Indiranagar, Bengaluru. We serve women living in Indiranagar, Domlur, HAL, Koramangala, Old Airport Road, and across East Bengaluru seeking collaborative, relationship-based medical consultations with women specialists.",
+        answer: "Yes, My Stree is a women’s health clinic on 13th Main Road, HAL 2nd Stage, Indiranagar (off 100 Feet Road), Bengaluru. We serve women living in Indiranagar, Domlur, HAL, Koramangala, Old Airport Road, and across East Bengaluru seeking collaborative medical consultations with gynaecologists and allied clinicians.",
         internalLink: { label: "View clinic location & contact", href: "/contact" },
       },
       {
@@ -124,13 +124,13 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "loc-6",
         question: "Is My Stree near 100 Feet Road, Indiranagar?",
-        answer: "Yes, My Stree is situated directly on 100 Feet Road in Indiranagar. This central location makes it convenient for patients commuting from nearby neighbourhoods such as Domlur, Koramangala, Ulsoor, CV Raman Nagar, and HAL 2nd Stage.",
+        answer: "Yes, My Stree is on 13th Main Road, HAL 2nd Stage, Indiranagar — just off 100 Feet Road. This central location makes it convenient for patients commuting from nearby neighbourhoods such as Domlur, Koramangala, Ulsoor, CV Raman Nagar, and HAL 2nd Stage.",
         internalLink: { label: "Explore clinic access", href: "/contact" },
       },
       {
         id: "loc-7",
         question: "Do I need an appointment before visiting My Stree?",
-        answer: "Yes, booking in advance is recommended. Doctor consultations are 15 minutes (30 minutes for nutrition, physiotherapy and psychology), and booking ahead reserves that time with your clinician and keeps waiting to a minimum.",
+        answer: "Yes, booking in advance is recommended. Doctor consultations are 15 minutes (30 minutes for nutrition, physiotherapy, yoga therapy and psychology; 60 minutes for psychiatry), and booking ahead reserves that time with your clinician and keeps waiting to a minimum.",
         internalLink: { label: "Book your appointment online", href: "/book" },
       },
       {
@@ -414,8 +414,8 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "fe-1",
         question: "Does My Stree provide fertility consultations in Bengaluru?",
-        answer: "Yes, My Stree provides comprehensive outpatient fertility consultations in Indiranagar, Bengaluru. Led by fertility specialists Dr. Surbhi Sinha and Dr. Chaitra Nayak, our clinic focuses on compassionate, low-intervention evaluation of reproductive health and root causes of delayed conception.",
-        internalLink: { label: "Meet our fertility specialists", href: "/team" },
+        answer: "Yes, My Stree provides outpatient fertility consultations in Indiranagar, Bengaluru. With obstetrician-gynaecologists Dr. Surbhi Sinha and Dr. Chaitra Nayak (reproductive medicine), our clinic focuses on thorough, low-intervention evaluation of reproductive health and root causes of delayed conception.",
+        internalLink: { label: "Meet our doctors", href: "/team" },
       },
       {
         id: "fe-2",
@@ -474,13 +474,13 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "fe-11",
         question: "Can I consult My Stree about egg freezing?",
-        answer: "Yes. If you are considering elective or medical oocyte cryopreservation (egg freezing) for future fertility preservation, our fertility specialists provide objective clinical counseling regarding ovarian reserve testing, age factors, procedural expectations, and reproductive planning.",
+        answer: "Yes. If you are considering elective or medical oocyte cryopreservation (egg freezing) for future fertility preservation, our obstetrician-gynaecologists provide objective clinical counselling regarding ovarian reserve testing, age factors, procedural expectations, and reproductive planning.",
         internalLink: { label: "Book fertility counselling", href: "/book" },
       },
       {
         id: "fe-12",
-        question: "When may a fertility specialist recommend referral or additional treatment?",
-        answer: "A fertility specialist may recommend referral for specialized surgical intervention (such as operative laparoscopy for advanced endometriosis or hysteroscopy for intrauterine septums) or advanced ART when bilateral tubal blockage, severe male factor infertility, or unexplained prolonged non-conception is diagnosed.",
+        question: "When may a doctor recommend referral or additional fertility treatment?",
+        answer: "Your gynaecologist or reproductive medicine doctor may recommend referral for surgical intervention (such as operative laparoscopy for advanced endometriosis or hysteroscopy for intrauterine septums) or assisted reproductive technology when bilateral tubal blockage, severe male factor infertility, or prolonged non-conception is diagnosed.",
         internalLink: { label: "Speak with our team", href: "/team" },
       },
     ],
@@ -900,7 +900,7 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
       {
         id: "bk-10",
         question: "How long does a consultation usually take?",
-        answer: "Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes. Bring your reports and a list of your questions so your clinician can go through what matters most to you.",
+        answer: "Doctor consultations are 15 minutes; nutrition, physiotherapy, yoga therapy and psychology sessions are 30 minutes; and psychiatry consultations are 60 minutes. Bring your reports and a list of your questions so your clinician can go through what matters most to you.",
         internalLink: { label: "Learn about our care model", href: "/team#care-model" },
       },
       {

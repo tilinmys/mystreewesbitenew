@@ -49,7 +49,7 @@ const quotes: readonly QuoteItem[] = [
     quote:
       "Women deserve a care team that connects hormones, mental health, and everyday life. That is the difference a truly personal plan can make.",
     name: "Meera Nair",
-    designation: "MBBS, DNB, Menopause Specialist",
+    designation: "MBBS, DNB, Obstetrician & Gynaecologist",
     avatar: "/images/doctors/meera-nair.png",
   },
   {

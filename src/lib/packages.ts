@@ -154,14 +154,14 @@ const TTC_FAQS: readonly QA[] = [
 
 export const PACKAGES: readonly CarePackage[] = [
   {
-    slug: "mirena-comfort-care",
+    slug: "hormonal-iud-care",
     // Generic wording only: no device or medicine brand, no licensing or
     // efficacy claims (Google Ads healthcare policy; Drugs & Cosmetics Act).
     name: "Hormonal IUD Care",
     tagline: "Care before, during and after your IUD fitting.",
-    metaTitle: "Hormonal IUD Fitting in Indiranagar, Bengaluru: ₹7,500 All-Inclusive",
+    metaTitle: "Hormonal IUD Fitting in Indiranagar: ₹7,500",
     metaDescription:
-      "Hormonal IUD (intrauterine system) fitting at MyStree, Indiranagar, Bengaluru for ₹7,500 all-inclusive: gynaecologist consultations before and after, the device, the fitting, prescribed medication and consumables.",
+      "Hormonal IUD fitting at MyStree, Indiranagar for ₹7,500 all-inclusive: gynaecologist visits before and after, device, fitting and prescribed medicines.",
     leadStrong: "A hormonal IUD fitting at MyStree costs ₹7,500 all-inclusive",
     lead: ", covering a gynaecologist consultation before and after, the device, the fitting, prescribed medication and consumables, in our clinic on 13th Main Road, Indiranagar, Bengaluru.",
     chips: ["Hormonal IUD", "In-clinic, Indiranagar"],
@@ -279,9 +279,9 @@ export const PACKAGES: readonly CarePackage[] = [
       },
     ],
     closing: "Hormonal IUD care in Indiranagar, at one clear price.",
-    image: { src: "/images/packages/mirena-insertion-package-indiranagar-bengaluru.webp", width: 960, height: 1335 },
+    image: { src: "/images/packages/hormonal-iud-care-package-indiranagar-bengaluru.webp", width: 960, height: 1335 },
     imageAlt: "Hormonal IUD care at MyStree",
-    glanceImage: { src: "/images/packages/woman-seated-reading-phone-after-mirena-fitting.webp", width: 588, height: 1323 },
+    glanceImage: { src: "/images/packages/woman-seated-reading-phone-after-hormonal-iud-fitting.webp", width: 588, height: 1323 },
     schema: {
       serviceType: "Hormonal IUD fitting",
       procedure: {
@@ -298,9 +298,9 @@ export const PACKAGES: readonly CarePackage[] = [
     slug: "mtp-care",
     name: "MTP Care Package",
     tagline: "Guided care, from consultation to follow-up.",
-    metaTitle: "MTP Care Package in Indiranagar, Bengaluru: ₹7,000 All-Inclusive",
+    metaTitle: "MTP Care Package in Indiranagar: ₹7,000 All-Inclusive",
     metaDescription:
-      "Medical termination of pregnancy (MTP) care at MyStree, Indiranagar, Bengaluru, under the MTP Act: two gynaecologist consultations, two scans, a CBC test and medication as prescribed, ₹7,000 all-inclusive.",
+      "MTP care at MyStree, Indiranagar under the MTP Act: two gynaecologist visits, two scans, a CBC blood test and prescribed medicines, ₹7,000 all-inclusive.",
     leadStrong: "The MTP Care Package at MyStree costs ₹7,000 all-inclusive",
     lead: ", covering two gynaecologist consultations, two scans, a CBC blood test and medication as prescribed by the gynaecologist. Care is provided under the Medical Termination of Pregnancy Act, and whether it is right for you is decided with your gynaecologist after an assessment.",
     chips: ["Under the MTP Act", "Confidential under the MTP Act", "In-clinic, Indiranagar"],
@@ -434,9 +434,9 @@ export const PACKAGES: readonly CarePackage[] = [
     slug: "care-journey-basic",
     name: "MyStree Care Journey: Basic",
     tagline: "For the ones trying to conceive: start your journey with the right care and guidance.",
-    metaTitle: "Trying to Conceive Package in Indiranagar, Bengaluru: Follicular Scans for ₹2,999",
+    metaTitle: "Trying to Conceive Scans, Indiranagar: ₹2,999",
     metaDescription:
-      "MyStree Care Journey Basic for couples trying to conceive, Indiranagar, Bengaluru: 2 gynaecologist consultations, 3 follicular scans and 1 nutrition consultation for ₹2,999.",
+      "MyStree Care Journey Basic in Indiranagar, Bengaluru: 2 gynaecologist consultations, 3 follicular scans and 1 nutrition consultation for ₹2,999.",
     leadStrong: "MyStree Care Journey: Basic costs ₹2,999",
     lead: " and includes two gynaecologist consultations, three follicular scans to track ovulation and one nutrition consultation, for women and couples trying to conceive, at our clinic on 13th Main Road, Indiranagar, Bengaluru.",
     chips: ["Trying to conceive", "Ovulation tracking", "In-clinic, Indiranagar"],
@@ -503,9 +503,9 @@ export const PACKAGES: readonly CarePackage[] = [
     slug: "care-journey-bloom",
     name: "MyStree Care Journey: Bloom",
     tagline: "More support for your journey, all in one place.",
-    metaTitle: "Care Journey Bloom: Trying to Conceive Package in Indiranagar, Bengaluru, ₹4,999",
+    metaTitle: "Care Journey Bloom, Indiranagar: 5-Care Plan ₹4,999",
     metaDescription:
-      "MyStree Care Journey Bloom for couples trying to conceive, Indiranagar, Bengaluru: 2 gynaecologist consultations, 3 follicular scans, nutrition, a yoga or fitness session and a dermatology consultation for ₹4,999.",
+      "Care Journey Bloom in Indiranagar, Bengaluru: 2 gynaecologist visits, 3 follicular scans, nutrition, yoga or fitness and dermatology for ₹4,999.",
     leadStrong: "MyStree Care Journey: Bloom costs ₹4,999",
     lead: " and brings together two gynaecologist consultations, three follicular scans, a nutrition consultation, a yoga or fitness session of your choice and a dermatology consultation, at our clinic on 13th Main Road, Indiranagar, Bengaluru.",
     chips: ["Trying to conceive", "Five kinds of care", "In-clinic, Indiranagar"],
@@ -590,9 +590,9 @@ export const PACKAGES: readonly CarePackage[] = [
     slug: "nutrition-care-3-months",
     name: "MyStree Nutrition Care: 3 Month Journey",
     tagline: "Not just a diet plan. A complete 3-month nutrition journey with you every step of the way.",
-    metaTitle: "3-Month Nutrition Programme in Indiranagar, Bengaluru: ₹14,999",
+    metaTitle: "3-Month Nutrition Programme, Indiranagar: ₹14,999",
     metaDescription:
-      "MyStree Nutrition Care, a 3-month nutrition journey in Indiranagar, Bengaluru: a full assessment, 6 personalised diet plans, 6 follow-ups, phone and WhatsApp support and an end-of-journey review, for ₹14,999.",
+      "MyStree 3-month Nutrition Care in Indiranagar, Bengaluru: full assessment, 6 personalised diet plans, 6 follow-ups and WhatsApp support for ₹14,999.",
     leadStrong: "MyStree Nutrition Care costs ₹14,999 for 3 months",
     lead: ": a detailed assessment, 6 personalised diet plans, 6 follow-up sessions, phone and WhatsApp support throughout and an end-of-journey review with our nutritionist in Indiranagar, Bengaluru. Your food, your body and your health goals, brought together in one plan.",
     chips: ["3 months", "6 plans, 6 follow-ups", "In-clinic, Indiranagar"],

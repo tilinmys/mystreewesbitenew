@@ -82,7 +82,7 @@
   padding-top: 1.25rem;
   border-top: 1px solid var(--visit-rule);
   color: var(--visit-muted);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono), monospace;
   font-size: var(--type-label);
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -113,9 +113,9 @@
 .ledgerTitle {
   margin: 0 0 0.35rem;
   color: var(--visit-ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono), monospace;
   font-size: var(--type-metadata-tag);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -146,7 +146,7 @@
   gap: 0.85rem;
   margin: 0;
   color: var(--visit-muted);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono), monospace;
   font-size: var(--type-metadata-tag);
   font-weight: 500;
   letter-spacing: 0.16em;

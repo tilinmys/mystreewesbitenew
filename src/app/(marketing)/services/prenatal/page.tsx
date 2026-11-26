@@ -52,9 +52,9 @@ const PAGE_PATH = "/services/prenatal";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Pregnancy & High-Risk Pregnancy Care in Indiranagar, Bengaluru",
+  title: "Pregnancy & High-Risk Care in Indiranagar",
   description:
-    "Antenatal and high-risk pregnancy care in Indiranagar, Bengaluru: senior obstetricians, NT and anomaly scan planning, gestational diabetes and blood pressure care, nutrition, pelvic physiotherapy and delivery planning.",
+    "Antenatal & high-risk pregnancy care in Indiranagar, Bengaluru: senior obstetricians, NT & anomaly scans, gestational diabetes, nutrition & delivery planning.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Pregnancy & High-Risk Pregnancy Care in Indiranagar, Bengaluru | MyStree",
@@ -225,31 +225,7 @@ export default async function PrenatalPage() {
           primaryCta={{ label: "Book a pregnancy consultation", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: "tel:+916366573772" }}
         />
-        <ServiceQuote
-          quote="A high-risk diagnosis should never mean living in fear. At our Indiranagar clinic, scans and evidence-based medicine come with clear explanations, and clinical decisions are made openly and together."
-          name="Dr. Smitha A.P"
-        />
       </ServiceBand>
-
-      <ServiceConditions
-        headingId="prenatal-conditions-heading"
-        heading="Pregnancy conditions we care for"
-        conditions={[
-          "Antenatal and breastfeeding preparation",
-          "Cervical insufficiency",
-          "Fetal growth restriction",
-          "Gestational diabetes",
-          "High blood pressure and preeclampsia",
-          "Pelvic girdle pain in pregnancy",
-          "Pre-conception planning",
-          "Pregnancy after 35",
-          "Previous caesarean (VBAC counselling)",
-          "Recurrent pregnancy loss",
-          "Thyroid disorders in pregnancy",
-          "Twin pregnancy",
-        ]}
-        cta={{ label: "Book a pregnancy consultation", href: "/book" }}
-      />
 
       <ServiceSpecialists
         headingId="prenatal-specialists-heading"
@@ -284,6 +260,26 @@ export default async function PrenatalPage() {
         ]}
       />
 
+      <ServiceConditions
+        headingId="prenatal-conditions-heading"
+        heading="Pregnancy conditions we care for"
+        conditions={[
+          "Antenatal and breastfeeding preparation",
+          "Cervical insufficiency",
+          "Fetal growth restriction",
+          "Gestational diabetes",
+          "High blood pressure and preeclampsia",
+          "Pelvic girdle pain in pregnancy",
+          "Pre-conception planning",
+          "Pregnancy after 35",
+          "Previous caesarean (VBAC counselling)",
+          "Recurrent pregnancy loss",
+          "Thyroid disorders in pregnancy",
+          "Twin pregnancy",
+        ]}
+        cta={{ label: "Book a pregnancy consultation", href: "/book" }}
+      />
+
       <ServiceSteps
         image={{ src: "/images/services/pages/antenatal-blood-pressure-check.webp", alt: "A nurse checks a pregnant woman's blood pressure" }}
         headingId="prenatal-steps-heading"
@@ -309,16 +305,9 @@ export default async function PrenatalPage() {
         cta={{ label: "Book a pregnancy consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/pregnant-woman-reading-scan-report.webp", alt: "A pregnant woman reads her scan report at home" }}
-        headingId="prenatal-insight-heading"
-        heading="Why pregnancy concerns are sometimes missed"
-        body="Pregnancy changes every system in the body, and short appointments leave little time to talk through results, symptoms and worries."
-        points={[
-          "Small rises in blood pressure, slower growth or rising sugar levels are easier to catch with time to review trends",
-          "Pelvic pain, nutrition and the emotional weight of a high-risk pregnancy deserve care alongside the scans",
-          "A delivery plan works best when it is built around your own medical history",
-        ]}
+      <ServiceQuote
+        quote="A high-risk diagnosis should never mean living in fear. At our Indiranagar clinic, scans and evidence-based medicine come with clear explanations, and clinical decisions are made openly and together."
+        name="Dr. Smitha A.P"
       />
 
       <ServiceFit
@@ -329,6 +318,18 @@ export default async function PrenatalPage() {
           { icon: "branch", label: "A previous miscarriage, preterm birth or difficult delivery" },
           { icon: "conversation", label: "Questions that need more than a rushed appointment" },
           { icon: "pregnancy", label: "A wish for physiotherapy and nutrition alongside your obstetric care" },
+        ]}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/pregnant-woman-reading-scan-report.webp", alt: "A pregnant woman reads her scan report at home" }}
+        headingId="prenatal-insight-heading"
+        heading="Why pregnancy concerns are sometimes missed"
+        body="Pregnancy changes every system in the body, and short appointments leave little time to talk through results, symptoms and worries."
+        points={[
+          "Small rises in blood pressure, slower growth or rising sugar levels are easier to catch with time to review trends",
+          "Pelvic pain, nutrition and the emotional weight of a high-risk pregnancy deserve care alongside the scans",
+          "A delivery plan works best when it is built around your own medical history",
         ]}
       />
 
@@ -343,7 +344,7 @@ export default async function PrenatalPage() {
         headingId="prenatal-stat-heading"
         heading="Pregnancy care in Indiranagar, step by step."
         figure="23 years"
-        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them as a specialist."
+        caption="of obstetric experience behind Dr. Smitha A.P's care, 15 of them in obstetrics and gynaecology."
       />
 
       <ServiceFacts
@@ -352,7 +353,7 @@ export default async function PrenatalPage() {
         heading="What every pregnancy visit at MyStree is built on"
         facts={[
           { figure: "40 weeks", label: "of care, from the first scan to delivery planning" },
-          { figure: "4", label: "specialists in one clinic: obstetrics, early pregnancy, nutrition and pelvic physiotherapy" },
+          { figure: "4", label: "disciplines in one clinic: obstetrics, early pregnancy, nutrition and pelvic physiotherapy" },
           { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />

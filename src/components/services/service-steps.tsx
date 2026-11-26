@@ -29,7 +29,7 @@ export type ServiceStepsProps = {
 
 export function ServiceSteps({ heading, steps, cta, image, headingId = "service-steps-heading" }: ServiceStepsProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="steps" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <div className={styles.copy}>
           <h2 id={headingId} className={styles.heading}>

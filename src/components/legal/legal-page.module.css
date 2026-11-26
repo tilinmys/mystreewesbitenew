@@ -23,9 +23,10 @@
 
 .eyebrow {
   margin: 0;
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--twilight-wine);
 }
@@ -56,9 +57,10 @@
 
 .tocTitle {
   margin: 0 0 0.5rem;
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
 }

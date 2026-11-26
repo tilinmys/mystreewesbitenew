@@ -1,14 +1,51 @@
 /*
- * Page canvas shared by every /services/* page. Each section is a locked
- * component in this folder with its own stylesheet; this file only sets the
- * page root. Specification: color.md, "Service page system".
+ * Page canvas shared by every /services/* page. Handles page root and
+ * deterministic surface alternation regardless of optional blocks (Quote,
+ * Plan, Questions, Reading).
  */
 
 .pageRoot {
   width: 100%;
   background: var(--bg-light);
-  color: var(--text-dark, #0C161D);
+  color: var(--text-dark, #3E1E26);
   /* clip, not hidden: hidden makes <main> a scroll container, which breaks
-     scroll-driven animations (view() timelines) and position: sticky. */
+     scroll-driven animations and position: sticky. */
   overflow-x: clip;
+}
+
+/* Fertility-clinic skips Conditions/Quote/Insight/Fit/Model/Stat:
+   Specialists (#FFFFFF) -> Steps (#EFE0E4) -> Facts (#FFFFFF) -> Faq (#EFE0E4). */
+.pageRoot :global([data-svc-band="specialists"]) + :global([data-svc-band="steps"]) {
+  background: var(--svc-mist);
+}
+
+/* Dermatology & Psychology omit Quote:
+   Steps (#FFFFFF) -> Fit (#EFE0E4) -> Insight (#FFFFFF) -> Model (#EFE0E4)
+   -> Stat (#FFFFFF) -> Facts (#EFE0E4) -> Questions (#FFFFFF) -> Faq (#EFE0E4). */
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) {
+  background: var(--svc-mist);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) + :global([data-svc-band="insight"]) {
+  background: var(--svc-paper);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) ~ :global([data-svc-band="model"]) {
+  background: var(--svc-mist);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) ~ :global([data-svc-band="stat"]) {
+  background: var(--svc-paper);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) ~ :global([data-svc-band="facts"]) {
+  background: var(--svc-mist);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) ~ :global([data-svc-band="questions"]) {
+  background: var(--svc-paper);
+}
+
+.pageRoot :global([data-svc-band="steps"]) + :global([data-svc-band="fit"]) ~ :global([data-svc-band="faq"]) {
+  background: var(--svc-mist);
 }

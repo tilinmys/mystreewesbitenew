@@ -7,7 +7,7 @@
  */
 
 .section {
-  --steps-rule: color-mix(in oklab, var(--cadet-slate) 40%, var(--alabaster-canvas));
+  --steps-rule: var(--border-subtle);
 
   padding: var(--svc-pad-y) var(--svc-pad-x);
   background: var(--svc-paper);
@@ -105,21 +105,9 @@
   inset: 0;
   background: linear-gradient(
     200deg,
-    var(--uranian-mist) 0%,
-    color-mix(in oklab, color-mix(in oklab, var(--uranian-mist) 90.9%, var(--twilight-wine)) 88%, var(--cadet-slate)) 100%
+    var(--surface-mist, #EFE0E4) 0%,
+    var(--surface-blush, #E5CCD3) 100%
   );
-}
-
-/* Hover: the booking pill turns Twilight Wine on this light ground, matching
-   the outlined "Meet our doctors" pill (user instruction). Wine grounds keep
-   the default orange hover, where wine would vanish. */
-.action > :global(.cta-book):hover,
-.action > :global(.cta-book):focus-visible {
-  --cta-top: var(--twilight-wine);
-  --cta-bottom: color-mix(in oklab, var(--twilight-wine) 88%, var(--midnight-chamber));
-  --cta-glow: 74 21 45;
-
-  color: var(--alabaster-canvas);
 }
 
 /* ------------------------------------------------- tablet  >= 640px */

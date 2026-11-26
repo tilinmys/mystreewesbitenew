@@ -13,8 +13,8 @@
 .section {
   padding: var(--svc-pad-y) var(--svc-pad-x);
   background:
-    radial-gradient(60% 140% at 12% 60%, color-mix(in oklab, color-mix(in oklab, var(--twilight-wine) 79.5%, var(--cadet-slate)) 88%, var(--alabaster-canvas)) 0%, transparent 70%),
-    linear-gradient(90deg, color-mix(in oklab, var(--twilight-wine) 82%, var(--cadet-slate)) 0%, var(--twilight-wine) 70%);
+    radial-gradient(60% 140% at 14% 58%, rgb(255 236 241 / 0.08) 0%, transparent 70%),
+    linear-gradient(128deg, var(--palette-velvet, #661026) 0%, var(--palette-velvet-deep, #470818) 100%);
   color: var(--svc-on-wine);
 }
 
@@ -69,12 +69,12 @@
    inside the palette and quiet enough that the orange booking pill remains
    the brightest thing on the page. */
 .primary {
-  background: color-mix(in oklab, var(--alabaster-canvas) 88%, var(--brand-flame-swatch) 12%);
-  color: var(--twilight-wine);
+  background: #FFFFFF;
+  color: #5C0017;
 }
 
 .primary:hover {
-  background: var(--alabaster-canvas);
+  background: #FAF1F3;
 }
 
 .secondary {

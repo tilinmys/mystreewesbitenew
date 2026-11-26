@@ -38,26 +38,26 @@ type Card = { title: string; text: string; href: string; label: string; external
 const CARDS: readonly Card[] = [
   {
     title: "Our services",
-    text: "Gynaecology, pregnancy, PCOS, menopause, skin and mental health.",
+    text: "Gynaecology, pregnancy, PCOS & menopause.",
     href: "/#services",
     label: "See the care we offer",
   },
   {
-    title: "Our specialists",
-    text: "Gynaecologists, obstetricians, a nutritionist and more, in one clinic.",
+    title: "Our care team",
+    text: "16 specialists in one Indiranagar clinic.",
     href: "/doctors",
-    label: "Meet our specialists",
+    label: "Meet our care team",
   },
   {
     title: "Find the clinic",
-    text: "13th Main Road, Indiranagar, Bengaluru. Get directions.",
+    text: "13th Main Road, Indiranagar. Directions.",
     href: clinic.mapsUrl,
     label: "Get directions to MyStree",
     external: true,
   },
   {
     title: "Call us",
-    text: `${clinic.telephoneDisplay}, ${HOURS_DISPLAY.replace("Mon–Sat", "Monday to Saturday")}.`,
+    text: `${clinic.telephoneDisplay} · ${HOURS_DISPLAY}.`,
     href: TEL_HREF,
     label: "Call MyStree",
   },
@@ -118,10 +118,19 @@ export function HomeHero() {
     <MotionConfig reducedMotion="user">
       <section ref={section} className={styles.hero} id="home" aria-labelledby="hero-heading">
         <div className={styles.stage}>
-          <motion.div className={styles.media} style={parallax ? { scale: imageScale } : undefined} aria-hidden="true">
+          <motion.div className={styles.media} style={parallax ? { scale: imageScale } : undefined}>
             <picture>
               <source media="(max-width: 767px)" srcSet={mobileSrc} />
-              <Image src={desktopSrc} alt="" fill priority fetchPriority="high" quality={90} sizes="100vw" className={styles.image} />
+              <Image
+                src={desktopSrc}
+                alt="A woman talking warmly with a gynaecologist at MyStree clinic in Indiranagar, Bengaluru"
+                fill
+                priority
+                fetchPriority="high"
+                quality={90}
+                sizes="100vw"
+                className={styles.image}
+              />
             </picture>
           </motion.div>
           <div className={styles.shade} aria-hidden="true" />
@@ -178,7 +187,7 @@ export function HomeHero() {
                 <span className={styles.bookShort}>Book appointment</span>
               </Link>
               <Link href="/doctors" className={styles.secondary}>
-                Find a specialist
+                Meet our doctors
                 <ArrowRight size={16} strokeWidth={1.8} aria-hidden="true" />
               </Link>
             </motion.div>

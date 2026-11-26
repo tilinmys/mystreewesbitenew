@@ -37,7 +37,7 @@ const LETTER = [
   "I have been an obstetrician for more than 23 years, and the first thing I learned has never changed: medicine works better when a woman feels heard. The real worry usually comes out late in a conversation, after the first one has been said. Too often, there is no time left for it.",
   "I started MyStree with Dr. Surbhi Sinha to make that time. A consultation here is not a queue. You sit with a doctor who takes your history properly, explains your reports in plain words and answers every question before you leave. And if something worries you later, you know whom to message.",
   "We began with pregnancy, because that is my work: high-risk pregnancies, recurrent pregnancy loss, diabetes and thyroid problems in pregnancy. A high-risk diagnosis should never mean living in fear. But women kept asking us about everything else. Irregular periods, PCOS, fertility, a daughter's first gynaecology visit, the changes that come with menopause.",
-  "So we brought in the people who could help: a nutritionist, a pelvic physiotherapist and a reproductive medicine specialist, in one clinic on 13th Main Road in Indiranagar, all talking to each other about you.",
+  "So we brought in the people who could help: a nutritionist, a pelvic physiotherapist and a reproductive endocrinologist, in one clinic on 13th Main Road in Indiranagar, all talking to each other about you.",
   "Care should not stop when the baby arrives, or when a test comes back normal. While everyone is looking after the baby, someone should be looking after the mother. That is the clinic I wanted to build, and the one we work in every day.",
 ] as const;
 

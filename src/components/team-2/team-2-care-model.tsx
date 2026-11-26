@@ -1,12 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
 
 import styles from "./team-2-care-model.module.css";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface ComparisonPoint {
   typical: string;
@@ -42,20 +39,6 @@ const COMPARISONS: readonly ComparisonPoint[] = [
 ];
 
 export function Team2CareModel() {
-  const reducedMotion = Boolean(useReducedMotion());
-
-  const rise = (delay: number) =>
-    reducedMotion
-      ? // Same first frame as the server (no hydration mismatch), then shown
-        // at once on mount: reduced-motion visitors never get a blank section.
-        { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
-      : {
-          initial: { opacity: 0, y: 16 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 } as const,
-          transition: { duration: 0.6, delay, ease: EASE },
-        };
-
   return (
     <section
       id="care-model"
@@ -65,7 +48,7 @@ export function Team2CareModel() {
       <div className={styles.inner}>
         {/* Top Grid: Care Philosophy Statement & Orbiting Diagram */}
         <div className={styles.topRow}>
-          <motion.div className={styles.copyCol} {...rise(0.04)}>
+          <div className={styles.copyCol}>
             <h2 id="care-model-heading" className={styles.heading}>
               You’re not one dimensional, neither is our care model
             </h2>
@@ -74,9 +57,9 @@ export function Team2CareModel() {
               same clinic and, with your consent, plan your care together, so the
               advice you are given fits together.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div className={styles.diagramCol} {...rise(0.12)}>
+          <div className={styles.diagramCol}>
             <div className={styles.diagramCard}>
               <Image
                 src="/images/team/mystree-care-model-transparent.png"
@@ -88,11 +71,11 @@ export function Team2CareModel() {
                 className={styles.diagramImage}
               />
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Bottom: Comparative Ledger Table (Directly integrated per reference) */}
-        <motion.div className={styles.tableCard} {...rise(0.18)}>
+        {/* Bottom: Comparative Ledger Table */}
+        <div className={styles.tableCard}>
           <div className={styles.tableHeader}>
             <div className={styles.headerColLeft}>What you need</div>
             <div className={styles.headerColRight}>
@@ -117,15 +100,14 @@ export function Team2CareModel() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Mobile Stacked View */}
         <div className={styles.mobileView}>
-          {COMPARISONS.map((row, idx) => (
-            <motion.div
+          {COMPARISONS.map((row) => (
+            <div
               key={row.typical}
               className={styles.mobileCard}
-              {...rise(0.08 + idx * 0.04)}
             >
               <div className={styles.mobileCardTypical}>
                 <span className={styles.mobileLabelTypical}>
@@ -145,7 +127,7 @@ export function Team2CareModel() {
                   <p className={styles.mobileTextMyStree}>{row.mystree}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

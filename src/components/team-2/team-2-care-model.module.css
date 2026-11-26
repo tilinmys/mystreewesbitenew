@@ -9,8 +9,8 @@
 .section {
   position: relative;
   width: 100%;
-  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 3.5rem);
-  background: color-mix(in oklab, var(--alabaster-canvas) 98%, var(--midnight-chamber));
+  padding: clamp(3.5rem, 5.5vw, 5rem) clamp(1.25rem, 4vw, 3.5rem);
+  background: var(--pure-white);
   color: var(--text-dark);
   border-top: 1px solid color-mix(in oklab, var(--twilight-wine) 14%, var(--alabaster-canvas));
   overflow: hidden;
@@ -135,9 +135,9 @@
   border-radius: 9999px;
   background: var(--uranian-mist);
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-label);
-  font-weight: 600;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
   /* All-caps at 12px: capitals need real tracking to stop reading as a block. */
   letter-spacing: 0.12em;
 }
@@ -227,10 +227,10 @@
   display: block;
   margin-bottom: 0.35rem;
   color: var(--text-muted);
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -253,11 +253,10 @@
   justify-content: space-between;
   margin-bottom: 0.4rem;
   color: var(--botanical-midnight);
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--type-label);
-  /* 600 is the system's label weight; 700 here was an outlier. */
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-metadata-tag);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 

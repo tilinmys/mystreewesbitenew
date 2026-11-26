@@ -10,7 +10,7 @@
 
 .section {
   padding: var(--svc-pad-y-statement) var(--svc-pad-x);
-  background: var(--svc-paper);
+  background: var(--svc-mist);
 }
 
 .inner {

@@ -54,8 +54,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getPost((await params).slug);
   if (!post) return {};
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const title = plainText(post.seo?.metaTitle) || plainText(post.title);
-  const description = plainText(post.seo?.metaDescription) || plainText(post.excerpt);
+  const rawTitle = plainText(post.seo?.metaTitle) || plainText(post.title);
+  const title = rawTitle.length > 54 ? `${rawTitle.slice(0, 54).replace(/\s+\S*$/, "")}` : rawTitle;
+  const rawDesc = plainText(post.seo?.metaDescription) || plainText(post.excerpt);
+  const description = rawDesc.length > 158 ? `${rawDesc.slice(0, 155).replace(/\s+\S*$/, "")}.` : rawDesc;
   const image = assetAbsoluteUrl(post.cover_image_url, SITE_URL);
   return {
     // The root layout appends "| MyStree".
@@ -206,7 +208,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {cover ? (
           <div className={styles.cover}>
-            <Image src={cover} alt="" fill priority sizes="(min-width: 1100px) 64rem, 100vw" className={styles.coverImage} />
+            <Image src={cover} alt={plainText(post.title)} fill priority sizes="(min-width: 1100px) 64rem, 100vw" className={styles.coverImage} />
           </div>
         ) : null}
 

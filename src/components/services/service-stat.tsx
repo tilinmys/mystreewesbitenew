@@ -32,7 +32,7 @@ export function ServiceStat({
   headingId = "service-stat-heading",
 }: ServiceStatProps) {
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={styles.section} data-svc-band="stat" aria-labelledby={headingId}>
       <div className={styles.inner}>
         <h2 id={headingId} className={styles.heading}>
           {heading}

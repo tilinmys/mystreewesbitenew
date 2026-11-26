@@ -53,9 +53,9 @@ const PAGE_PATH = "/services/menopause";
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
-  title: "Menopause & Perimenopause Clinic in Indiranagar, Bengaluru",
+  title: "Menopause & Perimenopause Care, Indiranagar",
   description:
-    "Menopause and perimenopause care in Indiranagar, Bengaluru: hot flushes, sleep and mood, treatment options, hormone and thyroid tests, bone density and nutrition, with gynaecologists, a nutritionist and a pelvic physiotherapist.",
+    "Menopause & perimenopause care in Indiranagar: hot flushes, sleep, mood, hormone tests and bone health with gynaecologists, nutrition & pelvic physio.",
   alternates: { canonical: `${SITE_URL}${PAGE_PATH}` },
   openGraph: {
     title: "Menopause & Perimenopause Clinic in Indiranagar, Bengaluru | MyStree",
@@ -223,31 +223,7 @@ export default async function MenopausePage() {
           primaryCta={{ label: "Book a menopause consultation", href: "/book" }}
           secondaryCta={{ label: "Call the clinic", href: "tel:+916366573772" }}
         />
-        <ServiceQuote
-          quote="Every woman's body and circumstances are different, and her care should be explained and planned with that in mind."
-          name="Dr. Surbhi Sinha"
-        />
       </ServiceBand>
-
-      <ServiceConditions
-        headingId="menopause-conditions-heading"
-        heading="Menopause concerns we care for"
-        conditions={[
-          "Bladder leaks and urgency",
-          "Brain fog and poor concentration",
-          "Early and premature menopause",
-          "Heavy or irregular periods in perimenopause",
-          "Hot flushes and night sweats",
-          "Joint pain and muscle aches",
-          "Low libido and painful sex",
-          "Mood changes and anxiety",
-          "Osteoporosis and bone health",
-          "Sleep problems",
-          "Vaginal dryness",
-          "Weight gain and metabolic changes",
-        ]}
-        cta={{ label: "Book a menopause consultation", href: "/book" }}
-      />
 
       <ServiceSpecialists
         headingId="menopause-specialists-heading"
@@ -282,6 +258,26 @@ export default async function MenopausePage() {
         ]}
       />
 
+      <ServiceConditions
+        headingId="menopause-conditions-heading"
+        heading="Menopause concerns we care for"
+        conditions={[
+          "Bladder leaks and urgency",
+          "Brain fog and poor concentration",
+          "Early and premature menopause",
+          "Heavy or irregular periods in perimenopause",
+          "Hot flushes and night sweats",
+          "Joint pain and muscle aches",
+          "Low libido and painful sex",
+          "Mood changes and anxiety",
+          "Osteoporosis and bone health",
+          "Sleep problems",
+          "Vaginal dryness",
+          "Weight gain and metabolic changes",
+        ]}
+        cta={{ label: "Book a menopause consultation", href: "/book" }}
+      />
+
       <ServiceSteps
         image={{ src: "/images/services/pages/morning-walk-women-in-their-fifties-bengaluru.webp", alt: "Two women in their fifties on a morning walk in a neighbourhood park" }}
         headingId="menopause-steps-heading"
@@ -307,16 +303,9 @@ export default async function MenopausePage() {
         cta={{ label: "Book a menopause consultation", href: "/book" }}
       />
 
-      <ServiceInsight
-        image={{ src: "/images/services/pages/night-sweats-hot-flushes-perimenopause.webp", alt: "A woman awake at night fanning herself by an open window" }}
-        headingId="menopause-insight-heading"
-        heading="Why menopause symptoms are often missed"
-        body="Perimenopause can begin years before periods stop, and its symptoms are easily put down to stress, thyroid trouble or simply getting older."
-        points={[
-          "Anxiety, poor sleep and brain fog are often treated on their own, without asking about periods",
-          "Treatment options are not always discussed in full, with your own risks and benefits weighed",
-          "Bone, heart and pelvic health change quietly after menopause and deserve a plan before problems appear",
-        ]}
+      <ServiceQuote
+        quote="Every woman's body and circumstances are different, and her care should be explained and planned with that in mind."
+        name="Dr. Surbhi Sinha"
       />
 
       <ServiceFit
@@ -327,6 +316,18 @@ export default async function MenopausePage() {
           { icon: "mind", label: "Hot flushes, night sweats, poor sleep, low mood or brain fog" },
           { icon: "conversation", label: "Questions about treatment options that need a proper conversation, not a quick yes or no" },
           { icon: "monitor", label: "Concerns about bone, heart, weight or pelvic health after menopause" },
+        ]}
+      />
+
+      <ServiceInsight
+        image={{ src: "/images/services/pages/night-sweats-hot-flushes-perimenopause.webp", alt: "A woman awake at night fanning herself by an open window" }}
+        headingId="menopause-insight-heading"
+        heading="Why menopause symptoms are often missed"
+        body="Perimenopause can begin years before periods stop, and its symptoms are easily put down to stress, thyroid trouble or simply getting older."
+        points={[
+          "Anxiety, poor sleep and brain fog are often treated on their own, without asking about periods",
+          "Treatment options are not always discussed in full, with your own risks and benefits weighed",
+          "Bone, heart and pelvic health change quietly after menopause and deserve a plan before problems appear",
         ]}
       />
 

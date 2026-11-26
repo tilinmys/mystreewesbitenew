@@ -10,7 +10,7 @@ import styles from "./service-plan.module.css";
  * at the foot of the contents, level with the bottom of the card.
  *
  * Rules (see docs/care-plans-research.md):
- *   - only packages cleared for public pages; Mirena and MTP are held until
+ *   - only packages cleared for public pages; Hormonal IUD and MTP are held until
  *     counsel signs off (DMR Act 1954 s.3)
  *   - "what this covers", never "save", "offer" or "limited time" — the NMC
  *     notice of 06.10.2026 treats discounts and inducements as prohibited

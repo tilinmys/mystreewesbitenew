@@ -7,7 +7,7 @@
  */
 
 .section {
-  --q-rule: color-mix(in oklab, var(--cadet-slate) 48%, var(--uranian-mist));
+  --q-rule: var(--border-subtle);
 
   padding: var(--svc-pad-y) var(--svc-pad-x);
   background: var(--svc-mist);
@@ -43,8 +43,8 @@
   inset: 0;
   background: linear-gradient(
     200deg,
-    var(--alabaster-canvas) 0%,
-    color-mix(in oklab, color-mix(in oklab, var(--alabaster-canvas) 90.3%, var(--twilight-wine)) 93%, var(--cadet-slate)) 100%
+    var(--surface-mist, #EFE0E4) 0%,
+    var(--surface-blush, #E5CCD3) 100%
   );
 }
 
