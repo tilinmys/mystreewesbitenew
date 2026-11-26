@@ -393,10 +393,10 @@ export function SiteNavbar() {
         <div className={`nav-inner ${styles.navInner}`}>
           <Link href="/" className={styles.brand} onClick={closeAllMenus} aria-label="MyStree home">
             <Image
-              src="/brand/mystree-logo.png"
-              alt="MyStree"
-              width={604}
-              height={220}
+              src="/brand/mystree-navbar-logo.png"
+              alt="MyStree — unravel the mystery"
+              width={800}
+              height={235}
               priority
               className={styles.brandLogo}
             />

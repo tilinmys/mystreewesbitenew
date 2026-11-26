@@ -120,12 +120,12 @@
   outline-offset: 4px;
 }
 
-/* The logo is a transparent PNG (public/brand); 60px tall on desktop so the
-   fine line work of the face and flower stays legible. */
+/* The logo is a transparent 800x235 PNG (public/brand/mystree-navbar-logo.png);
+   ~50px tall on desktop (~169px wide) so both the emblem and tagline stay crisp. */
 .brandLogo {
   display: block;
   width: auto;
-  height: 3.75rem;
+  height: 3.1rem;
 }
 
 /* ---- links ---- */
@@ -502,7 +502,7 @@
   }
 
   .brandLogo {
-    height: 2.5rem;
+    height: 2.35rem;
   }
 
   .desktopNav,
@@ -951,7 +951,7 @@
   }
 
   .brandLogo {
-    height: 2.25rem;
+    height: 2rem;
   }
 
   .bookButton {
@@ -963,7 +963,7 @@
    both buttons keep the side margin. */
 @media (min-width: 1025px) and (max-width: 1279px) {
   .brandLogo {
-    height: 3.25rem;
+    height: 2.75rem;
   }
 
   .desktopNav {
@@ -995,6 +995,6 @@
   }
 
   .brandLogo {
-    height: 2.75rem;
+    height: 2.4rem;
   }
 }
