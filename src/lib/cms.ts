@@ -75,7 +75,7 @@ export type CmsPost = {
  * revalidation Next keeps serving the last good page, and the next visit
  * tries again.
  */
-const MAX_ATTEMPTS = 12;
+const MAX_ATTEMPTS = 5;
 const hasBlocks = (post: Partial<CmsPost> | null | undefined) => Array.isArray(post?.blocks);
 const CACHE = { revalidate: BLOG_REVALIDATE_SECONDS, tags: [BLOG_CACHE_TAG] };
 

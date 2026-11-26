@@ -52,25 +52,17 @@ export function ServiceSpecialistsGrid({
         const expShort = doctor.experienceYears
           ? doctor.experienceYears.replace(/\byears\b/i, "yrs exp")
           : null;
-        const infoBarText = [expShort, entry.focus.join(" · ")].filter(Boolean).join(" • ");
-        const statusText = slot
+        const focusText = entry.focus.join(" · ");
+        const availabilityLabel = slot
           ? slot.dayLabel === "Today"
             ? "Available today"
-            : "Accepting bookings"
+            : "Next available"
           : isSyncing
             ? "Checking slots"
             : "Online booking";
 
         return (
           <li key={doctor.id} className={styles.card}>
-            <div className={styles.cardTopBar}>
-              <span className={styles.specialtyLabel}>{entry.tag}</span>
-              <span className={styles.statusPill}>
-                <span className={styles.statusDot} aria-hidden="true" />
-                <span>{statusText}</span>
-              </span>
-            </div>
-
             <div className={styles.profileRow}>
               {entry.profileHref ? (
                 <Link
@@ -83,7 +75,9 @@ export function ServiceSpecialistsGrid({
                       src={doctor.imageUrl}
                       alt={`Portrait of ${doctor.name}`}
                       fill
-                      sizes="76px"
+                      sizes="72px"
+                      loading="lazy"
+                      decoding="async"
                       className={styles.portraitImage}
                     />
                   ) : (
@@ -99,7 +93,9 @@ export function ServiceSpecialistsGrid({
                       src={doctor.imageUrl}
                       alt={`Portrait of ${doctor.name}`}
                       fill
-                      sizes="76px"
+                      sizes="72px"
+                      loading="lazy"
+                      decoding="async"
                       className={styles.portraitImage}
                     />
                   ) : (
@@ -111,6 +107,7 @@ export function ServiceSpecialistsGrid({
               )}
 
               <div className={styles.profileMeta}>
+                <span className={styles.specialtyLabel}>{entry.tag}</span>
                 <h3 className={styles.name}>
                   {entry.profileHref ? (
                     <Link href={entry.profileHref} className={styles.nameLink}>
@@ -120,24 +117,31 @@ export function ServiceSpecialistsGrid({
                     doctor.name
                   )}
                 </h3>
-                <p className={styles.feeLine}>
-                  {doctor.fee > 0 ? (
-                    <>
-                      <span className={styles.feeAmount}>₹{doctor.fee.toLocaleString("en-IN")}</span>
-                      <span className={styles.feeDuration}> / {doctor.durationMinutes} min visit</span>
-                    </>
-                  ) : (
-                    <span className={styles.feeDuration}>{doctor.durationMinutes} min visit</span>
-                  )}
-                </p>
               </div>
             </div>
 
-            {infoBarText ? <p className={styles.expBar}>{infoBarText}</p> : null}
+            <div className={styles.feeExpRow}>
+              <p className={styles.feeLine}>
+                {doctor.fee > 0 ? (
+                  <>
+                    <span className={styles.feeAmount}>₹{doctor.fee.toLocaleString("en-IN")}</span>
+                    <span className={styles.feeDuration}>/ {doctor.durationMinutes} min</span>
+                  </>
+                ) : (
+                  <span className={styles.feeDuration}>{doctor.durationMinutes} min visit</span>
+                )}
+              </p>
+              {expShort ? <span className={styles.expTag}>{expShort}</span> : null}
+            </div>
+
+            {focusText ? <p className={styles.focusLine}>{focusText}</p> : null}
 
             <div className={styles.slotSection}>
               <div className={styles.slotHeader}>
-                <span className={styles.slotTitle}>Next available slot</span>
+                <span className={styles.slotStatus}>
+                  <span className={styles.statusDot} aria-hidden="true" />
+                  <span className={styles.slotTitle}>{availabilityLabel}</span>
+                </span>
                 {slot?.mode ? (
                   <span className={styles.slotMode}>
                     {slot.mode === "online" ? "Video" : "In clinic"}

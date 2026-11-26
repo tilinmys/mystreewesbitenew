@@ -44,6 +44,8 @@ const homeSchema = {
  * the "| MyStree" template is not appended twice. No superlatives: the
  * competitor pages lean on "best", which the NMC notice rules out for us.
  */
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: { absolute: "Gynaecologist & Women's Health, Indiranagar | MyStree" },
   description:
@@ -80,7 +82,13 @@ export default async function HomePage() {
     }
   }
 
-  const slotMap = await getBatchNextSlots(slugIdPairs.map((item) => item.bookingId));
+  const emptySlots: Record<number, NextSlot | null> = {};
+  const slotMap = await Promise.race([
+    getBatchNextSlots(slugIdPairs.map((item) => item.bookingId)),
+    new Promise<Record<number, NextSlot | null>>((resolve) =>
+      setTimeout(() => resolve(emptySlots), 2200),
+    ),
+  ]);
   for (const { slug, bookingId } of slugIdPairs) {
     slotsBySlug[slug] = slotMap[bookingId] ?? null;
   }

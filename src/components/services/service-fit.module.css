@@ -140,28 +140,30 @@
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .icon :is(path, circle, ellipse) {
-      stroke-dasharray: 1;
-      animation: line-draw-trace linear both;
+    /* GPU-composited opacity + transform only (avoids main-thread SVG stroke-dashoffset repaints during scroll) */
+    .icon {
+      animation: line-draw-icon linear both;
       animation-timeline: view();
-      animation-range: cover 5% cover 30%;
+      animation-range: cover 5% cover 26%;
     }
 
     .label {
       animation: line-draw-words linear both;
       animation-timeline: view();
-      animation-range: cover 10% cover 28%;
+      animation-range: cover 8% cover 26%;
     }
   }
 }
 
-@keyframes line-draw-trace {
+@keyframes line-draw-icon {
   from {
-    stroke-dashoffset: 1;
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.96);
   }
 
   to {
-    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: none;
   }
 }
 

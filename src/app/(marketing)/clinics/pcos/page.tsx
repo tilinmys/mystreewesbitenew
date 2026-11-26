@@ -20,12 +20,12 @@ import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * PCOS and metabolic health — /clinics/pcos (rebuilt 17 Nov 2026).
+ * PCOS and metabolic health â€” /clinics/pcos (rebuilt 17 Nov 2026).
  *
- * Replaces the old four-card page ("Root-cause diagnosis…") with the locked
+ * Replaces the old four-card page ("Root-cause diagnosisâ€¦") with the locked
  * service-page template. Built from the SEO/AEO/GEO research brief of
- * 16–17 Nov 2026 (SEO.md §5, AEO.md §3, FAQ_DRAFTS.md PCO1–3, NUT3, ADO3,
- * DER2; GEO.md §5): PCOS is the clearest local content gap, and competitors
+ * 16â€“17 Nov 2026 (SEO.md Â§5, AEO.md Â§3, FAQ_DRAFTS.md PCO1â€“3, NUT3, ADO3,
+ * DER2; GEO.md Â§5): PCOS is the clearest local content gap, and competitors
  * that surface for it explain assessment, metabolic, skin and cycle care,
  * and care for women who are not planning a pregnancy.
  *
@@ -42,6 +42,8 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  */
 
 const PAGE_PATH = "/clinics/pcos";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
@@ -309,7 +311,7 @@ export default function PcosPage() {
         facts={[
           { figure: "3", label: "kinds of care in one clinic: gynaecology, nutrition and dermatology" },
           { figure: "Your goals", label: "care for cycles, skin, weight and, only if you want it, pregnancy" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

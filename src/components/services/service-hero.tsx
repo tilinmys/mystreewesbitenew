@@ -73,8 +73,9 @@ export function ServiceHero({
               alt={image.alt}
               fill
               priority
-              sizes="(min-width: 1024px) 28rem, (min-width: 640px) 40rem, 100vw"
-              quality={90}
+              fetchPriority="high"
+              sizes="(min-width: 1024px) 42vw, (min-width: 640px) 640px, calc(100vw - 2.5rem)"
+              quality={88}
               className={styles.image}
             />
           ) : (

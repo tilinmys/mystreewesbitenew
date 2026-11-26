@@ -20,7 +20,7 @@ import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Pelvic Floor Physiotherapy & Recovery — /services/pelvic-floor-physiotherapy.
+ * Pelvic Floor Physiotherapy & Recovery â€” /services/pelvic-floor-physiotherapy.
  *
  * The locked service-page template (color.md) with women's physiotherapy
  * content. Replaces the thin /clinics/pelvic-health page, which now
@@ -54,12 +54,14 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  *   - Dr. Jasmine Flora's credentials, years and quote come from
  *     lib/doctors.ts (MPT OBG physiotherapy, lactation counsellor, 21 years
  *     overall, 9 specialist); she is marked up as a Person, not a Physician
- *   - the priced pathways (₹600 intake, session packages) are not built: no
+ *   - the priced pathways (â‚¹600 intake, session packages) are not built: no
  *     physiotherapy package is in the clinic's package list
  *   - "private therapy suites" is softened to private one-to-one sessions
  */
 
 const PAGE_PATH = "/services/pelvic-floor-physiotherapy";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
@@ -309,7 +311,7 @@ export default function PelvicFloorPhysiotherapyPage() {
         heading="Why pelvic floor problems are often missed"
         body="Many women are told that leaking after children, or pain during sex, is just part of life. Both are common, and both can be assessed and treated."
         points={[
-          "“Do more Kegels” is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
+          "â€œDo more Kegelsâ€ is given as blanket advice, but a pelvic floor that is already too tight needs to relax first",
           "C-section scars can stay stiff and sensitive for months, and are rarely checked after the six-week visit",
           "Crunches and planks too soon after birth can strain a healing core and pelvic floor",
         ]}
@@ -336,7 +338,7 @@ export default function PelvicFloorPhysiotherapyPage() {
         facts={[
           { figure: "21 years", label: "of obstetric and gynaecological physiotherapy behind Dr. Jasmine Flora's care" },
           { figure: "1:1", label: "private sessions with your physiotherapist" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

@@ -256,29 +256,42 @@ export function CareChat({ doctors, packages }: { doctors: ChatDoctor[]; package
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Launcher visibility and the "reader is scrolling" state: at most one
-  // update per frame; the reveal point is measured on load and resize only.
+  // Launcher visibility and the "reader is scrolling" state: ref-guarded so
+  // React never re-renders repeatedly during scroll; reveal point measured on load/resize only.
   useEffect(() => {
     let idle: ReturnType<typeof setTimeout> | undefined;
     let frame = 0;
     let point = revealPoint();
+    let isVisible = false;
+    let isScrolling = false;
+
     const update = () => {
       frame = 0;
-      setVisible(window.scrollY > point);
+      const nextVisible = window.scrollY > point;
+      if (nextVisible !== isVisible) {
+        isVisible = nextVisible;
+        setVisible(nextVisible);
+      }
     };
     const onScroll = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
-      setScrolling(true);
+      if (!isScrolling) {
+        isScrolling = true;
+        setScrolling(true);
+      }
       clearTimeout(idle);
-      idle = setTimeout(() => setScrolling(false), IDLE_MS);
+      idle = setTimeout(() => {
+        isScrolling = false;
+        setScrolling(false);
+      }, IDLE_MS);
     };
     const onResize = () => {
       point = revealPoint();
-      onScroll();
+      if (!frame) frame = window.requestAnimationFrame(update);
     };
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);

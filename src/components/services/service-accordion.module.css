@@ -130,38 +130,10 @@
   }
 }
 
-/* ======================================================================
-   CASCADE — the FAQ's scroll animation.
-
-   As the list scrolls into view, each question drops down into its place
-   from just above — a short fall and a fade — one after another, so the
-   list reads as settling into the page. Each row is driven by its own
-   position (animation-timeline: view()), so the rows land in order at any
-   scroll speed and lift back up when you scroll back. CSS only; skipped
-   for reduced-motion users and browsers without scroll timelines, who see
-   the list in place.
-   ====================================================================== */
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .cascade .item {
-      animation: cascade-drop linear both;
-      animation-timeline: view();
-      animation-range: cover 4% cover 22%;
-    }
-  }
-}
-
-@keyframes cascade-drop {
-  from {
-    opacity: 0;
-    transform: translateY(-1rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* FAQ rows stay immediately readable during fast scrolling (no opacity-0 hiding
+   or view-timeline stutter when entering the viewport). */
+.cascade .item {
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

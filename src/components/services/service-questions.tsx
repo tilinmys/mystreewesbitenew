@@ -46,7 +46,10 @@ export function ServiceQuestions({
               src={image.src}
               alt={image.alt}
               fill
-              sizes="(min-width: 1024px) 26rem, (min-width: 640px) 40rem, 100vw"
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 1024px) 26rem, (min-width: 640px) 40rem, calc(100vw - 2.5rem)"
+              quality={88}
               className={styles.image}
             />
           ) : (

@@ -254,6 +254,10 @@ export function SiteNavbar() {
   // and returns on any upward scroll (16 Nov 2026).
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const isStickyRef = useRef(false);
+  const isHiddenRef = useRef(false);
+  const openDropdownRef = useRef<string | null>(null);
+  openDropdownRef.current = openDropdown;
 
   // Search states
   const [searchQuery, setSearchQuery] = useState("");
@@ -264,26 +268,51 @@ export function SiteNavbar() {
   const desktopNavRef = useRef<HTMLElement>(null);
 
 
-  // Scroll listener: detects when top header moves out of view
+  // Scroll listener: rAF-throttled + ref-guarded so React only renders when state flips
   useEffect(() => {
-    function handleScroll() {
+    let rafId = 0;
+
+    function syncScroll() {
+      rafId = 0;
       const currentScrollY = window.scrollY;
-      // When user scrolls down past Tier 1 (approx 50px)
-      setIsSticky(currentScrollY > 48);
+      const nextSticky = currentScrollY > 48;
+      if (nextSticky !== isStickyRef.current) {
+        isStickyRef.current = nextSticky;
+        setIsSticky(nextSticky);
+      }
+
       const delta = currentScrollY - lastScrollY.current;
-      if (currentScrollY < 160) setIsHidden(false);
-      else if (delta > 6) setIsHidden(true);
-      else if (delta < -6) setIsHidden(false);
-      if (Math.abs(delta) > 6 || currentScrollY < 160) lastScrollY.current = currentScrollY;
-      if (!mobileOpen) {
+      let nextHidden = isHiddenRef.current;
+      if (currentScrollY < 160) nextHidden = false;
+      else if (delta > 6) nextHidden = true;
+      else if (delta < -6) nextHidden = false;
+
+      if (nextHidden !== isHiddenRef.current) {
+        isHiddenRef.current = nextHidden;
+        setIsHidden(nextHidden);
+      }
+
+      if (Math.abs(delta) > 6 || currentScrollY < 160) {
+        lastScrollY.current = currentScrollY;
+      }
+
+      if (!mobileOpen && openDropdownRef.current !== null && Math.abs(delta) > 4) {
+        openDropdownRef.current = null;
         setOpenDropdown(null);
       }
     }
 
-    handleScroll();
+    function handleScroll() {
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(syncScroll);
+      }
+    }
+
+    syncScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
     };
   }, [mobileOpen]);
 
@@ -397,7 +426,9 @@ export function SiteNavbar() {
               alt="MyStree — unravel the mystery"
               width={800}
               height={235}
-              priority
+              sizes="(max-width: 1024px) 136px, 176px"
+              loading="eager"
+              decoding="async"
               className={styles.brandLogo}
             />
           </Link>

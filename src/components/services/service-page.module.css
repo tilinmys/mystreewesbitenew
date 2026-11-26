@@ -13,6 +13,20 @@
   overflow-x: clip;
 }
 
+/* Defer layout/paint of offscreen static bands on long 14-section service pages
+   without touching sticky bands (questions, faq) or above-the-fold hero/specialists. */
+.pageRoot :global([data-svc-band="conditions"]),
+.pageRoot :global([data-svc-band="steps"]),
+.pageRoot :global([data-svc-band="quote"]),
+.pageRoot :global([data-svc-band="fit"]),
+.pageRoot :global([data-svc-band="insight"]),
+.pageRoot :global([data-svc-band="model"]),
+.pageRoot :global([data-svc-band="stat"]),
+.pageRoot :global([data-svc-band="facts"]) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 460px;
+}
+
 /* Fertility-clinic skips Conditions/Quote/Insight/Fit/Model/Stat:
    Specialists (#FFFFFF) -> Steps (#EFE0E4) -> Facts (#FFFFFF) -> Faq (#EFE0E4). */
 .pageRoot :global([data-svc-band="specialists"]) + :global([data-svc-band="steps"]) {

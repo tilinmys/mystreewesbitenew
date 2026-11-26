@@ -23,7 +23,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Nutrition Counselling — /services/nutrition-counselling.
+ * Nutrition Counselling â€” /services/nutrition-counselling.
  *
  * The locked service-page template (color.md) with nutrition content.
  *
@@ -48,7 +48,7 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  * Content rules applied to the supplied brief:
  *   - no patient testimonials, "+500 happy clients", "2000+ families" or
  *     client photos (NMC notice, 06.10.2026; the counts are not recorded)
- *   - the brief's ₹600 fee is not stated: fees come from the booking
+ *   - the brief's â‚¹600 fee is not stated: fees come from the booking
  *     system via the specialist card (directory listings show other fees)
  *   - Priyanka Savina's credentials and quote come from lib/doctors.ts;
  *     "Dr." is not used for her, as she is not a medical doctor
@@ -59,6 +59,8 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  */
 
 const PAGE_PATH = "/services/nutrition-counselling";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
@@ -336,7 +338,7 @@ export default async function NutritionCounsellingPage() {
         facts={[
           { figure: "10 years", label: "of nutrition and counselling experience" },
           { figure: "M.Sc", label: "in Counselling Psychology, with a Diploma in Nutrition and Health Education" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

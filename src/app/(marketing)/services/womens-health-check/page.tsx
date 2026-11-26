@@ -23,6 +23,8 @@ import styles from "@/components/services/service-page.module.css";
 
 const PAGE_PATH = "/services/womens-health-check";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Women's Health Check & Pap Smear, Indiranagar",
   description:
@@ -300,7 +302,7 @@ export default async function WomensHealthCheckPage() {
       <ServiceStat
         headingId="health-check-stat-heading"
         heading="Routine screening checks what symptoms cannot tell you."
-        figure="3–5 yrs"
+        figure="3â€“5 yrs"
         caption="is the typical cervical screening interval once normal baseline results are established, as guided by your gynaecologist."
       />
 
@@ -309,9 +311,9 @@ export default async function WomensHealthCheckPage() {
         eyebrow="At a glance"
         heading="About preventive check-ups at MyStree"
         facts={[
-          { figure: "25–30", label: "recommended age range in India to begin routine cervical screening" },
+          { figure: "25â€“30", label: "recommended age range in India to begin routine cervical screening" },
           { figure: "15 min", label: "consultation with your gynaecologist to discuss tests and results" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at No. 3366, 13th Main Road, Indiranagar" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at No. 3366, 13th Main Road, Indiranagar" },
         ]}
       />
 

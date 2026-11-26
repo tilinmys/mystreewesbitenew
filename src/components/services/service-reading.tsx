@@ -64,7 +64,10 @@ export function ServiceReading({
                   src={article.image}
                   alt={article.title}
                   fill
-                  sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, calc(100vw - 2.5rem)"
+                  quality={88}
                   className={styles.image}
                 />
               </Link>

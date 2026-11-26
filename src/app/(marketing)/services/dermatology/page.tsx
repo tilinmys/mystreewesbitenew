@@ -22,7 +22,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Dermatology & Skin Care — /services/dermatology.
+ * Dermatology & Skin Care â€” /services/dermatology.
  *
  * The locked service-page template (color.md) with dermatology content. The
  * route is the previous my-stree.com URL, so the page keeps any ranking and
@@ -50,6 +50,8 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  */
 
 const PAGE_PATH = "/services/dermatology";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
@@ -332,7 +334,7 @@ export default async function DermatologyPage() {
         facts={[
           { figure: "MD (DVL)", label: "consultant dermatologist, in clinic or online" },
           { figure: "3", label: "specialities on hormonal skin and hair: dermatology, gynaecology and nutrition" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

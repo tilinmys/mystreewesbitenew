@@ -257,29 +257,18 @@ function toCard(
 
 function DoctorCard({ card, eager }: { card: ReturnType<typeof toCard>; eager?: boolean }) {
   const isAvailable = !card.practisesElsewhere;
-  const infoBarText = [card.experience, card.briefInfo.replace(/\.$/, "")].filter(Boolean).join(" • ");
-  const statusText = card.practisesElsewhere
+  const focusSummary = card.briefInfo.replace(/\.$/, "");
+  const availabilityLabel = card.practisesElsewhere
     ? "By request"
     : card.hasLiveSlot
       ? card.dayLabel === "Today"
         ? "Available today"
-        : "Accepting bookings"
+        : "Next available"
       : "Online booking";
 
   return (
     <li className={styles.item}>
       <article className={styles.card}>
-        <div className={styles.cardTopBar}>
-          <span className={styles.specialtyLabel}>{card.role}</span>
-          <span className={styles.statusPill}>
-            <span
-              className={isAvailable ? styles.statusDot : styles.statusDotMuted}
-              aria-hidden="true"
-            />
-            <span>{statusText}</span>
-          </span>
-        </div>
-
         <div className={styles.profileRow}>
           <Link
             href={`/doctors/${card.slug}`}
@@ -291,8 +280,8 @@ function DoctorCard({ card, eager }: { card: ReturnType<typeof toCard>; eager?: 
               <img
                 src={card.cutoutSrc}
                 alt={`${card.name}, ${card.role} at MyStree`}
-                width={74}
-                height={74}
+                width={72}
+                height={72}
                 loading={eager ? "eager" : "lazy"}
                 decoding="async"
                 className={styles.cutoutImg}
@@ -305,31 +294,46 @@ function DoctorCard({ card, eager }: { card: ReturnType<typeof toCard>; eager?: 
           </Link>
 
           <div className={styles.profileMeta}>
+            <span className={styles.specialtyLabel}>{card.role}</span>
             <h3 className={styles.name}>
               <Link href={`/doctors/${card.slug}`} className={styles.nameLink}>
                 {card.name}
               </Link>
             </h3>
-            <p className={styles.feeLine}>
-              {card.feeText ? (
-                <>
-                  <span className={styles.feeAmount}>{card.feeText}</span>
-                  {card.visitLabel ? (
-                    <span className={styles.feeDuration}> / {card.visitLabel}</span>
-                  ) : null}
-                </>
-              ) : (
-                <span className={styles.feeDuration}>{card.visitLabel ?? "In-clinic consultation"}</span>
-              )}
-            </p>
           </div>
         </div>
 
-        {infoBarText ? <p className={styles.expBar}>{infoBarText}</p> : null}
+        <div className={styles.feeExpRow}>
+          <p className={styles.feeLine}>
+            {card.feeText ? (
+              <>
+                <span className={styles.feeAmount}>{card.feeText}</span>
+                {card.visitLabel ? (
+                  <span className={styles.feeDuration}>
+                    / {card.visitLabel.replace(/\s+visit$/i, "")}
+                  </span>
+                ) : null}
+              </>
+            ) : (
+              <span className={styles.feeDuration}>
+                {card.visitLabel ?? "In-clinic consultation"}
+              </span>
+            )}
+          </p>
+          {card.experience ? <span className={styles.expTag}>{card.experience}</span> : null}
+        </div>
+
+        {focusSummary ? <p className={styles.focusLine}>{focusSummary}</p> : null}
 
         <div className={styles.slotSection}>
           <div className={styles.slotHeader}>
-            <span className={styles.slotTitle}>Next available slot</span>
+            <span className={styles.slotStatus}>
+              <span
+                className={isAvailable ? styles.statusDot : styles.statusDotMuted}
+                aria-hidden="true"
+              />
+              <span className={styles.slotTitle}>{availabilityLabel}</span>
+            </span>
             {card.slotMode ? (
               <span className={styles.slotMode}>
                 {card.slotMode === "online" ? "Video" : "In clinic"}

@@ -23,7 +23,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Menopause & Midlife Clinic — /services/menopause.
+ * Menopause & Midlife Clinic â€” /services/menopause.
  *
  * The locked service-page template (color.md) with menopause content.
  *
@@ -50,6 +50,8 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  */
 
 const PAGE_PATH = "/services/menopause";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
@@ -352,7 +354,7 @@ export default async function MenopausePage() {
         facts={[
           { figure: "12 months", label: "without a period confirms menopause; our care starts earlier, in perimenopause" },
           { figure: "4", label: "clinicians in one clinic: gynaecology, nutrition and pelvic physiotherapy" },
-          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

@@ -55,9 +55,10 @@ export function SmoothScroll({ children }: PropsWithChildren) {
       anchors: true,
       smoothWheel: true,
       syncTouch: false,
-      lerp: 0.1,
+      lerp: 0.14,
       wheelMultiplier: 1,
       allowNestedScroll: true,
+      autoResize: true,
     });
     lenisRef.current = lenis;
 

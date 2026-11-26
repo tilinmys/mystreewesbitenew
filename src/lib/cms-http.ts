@@ -9,7 +9,7 @@ import { request } from "node:https";
  * the machine that answered first. A fresh connection per attempt
  * (agent: false) lets each retry reach either machine.
  */
-export function freshGet(url: string, timeoutMs = 15000) {
+export function freshGet(url: string, timeoutMs = 4000) {
   return new Promise<{ status: number; contentType: string; body: Buffer }>((resolve, reject) => {
     const req = request(url, { method: "GET", agent: false, headers: { Accept: "application/json, image/*" } }, (res) => {
       const chunks: Buffer[] = [];

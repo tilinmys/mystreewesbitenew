@@ -22,7 +22,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Psychology & Counselling — /services/psychology.
+ * Psychology & Counselling â€” /services/psychology.
  *
  * The locked service-page template (color.md) with women's mental health
  * content. The route is the previous my-stree.com URL, so the page keeps
@@ -54,6 +54,8 @@ import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/
  */
 
 const PAGE_PATH = "/services/psychology";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".

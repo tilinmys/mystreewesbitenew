@@ -11,6 +11,8 @@ import type { Doctor } from "@/lib/doctors";
 import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, clinicNode, clinicianRef } from "@/lib/service-schema";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   // The root layout appends "| MyStree".
   title: "Doctors & Care Team in Indiranagar, Bengaluru",
@@ -92,7 +94,13 @@ export default async function DoctorsPage() {
     }
   }
 
-  const slotMap = await getBatchNextSlots(slugIdPairs.map((item) => item.bookingId));
+  const emptySlots: Record<number, NextSlot | null> = {};
+  const slotMap = await Promise.race([
+    getBatchNextSlots(slugIdPairs.map((item) => item.bookingId)),
+    new Promise<Record<number, NextSlot | null>>((resolve) =>
+      setTimeout(() => resolve(emptySlots), 2200),
+    ),
+  ]);
   for (const { slug, bookingId } of slugIdPairs) {
     slotsBySlug[slug] = slotMap[bookingId] ?? null;
   }

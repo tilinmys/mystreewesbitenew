@@ -209,6 +209,26 @@ html {
   max-width: 100vw;
 }
 
+/* Official Lenis override: prevent CSS smooth-scrolling from double-interpolating
+   against Lenis's per-frame scroll updates (root cause of desktop scroll lag & sticky jitter). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis,
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+html.lenis.lenis-stopped {
+  overflow: clip;
+}
+
 /* The page reset applies with or without Lenis (Lenis is off on touch and
    low-end devices, which once left the browser's 8px body margin). */
 html.lenis,

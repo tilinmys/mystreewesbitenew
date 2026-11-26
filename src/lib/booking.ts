@@ -19,6 +19,14 @@ const SEARCH_DAYS = 14;
 /** A slot this close to now is not offered: there is no time to travel. */
 const LEAD_MINUTES = 30;
 
+// In-process single-flight + 60s TTL cache so parallel SSG/ISR renders never
+// hammer the upstream booking host with duplicate concurrent requests.
+const MEM_TTL_MS = 60_000;
+let rosterMemo: { value: BookingDoctor[]; expiresAt: number } | null = null;
+let rosterInFlight: Promise<BookingDoctor[]> | null = null;
+const slotMemo = new Map<number, { value: NextSlot | null; expiresAt: number }>();
+const slotInFlight = new Map<number, Promise<NextSlot | null>>();
+
 export type BookingDoctor = {
   id: number;
   name: string;
@@ -143,12 +151,11 @@ export function cleanAbout(about: string) {
 }
 
 async function fetchRoster(): Promise<unknown> {
-  // A few tries: one dropped connection should not hide clinicians for a
-  // whole five-minute cache window.
-  for (let attempt = 0; attempt < 3; attempt++) {
+  // Fast bounded retry so a slow upstream booking host never blocks page TTFB.
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const response = await fetch(`${BOOKING_ORIGIN}/api/doctors`, {
-        signal: AbortSignal.timeout(5000),
+        signal: AbortSignal.timeout(2800),
         next: { revalidate: REVALIDATE_SECONDS, tags: ["booking-doctors"] },
       });
       if (response.ok) return await response.json();
@@ -160,38 +167,56 @@ async function fetchRoster(): Promise<unknown> {
 }
 
 export async function getBookingDoctors(): Promise<BookingDoctor[]> {
-  try {
-    const rows = await fetchRoster();
-    if (!Array.isArray(rows)) return [];
-
-    return (rows as RawDoctor[])
-      .filter((row) => typeof row.id === "number" && text(row.name))
-      .map((row) => {
-        const image = text(row.image_url);
-        return {
-          id: row.id as number,
-          // The booking system writes "Dr Isha Shetty" and "Dr. Smitha A.P.";
-          // normalise to the site's "Dr. Name" form.
-          name: text(row.name).replace(/^Dr\.?\s+/, "Dr. ").replace(/\.$/, ""),
-          speciality: text(row.speciality),
-          degree: normaliseDegree(text(row.degree)),
-          ...(() => {
-            const parsed = parseExperience(text(row.experience));
-            return { experienceYears: parsed.total, specialistYears: parsed.specialist };
-          })(),
-          registrationNumber: text(row.registration_number).replace(/\s+/g, " ") || null,
-          fee: typeof row.fees === "number" ? row.fees : 0,
-          durationMinutes: typeof row.duration_minutes === "number" ? row.duration_minutes : 15,
-          imageUrl: image ? `${BOOKING_ORIGIN}${encodeURI(image)}` : null,
-          languages: languagesFrom(text(row.about)),
-          bookingUrl: `${BOOKING_ORIGIN}/booking/appointment/${row.id}`,
-          about: text(row.about),
-          displayOrder: typeof row.display_order === "number" ? row.display_order : null,
-        };
-      });
-  } catch {
-    return [];
+  const now = Date.now();
+  if (rosterMemo && rosterMemo.expiresAt > now) {
+    return rosterMemo.value;
   }
+  if (rosterInFlight) {
+    return rosterInFlight;
+  }
+
+  rosterInFlight = (async () => {
+    try {
+      const rows = await fetchRoster();
+      if (!Array.isArray(rows)) return [];
+
+      const parsedRoster = (rows as RawDoctor[])
+        .filter((row) => typeof row.id === "number" && text(row.name))
+        .map((row) => {
+          const image = text(row.image_url);
+          return {
+            id: row.id as number,
+            // The booking system writes "Dr Isha Shetty" and "Dr. Smitha A.P.";
+            // normalise to the site's "Dr. Name" form.
+            name: text(row.name).replace(/^Dr\.?\s+/, "Dr. ").replace(/\.$/, ""),
+            speciality: text(row.speciality),
+            degree: normaliseDegree(text(row.degree)),
+            ...(() => {
+              const parsed = parseExperience(text(row.experience));
+              return { experienceYears: parsed.total, specialistYears: parsed.specialist };
+            })(),
+            registrationNumber: text(row.registration_number).replace(/\s+/g, " ") || null,
+            fee: typeof row.fees === "number" ? row.fees : 0,
+            durationMinutes: typeof row.duration_minutes === "number" ? row.duration_minutes : 15,
+            imageUrl: image ? `${BOOKING_ORIGIN}${encodeURI(image)}` : null,
+            languages: languagesFrom(text(row.about)),
+            bookingUrl: `${BOOKING_ORIGIN}/booking/appointment/${row.id}`,
+            about: text(row.about),
+            displayOrder: typeof row.display_order === "number" ? row.display_order : null,
+          };
+        });
+      if (parsedRoster.length > 0) {
+        rosterMemo = { value: parsedRoster, expiresAt: Date.now() + MEM_TTL_MS };
+      }
+      return parsedRoster;
+    } catch {
+      return [];
+    } finally {
+      rosterInFlight = null;
+    }
+  })();
+
+  return rosterInFlight;
 }
 
 /* ---------------------------------------------------------- IST time */
@@ -245,11 +270,11 @@ async function fetchDayFirstSlot(
         `${BOOKING_ORIGIN}/api/availability?doctor_id=${doctorId}&date=${iso}&mode=${mode}`,
         bypassCache
           ? {
-              signal: AbortSignal.timeout(6500),
+              signal: AbortSignal.timeout(3500),
               cache: "no-store",
             }
           : {
-              signal: AbortSignal.timeout(6500),
+              signal: AbortSignal.timeout(2500),
               next: { revalidate: REVALIDATE_SECONDS, tags: ["booking-availability"] },
             },
       );
@@ -287,22 +312,44 @@ export async function getNextSlot(
   doctorId: number,
   options?: { bypassCache?: boolean },
 ): Promise<NextSlot | null> {
-  const nowMinutes = istNow().minutes;
   const bypass = options?.bypassCache === true;
-
-  for (const mode of ["offline", "online"] as const) {
-    for (let start = 0; start < SEARCH_DAYS; start += 4) {
-      const count = Math.min(4, SEARCH_DAYS - start);
-      const wave = await Promise.all(
-        Array.from({ length: count }, (_, idx) =>
-          fetchDayFirstSlot(start + idx, nowMinutes, doctorId, mode, bypass),
-        ),
-      );
-      const hit = wave.find((slot) => slot !== null);
-      if (hit) return hit;
+  if (!bypass) {
+    const cached = slotMemo.get(doctorId);
+    if (cached && cached.expiresAt > Date.now()) {
+      return cached.value;
+    }
+    const existing = slotInFlight.get(doctorId);
+    if (existing) {
+      return existing;
     }
   }
-  return null;
+
+  const run = (async (): Promise<NextSlot | null> => {
+    const nowMinutes = istNow().minutes;
+    for (const mode of ["offline", "online"] as const) {
+      for (let start = 0; start < SEARCH_DAYS; start += 4) {
+        const count = Math.min(4, SEARCH_DAYS - start);
+        const wave = await Promise.all(
+          Array.from({ length: count }, (_, idx) =>
+            fetchDayFirstSlot(start + idx, nowMinutes, doctorId, mode, bypass),
+          ),
+        );
+        const hit = wave.find((slot) => slot !== null);
+        if (hit) {
+          slotMemo.set(doctorId, { value: hit, expiresAt: Date.now() + MEM_TTL_MS });
+          return hit;
+        }
+      }
+    }
+    slotMemo.set(doctorId, { value: null, expiresAt: Date.now() + MEM_TTL_MS });
+    return null;
+  })();
+
+  if (!bypass) {
+    slotInFlight.set(doctorId, run);
+    run.finally(() => slotInFlight.delete(doctorId));
+  }
+  return run;
 }
 
 /**

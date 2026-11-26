@@ -61,8 +61,10 @@ export function ServiceSteps({ heading, steps, cta, image, headingId = "service-
               src={image.src}
               alt={image.alt}
               fill
-              sizes="(min-width: 1024px) 28rem, (min-width: 640px) 40rem, 100vw"
-              quality={90}
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 1024px) 28rem, (min-width: 640px) 40rem, calc(100vw - 2.5rem)"
+              quality={88}
               className={styles.image}
             />
           ) : (

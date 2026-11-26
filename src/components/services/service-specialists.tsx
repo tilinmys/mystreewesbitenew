@@ -43,7 +43,16 @@ export async function ServiceSpecialists({
   // The booking system is unreachable or lists none of these clinicians.
   if (matched.length === 0) return null;
 
-  const slotMap = await getBatchNextSlots(matched.map((row) => row.doctor.id));
+  // Guard SSR with a 5000ms ISR budget: pre-rendered & cached pages serve users
+  // in ~10ms TTFB with real live dates/times already baked into the HTML, while
+  // client useLiveAvailabilityById keeps slots fresh from GET /api/availability.
+  const emptySlots: Record<number, null> = {};
+  const slotMap = await Promise.race([
+    getBatchNextSlots(matched.map((row) => row.doctor.id)),
+    new Promise<Record<number, null>>((resolve) =>
+      setTimeout(() => resolve(emptySlots), 2200),
+    ),
+  ]);
   const rows = matched.map((row) => ({
     ...row,
     initialSlot: slotMap[row.doctor.id] ?? null,
