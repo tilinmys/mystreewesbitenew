@@ -2,83 +2,89 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-services-row.module.css";
 
 /*
- * HomeServicesRow — High-Visibility Services Grid + Specialty Navigation Bar.
+ * HomeServicesRow — Editorial Two-Band Framed Services Showcase on Pure White.
  *
- * Uses the cohesive bespoke Burgundy ink-and-watercolor editorial artworks
- * (16:9 for primary cards, 1:1 for supporting specialty thumbnails) so every
- * clinical service is immediately recognizable at a glance.
+ * Band 1 (Core 6 Services): Luminous MyStree Rose-Burgundy panel (#8E1B3A ->
+ *   #6E0D28) inside a Pure White outer frame, holding 6 white-mat framed photo
+ *   cards (3x2 desktop, 2x3 tablet & mobile) with concise titles, to-the-point
+ *   subtitles, and circular Burgundy guide arrows.
+ * Band 2 (Supporting 4 Specialties): Harmonized Warm Blush-Alabaster panel
+ *   (#F4ECEE) directly underneath, holding 4 compact white cards (4 cols
+ *   desktop, 2x2 tablet & mobile) with clear guide arrows.
  */
+
+const CARD_EASE = [0.22, 1, 0.36, 1] as const;
+
 type Service = {
   title: string;
   text: string;
   href: string;
-  badge?: string;
   imageSrc: string;
   imageAlt: string;
-  objectPosition?: string;
 };
 
 const PRIMARY_SERVICES: readonly Service[] = [
   {
-    title: "Gynaecology consultation",
-    text: "Periods, pain, discharge & screening with an OBGYN.",
+    title: "Gynaecology",
+    text: "Periods, pelvic scans & OBGYN",
     href: "/services/obgyn-consults",
-    badge: "In clinic or video",
     imageSrc: "/images/home/services/art-gynaecology-consultation.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of a female gynaecologist consulting warmly with a woman patient across a clinic desk",
+      "A smiling woman consulting face-to-face with a female gynaecologist in a warm sunlit room at MyStree clinic in Indiranagar",
   },
   {
     title: "Pregnancy care",
-    text: "Antenatal visits, scans & high-risk obstetric care.",
+    text: "Antenatal & high-risk obstetrics",
     href: "/services/prenatal",
     imageSrc: "/images/home/services/art-pregnancy-care.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of an expectant mother cradling her baby bump while a female obstetrician reviews an ultrasound scan",
+      "A smiling expectant mother resting her hand on her baby bump beside a sunlit morning window",
   },
   {
-    title: "PCOS & metabolic care",
-    text: "Cycle, hormone & nutrition plans in one clinic.",
+    title: "PCOS & hormones",
+    text: "Cycles, hormones & nutrition",
     href: "/clinics/pcos",
     imageSrc: "/images/home/services/art-pcos-care.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of a woman and doctor reviewing a menstrual cycle chart and hormone reports beside a balanced meal bowl",
+      "A relaxed young woman smiling with a warm mug of herbal tea beside a wellness journal in soft daylight",
   },
   {
-    title: "Menopause support",
-    text: "Hot flushes, sleep, mood & bone-health guidance.",
+    title: "Menopause care",
+    text: "Hot flushes, sleep & bone health",
     href: "/services/menopause",
     imageSrc: "/images/home/services/art-menopause-care.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of a dignified woman in midlife speaking comfortably with a gynaecologist over a health plan",
+      "A serene woman in her fifties wearing a handloom cotton saree smiling warmly in gentle morning light",
   },
   {
     title: "Women's health check",
-    text: "Annual gynaecology review, Pap smear & breast exam.",
+    text: "Annual review & Pap smear",
     href: "/services/womens-health-check",
     imageSrc: "/images/home/services/art-womens-health-check.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of a stethoscope, blood-pressure cuff, and preventive screening checklist for an annual women's health check",
+      "A female doctor listening attentively to a smiling patient during an annual preventive women's health review",
   },
   {
-    title: "Pelvic floor physiotherapy",
-    text: "Bladder control, pelvic pain & postpartum recovery.",
+    title: "Pelvic physiotherapy",
+    text: "Bladder & postpartum recovery",
     href: "/services/pelvic-floor-physiotherapy",
     imageSrc: "/images/home/services/art-pelvic-floor-physiotherapy.webp",
     imageAlt:
-      "Editorial burgundy ink illustration of a female physiotherapist guiding a woman in a restorative pelvic-bridge rehabilitation exercise on a mat",
+      "A woman breathing calmly with a relaxed smile during a guided pelvic floor physiotherapy session",
   },
 ];
 
 const SPECIALTY_SERVICES: readonly Service[] = [
   {
     title: "Nutrition counselling",
-    text: "PCOS, pregnancy & thyroid",
+    text: "PCOS & pregnancy diet",
     href: "/services/nutrition-counselling",
     imageSrc: "/images/home/services/art-nutrition-counselling.webp",
     imageAlt:
@@ -93,7 +99,7 @@ const SPECIALTY_SERVICES: readonly Service[] = [
       "Editorial burgundy ink illustration of a female dermatologist examining a woman's skin and hairline with a dermatoscope",
   },
   {
-    title: "Adolescent & teen health",
+    title: "Adolescent & teen care",
     text: "Teens, puberty & cycles",
     href: "/services/adolescent-health",
     imageSrc: "/images/home/services/art-adolescent-health.webp",
@@ -111,82 +117,114 @@ const SPECIALTY_SERVICES: readonly Service[] = [
 ];
 
 export function HomeServicesRow() {
+  const still = useStillAfterMount();
+
   return (
     <section className={styles.section} id="services" aria-labelledby="services-row-heading">
-      <div className={styles.inner}>
-        <div className={styles.head}>
-          <div className={styles.headCopy}>
-            <p className={styles.eyebrow}>All Women&rsquo;s Health Services</p>
-            <h2 id="services-row-heading" className={styles.heading}>
-              Comprehensive care, <em className={styles.accent}>under one roof.</em>
-            </h2>
-            <p className={styles.lead}>
-              Select the service or concern you are looking for to see specialist doctors,
-              consultation fees and next available slots.
-            </p>
-          </div>
-          <Link href="/doctors" className={styles.findDoctorCta}>
-            <span>Find the right doctor</span>
-            <ArrowRight size={15} aria-hidden="true" />
-          </Link>
-        </div>
+      {/* Band 1: Core 6 Services on Luminous MyStree Rose-Burgundy inside Pure White */}
+      <div className={styles.coreFrame}>
+        <header className={styles.coreHead}>
+          <p className={styles.coreEyebrow}>Core Clinical Care · Indiranagar</p>
+          <h2 id="services-row-heading" className={styles.coreHeading}>
+            From routine check-ups to pregnancy, bring your whole self to MyStree.
+          </h2>
+        </header>
 
-        <ul className={styles.grid} aria-label="Core women's health services">
-          {PRIMARY_SERVICES.map((service) => (
-            <li key={service.href} className={styles.gridItem}>
-              <Link href={service.href} className={styles.card}>
-                <span className={styles.media}>
+        <ul className={styles.coreGrid} aria-label="Core women's health services">
+          {PRIMARY_SERVICES.map((service, index) => (
+            <motion.li
+              key={service.href}
+              className={styles.coreItem}
+              initial={still ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={
+                still
+                  ? { duration: 0 }
+                  : { duration: 0.52, delay: (index % 3) * 0.085, ease: CARD_EASE }
+              }
+            >
+              <Link href={service.href} className={styles.polaroidCard}>
+                <span className={styles.photoFrame}>
                   <Image
                     src={service.imageSrc}
                     alt={service.imageAlt}
                     fill
-                    sizes="(max-width: 639px) 128px, (max-width: 1099px) 48vw, 31vw"
-                    quality={90}
+                    loading="eager"
+                    decoding="async"
+                    sizes="(max-width: 639px) 46vw, (max-width: 1023px) 46vw, 30vw"
+                    quality={88}
                     className={styles.photo}
                   />
-                  {service.badge ? <span className={styles.badge}>{service.badge}</span> : null}
                 </span>
-                <span className={styles.cardBody}>
-                  <h3 className={styles.title}>{service.title}</h3>
-                  <span className={styles.text}>{service.text}</span>
-                </span>
-                <span className={styles.more}>
-                  <span>View doctors &amp; slots</span>
-                  <span className={styles.moreIcon} aria-hidden="true">
-                    <ArrowUpRight size={13} strokeWidth={2} />
+                <span className={styles.polaroidFoot}>
+                  <span className={styles.polaroidCopy}>
+                    <h3 className={styles.polaroidTitle}>{service.title}</h3>
+                    <span className={styles.polaroidSub}>{service.text}</span>
+                  </span>
+                  <span className={styles.guideCircle} aria-hidden="true">
+                    <ChevronRight size={15} strokeWidth={2.3} />
                   </span>
                 </span>
               </Link>
-            </li>
+            </motion.li>
           ))}
         </ul>
+      </div>
 
-        <div className={styles.specialtyBand}>
-          <p className={styles.specialtyHeading}>Supporting specialists at Indiranagar clinic</p>
-          <ul className={styles.specialtyGrid} aria-label="Additional specialist clinics">
-            {SPECIALTY_SERVICES.map((service) => (
-              <li key={service.href} className={styles.specialtyItem}>
-                <Link href={service.href} className={styles.specialtyCard}>
-                  <span className={styles.specialtyThumb}>
-                    <Image
-                      src={service.imageSrc}
-                      alt={service.imageAlt}
-                      fill
-                      sizes="64px"
-                      quality={90}
-                      className={styles.photo}
-                    />
-                  </span>
-                  <span className={styles.specialtyCopy}>
-                    <span className={styles.specialtyTitle}>{service.title}</span>
-                    <span className={styles.specialtyText}>{service.text}</span>
-                  </span>
-                  <ArrowUpRight size={15} strokeWidth={2} className={styles.specialtyArrow} aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+      {/* Band 2: Supporting 4 Specialties in a distinct harmonized Alabaster-Blush band */}
+      <div className={styles.supportFrame}>
+        <div className={styles.supportHead}>
+          <div>
+            <p className={styles.supportEyebrow}>Supporting Specialties</p>
+            <p className={styles.supportLead}>
+              Coordinated nutrition, skin, teen, and mental health care in the same clinic.
+            </p>
+          </div>
+          <Link href="/doctors" className={styles.allDoctorsLink}>
+            <span>Find the right doctor</span>
+            <ArrowRight size={15} strokeWidth={1.9} aria-hidden="true" />
+          </Link>
         </div>
+
+        <ul className={styles.supportGrid} aria-label="Supporting specialist clinics">
+          {SPECIALTY_SERVICES.map((service, index) => (
+            <motion.li
+              key={service.href}
+              className={styles.supportItem}
+              initial={still ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={
+                still
+                  ? { duration: 0 }
+                  : { duration: 0.46, delay: index * 0.075, ease: CARD_EASE }
+              }
+            >
+              <Link href={service.href} className={styles.supportCard}>
+                <span className={styles.supportThumb}>
+                  <Image
+                    src={service.imageSrc}
+                    alt={service.imageAlt}
+                    fill
+                    loading="eager"
+                    decoding="async"
+                    sizes="56px"
+                    quality={88}
+                    className={styles.supportPhoto}
+                  />
+                </span>
+                <span className={styles.supportCopy}>
+                  <h3 className={styles.supportTitle}>{service.title}</h3>
+                  <span className={styles.supportText}>{service.text}</span>
+                </span>
+                <span className={styles.supportArrow} aria-hidden="true">
+                  <ChevronRight size={15} strokeWidth={2.2} />
+                </span>
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   );

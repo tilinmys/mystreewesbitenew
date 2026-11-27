@@ -22,7 +22,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Dermatology & Skin Care â€” /services/dermatology.
+ * Dermatology & Skin Care — /services/dermatology.
  *
  * The locked service-page template (color.md) with dermatology content. The
  * route is the previous my-stree.com URL, so the page keeps any ranking and
@@ -231,16 +231,16 @@ export default async function DermatologyPage() {
         consultationLabel="Clinic consultation"
         specialists={[
           {
-            bookingId: 8,
-            tag: "Dermatology",
-            focus: ["Acne and pigmentation", "Hair and scalp"],
-            profileHref: "/doctors/dr-nivetha",
-          },
-          {
             bookingId: 3,
             tag: "Nutrition",
             focus: ["PCOS diet", "Hair and skin nutrition"],
             profileHref: "/doctors/priyanka-savina",
+          },
+          {
+            bookingId: 8,
+            tag: "Dermatology",
+            focus: ["Acne and pigmentation", "Hair and scalp"],
+            profileHref: "/doctors/dr-nivetha",
           },
         ]}
       />
@@ -334,7 +334,7 @@ export default async function DermatologyPage() {
         facts={[
           { figure: "MD (DVL)", label: "consultant dermatologist, in clinic or online" },
           { figure: "3", label: "specialities on hormonal skin and hair: dermatology, gynaecology and nutrition" },
-          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

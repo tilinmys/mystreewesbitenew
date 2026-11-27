@@ -20,7 +20,7 @@ import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Adolescent Health Clinic â€” /services/adolescent-health.
+ * Adolescent Health Clinic — /services/adolescent-health.
  *
  * The locked service-page design (color.md, "Service page system") with
  * adolescent content. Section 09 (care plan) is skipped: no package is
@@ -348,7 +348,7 @@ export default function AdolescentHealthPage() {
         facts={[
           { figure: "2", label: "ways to be seen: together with a parent, or one-on-one" },
           { figure: "4", label: "areas of teen care: gynaecology, nutrition, skin and mental health" },
-          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

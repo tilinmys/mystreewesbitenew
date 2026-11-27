@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { preload } from "react-dom";
 
 import { HomeHero } from "@/components/home/home-hero";
 import { HomePackages } from "@/components/home/home-packages";
 import { HomeJourney } from "@/components/home/home-journey";
 import { HomeServicesRow } from "@/components/home/home-services-row";
 import { HomeTeam } from "@/components/home/home-team";
+import { HomeFaq } from "@/components/home/home-faq";
+import { HOME_FAQ_ITEMS } from "@/components/home/home-faq-data";
 import { HomeClosing } from "@/components/home/home-closing";
-import { getBatchNextSlots, getBookingDoctors, type NextSlot } from "@/lib/booking";
-import { getDoctors } from "@/lib/doctors-repository";
-import { SITE_URL, clinic } from "@/lib/clinic";
+import { SITE_URL } from "@/lib/clinic";
 import { CLINIC_ID, clinicNode } from "@/lib/service-schema";
 
 /*
@@ -33,6 +34,18 @@ const homeSchema = {
       name: "MyStree",
       inLanguage: "en-IN",
       publisher: { "@id": CLINIC_ID },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: HOME_FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ],
 };
@@ -60,38 +73,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function HomePage() {
-  const [doctors, bookingRoster] = await Promise.all([getDoctors(), getBookingDoctors()]);
-  const bookingById = new Map(bookingRoster.map((record) => [record.id, record]));
-
-  const slotsBySlug: Record<string, NextSlot | null> = {};
-  const feesBySlug: Record<string, { fee: number; durationMinutes: number }> = {};
-  const slugIdPairs: Array<{ slug: string; bookingId: number }> = [];
-
-  for (const doctor of doctors) {
-    const match = doctor.bookingUrl?.match(/appointment\/(\d+)/);
-    const bookingId = match ? Number(match[1]) : null;
-    const record = bookingId ? bookingById.get(bookingId) : undefined;
-    if (record) {
-      feesBySlug[doctor.slug] = { fee: record.fee, durationMinutes: record.durationMinutes };
-    }
-    if (bookingId && !doctor.practisesElsewhere) {
-      slugIdPairs.push({ slug: doctor.slug, bookingId });
-    } else {
-      slotsBySlug[doctor.slug] = null;
-    }
-  }
-
-  const emptySlots: Record<number, NextSlot | null> = {};
-  const slotMap = await Promise.race([
-    getBatchNextSlots(slugIdPairs.map((item) => item.bookingId)),
-    new Promise<Record<number, NextSlot | null>>((resolve) =>
-      setTimeout(() => resolve(emptySlots), 2200),
-    ),
-  ]);
-  for (const { slug, bookingId } of slugIdPairs) {
-    slotsBySlug[slug] = slotMap[bookingId] ?? null;
-  }
+export default function HomePage() {
+  preload("/images/hero/mystree-hero-everyday-desktop.webp", {
+    as: "image",
+    fetchPriority: "high",
+    media: "(min-width: 768px)",
+  });
+  preload("/images/hero/mystree-hero-everyday-mobile.webp", {
+    as: "image",
+    fetchPriority: "high",
+    media: "(max-width: 767px)",
+  });
 
   return (
     <main className="mystree-page">
@@ -101,14 +93,15 @@ export default async function HomePage() {
       />
       {/*
         Streamlined conversion architecture: what care we offer (high service visibility),
-        whom to book (with symptom filters & live slots), transparent fixed-price care
-        packages, how a visit works, and direct closing booking action.
+        editorial Care Team showcase linking to the full clinician directory, transparent
+        fixed-price care packages, how a visit works, SEO/AEO/GEO FAQs, and clean closing CTA.
       */}
       <HomeHero />
       <HomeServicesRow />
-      <HomeTeam doctors={doctors} slotsBySlug={slotsBySlug} feesBySlug={feesBySlug} />
+      <HomeTeam />
       <HomePackages />
       <HomeJourney />
+      <HomeFaq />
       <HomeClosing />
     </main>
   );

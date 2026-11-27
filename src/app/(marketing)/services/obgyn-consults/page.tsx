@@ -105,7 +105,7 @@ const OBGYN_FAQS = [
  * ("gynaecologist in Indiranagar", "unmarried", "female gynaecologist",
  * "same-day scan", "PCOS doctor", "consultation fee", "near Domlur / HAL").
  * Every answer uses facts already in this repository; each leads with the
- * direct answer. Mirrored in the FAQPage schema below â€” keep them in step.
+ * direct answer. Mirrored in the FAQPage schema below — keep them in step.
  */
 const LOCAL_QUESTIONS = [
   {
@@ -136,7 +136,7 @@ const LOCAL_QUESTIONS = [
   {
     question: "How much does a gynaecology consultation cost at MyStree?",
     answer:
-      "The consultation fee depends on the doctor you choose and is shown before you confirm your booking. If you are trying to conceive, the MyStree Care Journey Basic plan covers two gynaecologist consultations, three follicular scans and one nutrition consultation for â‚¹2,999.",
+      "The consultation fee depends on the doctor you choose and is shown before you confirm your booking. If you are trying to conceive, the MyStree Care Journey Basic plan covers two gynaecologist consultations, three follicular scans and one nutrition consultation for ₹2,999.",
   },
   {
     question: "Where is MyStree in Indiranagar?",
@@ -229,7 +229,7 @@ export default async function ObgynConsultsPage() {
       />
 
       {/* ====================================================================
-         SECTIONS 1-2 â€” the opening band (locked, shared by every service
+         SECTIONS 1-2 — the opening band (locked, shared by every service
          page). Hero and quote share one Twilight Wine gradient.
 
          Copy is written for direct extraction: the H1 names the service in
@@ -283,7 +283,7 @@ export default async function ObgynConsultsPage() {
         ]}
       />
 
-      {/* SECTION â€” conditions, revealed with the Roll Call animation.
+      {/* SECTION — conditions, revealed with the Roll Call animation.
           Clinical scope only, alphabetical, no outcome claims. */}
 
       <ServiceConditions
@@ -313,7 +313,7 @@ export default async function ObgynConsultsPage() {
         plan={{
           name: CARE_JOURNEY_BASIC.name,
           audience: "For women trying to conceive",
-          price: "â‚¹2,999",
+          price: "₹2,999",
           priceNote: "One price for the full plan",
         }}
         items={CARE_JOURNEY_BASIC.items}
@@ -380,7 +380,7 @@ export default async function ObgynConsultsPage() {
         link={{ label: "Meet our doctors", href: "/doctors" }}
       />
 
-      {/* SECTION 3 â€” statement and figure. No patient counts are published
+      {/* SECTION 3 — statement and figure. No patient counts are published
           (Growthamp review 13 Nov 2026, item 5); the figure is Dr. Smitha
           A.P's experience as recorded in the booking system. */}
 
@@ -398,7 +398,7 @@ export default async function ObgynConsultsPage() {
         facts={[
           { figure: "15 min", label: "with your gynaecologist at every consultation" },
           { figure: "5", label: "areas of care under one roof: obstetrics, gynaecology, pelvic health, nutrition and andrology" },
-          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

@@ -22,7 +22,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Psychology & Counselling â€” /services/psychology.
+ * Psychology & Counselling — /services/psychology.
  *
  * The locked service-page template (color.md) with women's mental health
  * content. The route is the previous my-stree.com URL, so the page keeps

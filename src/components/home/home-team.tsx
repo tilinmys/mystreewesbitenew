@@ -1,511 +1,157 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, ChevronDown, ChevronUp, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
-import type { NextSlot } from "@/lib/booking";
-import { hasDoctorPhoto, type Doctor } from "@/lib/doctors";
-import { useLiveAvailabilityBySlug } from "@/lib/use-live-availability";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-team.module.css";
 
+const TILE_EASE = [0.22, 1, 0.36, 1] as const;
+
 /*
- * HomeTeam — Compact horizontal cutout Doctor Cards arranged in a static
- * responsive grid (3 cols desktop, 2 cols tablet, 1 col phones).
+ * HomeTeam — Editorial "Meet our Care Team" section.
  *
- * Inspired by the supplied reference layout (bust cutout left over soft arc
- * glow, crisp name + speciality + concise doctor info on the right, subtle
- * booking arrow, and full-width bottom schedule/CTA bar), adapted to the
- * MyStree palette and root font hierarchy with zero star ratings, review
- * counts, verification badges, or auto-scrolling marquee motion.
+ * Two-column scroll-fit composition inspired by the reference silhouette and
+ * crafted in MyStree's authoritative Burgundy & Warm Alabaster system:
+ *   Left  — Fraunces 400 heading, concise 3-line Plus Jakarta Sans 400 copy,
+ *           and a single primary MyStree Burgundy pill CTA linking to /doctors.
+ *   Right — 3-over-2 staggered rounded-square portrait mosaic of MyStree's
+ *           multidisciplinary clinicians (editorial monochrome over 5 curated
+ *           MyStree tonal tiles, warming gently on hover/focus).
  */
 
-type FeeMeta = { fee: number; durationMinutes: number };
-
-type Card = {
+type FeaturedMember = {
   slug: string;
   name: string;
   role: string;
-  cutoutSrc: string | null;
-  initials: string;
-  briefInfo: string;
-  metaLine: string;
-  dayLabel: string;
-  timeLabel: string;
-  bookingUrl: string;
+  src: string;
+  tone: "plum" | "burgundy" | "blush" | "taupe" | "garnet";
 };
 
-const INITIAL_VISIBLE = 6;
-
-const DISPLAY_ORDER = [
-  "dr-smitha-ap",
-  "dr-surbhi-sinha",
-  "dr-chaitra-nayak",
-  "dr-raksha-m",
-  "priyanka-savina",
-  "dr-jasmine-flora",
-  "dr-isha-shetty",
-  "dr-nivetha",
-  "dr-nivedita-sudheer",
-  "jigyasa-thakur",
-  "dr-shreyashi-bhattacharyya",
-  "dr-sitaram-m",
-  "nupur-karmarkar",
-] as const;
-
-const CUTOUT_PATHS: Record<string, string> = {
-  "dr-smitha-ap": "/images/specialists/dr-smitha-ap-cutout.webp",
-  "dr-surbhi-sinha": "/images/specialists/dr-surbhi-sinha-cutout.webp",
-  "dr-chaitra-nayak": "/images/specialists/dr-chaitra-nayak-cutout.webp",
-  "dr-raksha-m": "/images/specialists/dr-raksha-m-cutout.webp",
-  "priyanka-savina": "/images/specialists/priyanka-savina-cutout.webp",
-  "dr-jasmine-flora": "/images/specialists/dr-jasmine-flora-cutout.webp",
-  "dr-isha-shetty": "/images/specialists/dr-isha-shetty-cutout.webp",
-  "dr-nivedita-sudheer": "/images/specialists/dr-nivedita-sudheer-cutout.webp",
-  "jigyasa-thakur": "/images/specialists/jigyasa-thakur-cutout.webp",
-  "dr-sitaram-m": "/images/specialists/dr-sitaram-m-cutout.webp",
-  "nupur-karmarkar": "/images/specialists/nupur-karmarkar-cutout.webp",
-};
-
-const SPECIALTY_TAGS: Record<string, string> = {
-  "dr-smitha-ap": "High-Risk Obstetrics",
-  "dr-surbhi-sinha": "Obstetrics & Gynaecology",
-  "dr-chaitra-nayak": "Reproductive Medicine",
-  "dr-raksha-m": "Gynaecology & Obstetrics",
-  "priyanka-savina": "Clinical Nutrition",
-  "dr-jasmine-flora": "Pelvic Physiotherapy",
-  "dr-isha-shetty": "Gynaecology",
-  "dr-nivetha": "Dermatology",
-  "dr-nivedita-sudheer": "Psychiatry",
-  "jigyasa-thakur": "Clinical Psychology",
-  "dr-shreyashi-bhattacharyya": "Radiology",
-  "dr-sitaram-m": "Urology & Andrology",
-  "nupur-karmarkar": "Yoga Therapy",
-};
-
-const CARD_SUMMARIES: Record<string, string> = {
-  "dr-smitha-ap": "High-risk pregnancy, recurrent loss & obstetrics.",
-  "dr-surbhi-sinha": "Gynaecology, fertility checks & minimal access care.",
-  "dr-chaitra-nayak": "PCOS, endometriosis & fertility evaluation.",
-  "dr-raksha-m": "Obstetrics, gynaecology & reproductive care.",
-  "priyanka-savina": "Indian meal plans for PCOS, pregnancy & recovery.",
-  "dr-jasmine-flora": "Pelvic floor rehab, vaginismus & postnatal care.",
-  "dr-isha-shetty": "Routine gynaecology & pregnancy consultations.",
-  "dr-nivetha": "Hormonal acne, pigmentation, hair & scalp care.",
-  "dr-nivedita-sudheer": "Psychiatry consultations & psychotherapy care.",
-  "jigyasa-thakur": "Anxiety, fertility stress & postpartum counselling.",
-  "dr-shreyashi-bhattacharyya": "Diagnostic ultrasound & pelvic scan imaging.",
-  "dr-sitaram-m": "Urology & male partner fertility consultations.",
-  "nupur-karmarkar": "Therapeutic yoga for PCOS & prenatal wellness.",
-};
-
-function initialsOf(name: string) {
-  const words = name
-    .replace(/^(dr|ms|mrs|mr)\.?\s+/i, "")
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean);
-  if (!words.length) return "MS";
-  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
-  return `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase();
-}
-
-function summarizeBio(doctor: Doctor) {
-  const curated = CARD_SUMMARIES[doctor.slug];
-  if (curated) return curated;
-  return doctor.bio
-    .replace(/\b(renowned|prestigious|leading|best|world-class|expert|specialist)\b/gi, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-const SPECIALTY_FILTERS = [
+const TOP_ROW: readonly FeaturedMember[] = [
   {
-    id: "all",
-    label: "All doctors",
-    serviceHref: "/doctors",
-    serviceLabel: "Open full doctor directory",
+    slug: "dr-smitha-ap",
+    name: "Dr. Smitha A.P",
+    role: "Founder & High-Risk Obstetrics",
+    src: "/images/specialists/dr-smitha-ap-cutout.webp",
+    tone: "plum",
   },
   {
-    id: "gynae",
-    label: "Periods & Gynaecology",
-    serviceHref: "/services/obgyn-consults",
-    serviceLabel: "Explore Gynaecology Consults",
+    slug: "dr-surbhi-sinha",
+    name: "Dr. Surbhi Sinha",
+    role: "Obstetrics & Gynaecology",
+    src: "/images/specialists/dr-surbhi-sinha-cutout.webp",
+    tone: "burgundy",
   },
   {
-    id: "pregnancy",
-    label: "Pregnancy & High-Risk",
-    serviceHref: "/services/prenatal",
-    serviceLabel: "Explore Pregnancy Care",
+    slug: "dr-chaitra-nayak",
+    name: "Dr. Chaitra Nayak",
+    role: "Gynaecology & Fertility",
+    src: "/images/specialists/dr-chaitra-nayak-cutout.webp",
+    tone: "blush",
+  },
+];
+
+const BOTTOM_ROW: readonly FeaturedMember[] = [
+  {
+    slug: "priyanka-savina",
+    name: "Ms. Priyanka Savina",
+    role: "Clinical Nutrition & Counselling",
+    src: "/images/specialists/priyanka-savina-cutout.webp",
+    tone: "taupe",
   },
   {
-    id: "pcos",
-    label: "PCOS & Fertility",
-    serviceHref: "/clinics/pcos",
-    serviceLabel: "Explore PCOS & Fertility Care",
+    slug: "dr-jasmine-flora",
+    name: "Dr. Jasmine Flora",
+    role: "Pelvic Floor Physiotherapy",
+    src: "/images/specialists/dr-jasmine-flora-cutout.webp",
+    tone: "garnet",
   },
-  {
-    id: "pelvic",
-    label: "Pelvic Floor & Nutrition",
-    serviceHref: "/services/pelvic-floor-physiotherapy",
-    serviceLabel: "Explore Pelvic Physiotherapy",
-  },
-  {
-    id: "skin-mind",
-    label: "Skin, Hair & Mind",
-    serviceHref: "/services/dermatology",
-    serviceLabel: "Explore Dermatology & Mental Health",
-  },
-] as const;
+];
 
-type FilterId = (typeof SPECIALTY_FILTERS)[number]["id"];
-
-function matchesFilter(doctor: Doctor, filter: FilterId): boolean {
-  if (filter === "all") return true;
-  if (filter === "gynae") {
-    return doctor.specialty === "Gynaecology" || doctor.specialty === "Obstetrics";
-  }
-  if (filter === "pregnancy") {
-    return (
-      doctor.specialty === "Obstetrics" ||
-      doctor.slug === "dr-surbhi-sinha" ||
-      doctor.slug === "dr-isha-shetty" ||
-      doctor.slug === "priyanka-savina" ||
-      doctor.slug === "dr-jasmine-flora"
-    );
-  }
-  if (filter === "pcos") {
-    return (
-      doctor.specialty === "Fertility" ||
-      doctor.slug === "dr-surbhi-sinha" ||
-      doctor.slug === "dr-smitha-ap" ||
-      doctor.slug === "dr-isha-shetty" ||
-      doctor.slug === "priyanka-savina" ||
-      doctor.slug === "dr-nivetha" ||
-      doctor.slug === "dr-sitaram-m"
-    );
-  }
-  if (filter === "pelvic") {
-    return (
-      doctor.specialty === "Pelvic Health" ||
-      doctor.specialty === "Nutrition" ||
-      doctor.specialty === "Yoga Therapy"
-    );
-  }
-  return doctor.specialty === "Dermatology" || doctor.specialty === "Mental Health";
-}
-
-function toCard(
-  doctor: Doctor,
-  slot: NextSlot | null,
-  feeMeta?: FeeMeta,
-  isSyncing = false,
-): Card & {
-  feeText?: string;
-  visitLabel?: string;
-  experience?: string;
-  hasLiveSlot: boolean;
-  slotMode?: "offline" | "online";
-  practisesElsewhere: boolean;
-} {
-  const experienceRaw = doctor.credentials.find((c) => /experience/i.test(c));
-  const experience = experienceRaw
-    ? experienceRaw
-        .replace(/\byears\s+experience/i, "yrs exp")
-        .replace(/,\s*\d+\s*in speciality/i, "")
-        .trim()
-    : undefined;
-  const feeText = feeMeta && feeMeta.fee > 0 ? `₹${feeMeta.fee.toLocaleString("en-IN")}` : undefined;
-  const visitLabel = feeMeta && feeMeta.durationMinutes > 0 ? `${feeMeta.durationMinutes} min visit` : undefined;
-  const metaLine = experience ?? "";
-
-  const cutoutSrc = hasDoctorPhoto(doctor)
-    ? (CUTOUT_PATHS[doctor.slug] ?? doctor.image)
-    : null;
-
-  return {
-    slug: doctor.slug,
-    name: doctor.name,
-    role: SPECIALTY_TAGS[doctor.slug] ?? doctor.title,
-    cutoutSrc,
-    initials: initialsOf(doctor.name),
-    briefInfo: summarizeBio(doctor),
-    metaLine,
-    feeText,
-    visitLabel,
-    experience,
-    hasLiveSlot: Boolean(slot),
-    slotMode: slot?.mode,
-    practisesElsewhere: Boolean(doctor.practisesElsewhere),
-    dayLabel: slot
-      ? slot.dayLabel
-      : doctor.practisesElsewhere
-        ? "By request"
-        : isSyncing
-          ? "Loading..."
-          : "Check schedule",
-    timeLabel: slot
-      ? slot.time
-      : doctor.practisesElsewhere
-        ? "Enquire"
-        : isSyncing
-          ? "Live time"
-          : "All timings",
-    bookingUrl: doctor.bookingUrl ?? "/book",
-  };
-}
-
-function DoctorCard({ card, eager }: { card: ReturnType<typeof toCard>; eager?: boolean }) {
-  const isAvailable = !card.practisesElsewhere;
-  const focusSummary = card.briefInfo.replace(/\.$/, "");
-  const availabilityLabel = card.practisesElsewhere
-    ? "By request"
-    : card.hasLiveSlot
-      ? card.dayLabel === "Today"
-        ? "Available today"
-        : "Next available"
-      : "Online booking";
-
-  return (
-    <li className={styles.item}>
-      <article className={styles.card}>
-        <div className={styles.profileRow}>
-          <Link
-            href={`/doctors/${card.slug}`}
-            className={styles.portraitStage}
-            aria-label={`View profile of ${card.name}`}
-          >
-            {card.cutoutSrc ? (
-              /* eslint-disable-next-line @next/next/no-img-element -- roster portraits serve cutout and live host assets */
-              <img
-                src={card.cutoutSrc}
-                alt={`${card.name}, ${card.role} at MyStree`}
-                width={72}
-                height={72}
-                loading={eager ? "eager" : "lazy"}
-                decoding="async"
-                className={styles.cutoutImg}
-              />
-            ) : (
-              <span className={styles.monogram} aria-hidden="true">
-                {card.initials}
-              </span>
-            )}
-          </Link>
-
-          <div className={styles.profileMeta}>
-            <span className={styles.specialtyLabel}>{card.role}</span>
-            <h3 className={styles.name}>
-              <Link href={`/doctors/${card.slug}`} className={styles.nameLink}>
-                {card.name}
-              </Link>
-            </h3>
-          </div>
-        </div>
-
-        <div className={styles.feeExpRow}>
-          <p className={styles.feeLine}>
-            {card.feeText ? (
-              <>
-                <span className={styles.feeAmount}>{card.feeText}</span>
-                {card.visitLabel ? (
-                  <span className={styles.feeDuration}>
-                    / {card.visitLabel.replace(/\s+visit$/i, "")}
-                  </span>
-                ) : null}
-              </>
-            ) : (
-              <span className={styles.feeDuration}>
-                {card.visitLabel ?? "In-clinic consultation"}
-              </span>
-            )}
-          </p>
-          {card.experience ? <span className={styles.expTag}>{card.experience}</span> : null}
-        </div>
-
-        {focusSummary ? <p className={styles.focusLine}>{focusSummary}</p> : null}
-
-        <div className={styles.slotSection}>
-          <div className={styles.slotHeader}>
-            <span className={styles.slotStatus}>
-              <span
-                className={isAvailable ? styles.statusDot : styles.statusDotMuted}
-                aria-hidden="true"
-              />
-              <span className={styles.slotTitle}>{availabilityLabel}</span>
-            </span>
-            {card.slotMode ? (
-              <span className={styles.slotMode}>
-                {card.slotMode === "online" ? "Video" : "In clinic"}
-              </span>
-            ) : null}
-          </div>
-
-          <div className={styles.slotPills}>
-            <span className={styles.slotPill}>
-              <CalendarDays size={13} strokeWidth={1.9} aria-hidden="true" />
-              <span>{card.dayLabel}</span>
-            </span>
-            {card.timeLabel ? (
-              <span className={styles.slotPill}>
-                <Clock size={13} strokeWidth={1.9} aria-hidden="true" />
-                <span>
-                  {card.timeLabel}
-                  {/\b(?:AM|PM)\b/i.test(card.timeLabel) ? " IST" : ""}
-                </span>
-              </span>
-            ) : null}
-          </div>
-        </div>
-
-        <div className={styles.cardFooter}>
-          <Link
-            href={card.bookingUrl}
-            className={styles.bookBtn}
-            aria-label={`Book appointment with ${card.name} — ${card.dayLabel}, ${card.timeLabel}`}
-          >
-            Book Appointment
-          </Link>
-        </div>
-      </article>
-    </li>
-  );
-}
-
-export function HomeTeam({
-  doctors,
-  slotsBySlug = {},
-  feesBySlug = {},
+function PortraitTile({
+  member,
+  index,
+  still,
 }: {
-  doctors: readonly Doctor[];
-  slotsBySlug?: Record<string, NextSlot | null>;
-  feesBySlug?: Record<string, FeeMeta>;
+  member: FeaturedMember;
+  index: number;
+  still: boolean;
 }) {
-  const [showAll, setShowAll] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<FilterId>("all");
-  const gridId = useId();
-
-  const activeSlugs = useMemo(
-    () => doctors.filter((doc) => !doc.practisesElsewhere).map((doc) => doc.slug),
-    [doctors],
+  return (
+    <motion.div
+      initial={still ? false : { opacity: 0, y: 20, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={
+        still
+          ? { duration: 0 }
+          : { duration: 0.5, delay: index * 0.08, ease: TILE_EASE }
+      }
+    >
+      <Link
+        href={`/doctors/${member.slug}`}
+        className={`${styles.tile} ${styles[`tone_${member.tone}`]}`}
+        aria-label={`${member.name} — ${member.role}`}
+      >
+        <Image
+          src={member.src}
+          alt={`${member.name}, ${member.role} at MyStree`}
+          width={340}
+          height={340}
+          loading="eager"
+          decoding="async"
+          sizes="(max-width: 639px) 30vw, 170px"
+          quality={88}
+          className={styles.portrait}
+        />
+        <span className={styles.tileCaption} aria-hidden="true">
+          <span className={styles.tileName}>{member.name}</span>
+        </span>
+      </Link>
+    </motion.div>
   );
-  const { slots: liveSlots, fees: liveFees, isSyncing } = useLiveAvailabilityBySlug(
-    activeSlugs,
-    slotsBySlug,
-    feesBySlug,
-  );
+}
 
-  const orderIndex = new Map<string, number>(
-    DISPLAY_ORDER.map((slug, index) => [slug, index]),
-  );
-
-  const ordered = [...doctors].sort((a, b) => {
-    const idxA = orderIndex.get(a.slug) ?? 999;
-    const idxB = orderIndex.get(b.slug) ?? 999;
-    return idxA - idxB;
-  });
-
-  const filteredDoctors = ordered.filter((doc) => matchesFilter(doc, activeFilter));
-
-  const cards = filteredDoctors.map((doctor) =>
-    toCard(
-      doctor,
-      liveSlots[doctor.slug] ?? slotsBySlug[doctor.slug] ?? null,
-      liveFees[doctor.slug] ?? feesBySlug[doctor.slug],
-      isSyncing,
-    ),
-  );
-
-  const isFiltered = activeFilter !== "all";
-  const hasMore = !isFiltered && cards.length > INITIAL_VISIBLE;
-  const visibleCards = isFiltered || showAll ? cards : cards.slice(0, INITIAL_VISIBLE);
-  const hiddenCount = Math.max(0, cards.length - INITIAL_VISIBLE);
-  const currentFilter =
-    SPECIALTY_FILTERS.find((item) => item.id === activeFilter) ?? SPECIALTY_FILTERS[0];
+export function HomeTeam() {
+  const still = useStillAfterMount();
 
   return (
     <section className={styles.section} id="doctors" aria-labelledby="team-heading">
       <div className={styles.inner}>
-        <header className={styles.head}>
-          <p className={styles.sectionEyebrow}>Our clinical team</p>
+        <div className={styles.copy}>
           <h2 id="team-heading" className={styles.heading}>
-            Meet the <em className={styles.accent}>doctors</em> who will care for you.
+            Meet our Care Team
           </h2>
           <p className={styles.lead}>
-            Not sure whom to see? Choose your health concern below to view the right specialists
-            and live appointment times at our Indiranagar clinic.
+            MyStree&apos;s clinicians deeply understand women&apos;s health across gynaecology,
+            obstetrics, nutrition, and pelvic care — with the experience and time to support
+            complex concerns.
           </p>
-        </header>
-
-        <div className={styles.filterWrap}>
-          <div className={styles.filterTabs} role="tablist" aria-label="Filter doctors by concern">
-            {SPECIALTY_FILTERS.map((filter) => {
-              const selected = filter.id === activeFilter;
-              return (
-                <button
-                  key={filter.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  aria-controls={gridId}
-                  className={`${styles.filterTab} ${selected ? styles.filterTabActive : ""}`}
-                  onClick={() => {
-                    setActiveFilter(filter.id);
-                    if (filter.id !== "all") setShowAll(false);
-                  }}
-                >
-                  {filter.label}
-                </button>
-              );
-            })}
+          <div className={styles.actions}>
+            <Link href="/doctors" className={styles.cta}>
+              Meet our Care Team
+            </Link>
           </div>
-          {isFiltered ? (
-            <div className={styles.filterHint}>
-              <span>
-                Showing {cards.length} {cards.length === 1 ? "clinician" : "clinicians"} for{" "}
-                {currentFilter.label.toLowerCase()}
-              </span>
-              <Link href={currentFilter.serviceHref} className={styles.filterServiceLink}>
-                <span>{currentFilter.serviceLabel}</span>
-                <ArrowRight size={14} aria-hidden="true" />
-              </Link>
-            </div>
-          ) : null}
         </div>
 
-        <ul id={gridId} className={styles.grid}>
-          {visibleCards.map((card, index) => (
-            <DoctorCard key={card.slug} card={card} eager={index < INITIAL_VISIBLE || isFiltered} />
-          ))}
-        </ul>
-
-        <div className={styles.foot}>
-          {hasMore ? (
-            <button
-              type="button"
-              className={styles.viewMoreBtn}
-              aria-expanded={showAll}
-              aria-controls={gridId}
-              onClick={() => setShowAll((prev) => !prev)}
-            >
-              {showAll ? (
-                <>
-                  <span>Show less</span>
-                  <ChevronUp size={16} aria-hidden="true" />
-                </>
-              ) : (
-                <>
-                  <span>Show more doctors ({hiddenCount} more)</span>
-                  <ChevronDown size={16} aria-hidden="true" />
-                </>
-              )}
-            </button>
-          ) : null}
-
-          <Link href="/doctors" className={styles.all}>
-            <span>See all doctors &amp; filter by speciality</span>
-            <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+        <div className={styles.mosaic} aria-label="Featured MyStree clinicians">
+          <div className={styles.rowTop}>
+            {TOP_ROW.map((member, index) => (
+              <PortraitTile key={member.slug} member={member} index={index} still={still} />
+            ))}
+          </div>
+          <div className={styles.rowBottom}>
+            {BOTTOM_ROW.map((member, index) => (
+              <PortraitTile
+                key={member.slug}
+                member={member}
+                index={index + TOP_ROW.length}
+                still={still}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

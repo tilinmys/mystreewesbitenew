@@ -1,13 +1,15 @@
 /*
- * HomePackages — compact 4-part care package grid in the MyStree corporate
- * palette (crisp white cards, subtle slate borders, Twilight Wine badges,
- * Fraunces display heading, Plus Jakarta Sans card titles/body, JetBrains
- * Mono labels, uniform .cta-book action pill).
+ * HomePackages — Compact 4-Part Fixed-Price Care Programme Grid.
+ *
+ * Preserves the exact root typography & 4-zone card hierarchy while tightening
+ * image ratio (16:10 contain so every editorial engraving fits cleanly with
+ * zero cropping), internal rhythm, and overall card height (~335px) so all 4
+ * cards fit effortlessly on desktop, laptop, and mobile viewports.
  */
 .section {
-  --gutter: clamp(20px, 5.5vw, 100px);
+  --gutter: clamp(18px, 5.5vw, 96px);
   position: relative;
-  padding: 56px 0 64px;
+  padding: clamp(2.75rem, 4.8vw, 4rem) 0 clamp(3rem, 5.2vw, 4.25rem);
   background: var(--pure-white, #FFFFFF);
   border-top: 1px solid var(--border-subtle, #E8E1E2);
   color: var(--text-dark, #3E1E26);
@@ -18,66 +20,66 @@
 }
 
 .inner {
-  max-width: 1320px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
 .top {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
-  column-gap: 16px;
+  column-gap: 24px;
 }
 
 .intro {
-  max-width: 38rem;
+  max-width: 35rem;
 }
 
 .eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-family: var(--font-mono), monospace;
   font-size: 11px;
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--twilight-wine);
+  color: var(--twilight-wine, #800020);
 }
 
-/* Section heading: Fraunces 400 display role. */
+/* Display role: Fraunces 400. */
 .section .heading {
   margin: 0;
   font-family: var(--font-serif), serif !important;
-  font-size: clamp(2.15rem, 3.6vw, 3.25rem) !important;
+  font-size: clamp(2rem, 3.2vw, 2.85rem) !important;
   font-weight: 400 !important;
   font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
-  line-height: 1.08 !important;
-  letter-spacing: -0.025em !important;
-  color: var(--text-dark);
+  line-height: 1.09 !important;
+  letter-spacing: -0.024em !important;
+  color: var(--palette-oxblood, #5C0017);
   text-wrap: balance;
 }
 
 .accent {
   font-style: italic;
-  color: var(--twilight-wine);
+  color: var(--twilight-wine, #800020);
 }
 
 .lead {
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   font-family: var(--font-sans), sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.6;
-  color: var(--text-muted);
+  line-height: 1.56;
+  color: var(--text-muted, #5C484D);
   text-wrap: pretty;
 }
 
 .art {
   position: relative;
   width: 100%;
-  height: clamp(250px, 24vw, 340px);
-  opacity: 0.96;
+  height: clamp(160px, 16vw, 220px);
+  opacity: 0.94;
   mix-blend-mode: multiply;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 94%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 94%, transparent 100%);
@@ -95,50 +97,42 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px 20px;
-  margin: 24px 0 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border-subtle);
+  gap: 8px 20px;
+  margin: 14px 0 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle, #E8E1E2);
 }
 
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   margin: 0;
   font-family: var(--font-sans), sans-serif;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
-  color: var(--text-dark);
-}
-
-.kickerIcon {
-  flex: none;
-  color: var(--twilight-wine);
+  color: var(--text-dark, #3E1E26);
 }
 
 .speak {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-family: var(--font-sans), sans-serif;
   font-size: 13.5px;
   font-weight: 500;
-  color: var(--twilight-wine);
+  color: var(--twilight-wine, #800020);
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
 }
 
 .speak:hover {
-  color: var(--text-dark);
+  color: var(--palette-oxblood, #5C0017);
 }
 
-/* ------------------------------------------------------------------ 4-part grid */
+/* ------------------------------------------------------- Compact 4-card grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -154,46 +148,45 @@
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  background: var(--pure-white);
+  border: 1px solid var(--border-subtle, #E8E1E2);
+  border-radius: 14px;
+  background: var(--pure-white, #FFFFFF);
   box-shadow:
     0 1px 2px rgb(92 0 23 / 0.04),
-    0 8px 20px -16px rgb(92 0 23 / 0.14);
+    0 8px 18px -15px rgb(92 0 23 / 0.14);
   transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--palette-crimson, #AD002B);
   box-shadow:
     0 4px 10px rgb(92 0 23 / 0.06),
-    0 20px 38px -14px rgb(128 0 32 / 0.2);
+    0 16px 30px -14px rgb(128 0 32 / 0.2);
 }
 
+/* Compact 16:10 art stage with clean contain fit so zero engraving details crop */
 .mediaWrap {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   width: 100%;
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle, #E8E1E2);
-  background: var(--surface-mist);
+  background: #FCF8F8;
 }
 
 .photo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: 6px;
+  object-fit: contain;
   object-position: center center;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.photoLower {
-  object-position: center 62%;
+  mix-blend-mode: multiply;
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card:hover .photo {
@@ -204,25 +197,25 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 18px;
-  padding: 20px;
+  gap: 10px;
+  padding: 13px 14px 14px;
 }
 
 .titleBlock {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
 }
 
 /* Unified subheading role: Plus Jakarta Sans 600 */
 .section .cardTitle {
   margin: 0;
   font-family: var(--font-sans), sans-serif !important;
-  font-size: 1.1875rem !important;
+  font-size: 1rem !important;
   font-weight: 600 !important;
-  line-height: 1.3 !important;
-  letter-spacing: -0.015em !important;
-  color: var(--text-dark);
+  line-height: 1.28 !important;
+  letter-spacing: -0.014em !important;
+  color: var(--palette-oxblood, #5C0017);
 }
 
 .cardTitleLink {
@@ -231,30 +224,31 @@
 }
 
 .cardTitleLink:hover {
-  color: var(--twilight-wine);
+  color: var(--twilight-wine, #800020);
 }
 
 .cardSummary {
   margin: 0;
   font-family: var(--font-sans), sans-serif;
-  font-size: 14px;
+  font-size: 12.75px;
   font-weight: 400;
-  line-height: 1.55;
-  color: var(--text-muted);
+  line-height: 1.45;
+  color: var(--text-muted, #5C484D);
 }
 
 .pricingRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: 5px;
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle, #E8E1E2);
 }
 
 .price {
   font-family: var(--font-sans), sans-serif;
-  font-size: 26px;
+  font-size: 20.5px;
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -264,106 +258,114 @@
 
 .interval {
   font-family: var(--font-sans), sans-serif;
-  font-size: 13px;
+  font-size: 11.75px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-muted, #5C484D);
 }
 
 .cta {
   width: 100%;
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
   justify-content: center;
 }
 
 .cardTitleLink:focus-visible,
 .speak:focus-visible {
-  outline: 2px solid var(--twilight-wine);
+  outline: 2px solid var(--twilight-wine, #800020);
   outline-offset: 3px;
 }
 
 /* --------------------------------------------------------------- tablet */
-@media (max-width: 1120px) {
+@media (max-width: 1080px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    gap: 14px;
   }
 }
 
 /* --------------------------------------------------------------- phones */
 @media (max-width: 639px) {
   .section {
-    padding: 40px 0 48px;
+    padding: 2.25rem 0 2.75rem;
   }
 
   .top {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
 
   .art {
-    height: 165px;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    height: 130px;
   }
 
   .section .heading.heading {
-    font-size: 1.9rem !important;
+    font-size: 1.75rem !important;
   }
 
   .lead {
-    margin-top: 10px;
-    font-size: 15px;
+    margin-top: 8px;
+    font-size: 14.5px;
   }
 
   .rowHead {
-    margin: 18px 0 14px;
-    padding-top: 14px;
+    margin: 12px 0 12px;
+    padding-top: 12px;
   }
 
   .grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
   .card {
     display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-columns: 108px minmax(0, 1fr);
     align-items: stretch;
   }
 
   .mediaWrap {
-    width: 104px;
+    width: 108px;
     height: 100%;
     aspect-ratio: auto;
+    border-bottom: 0;
+    border-right: 1px solid var(--border-subtle, #E8E1E2);
   }
 
   .cardBody {
-    padding: 14px;
-    gap: 10px;
+    padding: 11px 12px;
+    gap: 8px;
   }
 
   .titleBlock {
-    gap: 4px;
+    gap: 3px;
   }
 
   .section .cardTitle {
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
   }
 
   .cardSummary {
-    font-size: 12.5px;
-    line-height: 1.42;
+    font-size: 12px;
+    line-height: 1.4;
   }
 
   .pricingRow {
-    padding-top: 8px;
+    padding-top: 7px;
   }
 
   .price {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .interval {
-    font-size: 12px;
+    font-size: 11px;
+  }
+
+  .cta {
+    min-height: 36px !important;
+    font-size: 12.5px !important;
   }
 }
 

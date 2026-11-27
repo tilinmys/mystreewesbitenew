@@ -3,15 +3,14 @@ import type { ReactNode } from "react";
 import styles from "./service-band.module.css";
 
 /*
- * ServiceBand — LOCKED. The opening band of every /services/* page.
- *
- * Paints one continuous Twilight Wine gradient behind <ServiceHero> and the
- * <ServiceQuote> that follows it. Giving them a shared ground, rather than a
- * background each, is what makes the two read as a single arrival instead of
- * two stacked boxes with a seam between them.
+ * ServiceBand — Sticky opening hero band shared by all 11 /services/* and
+ * /clinics/pcos pages. Stays gently pinned as the next section (ServiceSpecialists)
+ * glides up over it like an architectural sheet on scroll.
  */
 export function ServiceBand({ children }: { children: ReactNode }) {
   return (
-    <div className={styles.band}>{children}</div>
+    <div className={styles.band} data-svc-hero-band="true">
+      {children}
+    </div>
   );
 }

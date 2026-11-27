@@ -5,12 +5,36 @@
  */
 
 .pageRoot {
+  position: relative;
   width: 100%;
   background: var(--bg-light);
   color: var(--text-dark, #3E1E26);
   /* clip, not hidden: hidden makes <main> a scroll container, which breaks
      scroll-driven animations and position: sticky. */
   overflow-x: clip;
+}
+
+/* Sticky-curtain reveal: every section after the pinned ServiceBand hero
+   layers above it so scrolling smoothly brings the next section to the top. */
+.pageRoot > :global(section),
+.pageRoot > :global(div):not(:global([data-svc-hero-band])) {
+  position: relative;
+  z-index: 2;
+}
+
+.pageRoot > :global([data-svc-hero-band]) + * {
+  margin-top: -1.75rem;
+  border-top-left-radius: 1.75rem;
+  border-top-right-radius: 1.75rem;
+  box-shadow: 0 -22px 52px -16px rgb(28 0 10 / 0.34);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pageRoot > :global([data-svc-hero-band]) + * {
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /* Defer layout/paint of offscreen static bands on long 14-section service pages

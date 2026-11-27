@@ -405,12 +405,12 @@
     box-shadow 0.2s ease;
 }
 
-/* Full label on wide screens; "Book now" where the bar is tight. */
+/* Full label on desktop & standard laptops (>= 1200px); "Book now" below 1200px. */
 .bookShort {
   display: none;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1199px) {
   .bookLong {
     display: none;
   }
@@ -959,42 +959,66 @@
   }
 }
 
-/* Small laptops (1025–1279px): the same bar, tightened so the links and
-   both buttons keep the side margin. */
-@media (min-width: 1025px) and (max-width: 1279px) {
+/* Standard & compact laptops (1025–1420px): calibrated so logo, every nav link,
+   Log in, and the full Book Appointment CTA fit cleanly inside 1280px & 1366px
+   laptop viewports with generous side margins and zero right-edge clipping. */
+@media (min-width: 1025px) and (max-width: 1420px) {
+  .navInner {
+    padding: 0 clamp(1rem, 2vw, 1.75rem);
+    gap: clamp(0.65rem, 1vw, 1.1rem);
+  }
+
   .brandLogo {
-    height: 2.75rem;
+    height: 2.55rem;
   }
 
   .desktopNav {
-    gap: 0.8rem;
-    margin-right: 0.5rem;
+    gap: clamp(0.65rem, 0.95vw, 1.1rem);
+    margin-right: clamp(0.25rem, 0.6vw, 0.65rem);
   }
 
   .navLink {
-    font-size: var(--type-caption);
-    letter-spacing: 0.04em;
+    font-size: 0.8125rem;
+    letter-spacing: 0.045em;
   }
 
   .actionsGroup {
-    gap: 0.625rem;
+    gap: 0.6rem;
   }
 
   .loginButton,
   .bookButton {
-    padding: 0 0.875rem;
-    letter-spacing: 0.05em;
+    min-height: 2.625rem;
+    padding: 0 1rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.055em;
   }
 }
 
 /* Narrow laptops (1025–1199px): the logo already links home, so the Home
-   item steps out to keep every other link and both buttons on one row. */
+   item steps out and Book Appointment shortens to Book Now to guarantee zero clipping. */
 @media (min-width: 1025px) and (max-width: 1199px) {
   .navItemHome {
     display: none;
   }
 
   .brandLogo {
-    height: 2.4rem;
+    height: 2.3rem;
+  }
+
+  .desktopNav {
+    gap: 0.65rem;
+    margin-right: 0.35rem;
+  }
+
+  .navLink {
+    font-size: var(--type-caption);
+    letter-spacing: 0.035em;
+  }
+
+  .loginButton,
+  .bookButton {
+    padding: 0 0.85rem;
+    font-size: var(--type-caption);
   }
 }

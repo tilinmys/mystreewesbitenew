@@ -1,12 +1,14 @@
 /*
- * Home Section 01 (revised 16 Nov 2026, booking-first; color.md).
- * Bright photograph; centred heading with the booking button directly under
- * it; four glass cards in flow at the bottom. The first screen is the site
- * navbar (announcement + bar, about 120px desktop / 100px phones) plus this
- * stage. Root fonts only.
+ * HomeHero — Clean full-viewport editorial hero (card-free).
+ *
+ * Calibrated mathematically with svh units so 100% of the eyebrow, large
+ * Fraunces 400 headline, subtitle, and both CTAs stay cleanly centered inside
+ * the initial viewport on every desktop, laptop, and mobile screen.
  */
 .hero {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background: #ffffff;
   color: #fffaf6;
 }
@@ -16,8 +18,10 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: clamp(600px, calc(100svh - 108px), 780px);
+  justify-content: center;
+  height: calc(100svh - 120px);
+  min-height: 480px;
+  max-height: 840px;
   overflow: hidden;
   background: var(--palette-velvet-deep, #470818);
 }
@@ -37,29 +41,31 @@
 
 .image {
   object-fit: cover;
-  object-position: 60% 45%;
+  object-position: center 22%;
+  filter: brightness(0.92) contrast(1.03) saturate(1.03);
 }
 
-/* Calm Velvet Burgundy atmospheric scrim: keeps portrait photography rich while
-   ensuring crisp legibility for headlines and bottom glass cards in any light. */
+/* Warm focal vignette preserving genuine human warmth & smiles while giving
+   AAA legibility to centered pure-white editorial typography. */
 .shade {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(56% 44% at 50% 36%, rgb(58 6 20 / 0.52), transparent 100%),
-    linear-gradient(180deg, rgb(52 6 18 / 0.36) 0%, rgb(46 6 16 / 0.18) 38%, rgb(50 6 18 / 0.38) 66%, rgb(62 8 22 / 0.8) 100%);
+    radial-gradient(64% 56% at 50% 48%, rgb(30 5 12 / 0.56) 0%, rgb(30 5 12 / 0.24) 64%, rgb(30 5 12 / 0.06) 100%),
+    linear-gradient(180deg, rgb(28 5 12 / 0.26) 0%, rgb(28 5 12 / 0.14) 42%, rgb(38 5 15 / 0.44) 100%);
 }
 
 .copy {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 0;
+  width: 100%;
+  max-width: 62rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(32px, 5vh, 56px) 24px 20px;
+  padding: clamp(28px, 5svh, 64px) 24px clamp(36px, 6svh, 76px);
   text-align: center;
   will-change: transform;
 }
@@ -67,46 +73,44 @@
 /* Eyebrow H1 on `/` follows the unified JetBrains Mono 500 eyebrow role. */
 .hero .eyebrow {
   font-family: var(--font-mono), monospace !important;
-  font-size: clamp(0.75rem, 0.9vw, 0.8125rem) !important;
+  font-size: clamp(0.75rem, 0.9vw, 0.84rem) !important;
   font-weight: 500 !important;
-  line-height: 1.5 !important;
-  letter-spacing: 0.18em !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.22em !important;
 }
 
 .eyebrow {
-  margin: 0 0 22px;
-  text-shadow: 0 1px 12px rgb(30 14 12 / 0.55);
+  margin: 0 0 clamp(16px, 2.8svh, 28px);
+  text-shadow: 0 1px 14px rgb(24 6 10 / 0.65);
   font-family: var(--font-mono), monospace;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgb(255 250 246 / 0.9);
+  color: rgb(255 250 246 / 0.95);
 }
 
-/* Section exception: overrides the global `main h1` scale (globals.css). */
+/* Enlarged commanding editorial display headline (Fraunces 400). */
 .hero .display {
   margin: 0;
   font-family: var(--font-serif), serif !important;
-  font-size: clamp(2.75rem, 5vw, 4.75rem) !important;
+  font-size: clamp(2.85rem, min(6vw, 9.2svh), 5.65rem) !important;
   font-weight: 400 !important;
   font-variation-settings: "opsz" 144, "SOFT" 20, "WONK" 0;
-  line-height: 1.02 !important;
+  line-height: 1.05 !important;
   letter-spacing: -0.028em !important;
   color: #ffffff;
   text-wrap: balance;
-  /* A close shadow for edge definition plus a wide one for legibility
-     over a busy photograph. */
   text-shadow:
-    0 1px 2px rgb(20 8 8 / 0.35),
-    0 6px 40px rgb(20 8 8 / 0.45);
+    0 2px 6px rgb(20 6 10 / 0.42),
+    0 10px 44px rgb(20 6 10 / 0.52);
 }
 
 .mask {
   display: block;
   overflow: hidden;
-  padding: 0 0.1em 0.08em;
-  margin-bottom: -0.08em;
+  padding: 0 0.12em 0.08em;
+  margin-bottom: -0.06em;
 }
 
 .line {
@@ -119,14 +123,26 @@
   color: #fbe4e7;
 }
 
+.subtitle {
+  margin: clamp(16px, 2.8svh, 26px) auto 0;
+  max-width: 48ch;
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.58;
+  color: rgb(255 250 246 / 0.94);
+  text-shadow: 0 1px 14px rgb(20 6 10 / 0.6);
+  text-wrap: balance;
+}
+
 /* --------------------------------------------------------------- actions */
 .ctas {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 12px 16px;
-  margin-top: 32px;
+  gap: 14px 18px;
+  margin-top: clamp(24px, 4svh, 40px);
 }
 
 .bookShort {
@@ -139,28 +155,28 @@
     0 14px 30px -10px rgb(20 8 8 / 0.55);
 }
 
-/* Secondary: a light glass pill, clearly second to the booking button. */
 .secondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 3.5rem;
-  padding: 0 1.6rem;
-  border: 1px solid rgb(255 255 255 / 0.55);
+  padding: 0 1.75rem;
+  border: 1px solid rgb(255 255 255 / 0.62);
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.16);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
   font-family: var(--font-sans), sans-serif;
   font-size: var(--type-body);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  transition: background-color 200ms ease;
+  transition: background-color 200ms ease, border-color 200ms ease;
 }
 
 .secondary:hover {
-  background: rgb(255 255 255 / 0.26);
+  background: rgb(255 255 255 / 0.28);
+  border-color: rgb(255 255 255 / 0.85);
 }
 
 .secondary:focus-visible {
@@ -168,184 +184,61 @@
   outline-offset: 3px;
 }
 
-/* ------------------------------------------------------------------ cards */
-.cardsWrap {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  padding: 0 24px 24px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 272px));
-  gap: 14px;
-  width: min(1130px, 100%);
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cards li {
-  will-change: transform, opacity;
-}
-
-/*
- * Glass: a frosted pane over a warm tint, with a glass edge. The rim is a
- * 1px gradient border (masked pseudo-element) that is bright at the top-left
- * and bottom-right corners and fades along the sides, like light catching
- * the edge of a pane; an inner highlight runs along the top.
- */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 18px 18px 16px;
-  border: 0;
-  border-radius: 16px;
-  background:
-    linear-gradient(155deg, rgb(255 255 255 / 0.22) 0%, rgb(255 255 255 / 0.08) 42%, rgb(255 255 255 / 0.04) 100%),
-    rgb(71 8 24 / 0.42);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.42),
-    inset 0 -1px 0 rgb(255 255 255 / 0.08),
-    0 24px 48px -22px rgb(30 4 12 / 0.55);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  color: #fffaf6;
-  font: inherit;
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    border-color 300ms ease,
-    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgb(255 255 255 / 0.85) 0%,
-    rgb(255 255 255 / 0.2) 28%,
-    rgb(255 255 255 / 0.06) 55%,
-    rgb(255 255 255 / 0.22) 80%,
-    rgb(255 255 255 / 0.6) 100%
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  transition: opacity 300ms ease;
-  opacity: 0.85;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.card:focus-visible {
-  outline: 2px solid #fffaf6;
-  outline-offset: 3px;
-}
-
-.cardTitle {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-}
-
-.cardRule {
-  display: block;
-  height: 1px;
-  margin: 12px 0;
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0.08));
-}
-
-.cardText {
-  margin-bottom: 16px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: rgb(255 250 246 / 0.92);
-}
-
-.cardArrow {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  margin-top: auto;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 0.22);
-  transition:
-    background-color 250ms ease,
-    color 250ms ease;
-}
-
-.card:hover .cardArrow {
-  background: var(--surface-mist, #EFE0E4);
-  color: var(--palette-burgundy, #800020);
-}
-
-/* Tablets: four across, sharing the width. */
-@media (max-width: 1023px) {
-  .cards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    width: 100%;
-    max-width: 960px;
-  }
-}
-
-/* Phones: balanced upper portrait + CTAs paired with a compact 2 × 2 quick-action grid
-   without forcing an oversized empty wait before the cards appear. */
+/* Phones: full-bleed unobstructed vertical portrait sitting cleanly above the
+   sticky Call/WhatsApp bar with enlarged editorial typography. */
 @media (max-width: 767px) {
   .stage {
-    min-height: auto;
+    height: calc(100svh - 94px);
+    min-height: 520px;
+    max-height: none;
+    padding-bottom: 84px;
+    justify-content: center;
   }
 
   .image {
-    object-position: 50% 50%;
+    object-position: 50% 42%;
   }
 
   .copy {
-    flex: 0 0 auto;
-    min-height: clamp(390px, 56svh, 470px);
-    padding: 28px 16px 20px;
+    padding: 24px 18px 24px;
   }
 
-  /* Both buttons on one row, sharing the width. */
+  .hero .eyebrow {
+    font-size: 11px !important;
+    letter-spacing: 0.17em !important;
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .hero .display {
+    font-size: clamp(2.55rem, 11.4vw, 3.45rem) !important;
+    line-height: 1.06 !important;
+  }
+
+  .subtitle {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 34ch;
+  }
+
   .ctas {
     flex-wrap: nowrap;
     width: 100%;
-    gap: 8px;
-    margin-top: 22px;
+    max-width: 24rem;
+    gap: 10px;
+    margin-top: 26px;
   }
 
-  /* Specific enough to resize the global .cta-book.is-large. */
   .hero .ctas > * {
     flex: 1 1 0;
     min-width: 0;
     justify-content: center;
-    min-height: 3rem;
-    padding: 0 0.75rem;
-    font-size: 14px;
+    min-height: 3.05rem;
+    padding: 0 0.85rem;
+    font-size: 14.5px;
   }
 
   .ctas svg,
@@ -356,93 +249,23 @@
   .bookShort {
     display: inline;
   }
-
-  .hero .eyebrow {
-    font-size: 11.5px !important;
-    letter-spacing: 0.16em !important;
-  }
-
-  .eyebrow {
-    margin-bottom: 14px;
-  }
-
-  .hero .display {
-    font-size: clamp(2.4rem, 11vw, 3.1rem) !important;
-    line-height: 1.04 !important;
-  }
-
-  .cardsWrap {
-    padding: 0 16px 16px;
-  }
-
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .card {
-    padding: 12px 12px 11px;
-    border-radius: 12px;
-  }
-
-  .cardTitle {
-    font-size: 16px;
-  }
-
-  .cardRule {
-    margin: 8px 0;
-  }
-
-  .cardText {
-    margin-bottom: 10px;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .cardArrow {
-    width: 24px;
-    height: 24px;
-  }
 }
 
-/*
- * Phones and touch screens (17 Nov 2026): no backdrop blur and no
- * will-change layers. Blur under moving content was redrawn on every scroll
- * frame and made touch scrolling stick. The glass look is kept with a
- * slightly deeper tint, the gradient rim and the inner highlight.
- */
 @media (max-width: 767px), (hover: none) and (pointer: coarse) {
-  .card {
-    background:
-      linear-gradient(155deg, rgb(255 255 255 / 0.2) 0%, rgb(255 255 255 / 0.06) 45%, rgb(255 255 255 / 0.02) 100%),
-      rgb(71 8 24 / 0.62);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.35),
-      0 12px 24px -16px rgb(30 4 12 / 0.55);
-  }
-
   .secondary {
-    background: rgb(58 6 20 / 0.44);
+    background: rgb(58 6 20 / 0.48);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 
   .media,
-  .copy,
-  .cards li {
+  .copy {
     will-change: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .cardArrow {
-    transition: none;
-  }
-
-  .card:hover {
-    transform: none;
+  .hero {
+    position: relative;
   }
 }

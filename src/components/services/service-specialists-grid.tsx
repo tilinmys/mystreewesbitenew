@@ -42,10 +42,13 @@ export function ServiceSpecialistsGrid({
 
   const { slots, isSyncing } = useLiveAvailabilityById(doctorIds, initialSlots);
 
+  const colCount = Math.min(rows.length, 4);
+
   return (
     <ul
       className={styles.cards}
-      style={{ "--cols": Math.min(rows.length, 4) } as React.CSSProperties}
+      data-count={colCount}
+      style={{ "--cols": colCount } as React.CSSProperties}
     >
       {rows.map(({ entry, doctor }) => {
         const slot = slots[doctor.id] ?? null;

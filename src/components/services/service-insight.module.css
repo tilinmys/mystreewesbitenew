@@ -28,19 +28,24 @@
   row-gap: 2rem;
 }
 
+/* Seamless background attachment: zero borders or box lines; multiply on .media
+   melts the pure-white art canvas directly into the alabaster/paper section. */
 .media {
   position: relative;
   grid-area: media;
   width: 100%;
   min-width: 0;
-  overflow: hidden;
-  aspect-ratio: 3 / 2;
-  border-radius: 2px;
-  background: var(--svc-mist);
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  mix-blend-mode: multiply;
 }
 
 .image {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
 }
 
 /* Quiet light panel until the photograph arrives: mist warmed with a trace
@@ -142,8 +147,8 @@
   }
 
   .media {
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
   }
 
   .heading {

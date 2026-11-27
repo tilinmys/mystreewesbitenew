@@ -1,9 +1,9 @@
 /*
- * ServiceQuestions — LOCKED. Mobile-first.
+ * ServiceQuestions — Mobile-first + Desktop Sticky 3:4 Illustration Card.
  *
- * Desktop calibrated to a 1536px viewport: a ~1080px block · image 4:5,
- * ~420px wide, held in view · accordion ~580px · heading ~44px · questions
- * ~18px · answers ~16px.
+ * Mobile/Tablet (< 1024px): clean compact centered 3:4 card above the local Q&A
+ * so visitors see the custom Indiranagar illustration without excessive scroll.
+ * Desktop (>= 1024px): sticky 3:4 portrait illustration beside the accordion.
  */
 
 .section {
@@ -13,38 +13,46 @@
   background: var(--svc-mist);
 }
 
-/* Phone: questions first; the image would only push them down. */
 .inner {
   display: grid;
   max-width: 42rem;
   margin: 0 auto;
-  grid-template-areas: "copy";
+  grid-template-areas:
+    "media"
+    "copy";
+  row-gap: 1.75rem;
 }
 
+/* Seamless background attachment: zero borders, zero shadow, zero rectangle
+   separation — multiply on .media itself blends the sticky container cleanly
+   into the #F8F5F5 alabaster section background. */
 .media {
-  display: none;
   position: relative;
   grid-area: media;
   width: 100%;
+  max-width: 19rem;
+  margin: 0 auto;
   min-width: 0;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  border-radius: 2px;
-  background: var(--alabaster-canvas);
+  aspect-ratio: 3 / 4;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  mix-blend-mode: multiply;
 }
 
 .image {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
 }
 
-/* On mist, the waiting panel warms toward alabaster with a trace of wine. */
 .placeholder {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     200deg,
-    var(--surface-mist, #EFE0E4) 0%,
-    var(--surface-blush, #E5CCD3) 100%
+    var(--surface-mist, #F8F5F5) 0%,
+    var(--surface-well, #F3EFEF) 100%
   );
 }
 
@@ -67,24 +75,33 @@
   margin-top: var(--svc-gap-content);
 }
 
+/* ------------------------------------------------- tablet  >= 640px */
+
+@media (min-width: 640px) {
+  .media {
+    max-width: 22rem;
+  }
+}
+
 /* ------------------------------------------------ desktop  >= 1024px */
 
 @media (min-width: 1024px) {
   .inner {
     width: min(70.3vw, 67.5rem);
     max-width: none;
-    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.76fr) minmax(0, 1fr);
     grid-template-areas: "media copy";
     align-items: start;
-    column-gap: clamp(2.5rem, 6.25vw, 6rem);
+    column-gap: clamp(2.5rem, 5.5vw, 5.5rem);
+    row-gap: 0;
   }
 
-  /* Held in view while the answers scroll past it. */
+  /* Held cleanly in view while the answers scroll past it. */
   .media {
-    display: block;
     position: sticky;
-    top: 7rem;
-    max-height: calc(100svh - 9rem);
+    top: 6.5rem;
+    max-width: none;
+    margin: 0;
+    max-height: calc(100svh - 8.5rem);
   }
-
 }

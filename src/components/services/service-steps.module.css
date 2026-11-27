@@ -85,19 +85,27 @@
   width: 100%;
 }
 
+/* Seamless background attachment: zero box border, zero shadow, zero white frame
+   separation — multiply on .media blends the pure-white illustration canvas directly
+   into either #FFFFFF paper or #F8F5F5 warm alabaster grounds. */
 .media {
   position: relative;
   grid-area: media;
   width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
   min-width: 0;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  border-radius: 2px;
-  background: var(--svc-mist);
+  aspect-ratio: 3 / 4;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  mix-blend-mode: multiply;
 }
 
 .image {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .placeholder {
@@ -118,7 +126,8 @@
   }
 
   .media {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 3 / 4;
+    max-width: 24rem;
   }
 }
 
@@ -151,26 +160,29 @@
   }
 
   .media {
-    aspect-ratio: 4 / 5;
-    max-height: calc(100svh - 12rem);
+    max-width: none;
+    margin: 0;
+    aspect-ratio: 3 / 4;
+    max-height: calc(100svh - 10rem);
   }
 }
 
 /*
- * Phones (17 Nov 2026, compact; color.md "Service pages on phones").
- * The photograph leads as a rounded 16:9 banner above the steps; the steps are tighter.
+ * Phones: keep full 3:4 portrait frame capped cleanly so vertical illustrations
+ * never get sliced into a narrow 16:9 strip on mobile.
  */
 @media (max-width: 639px) {
   .inner {
     grid-template-areas:
       "media"
       "copy";
-    row-gap: 1.25rem;
+    row-gap: 1.5rem;
   }
 
   .media {
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
+    aspect-ratio: 3 / 4;
+    max-width: 19rem;
+    border-radius: 0;
   }
 
   .heading {

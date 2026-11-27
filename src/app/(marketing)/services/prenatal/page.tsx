@@ -23,7 +23,7 @@ import { getDoctors } from "@/lib/doctors-repository";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Pre-Natal & High-Risk Pregnancy Clinic â€” /services/prenatal.
+ * Pre-Natal & High-Risk Pregnancy Clinic — /services/prenatal.
  *
  * The locked service-page template (color.md) with pregnancy content. The
  * route is kept: the navbar, footer and sitemap already link it. The
@@ -356,7 +356,7 @@ export default async function PrenatalPage() {
         facts={[
           { figure: "40 weeks", label: "of care, from the first scan to delivery planning" },
           { figure: "4", label: "disciplines in one clinic: obstetrics, early pregnancy, nutrition and pelvic physiotherapy" },
-          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 

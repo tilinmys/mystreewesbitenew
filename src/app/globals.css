@@ -229,6 +229,13 @@ html.lenis.lenis-stopped {
   overflow: clip;
 }
 
+/* Sticky-curtain support for homepage: every section below #home layers above
+   the sticky hero cleanly as the visitor scrolls. */
+.mystree-page > section:not(#home) {
+  position: relative;
+  z-index: 2;
+}
+
 /* The page reset applies with or without Lenis (Lenis is off on touch and
    low-end devices, which once left the browser's 8px body margin). */
 html.lenis,

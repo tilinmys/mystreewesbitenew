@@ -1,4 +1,13 @@
 .band {
-  background: var(--svc-band);
-  color: var(--svc-on-wine);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: linear-gradient(155deg, #8E1B3A 0%, #6E0D28 100%);
+  color: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band {
+    position: relative;
+  }
 }

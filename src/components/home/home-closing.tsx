@@ -1,102 +1,82 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
-import { isLiteMotion, useStillAfterMount } from "@/lib/use-lite-motion";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-closing.module.css";
 
 /*
- * HomeClosing, the last home section before the footer (16 Nov 2026), after
- * the supplied reference: a full-bleed, warm close-up photograph of skin, a
- * centred two-line serif statement with one italic word, and one booking
- * button. The photograph drifts slowly as the section scrolls past.
- *
- * Copy: no statistics or outcome claims (the reference's "74% receive a
- * diagnosis" is the kind of claim the compliance review of 13 Nov 2026
- * removed); one calm, factual invitation to book.
- *
- * ------------------------------------------------------------------------
- * IMAGE TO GENERATE (2 files). Save as WebP, then set READY to true below.
- *
- *   /public/images/home/closing/mystree-closing-skin-desktop.webp  2880 × 1200
- *   /public/images/home/closing/mystree-closing-skin-mobile.webp   1200 × 1800
- *
- * In use (16 Nov 2026): a warm close-up of a shoulder, supplied by the user;
- * the generator's corner mark was removed. The prompt below is the
- * people-free alternative (fabric and light only), if it is ever replaced.
- *
- * Prompt (desktop, 21:9):
- *   "Abstract close-up editorial photograph of soft flowing silk fabric in
- *    warm terracotta, rosewood and cocoa tones, gentle folds and ripples
- *    catching soft directional window light from the right and falling into
- *    deep warm shadow on the left, smooth satin sheen, very shallow depth of
- *    field, calm and intimate mood, fine film grain, high resolution, ultra
- *    detailed, no people, no hands, no faces, no text, no logos, no
- *    watermark, minimal luxury editorial style."
- *
- * Prompt (mobile, 2:3): the same, framed vertically: "the main fold of the
- *    silk running diagonally from the top right to the lower left, with soft
- *    out-of-focus fabric filling the centre of the frame".
- *
- * Keep the centre of the frame calm and mid-toned: the white statement and
- * the button sit there.
- * ------------------------------------------------------------------------
+ * HomeClosing — Clean Deep Burgundy architectural closing band with a
+ * subtle editorial fine-line sanctuary backdrop (replacing the previous
+ * close-up skin photo). Drop custom generated line art at:
+ *   /public/images/home/closing/mystree-closing-lineart.webp
+ * and flip LINE_ART_READY = true to layer it seamlessly over the band.
  */
-const READY = true;
-const EASE = [0.16, 1, 0.3, 1] as const;
+const LINE_ART_READY = false;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function HomeClosing() {
   const still = useStillAfterMount();
-  const section = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
-  const drift = useTransform(scrollYProgress, (v) => (isLiteMotion() ? "0%" : `${(v - 0.5) * -12}%`));
-  const zoom = useTransform(scrollYProgress, (v) => (isLiteMotion() ? 1 : 1.12 - v * 0.08));
 
   const rise = (delay: number) =>
     still
       ? {}
       : {
-          initial: { opacity: 0, y: 28 },
+          initial: { opacity: 0, y: 22 },
           whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.5 },
-          transition: { duration: 1, delay, ease: EASE },
+          viewport: { once: true, amount: 0.35 },
+          transition: { duration: 0.75, delay, ease: EASE },
         };
 
   return (
-    <section ref={section} className={styles.section} aria-labelledby="closing-heading">
-      <motion.div className={styles.media} style={still ? undefined : { y: drift, scale: zoom }}>
-        {READY ? (
-          <picture>
-            <source media="(max-width: 767px)" srcSet="/images/home/closing/mystree-closing-skin-mobile.webp" />
-            <Image
-              src="/images/home/closing/mystree-closing-skin-desktop.webp"
-              alt="Warm sunlit doorway at MyStree Women's Health Clinic on 13th Main Road, Indiranagar"
-              fill
-              sizes="100vw"
-              className={styles.image}
-            />
-          </picture>
-        ) : (
-          <div className={styles.placeholder} />
-        )}
-      </motion.div>
-      <div className={styles.shade} aria-hidden="true" />
-      {READY ? null : (
-        <span className={styles.placeholderTag} aria-hidden="true">
-          Image placeholder · mystree-closing-skin-desktop.webp
-        </span>
+    <section className={styles.section} aria-labelledby="closing-heading">
+      {LINE_ART_READY ? (
+        <div className={styles.lineArtWrap} aria-hidden="true">
+          <Image
+            src="/images/home/closing/mystree-closing-lineart.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={88}
+            className={styles.lineArtImage}
+          />
+        </div>
+      ) : (
+        <svg
+          className={styles.decorativeLineArt}
+          viewBox="0 0 1440 460"
+          fill="none"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <path
+            d="M-60 390 C 180 280, 340 90, 620 120 C 890 150, 990 360, 1290 290 C 1380 268, 1440 220, 1510 185"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <path
+            d="M-40 120 C 210 240, 440 395, 760 345 C 1030 302, 1180 120, 1490 95"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeDasharray="4 8"
+          />
+          <circle cx="1180" cy="230" r="170" stroke="currentColor" strokeWidth="1" />
+          <circle cx="240" cy="230" r="145" stroke="currentColor" strokeWidth="0.9" />
+        </svg>
       )}
 
       <div className={styles.inner}>
-        <motion.h2 id="closing-heading" className={styles.heading} {...rise(0)}>
+        <motion.p className={styles.eyebrow} {...rise(0)}>
+          Indiranagar, Bengaluru · Mon–Sat, 9 am to 8 pm
+        </motion.p>
+        <motion.h2 id="closing-heading" className={styles.heading} {...rise(0.08)}>
           Your health deserves <em className={styles.accent}>time</em>, and a doctor who listens.
         </motion.h2>
-        <motion.div className={styles.actions} {...rise(0.15)}>
+        <motion.div className={styles.actions} {...rise(0.18)}>
           <Link href="/book" className={`cta-book is-large ${styles.cta}`}>
             Book an appointment
           </Link>

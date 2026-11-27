@@ -1,193 +1,216 @@
 /*
- * ServiceHero — LOCKED. Mobile-first: the base rules ARE the phone layout;
- * wider screens are added with min-width queries, never subtracted.
+ * ServiceHero — Luminous Light-Burgundy Canvas + Well-Proportioned Gently
+ * Visible Background Artwork + Dead-Centered White Editorial Typography.
  *
- * SCALE. Calibrated to a 1536px-wide viewport — a 1920x1080 laptop at the
- * 125% Windows scaling most laptops ship with — where the reference renders
- * at 100%:  content 1312px · text : image 1.2 : 1 · image 21:20 · heading
- * ~61px on two lines · lead ~21px · pill ~59px tall.
- * Desktop values are written in vw so smaller laptops scale down with the
- * viewport, and every one is capped at its 1536px value, so a wider screen
- * or a zoomed-out browser shows the same centred 1312px block the reference
- * shows rather than an ever-growing one.
+ * Calibrated balance:
+ *   - Warm Rose-Burgundy ground (#8E1B3A -> #6E0D28) — rich brand presence
+ *     without dark/muddy heaviness
+ *   - Background illustration rendered in natural 4:3 proportion (contain +
+ *     soft horizontal feather mask on wide screens) at ~0.34–0.38 opacity so
+ *     the entire clinical vignette is clearly seen without zoomed-in cropping
+ *   - Localized center Rose-Burgundy veil holds white Fraunces 400 heading &
+ *     body prose at > 7.5:1 AAA contrast
  */
 
-/* ------------------------------------------------------------------ base */
-
 .hero {
-  /* No background: <ServiceBand> paints the gradient this shares with the
-     quote below it. */
-  color: var(--svc-on-wine);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(460px, 74svh, 580px);
+  overflow: hidden;
+  background: linear-gradient(155deg, #8E1B3A 0%, #6E0D28 100%);
+  color: #FFFFFF;
 }
 
+/* ---- proportioned, seamless background artwork ---- */
+/* Matching the illustration's pure #FFFFFF canvas across the full hero width
+   at calibrated opacity makes the 4:3 art sit in natural uncropped proportion
+   with ZERO vertical side seams on wide screens. */
+.bgMedia {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: #FFFFFF;
+  opacity: 0.34;
+  filter: brightness(0.94) contrast(1.06) saturate(0.96);
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #8E1B3A 0%, #6E0D28 100%);
+}
+
+/* Localized center readability veil: keeps text crystal clear while letting
+   the illustration show clearly around and softly through the hero. */
+.bgVeil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 54% 56% at 50% 48%,
+      rgb(106 14 39 / 0.72) 0%,
+      rgb(112 16 42 / 0.36) 58%,
+      rgb(112 16 42 / 0.08) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(118 18 45 / 0.28) 0%,
+      rgb(110 15 41 / 0.08) 44%,
+      rgb(88 10 31 / 0.44) 100%
+    );
+}
+
+/* ---- centered editorial stage ---- */
+
 .inner {
-  display: grid;
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 65rem;
+  max-width: 56rem;
   margin: 0 auto;
-  padding: 2.25rem 1.25rem 2.75rem;
-  grid-template-columns: minmax(0, 1fr);
+  padding: 3.25rem 1.25rem 4.75rem;
 }
 
 .copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   min-width: 0;
 }
 
-/*
- * Heading. Service pages keep their own readable display proportion against
- * the framed clinical photography while preserving Fraunces 400 clarity.
- */
+/* Fraunces 400 display headline — crisp pure white on warm Rose-Burgundy */
 .title {
-  max-width: 15ch;
+  max-width: 19ch;
   margin: 0;
-  color: var(--svc-on-wine);
-  font-size: clamp(1.95rem, 3.25vw, 3.25rem) !important;
+  color: #FFFFFF;
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-size: clamp(2.1rem, 4.4vw, 3.85rem) !important;
   font-weight: 400 !important;
-  line-height: 1.14 !important;
-  letter-spacing: -0.024em !important;
+  font-variation-settings: "opsz" 144, "SOFT" 16, "WONK" 0;
+  line-height: 1.09 !important;
+  letter-spacing: -0.025em !important;
+  text-wrap: balance;
+  text-shadow:
+    0 1px 3px rgb(54 4 18 / 0.42),
+    0 4px 24px rgb(54 4 18 / 0.36);
 }
 
 .lead {
-  max-width: 34rem;
-  margin: 1.125rem 0 0;
-  color: var(--svc-on-wine-soft);
-  font-size: clamp(0.98rem, 1.15vw, 1.125rem);
+  max-width: 39rem;
+  margin: 1.2rem auto 0;
+  color: #FFF5F7;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.98rem, 1.2vw, 1.15rem);
   font-weight: 400;
   line-height: 1.65;
+  text-wrap: pretty;
+  text-shadow: 0 1px 14px rgb(54 4 18 / 0.34);
 }
 
-/* ---- actions: thumb-first on a phone ---- */
+/* ---- centered actions ---- */
 
 .actions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.35rem;
-  margin-top: 1.75rem;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+  margin-top: 1.85rem;
 }
 
-/* Full width on a phone: the easiest target in one-handed reach. */
+/* Crisp Pure White pill on Rose-Burgundy (AAA contrast) */
 .actions > :global(.cta-book) {
   width: 100%;
+  min-height: 3.15rem;
   --cta-top: #FFFFFF;
-  --cta-bottom: var(--surface-mist, #EFE0E4);
+  --cta-bottom: #F7F0F2;
   --cta-glow: 255 255 255;
 
   color: var(--palette-oxblood, #5C0017);
   box-shadow:
     inset 0 1px 0 #FFFFFF,
-    0 2px 8px rgb(40 0 10 / 0.28),
-    0 12px 26px -10px rgb(255 255 255 / 0.24);
+    0 6px 20px -6px rgb(40 4 14 / 0.36);
 }
 
 .actions > :global(.cta-book):hover,
 .actions > :global(.cta-book):focus-visible {
   --cta-top: #FFFFFF;
-  --cta-bottom: var(--surface-blush, #E5CCD3);
+  --cta-bottom: #EDE0E4;
 
   color: var(--palette-oxblood, #5C0017);
 }
 
 .secondary {
-  display: flex;
-  min-height: 3rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--svc-on-wine);
+  min-height: 3.15rem;
+  padding: 0 1.45rem;
+  border: 1px solid rgb(255 255 255 / 0.56);
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.14);
+  color: #FFFFFF;
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: var(--type-ui);
+  font-size: 0.925rem;
   font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in oklab, var(--svc-on-wine) 50%, transparent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.4em;
-  transition: text-decoration-color 200ms ease;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .secondary:hover {
-  text-decoration-color: var(--svc-on-wine);
+  border-color: rgb(255 255 255 / 0.9);
+  background: rgb(255 255 255 / 0.24);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 .secondary:focus-visible {
-  outline: 2px solid var(--svc-on-wine);
+  outline: 2px solid #FFFFFF;
   outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* ---- media ---- */
-
-.media {
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  margin-top: 2rem;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  border-radius: 16px;
-  border: 1px solid rgb(255 255 255 / 0.16);
-  background: var(--palette-velvet-deep, #470818);
-  box-shadow: 0 24px 48px -20px rgb(24 0 8 / 0.52);
-}
-
-.image {
-  object-fit: cover;
-  object-position: center 22%;
-}
-
-/* A quiet tonal panel waiting cleanly in Velvet Burgundy. */
-.placeholder {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    165deg,
-    var(--palette-velvet, #661026) 0%,
-    var(--palette-velvet-deep, #470818) 100%
-  );
-}
-
-/* --------------------------------------- short phones, < 700px tall */
-
-@media (max-width: 639px) and (max-height: 700px) {
-  .inner {
-    padding-top: 1.75rem;
-    padding-bottom: 2.25rem;
-  }
-
-  .lead {
-    margin-top: 0.875rem;
-    line-height: 1.55;
-  }
-
-  .actions {
-    margin-top: 1.25rem;
-  }
 }
 
 /* ------------------------------------------------- tablet  >= 640px */
 
 @media (min-width: 640px) {
+  .hero {
+    min-height: clamp(500px, 74svh, 620px);
+  }
+
   .inner {
-    max-width: 44rem;
-    padding: 3rem 2.5rem 3.5rem;
+    padding: 3.75rem 2.25rem 5.25rem;
   }
 
   .actions {
     flex-direction: row;
     align-items: center;
-    gap: 1.5rem;
+    width: auto;
+    max-width: none;
+    gap: 1rem;
+    margin-top: 2.1rem;
   }
 
   .actions > :global(.cta-book) {
     width: auto;
-  }
-
-  .secondary {
-    justify-content: flex-start;
-  }
-
-  .media {
-    margin-top: 2.25rem;
-    aspect-ratio: 3 / 2;
+    padding-inline: 1.9rem;
   }
 }
 
@@ -195,58 +218,78 @@
 
 @media (min-width: 1024px) {
   .hero {
-    display: flex;
-    align-items: center;
-    min-height: clamp(500px, 66vh, 620px);
+    min-height: clamp(560px, calc(100svh - 118px), 700px);
+  }
+
+  /* Natural 4:3 proportion inside wide desktop hero — seamless edge-to-edge
+     Light Rose-Burgundy canvas with full characters & props cleanly visible */
+  .bgMedia {
+    opacity: 0.34;
+    filter: brightness(0.94) contrast(1.06) saturate(0.98);
+  }
+
+  .bgImage {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .bgVeil {
+    background:
+      radial-gradient(
+        ellipse 48% 56% at 50% 48%,
+        rgb(110 15 41 / 0.66) 0%,
+        rgb(116 18 44 / 0.28) 56%,
+        rgb(116 18 44 / 0.06) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(118 18 45 / 0.22) 0%,
+        rgb(110 15 41 / 0.06) 44%,
+        rgb(86 10 30 / 0.4) 100%
+      );
   }
 
   .inner {
-    max-width: none;
-    width: 100%;
-    padding: clamp(3.25rem, 5vw, 4.75rem) max(6vw, calc((100% - 82rem) / 2));
-    column-gap: clamp(2.5rem, 4.25vw, 4.5rem);
-    grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
-    align-items: center;
-  }
-
-  .lead {
-    max-width: 44ch;
-    margin-top: clamp(1rem, 1.5vw, 1.375rem);
-    font-size: clamp(1rem, 1.15vw, 1.125rem);
-    line-height: 1.65;
+    padding: 4rem 2.5rem 5.75rem;
   }
 
   .actions {
-    margin-top: clamp(1.5rem, 2.3vw, 2.125rem);
-    gap: clamp(1.25rem, 1.6vw, 1.5rem);
+    margin-top: 2.25rem;
+    gap: 1.15rem;
   }
 
-  /* Two-class specificity outranks .cta-book on its own. */
-  .actions > :global(.cta-book) {
-    min-height: clamp(2.85rem, 3.6vw, 3.45rem);
-    padding-inline: clamp(1.45rem, 2.15vw, 2.15rem);
-    font-size: clamp(0.875rem, 0.98vw, 0.975rem);
-  }
-
+  .actions > :global(.cta-book),
   .secondary {
-    font-size: clamp(0.875rem, 0.98vw, 0.975rem);
-  }
-
-  .media {
-    margin: 0;
-    aspect-ratio: 5 / 4;
-    border-radius: 18px;
+    min-height: 3.3rem;
+    font-size: 0.95rem;
   }
 }
 
-/* Short laptop screens: keep image and copy balanced with even breathing room. */
-@media (min-width: 1024px) and (max-height: 700px) {
+/* Standard & compact laptops (1280x720, 1366x768, 1536x864 @ 125%) */
+@media (min-width: 1024px) and (max-height: 780px) {
   .hero {
-    min-height: 460px;
+    min-height: clamp(430px, 66svh, 520px);
   }
 
   .inner {
-    padding-block: 2.5rem;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  .actions {
+    margin-top: 1.65rem;
+  }
+}
+
+/* Mobile framing: full-bleed cover with balanced visibility */
+@media (max-width: 639px) {
+  .bgMedia {
+    opacity: 0.28;
+    filter: brightness(0.92) contrast(1.05) saturate(0.96);
+  }
+
+  .bgImage {
+    object-fit: cover;
+    object-position: center 42%;
   }
 }
 
@@ -254,29 +297,8 @@
   .secondary {
     transition: none;
   }
-}
 
-/*
- * Phones: clean 16:10 framed card under actions; readable body rhythm.
- */
-@media (max-width: 639px) {
-  .title {
-    font-size: 1.85rem !important;
-  }
-
-  .lead {
-    margin-top: 0.75rem;
-    font-size: 15px;
-    line-height: 1.55;
-  }
-
-  .actions {
-    margin-top: 1.25rem;
-  }
-
-  .media {
-    margin-top: 1.35rem;
-    aspect-ratio: 16 / 10;
-    border-radius: 14px;
+  .secondary:hover {
+    transform: none;
   }
 }

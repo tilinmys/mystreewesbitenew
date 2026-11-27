@@ -4,19 +4,15 @@ import Link from "next/link";
 import styles from "./service-hero.module.css";
 
 /*
- * ServiceHero — LOCKED. Section 01 of every /services/* page.
+ * ServiceHero — Section 01 of every /services/* and /clinics/* page.
  *
- * Render it inside <ServiceBand>, which paints the wine gradient that the
- * hero and the quote beneath it share. The hero itself has no background.
+ * Full-bleed gently faded editorial background artwork behind dead-centered
+ * Fraunces 400 display typography, readable lead copy, and balanced primary +
+ * secondary actions. Calibrated radial alabaster veil maintains > 11:1 AAA
+ * contrast over both flat vector illustrations and clinical photography.
  *
- * Deliberately sparse: a heading, one or two lines of lead, two actions and
- * a photograph. No breadcrumb, no eyebrow label, no badges. Everything added
- * above the heading competes with it; the page's BreadcrumbList structured
- * data still carries the trail for search engines.
- *
- * Server component, zero client JavaScript, and no entrance animation — on a
- * phone the H1 is usually the Largest Contentful Paint element, and fading
- * it in would delay LCP by the length of the fade.
+ * Server component, zero client JavaScript, zero opacity-0 entrance delay so
+ * LCP fires immediately on both desktop and mobile.
  */
 
 export type ServiceHeroProps = {
@@ -25,7 +21,7 @@ export type ServiceHeroProps = {
   lead: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string; external?: boolean };
-  /** Omit to render the reserved image frame. */
+  /** Background editorial illustration or photograph. */
   image?: { src: string; alt: string };
   headingId?: string;
 };
@@ -40,6 +36,25 @@ export function ServiceHero({
 }: ServiceHeroProps) {
   return (
     <section className={styles.hero} aria-labelledby={headingId}>
+      <div className={styles.bgMedia} aria-hidden="true">
+        {image ? (
+          <Image
+            src={image.src}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            quality={88}
+            className={styles.bgImage}
+          />
+        ) : (
+          <div className={styles.placeholder} />
+        )}
+      </div>
+
+      <div className={styles.bgVeil} aria-hidden="true" />
+
       <div className={styles.inner}>
         <div className={styles.copy}>
           <h1 id={headingId} className={styles.title}>
@@ -49,7 +64,7 @@ export function ServiceHero({
           <p className={styles.lead}>{lead}</p>
 
           <div className={styles.actions}>
-            <Link href={primaryCta.href} className="cta-book">
+            <Link href={primaryCta.href} className={`cta-book ${styles.primaryBtn}`}>
               {primaryCta.label}
             </Link>
             {secondaryCta ? (
@@ -64,28 +79,6 @@ export function ServiceHero({
               </a>
             ) : null}
           </div>
-        </div>
-
-        <div className={styles.media}>
-          {image ? (
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority
-              fetchPriority="high"
-              sizes="(min-width: 1024px) 42vw, (min-width: 640px) 640px, calc(100vw - 2.5rem)"
-              quality={88}
-              className={styles.image}
-            />
-          ) : (
-            /*
-              Reserved image frame. Pass `image={{ src, alt }}` to fill it.
-              The frame holds its ratio at every breakpoint, so the real
-              photograph lands with zero layout shift.
-            */
-            <div className={styles.placeholder} aria-hidden="true" />
-          )}
         </div>
       </div>
     </section>

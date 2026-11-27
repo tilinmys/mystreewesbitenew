@@ -2,10 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { clinic } from "@/lib/clinic";
+import { useStillAfterMount } from "@/lib/use-lite-motion";
 import styles from "./home-packages.module.css";
+
+const CARD_EASE = [0.22, 1, 0.36, 1] as const;
 
 export type PackageCard = {
   href: string;
@@ -40,6 +44,8 @@ const WHATSAPP_URL = `https://wa.me/${clinic.telephone.replace("+", "")}?text=${
 )}`;
 
 export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
+  const still = useStillAfterMount();
+
   return (
     <section className={styles.section} id="packages" aria-labelledby="packages-heading">
       <div className={styles.inner}>
@@ -60,7 +66,10 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
               src="/images/home/packages/reproductive-anatomy-engraving.webp"
               alt="Botanical engraving illustration representing women's reproductive health"
               fill
+              loading="eager"
+              decoding="async"
               sizes="(max-width: 767px) 100vw, 40vw"
+              quality={88}
               className={styles.artImage}
             />
           </div>
@@ -75,18 +84,31 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
         </div>
 
         <ul className={styles.grid} aria-label="Care packages">
-          {cards.map((card) => {
+          {cards.map((card, index) => {
             const art = PACKAGE_ART[card.image];
             return (
-              <li key={card.href} className={styles.item}>
+              <motion.li
+                key={card.href}
+                className={styles.item}
+                initial={still ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.14 }}
+                transition={
+                  still
+                    ? { duration: 0 }
+                    : { duration: 0.55, delay: index * 0.085, ease: CARD_EASE }
+                }
+              >
                 <article className={styles.card}>
                   <Link href={card.href} className={styles.mediaWrap} aria-label={card.title}>
                     <Image
                       src={art.src}
                       alt={art.alt}
                       fill
+                      loading="eager"
+                      decoding="async"
                       sizes="(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 25vw"
-                      quality={90}
+                      quality={88}
                       className={styles.photo}
                     />
                   </Link>
@@ -116,7 +138,7 @@ export function HomePackagesView({ cards }: { cards: PackageCard[] }) {
                     </Link>
                   </div>
                 </article>
-              </li>
+              </motion.li>
             );
           })}
         </ul>

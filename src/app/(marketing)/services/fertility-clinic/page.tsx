@@ -13,7 +13,7 @@ import { SITE_URL, clinic } from "@/lib/clinic";
 import { CLINIC_ID, breadcrumbNode, clinicNode, clinicianRef, faqNode } from "@/lib/service-schema";
 
 /*
- * Fertility consultations â€” /services/fertility-clinic.
+ * Fertility consultations — /services/fertility-clinic.
  *
  * Compliance (Growthamp website review, 13 Nov 2026, item 1; ART Act 2021
  * s.15, 25, 27; NMC Guidelines on Ethical Advertising 8.1(i), (iii), (ix);
@@ -167,7 +167,7 @@ export default function FertilityClinicPage() {
         facts={[
           { figure: "15 min", label: "for the first consultation" },
           { figure: "2", label: "partners seen together, from the first visit" },
-          { figure: "Monâ€“Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
+          { figure: "Mon–Sat", label: "9 am to 8 pm at the Indiranagar clinic" },
         ]}
       />
 
